@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="CourseDatail.css">
+    <link rel="stylesheet" href="../icon1/font_1tcd3858di3/iconfont.css">
+    <link rel="stylesheet" href="../icon2/font_0mpd6rpj9zd/iconfont.css">
+    <link rel="stylesheet" href="../icon3/font_4x261h1ruhq/iconfont.css">
+    <title>CourseDetail</title>
+</head>
+
+<body>
+    <header>
+        <div id="mySidepanel" class="sidepanel">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <form action="" id="search-bar-form">
+                <input type="text" id="search-bar" placeholder="Search...">
+                <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
+            </form>
+            <a href=""><i class="iconfont icon-31gouwuchexuanzhong">
+                    <p>Shopping Cart</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-user">
+                    <p>User Info</p>
+                </i></a>
+            <a href="../CoursePage/CoursePage.html"><i class="iconfont icon-book1">
+                    <p>Course</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-book">
+                    <p>Tutorial</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-shijuan">
+                    <p>Quiz</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-guanyuwomen">
+                    <p>About Us</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-dianhua">
+                    <p>Contact Us</p>
+                </i></a>
+        </div>
+
+        <button class="openbtn" onclick="openNav()">☰</button>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidepanel").style.width = "30rem";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidepanel").style.width = "0rem";
+            }
+        </script>
+        <div class="left-bar">
+            <div id="logo">LOGO</div>
+            <ul class="menu">
+                <li class="item">Category<span></span>
+                    <ul>
+                        <li onclick="window.location.href = '../CoursePage/CoursePage.html'">Course</li>
+                        <li>Tutorial</li>
+                        <li>Quiz</li>
+                    </ul>
+                </li>
+                <li class="item">About<span></span>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Contact Us</li>
+                        <li>Our Lecturer</li>
+                        <li>example</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <script>
+            const menuItems = document.querySelectorAll('.menu > li');
+
+            menuItems.forEach((menuItem) => {
+                const submenu = menuItem.querySelector('ul');
+
+                // 计算子菜单的最大高度
+                submenu.style.maxHeight = submenu.scrollHeight + 'px';
+
+                // 当鼠标悬停在菜单项上时，将 max-height 设置为计算值
+                menuItem.addEventListener('mouseenter', () => {
+                    submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                });
+
+                // 当鼠标离开时，将 max-height 重置为 0
+                menuItem.addEventListener('mouseleave', () => {
+                    submenu.style.maxHeight = '0';
+                });
+            });
+        </script>
+        <div class="right-bar">
+            <form action="" id="search-bar-form">
+                <input type="text" id="search-bar" placeholder="Search...">
+                <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
+            </form>
+            <i class="iconfont icon-31gouwuchexuanzhong"></i>
+            <i class="iconfont icon-user"></i>
+        </div>
+    </header>
+    <section>
+        <div class="container-upper">
+            <div class="description">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse debitis assumenda nostrum,
+                    perspiciatis aut ratione error in quod culpa consequatur eligendi officia voluptatibus modi
+                    asperiores tenetur, sapiente facere illum. Ex?</p>
+            </div>
+        </div>
+        <div class="container-lower">
+            <div class="outer-container">
+                <div class="inner-container">
+                    Beginner
+                </div>
+                <div class="inner-container">
+                    3 Months
+                </div>
+                <div class="inner-container">
+                    39 downloadable resources
+                </div>
+                <div class="inner-container">
+                    Completion Certificate
+                </div>
+                <div class="inner-container">
+                    Last Updated October 29, 2023
+                </div>
+            </div>
+        </div>
+        <div class="overlay">
+            <img src="">
+            <h1>Course Name</h1>
+            <div class="course-detail">
+                <p>Lecturer :</p>
+                <p>Evalute : Mr Ng</p>
+                <p>Price : RM 500</p>
+            </div>
+            <div class="course-button">
+                <button>Buy It Now</button>
+                <button>Add To Cart</button>
+            </div>
+        </div>
+    </section>
+    <div class="small-screen">
+        <div class="container-upper-small">
+            <img src="">
+            <h1>Course Name</h1>
+            <p>Lecturer :</p>
+            <p>Evalute : Mr Ng</p>
+            <p>Price : RM 500</p>
+        </div>
+        <div class="description-small">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quis Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis, ipsa optio est quidem modi cupiditate nemo, et doloremque voluptatem quia adipisci. Dolorum quibusdam aliquam, cupiditate temporibus dicta molestiae quam! Quo.</p>
+        </div>
+        <div class="about-course-small">
+            <div>
+                Beginner
+            </div>
+            <div>
+                3 Months
+            </div>
+            <div>
+                39 downloadable resources
+            </div>
+            <div>
+                Completion Certificate
+            </div>
+            <div>
+                Last Updated October 29, 2023
+            </div>
+        </div>
+        <div class="course-button-small">
+            <button>Buy It Now</button>
+            <button>Add To Cart</button>
+        </div>
+    </div>
+</body>
+
+</html>

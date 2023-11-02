@@ -1,0 +1,525 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 10px;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+header {
+    width: 80%;
+    height: 5rem;
+    background-color: rgb(60, 60, 60);
+    display: flex;
+    padding: 0% 10%;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0px 2rem 5rem rgba(0, 0, 0, 0.2);
+}
+
+header .left-bar {
+    width: auto;
+    display: flex;
+    height: 5rem;
+}
+
+#logo {
+    width: 10rem;
+    height: 5rem;
+    font-size: 2rem;
+    text-align: center;
+    line-height: 5rem;
+    background-color: rgb(255, 140, 0);
+    color: white;
+}
+
+.menu {
+    width: 30rem;
+    display: flex;
+}
+
+ul {
+    list-style: none;
+}
+
+.menu>li {
+    width: 15rem;
+    text-align: center;
+    font-size: 2rem;
+    color: rgb(255, 140, 0);
+    line-height: 5rem;
+    position: relative;
+}
+
+.menu>li:hover {
+    background-color: rgb(255, 140, 0);
+    color: rgb(60, 60, 60);
+    height: 5rem;
+}
+
+.menu>li>ul {
+    display: none;
+    background-color: rgb(60, 60, 60);
+    color: white;
+    position: absolute;
+    left: 0px;
+    top: 5rem;
+    width: 14.8rem;
+    border-radius: 0px 0px 5px 5px;
+    border: .1rem solid rgb(60, 60, 60);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    z-index: 2;
+}
+
+.item:hover ul {
+    display: block;
+
+}
+
+.item li:hover {
+    background-color: rgb(255, 140, 0);
+    color: white;
+}
+
+.item span {
+    width: 0;
+    height: 0;
+    margin-left: 2rem;
+    display: inline-block;
+    border: .5rem solid transparent;
+    border-top: .5rem solid rgb(255, 140, 0);
+    position: relative;
+    top: .25rem;
+}
+
+.item:hover span {
+    border: .5rem solid transparent;
+    border-bottom: .5rem solid rgb(60, 60, 60);
+    position: relative;
+    top: -2.5px;
+}
+
+.menu::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.right-bar {
+    display: block;
+    display: flex;
+    height: 5rem;
+    top: 0;
+    position: absolute;
+    right: 10%;
+}
+
+#search-bar-form {
+    width: calc(30rem - 0.1rem);
+    height: 3rem;
+    border: 0.1rem solid rgb(255, 140, 0);
+    align-items: center;
+    border-radius: 1rem;
+    margin: 1rem 0rem;
+    outline: none;
+    display: flex;
+}
+
+#search-bar {
+    outline: none;
+    width: 24rem;
+    height: 3rem;
+    border: none;
+    border-radius: 1rem 0rem 0rem 1rem;
+    padding: 0rem 1rem;
+}
+
+#search-bar-submit {
+    width: calc(5rem - 0.1rem);
+    font-size: 2.5rem;
+    height: 3rem;
+    border-radius: 0rem 1rem 1rem 0rem;
+    border: none;
+    background-color: white;
+    color: rgb(255, 140, 0);
+    margin: 0;
+    cursor: pointer;
+}
+
+#search-bar-submit>i:hover {
+    color: rgb(60, 60, 60);
+}
+
+.right-bar>i {
+    font-size: 3rem;
+    margin-left: 5rem;
+    color: rgb(255, 140, 0);
+    line-height: 5rem;
+}
+
+.right-bar>i:hover {
+    animation: bounce 0.5s;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.openbtn {
+    display: none;
+}
+
+.sidepanel {
+    display: none;
+}
+
+.progress-container {
+    width: 100%;
+    height: 0.8rem;
+    background: #ccc;
+    position: fixed;
+    z-index: 10;
+    top: 5rem;
+}
+
+.progress-bar {
+    height: 0.8rem;
+    background: rgb(255, 140, 0);
+    width: 0%;
+}
+
+section {
+    width: 100%;
+    min-height: calc(100% - 5rem);
+    margin-top: 5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay {
+    position: absolute;
+    background-color: rgba(255, 255, 255);
+    width: 30%;
+    height: 80%;
+    top: 10%;
+    bottom: 10%;
+    left: 5%;
+    z-index: 1;
+    border: 1px solid black;
+    border-radius: 5rem;
+    box-sizing: border-box;
+    padding: 3% 4%;
+    text-align: center;
+}
+
+.overlay img {
+    width: 90%;
+    height: 30%;
+    background-color: gray;
+}
+
+.overlay h1 {
+    margin-top: 5%;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.overlay>.course-detail p, .container-upper-small p{
+    width: 100%;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 8%;
+}
+
+.overlay .course-button {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    bottom: 5%;
+    position: absolute;
+    left: 0;
+}
+
+.course-button button {
+    width: 80%;
+    padding: 5%;
+    background-color: rgb(255, 140, 0);
+    color: white;
+    border: none;
+    margin-top: 5%;
+}
+
+.course-button button:hover {
+    color: white;
+    border: 2px solid black;
+    opacity: 0.5;
+}
+
+.container-upper {
+    width: 100%;
+    flex: 8;
+    position: relative;
+}
+
+.description {
+    width: 45%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    right: 5%;
+    border: 2px dashed black;
+    padding: 2% 3%;
+    box-sizing: border-box;
+}
+
+.description p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.container-lower {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding-left: 40%;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.outer-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 5%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+.inner-container {
+    width: auto;
+    height: 5rem;
+    padding: 0 5%;
+    border: 1px solid black;
+    border-radius: 1rem;
+    text-align: center;
+    line-height: 5rem;
+    font-size: 1.5rem;
+    margin: 2.5%;
+}
+
+.small-screen {
+    width: 100%;
+    display: none;
+}
+
+.container-upper-small{
+    width: 60%;
+    padding: 5% 20%;
+    margin-top: 5rem;
+}
+
+.container-upper-small img{
+    width: 100%;
+    height: 30rem;
+    margin-bottom: 2.5%;
+}
+
+.description-small {
+    width: 60%;
+    padding: 0 20%;
+    margin-bottom: 5%;
+}
+
+.description-small p{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.about-course-small {
+    width: 60%;
+    padding: 5% 20%;
+    background-color: #f5f5f5;
+}
+
+.about-course-small>div{
+    width: 85%;
+    height: 5rem;
+    padding: 0 5%;
+    border: 1px solid black;
+    border-radius: 1rem;
+    text-align: center;
+    line-height: 5rem;
+    font-size: 1.5rem;
+    margin: 2.5%;
+}
+
+.course-button-small {
+    width: 60%;
+    display: flex;
+    padding:  0 20%;
+    background-color: #f5f5f5;
+}
+
+.course-button-small button{
+    width: 50%;
+    background-color: rgb(255, 140, 0);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    padding: 2% 5%;
+}
+
+
+
+@media all and (max-width: 76.8rem) {
+    html {
+        font-size: 9px;
+    }
+
+    body {
+        width: 100%;
+        overflow: visible;
+    }
+
+    .right-bar {
+        display: none;
+    }
+
+    .sidepanel {
+        display: block;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        transition: 0.5s;
+        overflow-x: hidden;
+        padding-top: 5rem;
+        background-color: rgba(255, 140, 0, 0.6);
+        margin-top: 5rem;
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    .sidepanel .closebtn {
+        position: absolute;
+        top: 0;
+        right: 2.5rem;
+        font-size: 3.6rem;
+        color: white;
+        text-decoration: none;
+    }
+
+    header {
+        width: 100%;
+        height: 5rem;
+        background-color: rgb(60, 60, 60);
+        display: flex;
+        justify-content: flex-start
+    }
+
+    .openbtn {
+        font-size: 3rem;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        padding: 1rem;
+        display: block;
+        margin-top: -1rem;
+        margin-right: 0;
+        margin-left: -7%;
+        color: white;
+    }
+
+    .openbtn:hover {
+        height: 6rem;
+        background-color: rgb(255, 140, 0);
+    }
+
+    #search-bar-form {
+        width: 27rem;
+        margin: 1rem 1.5rem;
+    }
+
+    #search-bar {
+        width: 21rem;
+    }
+
+    .sidepanel a>i {
+        color: white;
+        margin: 2rem;
+        display: block;
+        margin-right: 2rem;
+        display: flex;
+        text-decoration: none;
+    }
+
+    .sidepanel a,
+    .sidepanel p {
+        font-size: 2.5rem;
+        color: white;
+        display: block;
+        margin-left: 3rem;
+        cursor: pointer;
+        text-decoration: none;
+        padding: 0.1rem;
+    }
+
+    .sidepanel a:hover {
+        background-color: rgb(60, 60, 60);
+    }
+
+    .sidepanel a {
+        font-size: 3rem;
+        margin: 1rem;
+        cursor: pointer;
+    }
+
+    section{
+        display: none;
+    }
+
+    .small-screen{
+        display: block;
+    }
+}
+
+@media all and (max-width: 57.6rem) {
+
+    html {
+        font-size: 7px;
+        overflow: visible;
+    }
+
+    .left-bar {
+        margin: 0;
+    }
+}
