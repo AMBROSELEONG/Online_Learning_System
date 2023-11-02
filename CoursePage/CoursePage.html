@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course</title>
+    <link rel="stylesheet" type="text/css" href="CorusePage.css">
+    <link rel="stylesheet" href="../MainPage/icon1/font_1tcd3858di3/iconfont.css">
+    <link rel="stylesheet" href="../MainPage/icon2/font_0mpd6rpj9zd/iconfont.css">
+    <link rel="stylesheet" href="../MainPage/icon3/font_4x261h1ruhq/iconfont.css">
+</head>
+
+<body>
+    <header>
+        <div id="mySidepanel" class="sidepanel">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <form action="" id="search-bar-form">
+                <input type="text" id="search-bar" placeholder="Search...">
+                <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
+            </form>
+            <a href=""><i class="iconfont icon-31gouwuchexuanzhong">
+                    <p>Shopping Cart</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-user">
+                    <p>User Info</p>
+                </i></a>
+            <a href="#course-container"><i class="iconfont icon-book1">
+                    <p>Course</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-book">
+                    <p>Tutorial</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-shijuan">
+                    <p>Quiz</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-guanyuwomen">
+                    <p>About Us</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-dianhua">
+                    <p>Contact Us</p>
+                </i></a>
+        </div>
+
+        <button class="openbtn" onclick="openNav()">☰</button>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidepanel").style.width = "30rem";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidepanel").style.width = "0rem";
+            }
+        </script>
+        <div class="left-bar">
+            <div id="logo">LOGO</div>
+            <ul class="menu">
+                <li class="item">Category<span></span>
+                    <ul>
+                        <li>Course</li>
+                        <li>Tutorial</li>
+                        <li>Quiz</li>
+                    </ul>
+                </li>
+                <li class="item">About<span></span>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Contact Us</li>
+                        <li>Our Lecturer</li>
+                        <li>example</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <script>
+            const menuItems = document.querySelectorAll('.menu > li');
+
+            menuItems.forEach((menuItem) => {
+                const submenu = menuItem.querySelector('ul');
+
+                // 计算子菜单的最大高度
+                submenu.style.maxHeight = submenu.scrollHeight + 'px';
+
+                // 当鼠标悬停在菜单项上时，将 max-height 设置为计算值
+                menuItem.addEventListener('mouseenter', () => {
+                    submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                });
+
+                // 当鼠标离开时，将 max-height 重置为 0
+                menuItem.addEventListener('mouseleave', () => {
+                    submenu.style.maxHeight = '0';
+                });
+            });
+        </script>
+        <div class="right-bar">
+            <form action="" id="search-bar-form">
+                <input type="text" id="search-bar" placeholder="Search...">
+                <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
+            </form>
+            <i class="iconfont icon-31gouwuchexuanzhong"></i>
+            <i class="iconfont icon-user"></i>
+        </div>
+    </header>
+    <section>
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+        <script>
+            // When the user scrolls the page, execute myFunction 
+            window.onscroll = function () { myFunction() };
+
+            function myFunction() {
+                var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                var scrolled = (winScroll / height) * 100;
+                document.getElementById("myBar").style.width = scrolled + "%";
+            }
+        </script>
+        <div id="myBtnContainer">
+            <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+            <button class="btn" onclick="filterSelection('Category1')"> Category1</button>
+            <button class="btn" onclick="filterSelection('Category2')"> Category2</button>
+        </div>
+
+        <div class="container">
+            <div class="filterDiv Category1" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            <div class="filterDiv Category2" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+    
+            <div class="filterDiv Category1" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            <div class="filterDiv Category2" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            
+            <div class="filterDiv Category1" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            <div class="filterDiv Category2" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            
+            <div class="filterDiv Category1" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            <div class="filterDiv Category2" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            
+            <div class="filterDiv Category1" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            <div class="filterDiv Category2" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+           
+            <div class="filterDiv Category1" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            <div class="filterDiv Category2" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            
+            <div class="filterDiv Category1" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            <div class="filterDiv Category2" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            
+            <div class="filterDiv Category1" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            <div class="filterDiv Category2" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            
+            <div class="filterDiv Category1" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            <div class="filterDiv Category2" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            
+            <div class="filterDiv Category1" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+            <div class="filterDiv Category2" onclick="location.href=''">
+                <img src="" alt="">
+                <h1>Course:</h1>
+                <p class="price">RM 100</p>
+                <h2>Licturer</h2>
+                <button class="add-to-cart">Add To Cart</button>
+            </div>
+        
+
+
+            <script>
+                filterSelection("all")
+                function filterSelection(c) {
+                    var x, i;
+                    x = document.getElementsByClassName("filterDiv");
+                    if (c == "all") c = "";
+                    // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+                    for (i = 0; i < x.length; i++) {
+                        w3RemoveClass(x[i], "show");
+                        if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+                    }
+                }
+
+                // Show filtered elements
+                function w3AddClass(element, name) {
+                    var i, arr1, arr2;
+                    arr1 = element.className.split(" ");
+                    arr2 = name.split(" ");
+                    for (i = 0; i < arr2.length; i++) {
+                        if (arr1.indexOf(arr2[i]) == -1) {
+                            element.className += " " + arr2[i];
+                        }
+                    }
+                }
+
+                // Hide elements that are not selected
+                function w3RemoveClass(element, name) {
+                    var i, arr1, arr2;
+                    arr1 = element.className.split(" ");
+                    arr2 = name.split(" ");
+                    for (i = 0; i < arr2.length; i++) {
+                        while (arr1.indexOf(arr2[i]) > -1) {
+                            arr1.splice(arr1.indexOf(arr2[i]), 1);
+                        }
+                    }
+                    element.className = arr1.join(" ");
+                }
+
+                // Add active class to the current control button (highlight it)
+                var btnContainer = document.getElementById("myBtnContainer");
+                var btns = btnContainer.getElementsByClassName("btn");
+                for (var i = 0; i < btns.length; i++) {
+                    btns[i].addEventListener("click", function () {
+                        var current = document.getElementsByClassName("active");
+                        current[0].className = current[0].className.replace(" active", "");
+                        this.className += " active";
+                    });
+                }
+            </script>
+    </section>
+    <footer>
+        <div class="footer-container-left">
+            <p>About US</p>
+            <p>Contact US</p>
+            <p>Term</p>
+            <p>Privacy Policy</p>
+            <p>New Era University College</p>
+        </div>
+        <div class="footer-container-center">
+            <div>
+                <i class="iconfont icon-instagram">
+                    <p>Instagram</p>
+                </i>
+            </div>
+            <div>
+                <i class="iconfont icon-facebook">
+                    <p>Facebook</p>
+                </i>
+            </div>
+            <div>
+                <i class="iconfont icon-whatsapp">
+                    <p>Whatsapp</p>
+                </i>
+            </div>
+            <div>
+                <i class="iconfont icon-wechat">
+                    <p>Wechat</p>
+                </i>
+            </div>
+        </div>
+        <div class="footer-container-right">
+            <p>Tutorial</p>
+            <p>Quiz</p>
+            <p>Lecturer</p>
+            <p>Help And Support</p>
+            <p>Copyright © 2021 New Era University College. All Rights Reserved.</p>
+        </div>
+
+    </footer>
+</body>
+
+</html>

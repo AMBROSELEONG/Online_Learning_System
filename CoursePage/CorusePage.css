@@ -192,7 +192,7 @@ ul {
 
 .progress-container {
     width: 100%;
-    height: 8px;
+    height: 0.8rem;
     background: #ccc;
     position: fixed;
     z-index: 10;
@@ -200,7 +200,7 @@ ul {
 }
 
 .progress-bar {
-    height: 8px;
+    height: 0.8rem;
     background: rgb(255, 140, 0);
     width: 0%;
 }
@@ -211,217 +211,106 @@ body section {
     margin-top: 5rem;
 }
 
-.swiper-container {
+.container {
     width: 80%;
-    height: 40rem;
+    margin: 5% 10%;
     overflow: hidden;
     display: flex;
-    position: relative;
-    margin: 5% 10%;
-}
-
-.swiper-container img {
-    width: 100%;
-    height: 40rem;
-}
-
-.swiper-wrapper {
-    width: 9999rem;
-}
-
-.swiper-button-next,
-.swiper-button-prev,
-.swiper-pagination::before {
-    position: absolute;
-}
-
-.introduce-container {
-    width: 90%;
-    height: 30rem;
-    background-color: #f5f5f5;
-    padding: 5%;
-    text-align: center;
-}
-
-.introduce-container p {
-    color: #6a6f73;
-    font-size: 3rem;
-}
-
-.introduce-container>div {
-    width: 100%;
-}
-
-.introduce-container>div>img {
-    width: 100%;
-    height: 20rem;
-    object-fit: contain;
-}
-
-
-.course-container {
-    width: calc(100% - 10rem);
-    text-align: center;
-    margin-bottom: 25rem;
-    margin: 5rem;
-}
-
-.course-container>p {
-    font-size: 5rem;
-    margin-bottom: 2rem;
-}
-
-.course-detail {
-    width: calc(100%-4rem);
-    height: 20rem;
-    display: flex;
-    padding: 2rem;
     flex-wrap: wrap;
 }
 
-.course-detail-inner {
-    width: calc(100%-4rem/4);
-    height: 100%;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
+.filterDiv {
+    background-color: white;
+    color: #ffffff;
+    width: 20%;
+    height: 30rem;
+    margin: 2.5%;
+    display: none;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    position: relative;
-    background-color: transparent;
-    perspective: 100rem;
-    margin: 2rem;
-}
-
-.course-detail:hover .course-detail-inner {
-    transform: rotateX(180deg);
-}
-
-.course-detail-front,
-.course-detail-back {
-    width: 100%;
-    height: 20rem;
+    font-family: arial;
+    padding: 2% 3%;
     box-sizing: border-box;
-    background-color: #777;
-    position: absolute;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    text-align: center;
+    position: relative;
 }
 
-.course-detail-front {
-    background-color: #6a6f73;
+.filterDiv:hover {
+    background-color: #ccc;
+}
+
+.filterDiv img {
     width: 100%;
-    height: 20rem;
+    height: 30%;
+    background-color: rgb(255, 140, 0);
 }
 
-.course-detail-back {
-    background-color: #f5f5f5;
+.filterDiv h1 {
     color: black;
-    text-align: left;
-    padding: 3rem;
-    transform: rotateX(180deg);
+    font-size: 2.5rem;
+    margin: 5%;
 }
 
-.course-detail-back button {
-    width: auto;
-    background-color: rgb(255, 140, 0);
-    cursor: pointer;
+.price {
+    color: grey;
+    font-size: 22px;
+    margin: 10%;
+}
+
+.filterDiv h2 {
+    color: black;
+    font-size: 2rem;
+    margin: 5%;
+}
+
+.add-to-cart {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     border: none;
-    border-radius: 2rem;
-    padding: 1rem;
-    margin: 1rem 2rem;
-}
-
-.aboutus-container {
-    width: calc(100% - 5rem - 0.2rem);
-    padding: 2.5rem;
-    text-align: center;
-    background-color: #f5f5f5;
-    margin: 7.5rem 0%;
-}
-
-.aboutus-container>p {
-    font-size: 3rem;
-    text-align: center;
-}
-
-.aboutus-container-outside {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-}
-
-.aboutus-container-inner {
-    width: calc(50rem - 5rem);
-    height: calc(25rem - 5rem);
-    margin: 2.5rem;
-    display: flex;
-    border: 1px solid rgb(60, 60, 60);
-    border-radius: 3rem;
-}
-
-.aboutus-container-inner img {
-    width: 30%;
-    height: 66%;
-    margin: 2.5rem;
-    border-radius: 10rem;
-    border: 1px solid rgb(60, 60, 60);
-}
-
-.aboutus-container-inner .content {
-    flex: 1;
-    height: 15rem;
-    text-align: left;
-    font-size: 2rem;
-    display: grid;
-    align-items: center;
-}
-
-.tutorial-container {
-    width: calc(100%-60rem);
-    height: 30rem;
-    padding: 5rem 30rem;
-    display: flex;
-}
-
-.tutorial-container-inner-left {
-    width: 45%;
-    text-align: left;
-}
-
-.tutorial-container-inner-left p {
-    font: 3rem normal black;
-    margin: 1rem;
-}
-
-.tutorial-container-inner-left img {
-    width: 50%;
-    height: 5rem;
-}
-
-.tutorial-container-inner-left ul li {
-    font-size: 2rem;
-    list-style-type: circle;
-    margin: 1rem 3rem;
-}
-
-.tutorial-container-inner-left button {
-    width: 50%;
-    height: 5rem;
+    outline: 0;
+    padding: 12px;
+    color: white;
     background-color: rgb(255, 140, 0);
-    margin-top: 3rem;
-}
-
-.tutorial-container-inner-right {
-    flex: 1;
-    height: 30rem;
-    border: 0.1rem solid rgb(60, 60, 60);
-}
-
-.tutorial-container-inner-right img {
+    text-align: center;
+    cursor: pointer;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background-color: #6a6f73;
+    font-size: 18px;
+}
+
+.filterDiv button:hover {
+    opacity: 0.7;
+}
+
+.show {
+    display: block;
+}
+
+#myBtnContainer {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    position: fixed;
+    z-index: 10;
+    top: 5.8rem;
+}
+
+.btn {
+    width: 10rem;
+    margin-top: 5%;
+    border: none;
+    outline: none;
+    padding: 12px 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #ddd;
+}
+
+.btn.active {
+    background-color: rgb(255, 140, 0);
+    color: white;
 }
 
 footer {
@@ -471,6 +360,7 @@ footer {
     font: 2rem normal;
     color: white;
 }
+
 
 @media all and (max-width: 76.8rem) {
     html {
@@ -527,6 +417,7 @@ footer {
         margin-top: -1rem;
         margin-right: 0;
         margin-left: -7%;
+        color: white;
     }
 
     .openbtn:hover {
@@ -573,59 +464,8 @@ footer {
         cursor: pointer;
     }
 
-    .swiper-container {
-        width: 100%;
-        margin: 0;
-    }
-
-    #course-container {
-        width: 96%;
-        margin-bottom: 30rem;
-        margin: 2%;
-        padding: 0;
-    }
-
-    .tab-content-inner div:nth-child(5) {
-        flex: none;
-        display: flex;
-        width: calc(100% - (24%*2));
-        margin: 0 24%;
-    }
-
-    .tab-content-inner div:nth-child(5) .course-detail {
-        width: 94%;
-        margin: 3%;
-    }
-
-    .course-detail-outer {
-        width: 25%;
-        box-sizing: border-box;
-    }
-
-    .course-detail {
-        flex: 1;
-        margin: 3%;
-    }
-
-    .course-container a {
-        display: block;
-        text-decoration: none;
-        color: black;
-        font-size: 2rem;
-    }
-
-    .course-container a:hover {
-        color: blue;
-    }
-
-    .aboutus-container {
-        width: 94%;
-        padding: 3%;
-    }
-
-    .tutorial-container {
-        width: 94%;
-        padding: 3%;
+    .filterDiv{
+        width: 30%;
     }
 }
 
@@ -643,65 +483,4 @@ footer {
     .left-bar {
         margin: 0;
     }
-
-    .tab-content-inner {
-        flex-direction: column;
-    }
-
-    #course-container {
-        width: 96%;
-        margin-bottom: 30rem;
-        margin: 2%;
-        padding: 0;
-    }
-
-    .course-detail-outer {
-        display: flex;
-        width: 100%;
-    }
-
-    .course-detail {
-        width: 50%;
-    }
-
-    .tab-content-inner>div:nth-child(5) {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .aboutus-container .aboutus-container-outside {
-        flex-direction: column;
-        width: 100%;
-        flex: 0;
-    }
-
-    .aboutus-container .aboutus-container-inner {
-        width: 70%;
-        margin: 2% 15%;
-    }
-
-    .aboutus-container p {
-        font-size: 4rem;
-    }
-
-    .aboutus-container-inner .content p {
-        font-size: 3rem;
-    }
-
-    .tutorial-container {
-        margin-bottom: 5%;
-    }
-
-    .footer-container-left,
-    .footer-container-right {
-        width: 30%;
-        text-align: center;
-    }
-
-    .footer-container-center {
-        flex-direction: column;
-        margin-top: -10%;
-    }
-
 }
