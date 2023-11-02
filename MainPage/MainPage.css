@@ -271,16 +271,19 @@ body section {
     margin-bottom: 2rem;
 }
 
-.course-detail {
-    width: calc(100%-4rem);
-    height: 20rem;
+.course-list {
+    width: 100%;
     display: flex;
-    padding: 2rem;
     flex-wrap: wrap;
 }
 
+.course-detail {
+    width: 25%;
+    height: 20rem;
+}
+
 .course-detail-inner {
-    width: calc(100%-4rem/4);
+    width: calc(100% - 4rem);
     height: 100%;
     transition: transform 0.8s;
     transform-style: preserve-3d;
@@ -527,6 +530,7 @@ footer {
         margin-top: -1rem;
         margin-right: 0;
         margin-left: -7%;
+        color: white;
     }
 
     .openbtn:hover {
@@ -578,46 +582,6 @@ footer {
         margin: 0;
     }
 
-    #course-container {
-        width: 96%;
-        margin-bottom: 30rem;
-        margin: 2%;
-        padding: 0;
-    }
-
-    .tab-content-inner div:nth-child(5) {
-        flex: none;
-        display: flex;
-        width: calc(100% - (24%*2));
-        margin: 0 24%;
-    }
-
-    .tab-content-inner div:nth-child(5) .course-detail {
-        width: 94%;
-        margin: 3%;
-    }
-
-    .course-detail-outer {
-        width: 25%;
-        box-sizing: border-box;
-    }
-
-    .course-detail {
-        flex: 1;
-        margin: 3%;
-    }
-
-    .course-container a {
-        display: block;
-        text-decoration: none;
-        color: black;
-        font-size: 2rem;
-    }
-
-    .course-container a:hover {
-        color: blue;
-    }
-
     .aboutus-container {
         width: 94%;
         padding: 3%;
@@ -644,30 +608,23 @@ footer {
         margin: 0;
     }
 
-    .tab-content-inner {
-        flex-direction: column;
-    }
-
     #course-container {
-        width: 96%;
+        width: 80%;
         margin-bottom: 30rem;
-        margin: 2%;
+        margin: 0% 10%;
         padding: 0;
-    }
-
-    .course-detail-outer {
-        display: flex;
-        width: 100%;
     }
 
     .course-detail {
         width: 50%;
+        box-sizing: border-box;
+        margin-bottom: 2%;
     }
 
-    .tab-content-inner>div:nth-child(5) {
-        width: 100%;
+    .course-detail-back button {
         margin: 0;
-        padding: 0;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
     }
 
     .aboutus-container .aboutus-container-outside {

@@ -223,7 +223,7 @@ body section {
     background-color: white;
     color: #ffffff;
     width: 20%;
-    height: 30rem;
+    height: 35rem;
     margin: 2.5%;
     display: none;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -465,7 +465,11 @@ footer {
     }
 
     .filterDiv{
-        width: 30%;
+        width: calc((100% - 10% - 6%)/3);
+    }
+
+    .btn{
+        width: 15rem;
     }
 }
 
@@ -482,5 +486,21 @@ footer {
 
     .left-bar {
         margin: 0;
+    }
+
+    .filterDiv{
+        width: calc((100% - 10% - 6%)/2);
+        height: 40rem;
+    }
+
+    .footer-container-left,
+    .footer-container-right {
+        width: 30%;
+        text-align: center;
+    }
+
+    .footer-container-center {
+        flex-direction: column;
+        margin-top: -10%;
     }
 }
