@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1698494301028') format('truetype');
+  src: url('iconfont.ttf?t=1699084124145') format('truetype');
 }
 
 .iconfont {
@@ -11,8 +11,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-31gouwuchexuanzhong:before {
+  content: "\f01d1";
+}
+
 .icon-book:before {
   content: "\e61e";
+}
+
+.icon-facebook_facebook:before {
+  content: "\e611";
 }
 
 .icon-shijuan:before {
@@ -27,11 +35,31 @@
   content: "\e7b3";
 }
 
+.icon-instagram:before {
+  content: "\e87f";
+}
+
+.icon-sousuo:before {
+  content: "\eafe";
+}
+
 .icon-xuexiao:before {
   content: "\e659";
 }
 
+.icon-whatsapp:before {
+  content: "\e8ea";
+}
+
 .icon-guanyuwomen:before {
   content: "\e645";
+}
+
+.icon-wechat:before {
+  content: "\e618";
+}
+
+.icon-user:before {
+  content: "\e682";
 }
 
