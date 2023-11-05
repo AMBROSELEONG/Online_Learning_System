@@ -475,7 +475,7 @@ footer {
     color: white;
 }
 
-@media all and (max-width: 76.8rem) {
+@media all and (max-width: 768px){
     html {
         font-size: 9px;
     }
@@ -593,7 +593,7 @@ footer {
     }
 }
 
-@media all and (max-width: 57.6rem) {
+@media all and (max-width: 576px){
 
     body {
         overflow-x: hidden;
