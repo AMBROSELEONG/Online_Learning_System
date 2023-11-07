@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        animation: animatezoom 0.5s;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        width: 50rem;
+        height: 20rem;
+        margin: 15rem auto;
+        padding: 2rem;
+        text-align: center;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    }
+
+    .modal-content>div {
+        width: 80%;
+        margin: 5%;
+        padding: 5%;
+        border: 1px solid black;
+        font-size: 2rem;
+    }
+
+    #startQuizButton,
+    #cancelQuizButton {
+        margin: 10px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    #startQuizButton:hover,
+    #cancelQuizButton:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<body style="background-image: url(../img/quiz.jpg); background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center; margin-top: 10%;">
+                <h1>QUIZ</h1>
+            </div>
+            <div class="col-md-12">
+                <div class="card"
+                    style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
+                    <div class="card-body">
+                        <h5 class="card-title">Question 1</h5>
+                        <form>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1-option1" value="option1">
+                                <label class="form-check-label" for="q1-option1">Option 1</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1-option2" value="option2">
+                                <label class="form-check-label" for="q1-option2">Option 2</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1-option3" value="option3">
+                                <label class="form-check-label" for="q1-option3">Option 3</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1-option4" value="option4">
+                                <label class="form-check-label" for="q1-option4">Option 4</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card"
+                    style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
+                    <div class="card-body">
+                        <h5 class="card-title">Question 1</h5>
+                        <form>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q2" id="q2-option1" value="option1">
+                                <label class="form-check-label" for="q2-option1">Option 1</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q2" id="q2-option2" value="option2">
+                                <label class="form-check-label" for="q2-option2">Option 2</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q2" id="q2-option3" value="option3">
+                                <label class="form-check-label" for="q2-option3">Option 3</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q2" id="q2-option4" value="option4">
+                                <label class="form-check-label" for="q2-option4">Option 4</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card"
+                    style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
+                    <div class="card-body">
+                        <h5 class="card-title">Question 1</h5>
+                        <form>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q3" id="q3-option1" value="option1">
+                                <label class="form-check-label" for="q3-option1">Option 1</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q3" id="q3-option2" value="option2">
+                                <label class="form-check-label" for="q3-option2">Option 2</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q3" id="q3-option3" value="option3">
+                                <label class="form-check-label" for="q3-option3">Option 3</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q3" id="q3-option4" value="option4">
+                                <label class="form-check-label" for="q3-option4">Option 4</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card"
+                    style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
+                    <div class="card-body">
+                        <h5 class="card-title">Question 1</h5>
+                        <form>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q4" id="q4-option1" value="option1">
+                                <label class="form-check-label" for="q4-option1">Option 1</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q4" id="q4-option2" value="option2">
+                                <label class="form-check-label" for="q4-option2">Option 2</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q4" id="q4-option3" value="option3">
+                                <label class="form-check-label" for="q4-option3">Option 3</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q4" id="q4-option4" value="option4">
+                                <label class="form-check-label" for="q4-option4">Option 4</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" style="text-align: center; color: red;">
+                <p>Please Be Aware!! There are a few precautions and rules during the examination start as below:</p>
+                <p>1. DO NOT USED ChatGPT</p>
+                <p>2. Your actions of cheating WILL BE on the COURT OF LAWS.</p>
+                <p>3. During the examination, your actions are being monitoring until you had done your online exams
+                    sheet.
+                </p>
+
+            </div>
+            <div class="col-md-12">
+                <button class="btn btn-primary col-md-12" style="margin-bottom: 5%;" onclick="openModal()">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <div>
+                <h1>YOUR GRADE IS </h1>
+            </div>
+            <button id="startQuizButton" onclick="window.location.href='../QuizList/QuizList.html'">Yes</button>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById('quizModal');
+        var startButton = document.getElementById('startQuizButton');
+        var cancelButton = document.getElementById('cancelQuizButton');
+
+        function openModal() {
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        startButton.addEventListener('click', function () {
+            // 在这里添加处理“开始测试”的逻辑
+            // 例如：window.location.href = 'quiz.html';
+            closeModal();
+        });
+
+        cancelButton.addEventListener('click', function () {
+            // 在这里添加处理“取消”的逻辑
+            closeModal();
+        });
+    </script>
+</body>
+
+</html>
