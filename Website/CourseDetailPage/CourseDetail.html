@@ -29,7 +29,7 @@
             <a href="../QuizPage/Quiz.html"><i class="iconfont icon-shijuan">
                     <p>Quiz</p>
                 </i></a>
-            <a href=""><i class="iconfont icon-guanyuwomen">
+            <a href="../ShoppingCart/ShoppingCart.html"><i class="iconfont icon-guanyuwomen">
                     <p>About Us</p>
                 </i></a>
             <a href=""><i class="iconfont icon-dianhua">
@@ -54,7 +54,7 @@
                 <li class="item">Category<span></span>
                     <ul>
                         <li onclick="window.location.href = '../CoursePage/CoursePage.html'">Course</li>
-                        <li  onclick="window.location.href = '../QuizPage/Quiz.html'">Quiz</li>
+                        <li onclick="window.location.href = '../QuizPage/Quiz.html'">Quiz</li>
                     </ul>
                 </li>
                 <li class="item">About<span></span>
@@ -91,7 +91,8 @@
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
-            <i class="iconfont icon-31gouwuchexuanzhong"></i>
+            <i class="iconfont icon-31gouwuchexuanzhong"
+                onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.html'"></i>
         </div>
     </header>
@@ -131,47 +132,11 @@
                 <p>Price : RM 500</p>
             </div>
             <div class="course-button">
-                <button>Buy It Now</button>
-                <button>Add To Cart</button>
+                <button onclick="window.location.href='../CheckOutPage/CheckOutPage.html'">Buy It Now</button>
+                <button onclick="window.location.href='../ShoppingCart/ShoppingCart.html'">Add To Cart</button>
             </div>
         </div>
     </section>
-    <div class="small-screen">
-        <div class="container-upper-small">
-            <img src="">
-            <h1>Course Name</h1>
-            <p>Lecturer :</p>
-            <p>Evalute : Mr Ng</p>
-            <p>Price : RM 500</p>
-        </div>
-        <div class="description-small">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quis Lorem ipsum dolor, sit amet
-                consectetur adipisicing elit. Omnis, ipsa optio est quidem modi cupiditate nemo, et doloremque
-                voluptatem quia adipisci. Dolorum quibusdam aliquam, cupiditate temporibus dicta molestiae quam! Quo.
-            </p>
-        </div>
-        <div class="about-course-small">
-            <div>
-                Beginner
-            </div>
-            <div>
-                3 Months
-            </div>
-            <div>
-                39 downloadable resources
-            </div>
-            <div>
-                Completion Certificate
-            </div>
-            <div>
-                Last Updated October 29, 2023
-            </div>
-        </div>
-        <div class="course-button-small">
-            <button>Buy It Now</button>
-            <button>Add To Cart</button>
-        </div>
-    </div>
 </body>
 
 </html>

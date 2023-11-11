@@ -276,6 +276,8 @@ section {
     color: white;
     border: none;
     margin-top: 5%;
+    cursor: pointer;
+    z-index: 5;
 }
 
 .course-button button:hover {
