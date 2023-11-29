@@ -1,3 +1,20 @@
+<?php
+$servername = "127.0.0.1";
+$user = "root";
+$pass = "";
+$dbName = "online_learning_system";
+
+$conn = new mysqli($servername, $user, $pass, $dbName);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM comments ORDER BY CommentDate DESC";
+$result = $conn->query($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,14 +75,18 @@
         <h1 class="mt-5">Comment Board</h1>
 
         <div class="comment-box">
-            <form id="commentForm">
+            <form id="commentForm" action="Comment1.php" method="post">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
-                    <input type="text" class="form-control" id="name" required>
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <div class="mb-3">
-                    <label for="message" class="form-label">Content:</label>
-                    <textarea class="form-control" id="message" rows="3" required></textarea>
+                    <label for="comment" class="form-label">Content:</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="course" class="form-label">Course:</label>
+                    <textarea class="form-control" id="course" name="course" rows="3" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -75,7 +96,15 @@
         <div class="comment-box mt-4">
             <h3>Comment List</h3>
             <ul id="commentList" class="list-group">
-                <!-- 这里将通过JavaScript动态添加留言 -->
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<li class="list-group-item"><strong>' . htmlspecialchars($row['UserName']) . ':</strong><br>' . htmlspecialchars($row['CommentContent']) . '<br>' . htmlspecialchars($row['CourseName']) . '<br><small>Posted on ' . htmlspecialchars($row['CommentDate']) . '</small></li>';
+                    }
+                } else {
+                    echo "No comments yet.";
+                }
+                ?>
             </ul>
         </div>
 
@@ -85,28 +114,68 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        function getCurrentTime() {
+            var currentDate = new Date();
+            var day = currentDate.getDate();
+            var month = currentDate.getMonth() + 1; // Month starts from 0
+            var year = currentDate.getFullYear();
+            var hours = currentDate.getHours();
+            var minutes = currentDate.getMinutes();
+            var seconds = currentDate.getSeconds();
+
+            // 格式化时间
+            var formattedTime = year + '-' + addZeroBefore(month) + '-' + addZeroBefore(day) + ' ' + addZeroBefore(hours) + ':' + addZeroBefore(minutes) + ':' + addZeroBefore(seconds);
+            return formattedTime;
+        }
+
+        // 为单个数字添加前导零
+        function addZeroBefore(number) {
+            return (number < 10 ? '0' : '') + number;
+        }
+
         // 监听表单提交事件
         document.getElementById('commentForm').addEventListener('submit', function (event) {
-            event.preventDefault(); 
+            event.preventDefault();
 
             // 获取姓名和留言内容
             var name = document.getElementById('name').value;
-            var message = document.getElementById('message').value;
+            var comment = document.getElementById('comment').value;
+            var course = document.getElementById('course').value;
+            var currentTime = getCurrentTime();
+
+            var formData = new FormData(this);
 
             // 创建留言元素
             var li = document.createElement('li');
             li.className = 'list-group-item';
-            li.innerHTML = '<strong>' + name + ':</strong><br> ' + message;
-
+            li.innerHTML = '<strong>' + name + ':</strong><br> ' + comment + "<br>" + course + '<br><small>Posted on ' + currentTime + '</small>';
             // 将留言元素添加到留言列表中
             document.getElementById('commentList').appendChild(li);
 
             // 清空表单
             document.getElementById('name').value = '';
-            document.getElementById('message').value = '';
+            document.getElementById('comment').value = '';
+            document.getElementById('course').value = '';
+
+            fetch('Comment.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    // Handle the server response here if needed
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         });
     </script>
 
 </body>
 
 </html>
+
+<?php
+$conn->close();
+?>

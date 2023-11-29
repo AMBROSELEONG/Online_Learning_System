@@ -56,7 +56,26 @@
             <div class="col"></div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        // 检查 URL 参数中是否有成功的标记
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
 
+        // 如果成功标记存在，显示弹出框
+        if (successParam === 'true') {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Registration successful!',
+                icon: 'success'
+            }).then((result) => {
+                // 在用户点击确认后，跳转到指定页面
+                if (result.isConfirmed || result.isDismissed) {
+                    window.location.href = 'LoginForm.html'; // 替换为你要跳转的页面
+                }
+            });
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>

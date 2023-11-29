@@ -25,9 +25,9 @@ function verify($username, $password, $email, $contactnumber)
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
-    $password = $_POST['passwordhash'];
-    $email = $_POST['Email'];
-    $contactnumber = $_POST['ContactNumber'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+    $contactnumber = $_POST['contact'];
 
     $errors = verify($username, $password, $email, $contactnumber); // Call the function and store the errors
 
@@ -48,13 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("ssss", $username, $password, $email, $contactnumber);
 
         if ($stmt->execute()) {
-            echo "<script>
-                swal({
-                    title: 'Success!',
-                    text: 'Registration successful!',
-                    icon: 'success'
-                });
-            </script>";
+            header("Location: LoginForm.html?success=true");
+            exit(); // 退出脚本，确保不会继续执行
         } else {
             echo "Error: " . $stmt->error;
         }
