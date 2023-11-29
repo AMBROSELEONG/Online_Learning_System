@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course</title>
-    <link rel="stylesheet" type="text/css" href="CorusePage.css">
-    <link rel="stylesheet" href="../icon/iconfont.css">
+    <title>Quiz</title>
+    <link rel="stylesheet" type="text/css" href="QuizList.css">
+    <link rel="stylesheet" href="icon/iconfont.css">
 </head>
 
 <body>
@@ -17,17 +17,17 @@
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
-            <a href="../ShoppingCart/ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
+            <a href="ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
                     <p>Shopping Cart</p>
                 </i></a>
-            <a href="../UserProfile/UserProfile.html"><i class="iconfont icon-user">
+            <a href="UserProfile.html"><i class="iconfont icon-user">
                     <p>User Info</p>
                 </i></a>
-            <a href="../MainPage/MainPage.html"><i class="iconfont icon-book1">
+            <a href="MainPage.html"><i class="iconfont icon-book1">
                     <p>Home</p>
                 </i></a>
-            <a href="../QuizList/QuizList.html"><i class="iconfont icon-shijuan">
-                    <p>Quiz</p>
+            <a href="CoursePage.html"><i class="iconfont icon-shijuan">
+                    <p>Course</p>
                 </i></a>
             <a href=""><i class="iconfont icon-guanyuwomen">
                     <p>About Us</p>
@@ -35,7 +35,7 @@
             <a href=""><i class="iconfont icon-dianhua">
                     <p>Contact Us</p>
                 </i></a>
-            <a href="../Comment/Comment.html"><i class="iconfont icon-comment">
+            <a href="Comment.html"><i class="iconfont icon-comment">
                     <p>Comment</p>
                 </i></a>
         </div>
@@ -56,9 +56,9 @@
             <ul class="menu">
                 <li class="item">Category<span></span>
                     <ul>
-                        <li onclick="window.location.href = '../MainPage/MainPage.html'">Home</li>
-                        <li onclick="window.location.href = '../QuizList/QuizList.html'">Quiz</li>
-                        <li onclick="window.location.href = '../Comment/Comment.html'">Comment</li>
+                        <li onclick="window.location.href = 'MainPage.html'">Home</li>
+                        <li onclick="window.location.href = 'CoursePage.html'">Course</li>
+                        <li onclick="window.location.href = 'Comment.html'">Comment</li>
                     </ul>
                 </li>
                 <li class="item">About<span></span>
@@ -97,7 +97,7 @@
             </form>
             <i class="iconfont icon-31gouwuchexuanzhong"
                 onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
-            <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.html'"></i>
+            <i class="iconfont icon-user" onclick="window.location.href = 'UserProfile.html'"></i>
         </div>
     </header>
     <section>
@@ -122,19 +122,19 @@
         </div>
 
         <div class="container">
-            <div class="filterDiv Category1" onclick="location.href=''">
+            <div class="filterDiv Category1" onclick="openModal()">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
             <div class="filterDiv Category2" onclick="location.href=''">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
 
             <div class="filterDiv Category1" onclick="location.href=''">
@@ -142,14 +142,14 @@
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
             <div class="filterDiv Category2" onclick="location.href=''">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
 
             <div class="filterDiv Category1" onclick="location.href=''">
@@ -157,14 +157,14 @@
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
             <div class="filterDiv Category2" onclick="location.href=''">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
 
             <div class="filterDiv Category1" onclick="location.href=''">
@@ -172,14 +172,14 @@
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
             <div class="filterDiv Category2" onclick="location.href=''">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
 
             <div class="filterDiv Category1" onclick="location.href=''">
@@ -187,14 +187,14 @@
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
             <div class="filterDiv Category2" onclick="location.href=''">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
 
             <div class="filterDiv Category1" onclick="location.href=''">
@@ -202,14 +202,14 @@
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
             <div class="filterDiv Category2" onclick="location.href=''">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
 
             <div class="filterDiv Category1" onclick="location.href=''">
@@ -217,14 +217,14 @@
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
             <div class="filterDiv Category2" onclick="location.href=''">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
 
             <div class="filterDiv Category1" onclick="location.href=''">
@@ -232,14 +232,14 @@
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
             <div class="filterDiv Category2" onclick="location.href=''">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
 
             <div class="filterDiv Category1" onclick="location.href=''">
@@ -247,14 +247,14 @@
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
             <div class="filterDiv Category2" onclick="location.href=''">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
 
             <div class="filterDiv Category1" onclick="location.href=''">
@@ -262,16 +262,25 @@
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
             <div class="filterDiv Category2" onclick="location.href=''">
                 <img src="" alt="">
                 <h1>Course:</h1>
                 <p class="price">RM 100</p>
                 <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
+                <button class="try-quiz">Let's Try Quiz</button>
             </div>
 
+            <div id="quizModal" class="modal">
+                <div class="modal-content">
+                    <div>
+                        <h1>READY FOR A QUIZ?</h1>
+                    </div>
+                    <button id="startQuizButton" onclick="window.location.href='Quiz.html'">Yes</button>
+                    <button id="cancelQuizButton">No</button>
+                </div>
+            </div>
 
 
             <script>
@@ -323,6 +332,33 @@
                     });
                 }
             </script>
+
+            <script>
+                var modal = document.getElementById('quizModal');
+                var startButton = document.getElementById('startQuizButton');
+                var cancelButton = document.getElementById('cancelQuizButton');
+
+                function openModal() {
+                    modal.style.display = 'block';
+                }
+
+                function closeModal() {
+                    modal.style.display = 'none';
+                }
+
+                startButton.addEventListener('click', function () {
+                    // 在这里添加处理“开始测试”的逻辑
+                    // 例如：window.location.href = 'quiz.html';
+                    closeModal();
+                });
+
+                cancelButton.addEventListener('click', function () {
+                    // 在这里添加处理“取消”的逻辑
+                    closeModal();
+                });
+            </script>
+
+
     </section>
     <footer>
         <div class="footer-container-left">
