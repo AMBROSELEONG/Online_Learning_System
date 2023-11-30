@@ -75,7 +75,7 @@ $result = $conn->query($sql);
         <h1 class="mt-5">Comment Board</h1>
 
         <div class="comment-box">
-            <form id="commentForm" action="Comment.php" method="post">
+            <form id="commentForm" action="CommentPHP.php" method="post">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
                     <input type="text" class="form-control" id="name" name="name" required>

@@ -1,8 +1,5 @@
 <?php
-    include '../../Website/RegisterForm/RegisterForm.php';
-?>
-
-<?php
+include 'RegisterForm.php';
 function verify($username, $password, $email, $contactnumber)
 {
     $errors = array(); // Create an array to store validation error messages
@@ -38,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($errors)) {
         $servername = "localhost";
         $user = "root";
-        $pass = "0000";
+        $pass = "";
         $dbName = "online_learning_system";
 
         $conn = new mysqli($servername, $user, $pass, $dbName);
@@ -47,30 +44,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             die("Connection Failed: " . $conn->connect_error);
         }
 
-        $insert = "INSERT INTO User(UserName, PasswordHash, Email, ContactNumber) VALUES (?, ?, ?, ?)";
+        $insert = "INSERT INTO users(UserName, PasswordHash, Email, ContactNumber) VALUES (?, ?, ?, ?)";
         $stm = $conn->prepare($insert);
-        $stm->bind_param("sssi", $username, $password, $email, $contactnumber);
-        
+        $stm->bind_param("ssss", $username, $password, $email, $contactnumber);
+
         if ($stm->execute()) {
             echo "<script>
-                swal({
+                Swal.fire({
                     title: 'Success!',
                     text: 'Registration successful!',
                     icon: 'success'
+                }).then(() => {
+                    window.location.href = 'LoginForm.php'; // Redirect to login page after 'OK' is clicked
                 });
             </script>";
         } else {
             echo "Error: " . $stm->error;
         }
-        
+
         $stm->close();
         $conn->close();
     } else {
         // Handle errors (display or log them)
         foreach ($errors as $error) {
-            echo $error . "<br>";
+            echo "<script>
+                Swal.fire({
+                    title: 'Error!',
+                    text: '$error',
+                    icon: 'error'
+                });
+            </script>";
         }
-        header("location: ");
-    }
+    }
 }
 ?>
