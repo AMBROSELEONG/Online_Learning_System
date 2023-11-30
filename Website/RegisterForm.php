@@ -1,66 +1,65 @@
-<?php
-function verify($username, $password, $email, $contactnumber)
-{
-    $errors = array(); // Create an array to store validation error messages
+<!DOCTYPE html>
+<html lang="en">
 
-    if (empty($username) || empty($password) || empty($email) || empty($contactnumber)) {
-        $errors[] = "Please fill in all fields.";
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
 
-    // Validate form data
-    if ($password !== $_POST["repeatpassword"]) {
-        $errors[] = "Password and Repeat Password do not match.";
-    }
+<body style="background-image: url(../img/background.jpg);">
+    <div class="container">
+        <div class="row ">
+            <div class="col"></div>
+            <div class="col-sm-6 p-3 my-3"
+                style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255, 0.2);">
+                <h1 style="text-align: center; color: gray;">Registration Form</h1>
+                <form id="registrationForm" action="RegisterForm.php" method="post">
+                    <div class="form-group">
+                        <label for="username" style="color: gray;">Username</label>
+                        <input type="text" class="form-control" id="UserName" name="UserName" required>
+                    </div>
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Please enter a valid email address.";
-    }
+                    <div class="form-group">
+                        <label for="password" style="color: gray;">Password</label>
+                        <input type="password" class="form-control" id="PasswordHash" name="Password" required>
+                    </div>
 
-    if (!preg_match("/^(01[0-9])?\d{7,8}$/", $contactnumber)) {
-        $errors[] = "Please enter a valid 10-digit phone number.";
-    }
+                    <div class="form-group">
+                        <label for="repeatpassword" style="color: gray;">Repeat Password</label>
+                        <input type="password" class="form-control" id="repeatpassword" name="repeatpassword" required>
+                    </div>
 
-    return $errors; // Return the array of errors
-}
+                    <div class="form-group">
+                        <label for="contact" style="color: gray;">Contact Number</label>
+                        <input type="tel" class="form-control" id="ContactNumber" name="ContactNumber" required>
+                    </div>
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
-    $contactnumber = $_POST['contact'];
+                    <div class="form-group">
+                        <label for="email" style="color: gray;">Email</label>
+                        <input type="email" class="form-control" id="Email" name="Email" required>
+                    </div>
 
-    $errors = verify($username, $password, $email, $contactnumber); // Call the function and store the errors
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                        <label class="form-check-label" for="terms" style="color: gray;">Agree with terms and
+                            privacy</label>
+                    </div>
+                    <p>Already registered? Go <span style="color: blue; cursor: pointer;"><a href="../LoginForm/LoginForm.html">Login
+                                Now</a></span></p>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="submit" class="btn btn-primary" id="submit" name="submit"
+                        style="background-color: rgb(255, 140, 0);">Submit</button>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
 
-    if (empty($errors)) {
-        $servername = "127.0.0.1";
-        $user = "root";
-        $pass = "";
-        $dbName = "online_learning_system";
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
 
-        $conn = new mysqli($servername, $user, $pass, $dbName);
-
-        if ($conn->connect_error) {
-            die("Connection Failed: " . $conn->connect_error);
-        }
-
-        $insert = "INSERT INTO users(UserName, PasswordHash, Email, ContactNumber) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($insert);
-        $stmt->bind_param("ssss", $username, $password, $email, $contactnumber);
-
-        if ($stmt->execute()) {
-            header("Location: LoginForm.html?success=true");
-            exit(); // 退出脚本，确保不会继续执行
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-        
-        $stmt->close();
-        $conn->close();
-    } else {
-        // Handle errors (display or log them)
-        foreach ($errors as $error) {
-            echo $error . "<br>";
-        }
-    }
-}
-?>
+</html>
