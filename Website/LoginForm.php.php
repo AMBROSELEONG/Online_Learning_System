@@ -1,3 +1,48 @@
+<?php
+
+    session_start();
+
+    include '../LoginForm/LoginForm.php';
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        if (empty($username) || empty($password)) {
+            
+            $query ="select * from form where UserName ='$username' limit 1";
+            $result = mysqli_query($conn, $query);
+        }
+
+        if($result){
+            if($result && mysqli_num_rows($result) > 0)
+            {
+
+                $username =mysqli_fetch_assoc($result);
+
+                if($username['password'] == $password)
+                {
+
+                    header("location: MainPage.html");
+
+                    die;       
+                }
+
+            }
+        }
+         
+        echo "<script type='text/javascript'> alert('wrong username or password')</script>";
+
+    }
+    else{
+
+         echo "<script type='text/javascript'> alert('wrong username or password')</script>";
+    }
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +87,32 @@
                     <button type="submit" class="btn btn-primary"
                         style="background-color: rgb(255, 140, 0);">Login</button>
                 </form>
+
+                <?php
+                if(isset($_GET["error"])){
+                    if($_GET["error"] == "emptyinput"){
+                        echo "<p>Fill in all fields!</p>";
+                    }
+                    else if($_GET["error"] == "invaliduid"){
+                        echo "<p>Fill in a proper username!</p>";
+                    }
+                    else if($_GET["error"] == "passworddontmatch"){
+                        echo "<p>Password doesn't match!</p>";
+                    }
+                    else if($_GET["error"] == "stmfailed"){
+                        echo "<p>Something wnet wrong!</p>";
+                    }
+                    else if($_GET["error"] == "usernametaken"){
+                        echo "<p>Username already taken!</p>";
+                    }
+                    else if($_GET["error"] == "passworddontmatch"){
+                        echo "<p>Password doesn't match</p>";
+                    }
+                    else if($_GET["error"] == "none"){
+                        echo "<p>You have signed up!</p>";
+                    }
+                }
+        ?>
             </div>
             <div class="col"></div>
         </div>
