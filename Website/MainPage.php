@@ -46,7 +46,7 @@ $username = $_SESSION['username'];
             <a href="QuizList.html"><i class="iconfont icon-shijuan">
                     <p>Quiz</p>
                 </i></a>
-            <a href=""><i class="iconfont icon-guanyuwomen">
+            <a href="AboutUs.html"><i class="iconfont icon-guanyuwomen">
                     <p>About Us</p>
                 </i></a>
             <a href=""><i class="iconfont icon-dianhua">
@@ -80,9 +80,8 @@ $username = $_SESSION['username'];
                 </li>
                 <li class="item">About<span></span>
                     <ul>
-                        <li>About Us</li>
-                        <li>Contact Us</li>
-                        <li>Our Lecturer</li>
+                        <li onclick="window.location.href = 'AboutUs.html'">About Us</li>
+                        <li onclick="window.location.href = 'AboutTheTutor.html'">Our Lecturer</li>
                     </ul>
                 </li>
             </ul>
