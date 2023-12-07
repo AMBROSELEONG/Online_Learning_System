@@ -17,7 +17,7 @@ $username = $_SESSION['username'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Learning System</title>
     <link rel="stylesheet" type="text/css" href="MainPage.css">
-    <link rel ="stylesheet" href="../icon/iconfont.css">
+    <link rel="stylesheet" href="icon/iconfont.css">
     <link rel="icon" type="image/x-icon" href="">
     <!-- 引入 Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -34,16 +34,16 @@ $username = $_SESSION['username'];
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
-            <a href="../ShoppingCart/ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
+            <a href="ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
                     <p>Shopping Cart</p>
                 </i></a>
-            <a href="../UserProfile/UserProfile.html"><i class="iconfont icon-user">
+            <a href="UserProfile.html"><i class="iconfont icon-user">
                     <p>User Info</p>
                 </i></a>
-            <a href="../CoursePage/CoursePage.html"><i class="iconfont icon-book1">
+            <a href="CoursePage.html"><i class="iconfont icon-book1">
                     <p>Course</p>
                 </i></a>
-            <a href="../QuizList/QuizList.html"><i class="iconfont icon-shijuan">
+            <a href="QuizList.html"><i class="iconfont icon-shijuan">
                     <p>Quiz</p>
                 </i></a>
             <a href=""><i class="iconfont icon-guanyuwomen">
@@ -52,7 +52,7 @@ $username = $_SESSION['username'];
             <a href=""><i class="iconfont icon-dianhua">
                     <p>Contact Us</p>
                 </i></a>
-                <a href="../Comment/Comment.html"><i class="iconfont icon-comment">
+            <a href="CommentPage.php"><i class="iconfont icon-comment">
                     <p>Comment</p>
                 </i></a>
         </div>
@@ -73,9 +73,9 @@ $username = $_SESSION['username'];
             <ul class="menu">
                 <li class="item">Category<span></span>
                     <ul>
-                        <li onclick="window.location.href = '../CoursePage/CoursePage.html'">Course</li>
-                        <li onclick="window.location.href = '../QuizList/QuizList.html'">Quiz</li>
-                        <li onclick="window.location.href = '../Comment/Comment.html'">Comment</li>
+                        <li onclick="window.location.href = 'CoursePage.html'">Course</li>
+                        <li onclick="window.location.href = 'QuizList.html'">Quiz</li>
+                        <li onclick="window.location.href = 'CommentPage.php'">Comment</li>
                     </ul>
                 </li>
                 <li class="item">About<span></span>
@@ -112,8 +112,8 @@ $username = $_SESSION['username'];
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
-            <i class="iconfont icon-31gouwuchexuanzhong" onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
-            <i class="iconfont icon-user" onclick="window.location.href='../LoginForm/LoginForm.php.php'"></i>
+            <i class="iconfont icon-31gouwuchexuanzhong" onclick="window.location.href='ShoppingCart.html'"></i>
+            <i class="iconfont icon-user" onclick="window.location.href='LoginForm.php'"></i>
         </div>
     </header>
 
@@ -138,16 +138,16 @@ $username = $_SESSION['username'];
             <div class="swiper-button-prev"></div>
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="./Img/Lecturer Img 0.png" alt="Picture 1">
+                    <img src="img/Lecturer Img 0.png" alt="Picture 1">
                 </div>
                 <div class="swiper-slide">
-                    <img src="./Img/Lecturer Img 1.png" alt="Picture 2">
+                    <img src="img/Lecturer Img 1.png" alt="Picture 2">
                 </div>
                 <div class="swiper-slide">
-                    <img src="./Img/Lecturer 2.png" alt="PIcture 3">
+                    <img src="img/Lecturer 2.png" alt="PIcture 3">
                 </div>
                 <div class="swiper-slide">
-                    <img src="./Img/lecturer 3.png" alt="Picture 4">
+                    <img src="img/lecturer 3.png" alt="Picture 4">
                 </div>
             </div>
         </div>
@@ -170,83 +170,8 @@ $username = $_SESSION['username'];
         <div class="introduce-container">
             <p>Simple online learning system assignments from</p>
             <div style="display: flex;">
-                <img src="./Img/new-era-university-college.png" alt="New Era University College">
+                <img src="img/new-era-university-college.png" alt="New Era University College">
             </div>
-        </div>
-
-        <div class="course-container">
-            <p>Explore Exciting Online Courses</p>
-            <div class="course-list">
-                <div class="course-detail">
-                    <div class="course-detail-inner">
-                        <div class="course-detail-front">
-                            <img src="" alt="">
-                        </div>
-                        <div class="course-detail-back">
-                            <h1>Course Name:</h1>
-                            <hr>
-                            <h1>Course Description:</h1>
-                            <h2>Lecturer:</h2>
-                            <h2>Price:</h2>
-                            <br>
-                            <h2>Estimared study time:</h2>
-                            <button>Course Detail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="course-detail">
-                    <div class="course-detail-inner">
-                        <div class="course-detail-front">
-                            <img src="" alt="">
-                        </div>
-                        <div class="course-detail-back">
-                            <h1>Course Name:</h1>
-                            <hr>
-                            <h1>Course Description:</h1>
-                            <h2>Lecturer:</h2>
-                            <h2>Price:</h2>
-                            <br>
-                            <h2>Estimared study time:</h2>
-                            <button>Course Detail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="course-detail">
-                    <div class="course-detail-inner">
-                        <div class="course-detail-front">
-                            <img src="" alt="">
-                        </div>
-                        <div class="course-detail-back">
-                            <h1>Course Name:</h1>
-                            <hr>
-                            <h1>Course Description:</h1>
-                            <h2>Lecturer:</h2>
-                            <h2>Price:</h2>
-                            <br>
-                            <h2>Estimared study time:</h2>
-                            <button>Course Detail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="course-detail">
-                    <div class="course-detail-inner">
-                        <div class="course-detail-front">
-                            <img src="" alt="">
-                        </div>
-                        <div class="course-detail-back">
-                            <h1>Course Name:</h1>
-                            <hr>
-                            <h1>Course Description:</h1>
-                            <h2>Lecturer:</h2>
-                            <h2>Price:</h2>
-                            <br>
-                            <h2>Estimared study time:</h2>
-                            <button>Course Detail</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
         <script>
             function openPage(pageName, elmnt, color) {

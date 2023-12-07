@@ -8,18 +8,23 @@
     <link rel="stylesheet" type="text/css" href="UserProfile.css">
 </head>
 
+<script>
+    history.replaceState(null, null);
+</script>
+
 <body>
     <div class="container-upper">
         <div class="container-right">
             <button>Profile</button>
-            <button onclick="window.location.href='UserResume.html'">Resume</button>
-            <button onclick="window.location.href='UserHistory.html'">History</button>
+            <button onclick="window.location.href='UserResume.html'"
+                script="window.location.replace('UserRusume.html')">Resume</button>
+            <button onclick="window.location.href='UserHistory.html'"
+                script="window.location.replace('UserHistory.html')">History</button>
         </div>
     </div>
     <img class="user-img" src=""></img>
     <div class="container-lower">
         <input type="file" id="fileInput" style="display: none;">
-        <button onclick="document.getElementById('fileInput').click();">Upload Photo</button>
         <button class="edit-profile">Edit Profile</button>
 
         <div class="container-content">
@@ -34,7 +39,9 @@
             <hr>
             <div class="about-me">
                 <h1>About Me</h1>
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus iusto corporis in tempora mollitia odit aperiam optio maiores placeat impedit? Quibusdam dolorem deleniti autem tempore alias assumenda dicta excepturi quas.</h2>
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus iusto corporis in tempora mollitia
+                    odit aperiam optio maiores placeat impedit? Quibusdam dolorem deleniti autem tempore alias assumenda
+                    dicta excepturi quas.</h2>
             </div>
         </div>
     </div>
