@@ -1,0 +1,280 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" type="text/css" href="AboutUs.css">
+    <link rel="stylesheet" href="../icon/iconfont.css">
+    <link rel="icon" type="image/x-icon" href="">
+    <!-- 引入 Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- 引入 Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div id="mySidepanel" class="sidepanel">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <form action="" id="search-bar-form">
+                <input type="text" id="search-bar" placeholder="Search...">
+                <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
+            </form>
+            <a href="../ShoppingCart/ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
+                    <p>Shopping Cart</p>
+                </i></a>
+            <a href="../UserProfile/UserProfile.html"><i class="iconfont icon-user">
+                    <p>User Info</p>
+                </i></a>
+            <a href="../MainPage/MainPage.html"><i class="iconfont icon-book1">
+                    <p>Home</p>
+                </i></a>
+            <a href="../QuizList/QuizList.html"><i class="iconfont icon-shijuan">
+                    <p>Quiz</p>
+                </i></a>
+            <a href="../AboutUs/AboutUs.html"><i class="iconfont icon-guanyuwomen">
+                    <p>About Us</p>
+                </i></a>
+            <a href=""><i class="iconfont icon-dianhua">
+                    <p>Contact Us</p>
+                </i></a>
+            <a href="../Comment/Comment.html"><i class="iconfont icon-comment">
+                    <p>Comment</p>
+                </i></a>
+        </div>
+
+        <button class="openbtn" onclick="openNav()">☰</button>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidepanel").style.width = "30rem";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidepanel").style.width = "0rem";
+            }
+        </script>
+        <div class="left-bar">
+            <div id="logo">LOGO</div>
+            <ul class="menu">
+                <li class="item">Category<span></span>
+                    <ul>
+                        <li>Course</li>
+                        <li>Tutorial</li>
+                        <li>Quiz</li>
+                    </ul>
+                </li>
+                <li class="item">About<span></span>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Contact Us</li>
+                        <li>Our Lecturer</li>
+                        <li>example</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <script>
+            const menuItems = document.querySelectorAll('.menu > li');
+
+            menuItems.forEach((menuItem) => {
+                const submenu = menuItem.querySelector('ul');
+
+                // 计算子菜单的最大高度
+                submenu.style.maxHeight = submenu.scrollHeight + 'px';
+
+                // 当鼠标悬停在菜单项上时，将 max-height 设置为计算值
+                menuItem.addEventListener('mouseenter', () => {
+                    submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                });
+
+                // 当鼠标离开时，将 max-height 重置为 0
+                menuItem.addEventListener('mouseleave', () => {
+                    submenu.style.maxHeight = '0';
+                });
+            });
+        </script>
+        <div class="right-bar">
+            <form action="" id="search-bar-form">
+                <input type="text" id="search-bar" placeholder="Search...">
+                <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
+            </form>
+            <i class="iconfont icon-31gouwuchexuanzhong"></i>
+            <i class="iconfont icon-user"></i>
+        </div>
+    </header>
+    <section>
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+        <script>
+            // When the user scrolls the page, execute myFunction 
+            window.onscroll = function () { myFunction() };
+
+            function myFunction() {
+                var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                var scrolled = (winScroll / height) * 100;
+                document.getElementById("myBar").style.width = scrolled + "%";
+            }
+        </script>
+        <div class="Us-content-1">
+            <div id="title-logo-about-flex">
+                <div class="title-logo">
+                    <p>About Us</p>
+                    <div class="logo-image">LOGO</div>
+                </div>
+                <div class="Aboutus-content">
+                    <p>About Us content</p>
+                    <p></p>
+                </div>
+            </div>
+            <div class="character-content">
+                <div class="character-flex">
+                    <div class="character-list">
+                        <p style="margin-top: 15%;">Get valuable certificates </p>
+                    </div>
+                    <div class="character-list">
+                        <p>4.7/5</p>
+                        <p>Average rating given by students </p>
+                    </div>
+                </div>
+                <div class="character-flex">
+                    <div class="character-list">
+                        <p style="margin-top: 15%;">Flexible study time arrangements</p>
+                    </div>
+                    <div class="character-list">
+                        <p>200+</p>
+                        <p>Industry experts in our mentor network </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-container">
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="student-evaluate">
+                        <div class="student-intro">
+                            <div>
+                                <img src="" alt="">
+                            </div>
+                            <div class="student-name">
+                                <p>Name1</p>
+                            </div>
+                        </div>
+                        <div class="student-evaluation-content">
+                            <p>Student evaluation content</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="student-evaluate">
+                        <div class="student-intro">
+                            <div class="student-image">
+                                <img src="" alt="">
+                            </div>
+                            <div class="student-name">
+                                <p>Name2</p>
+                            </div>
+                        </div>
+                        <div class="student-evaluation-content">
+                            <p>Student evaluation content</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="student-evaluate">
+                        <div class="student-intro">
+                            <div class="student-image">
+                                <img src="" alt="">
+                            </div>
+                            <div class="student-name">
+                                <p>Name3</p>
+                            </div>
+                        </div>
+                        <div class="student-evaluation-content">
+                            <p>Student evaluation content</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="student-evaluate">
+                        <div class="student-intro">
+                            <div class="student-image">
+                                <img src="" alt="">
+                            </div>
+                            <div class="student-name">
+                                <p>Name4</p>
+                            </div>
+                        </div>
+                        <div class="student-evaluation-content">
+                            <p>Student evaluation content</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        var mySwiper = new Swiper('.swiper-container', {
+            // 自动播放配置
+            autoplay: {
+                delay: 3000, // 自动播放
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+    <footer>
+        <div class="footer-container-left">
+            <p>About US</p>
+            <p>Contact US</p>
+            <p>Term</p>
+            <p>Privacy Policy</p>
+            <p>New Era University College</p>
+        </div>
+        <div class="footer-container-center">
+            <div>
+                <i class="iconfont icon-instagram">
+                    <p>Instagram</p>
+                </i>
+            </div>
+            <div>
+                <i class="iconfont icon-facebook">
+                    <p>Facebook</p>
+                </i>
+            </div>
+            <div>
+                <i class="iconfont icon-whatsapp">
+                    <p>Whatsapp</p>
+                </i>
+            </div>
+            <div>
+                <i class="iconfont icon-wechat">
+                    <p>Wechat</p>
+                </i>
+            </div>
+        </div>
+        <div class="footer-container-right">
+            <p>Tutorial</p>
+            <p>Quiz</p>
+            <p>Lecturer</p>
+            <p>Help And Support</p>
+            <p>Copyright © 2021 New Era University College. All Rights Reserved.</p>
+        </div>
+
+    </footer>
+</body>

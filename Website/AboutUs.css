@@ -1,0 +1,589 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 10px;
+}
+
+header {
+    width: 80%;
+    height: 5rem;
+    background-color: rgb(60, 60, 60);
+    display: flex;
+    padding: 0% 10%;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0px 2rem 5rem rgba(0, 0, 0, 0.2);
+}
+
+header .left-bar {
+    width: auto;
+    display: flex;
+    height: 5rem;
+}
+
+#logo {
+    width: 10rem;
+    height: 5rem;
+    font-size: 2rem;
+    text-align: center;
+    line-height: 5rem;
+    background-color: rgb(255, 140, 0);
+    color: white;
+}
+
+.menu {
+    width: 30rem;
+    display: flex;
+}
+
+ul {
+    list-style: none;
+}
+
+.menu>li {
+    width: 15rem;
+    text-align: center;
+    font-size: 2rem;
+    color: rgb(255, 140, 0);
+    line-height: 5rem;
+    position: relative;
+}
+
+.menu>li:hover {
+    background-color: rgb(255, 140, 0);
+    color: rgb(60, 60, 60);
+    height: 5rem;
+}
+
+.menu>li>ul {
+    display: none;
+    background-color: rgb(60, 60, 60);
+    color: white;
+    position: absolute;
+    left: 0px;
+    top: 5rem;
+    width: 14.8rem;
+    border-radius: 0px 0px 5px 5px;
+    border: .1rem solid rgb(60, 60, 60);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    z-index: 2;
+}
+
+.item:hover ul {
+    display: block;
+
+}
+
+.item li:hover {
+    background-color: rgb(255, 140, 0);
+    color: white;
+}
+
+.item span {
+    width: 0;
+    height: 0;
+    margin-left: 2rem;
+    display: inline-block;
+    border: .5rem solid transparent;
+    border-top: .5rem solid rgb(255, 140, 0);
+    position: relative;
+    top: .25rem;
+}
+
+.item:hover span {
+    border: .5rem solid transparent;
+    border-bottom: .5rem solid rgb(60, 60, 60);
+    position: relative;
+    top: -2.5px;
+}
+
+.menu::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.right-bar {
+    display: block;
+    display: flex;
+    height: 5rem;
+}
+
+#search-bar-form {
+    width: calc(30rem - 0.1rem);
+    height: 3rem;
+    border: 0.1rem solid rgb(255, 140, 0);
+    align-items: center;
+    border-radius: 1rem;
+    margin: 1rem 0rem;
+    outline: none;
+    display: flex;
+}
+
+#search-bar {
+    outline: none;
+    width: 24rem;
+    height: 3rem;
+    border: none;
+    border-radius: 1rem 0rem 0rem 1rem;
+    padding: 0rem 1rem;
+}
+
+#search-bar-submit {
+    width: calc(5rem - 0.1rem);
+    font-size: 2.5rem;
+    height: 3rem;
+    border-radius: 0rem 1rem 1rem 0rem;
+    border: none;
+    background-color: white;
+    color: rgb(255, 140, 0);
+    margin: 0;
+    cursor: pointer;
+}
+
+#search-bar-submit>i:hover {
+    color: rgb(60, 60, 60);
+}
+
+.right-bar>i {
+    font-size: 3rem;
+    margin-left: 5rem;
+    color: rgb(255, 140, 0);
+    line-height: 5rem;
+}
+
+.right-bar>i:hover {
+    animation: bounce 0.5s;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.openbtn {
+    display: none;
+}
+
+.sidepanel {
+    display: none;
+}
+
+.progress-container {
+    width: 100%;
+    height: 8px;
+    background: #ccc;
+    position: fixed;
+    z-index: 10;
+    top: 5rem;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgb(255, 140, 0);
+    width: 0%;
+}
+
+
+body section {
+    width: 100%;
+    margin-top: 5rem;
+}
+
+.swiper-container {
+    height: 40rem;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    width: calc(80% - 5rem - 0.2rem);
+    padding: 2.5rem;
+    text-align: center;
+    margin: 0% 10%;
+}
+
+.swiper-wrapper {
+    width: 9999rem;
+}
+
+.swiper-button-next,
+.swiper-button-prev,
+.swiper-pagination::before {
+    position: absolute;
+}
+
+.introduce-container {
+    width: 90%;
+    height: 30rem;
+    background-color: #f5f5f5;
+    padding: 5%;
+    text-align: center;
+}
+
+.introduce-container p {
+    color: #6a6f73;
+    font-size: 3rem;
+}
+
+.introduce-container>div {
+    width: 100%;
+}
+
+.introduce-container>div>img {
+    width: 100%;
+    height: 20rem;
+    object-fit: contain;
+}
+
+.Us-content-1 {
+    width: calc(100% - 5rem - 0.2rem);
+    padding: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    display: flex;
+    background-color: #f5f5f5;
+}
+
+#title-logo-about-flex {
+    width: 65%;
+    display: flex;
+}
+
+.title-logo {
+    width: 30%;
+    padding: 4%;
+}
+
+.title-logo>p {
+    font-size: 5rem;
+    text-align: center;
+}
+
+.logo-image{
+    margin-top: 20%;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.Aboutus-content{
+    width: 65%;
+    height: 20rem;
+    padding: 4%;
+    text-align: center;
+}
+
+.Aboutus-content>p{
+    font-size: 3rem;
+    text-align: center;
+}
+
+.character-content{
+    width: 35%;
+    height: 26rem;
+    text-align: center;
+}
+
+.character-flex{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.character-list{
+    flex: 1;
+    width: calc(20rem - 6rem);
+    height: calc(15rem - 4rem);
+    margin: 0.5rem;
+    padding: 2%;
+    background-color: rgb(255, 245, 229);
+    border: 1px solid rgb(255, 140, 0);
+    border-radius: 2rem;
+}
+
+.character-list>p{
+    font-size: 2rem;
+    align-items: center;
+    padding: 2%;
+}
+
+.student-evaluate{
+    width: 95%;
+    padding: 5%;
+    display: flex;
+}
+
+.student-intro{
+    width: calc(25rem - 5rem);
+    height: calc(25rem - 5rem);
+    margin: 3rem;
+    border: 1px solid rgb(60, 60, 60);
+    border-radius: 1rem;
+}
+
+.student-intro img{
+    width: 100%;
+    height: 80%;
+    border-radius: 1rem;
+}
+
+.student-name{
+    height: 20%;
+    font-size: 2rem;
+    display: grid;
+    align-items: center;
+    background-color: rgb(255, 140, 0);
+    color: white;
+}
+
+.student-evaluation-content{
+    width: 50%;
+    height: 20rem;
+    margin: 0% 5%;
+    padding: 4%;
+    text-align: center;
+    border: 1px solid rgb(60, 60, 60);
+    border-radius: 3rem;
+}
+
+.student-evaluation-content>p{
+    font-size: 2rem;
+}
+
+footer {
+    width: 90%;
+    height: auto;
+    background-color: rgb(60, 60, 60);
+    padding: 5%;
+    display: flex;
+}
+
+.footer-container-left,
+.footer-container-right {
+    width: 30%;
+}
+
+.footer-container-left>p,
+.footer-container-right>p {
+    font: 1.7rem normal;
+    color: white;
+    margin: 1.5rem;
+    cursor: pointer;
+}
+
+.footer-container-right button {
+    border: 1px solid #f5f5f5;
+    background-color: transparent;
+    width: 10rem;
+}
+
+.footer-container-center {
+    flex: 3;
+    padding-top: 10rem;
+    display: flex;
+}
+
+.footer-container-center div {
+    margin: 1.5rem;
+    text-align: center;
+}
+
+.footer-container-center div i {
+    color: white;
+    cursor: pointer;
+}
+
+.footer-container-center div i p {
+    font: 2rem normal;
+    color: white;
+}
+
+@media all and (max-width: 768px){
+    html {
+        font-size: 9px;
+    }
+
+    body {
+        width: 100%;
+    }
+
+    .right-bar {
+        display: none;
+    }
+
+    .sidepanel {
+        display: block;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        transition: 0.5s;
+        overflow-x: hidden;
+        padding-top: 5rem;
+        background-color: rgba(255, 140, 0, 0.6);
+        margin-top: 5rem;
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    .sidepanel .closebtn {
+        position: absolute;
+        top: 0;
+        right: 2.5rem;
+        font-size: 3.6rem;
+        color: white;
+        text-decoration: none;
+    }
+
+    header {
+        width: 100%;
+        height: 5rem;
+        background-color: rgb(60, 60, 60);
+        display: flex;
+        justify-content: flex-start
+    }
+
+    .openbtn {
+        font-size: 3rem;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        padding: 1rem;
+        display: block;
+        margin-top: -1rem;
+        margin-right: 0;
+        margin-left: -7%;
+        color: white;
+    }
+
+    .openbtn:hover {
+        height: 6rem;
+        background-color: rgb(255, 140, 0);
+    }
+
+    #search-bar-form {
+        width: 27rem;
+        margin: 1rem 1.5rem;
+    }
+
+    #search-bar {
+        width: 21rem;
+    }
+
+    .sidepanel a>i {
+        color: white;
+        margin: 2rem;
+        display: block;
+        margin-right: 2rem;
+        display: flex;
+        text-decoration: none;
+    }
+
+    .sidepanel a,
+    .sidepanel p {
+        font-size: 2.5rem;
+        color: white;
+        display: block;
+        margin-left: 3rem;
+        cursor: pointer;
+        text-decoration: none;
+        padding: 0.1rem;
+    }
+
+    .sidepanel a:hover {
+        background-color: rgb(60, 60, 60);
+    }
+
+    .sidepanel a {
+        font-size: 3rem;
+        margin: 1rem;
+        cursor: pointer;
+    }
+
+    .swiper-container {
+        width: 90%;
+        margin: 0;
+    }
+
+    .Us-content-1 {
+        width: 94%;
+        padding: 3%;
+        display: block;
+    }
+
+    #title-logo-about-flex {
+        width: 100%;
+        display: flex;
+    }
+
+    .character-content{
+        width: 93%;
+        height: 14rem;
+        display: flex;
+    }
+
+}
+
+@media all and (max-width: 576px){
+
+    body {
+        overflow-x: hidden;
+    }
+
+    html {
+        font-size: 7px;
+        overflow-x: hidden;
+    }
+
+    .left-bar {
+        margin: 0;
+    }
+
+    .swiper-container{
+        height: 60rem;
+    }
+
+    .student-evaluate{
+        display: block;
+    }
+
+    .student-intro{
+        margin: 5% 28%;
+    }
+
+    .student-evaluation-content{
+        width: 75%;
+    }
+
+    .footer-container-left,
+    .footer-container-right {
+        width: 30%;
+        text-align: center;
+    }
+
+    .footer-container-center {
+        flex-direction: column;
+        margin-top: -10%;
+    }
+
+}
