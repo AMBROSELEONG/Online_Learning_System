@@ -1,13 +1,19 @@
 <?php
+// 在 MainPage.php 页面的开头调用 session_start()，以便访问 $_SESSION 中的数据
 session_start();
 
-if (!isset($_SESSION['username'])) {
-    header("Location: LoginForm.php");
+// 检查 $_SESSION['userID'] 是否设置
+if (isset($_SESSION['UserID'])) {
+    $UserID = $_SESSION['UserID'];
+    // 现在可以在这里使用 $userID，例如输出它
+    echo "User ID: " . $UserID;
+} else {
+    // 如果 $_SESSION['userID'] 未设置，可能需要执行其他操作，比如重定向到登录页面
+    header("location: LoginForm.php");
     exit();
 }
-
-$username = $_SESSION['username'];
 ?>
+
 
 <!Doctype html>
 <html lang="en">
@@ -37,7 +43,7 @@ $username = $_SESSION['username'];
             <a href="ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
                     <p>Shopping Cart</p>
                 </i></a>
-            <a href="UserProfile.html"><i class="iconfont icon-user">
+            <a href="UserProfilePage.php"><i class="iconfont icon-user">
                     <p>User Info</p>
                 </i></a>
             <a href="CoursePage.html"><i class="iconfont icon-book1">
@@ -112,7 +118,7 @@ $username = $_SESSION['username'];
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
             <i class="iconfont icon-31gouwuchexuanzhong" onclick="window.location.href='ShoppingCart.html'"></i>
-            <i class="iconfont icon-user" onclick="window.location.href='LoginForm.php'"></i>
+            <i class="iconfont icon-user" onclick="window.location.href='UserProfilePage.php'"></i>
         </div>
     </header>
 

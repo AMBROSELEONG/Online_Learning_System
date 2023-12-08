@@ -26,6 +26,8 @@ body {
     border: 1px solid gray;
     top: 5%;
     left: 5%;
+    border-radius: 50%;
+    background-image: url(img/user_background.png);
 }
 
 .container-upper {
@@ -105,6 +107,7 @@ body {
 .content-right>h1 {
     color: black;
     margin: 5% 0%;
+    display: flex;
 }
 
 hr {
