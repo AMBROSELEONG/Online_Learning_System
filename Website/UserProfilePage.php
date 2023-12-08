@@ -63,7 +63,7 @@ include 'UserProfileFindData.php';
             <span onclick="document.getElementById('id01').style.display='none'" class="close"
                 title="Close Modal">&times;</span>
             <img class="img-show" id="img-show"
-                src="<?php echo !empty($image) ? $image : './img/user_background.png'; ?>"
+                src="<?php echo !empty($image) ? $image : 'img/user_background.png'; ?>"
                 style="width: 20rem; height: 20rem; border: 1px solid black; border-radius: 50%; margin: 0 auto; "><br>
             <input type="file" id="img-input" name="userImage" onchange="fileChange(this)"
                 accept=".jpg, .jpeg, .png, .gif">

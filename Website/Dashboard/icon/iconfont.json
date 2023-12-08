@@ -1,0 +1,44 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2681699",
+      "name": "留言",
+      "font_class": "liuyan",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "3775379",
+      "name": "导师",
+      "font_class": "daoshi",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "6151268",
+      "name": "user-group",
+      "font_class": "user-group",
+      "unicode": "e815",
+      "unicode_decimal": 59413
+    },
+    {
+      "icon_id": "6606729",
+      "name": "作业",
+      "font_class": "zuoye",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "12548834",
+      "name": "课程",
+      "font_class": "kecheng-",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    }
+  ]
+}
