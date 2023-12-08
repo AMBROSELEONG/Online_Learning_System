@@ -5,18 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $course = $_POST['course'];
     $post_time = date('Y-m-d H:i:s');
 
-    if (empty($errors)) {
-        $servername = "127.0.0.1";
-        $user = "root";
-        $pass = "";
-        $dbName = "online_learning_system";
-
-        $conn = new mysqli($servername, $user, $pass, $dbName);
-    // 建立与数据库的连接（示例使用 mysqli）
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+    include 'ConnectDB.php';
 
         // 将评论内容插入数据库
         $stmt = $conn->prepare("INSERT INTO comments (UserName, CommentContent, CourseName, CommentDate) VALUES (?,?,?,?)");
@@ -52,5 +41,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $error . "<br>";
         }
     }
-}
 ?>

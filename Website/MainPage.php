@@ -1,17 +1,6 @@
 <?php
 // 在 MainPage.php 页面的开头调用 session_start()，以便访问 $_SESSION 中的数据
-session_start();
-
-// 检查 $_SESSION['userID'] 是否设置
-if (isset($_SESSION['UserID'])) {
-    $UserID = $_SESSION['UserID'];
-    // 现在可以在这里使用 $userID，例如输出它
-    echo "User ID: " . $UserID;
-} else {
-    // 如果 $_SESSION['userID'] 未设置，可能需要执行其他操作，比如重定向到登录页面
-    header("location: LoginForm.php");
-    exit();
-}
+include 'Session.php';
 ?>
 
 

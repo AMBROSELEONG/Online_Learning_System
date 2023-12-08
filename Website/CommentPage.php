@@ -1,14 +1,5 @@
 <?php
-$servername = "127.0.0.1";
-$user = "root";
-$pass = "";
-$dbName = "online_learning_system";
-
-$conn = new mysqli($servername, $user, $pass, $dbName);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'ConnectDB.php';
 
 $sql = "SELECT * FROM comments ORDER BY CommentDate DESC";
 $result = $conn->query($sql);

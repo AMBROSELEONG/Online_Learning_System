@@ -1,13 +1,5 @@
 <?php
-session_start();
-
-if (isset($_SESSION['UserID'])) {
-    $userID = $_SESSION['UserID'];
-} else {
-    header("location: LoginForm.php");
-    exit();
-}
-
+include 'Session.php';
 include 'ConnectDB.php';
 
 if (isset($_POST['save'])) {
