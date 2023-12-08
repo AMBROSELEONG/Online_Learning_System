@@ -3,7 +3,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    include 'ConnectDB.php';
+    include '../ConnectDB.php';
 
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -24,10 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // 将用户ID存入 session
         $_SESSION['UserID'] = $row['UserID'];
 
-        header("location: MainPage.php");
+        header("location: ../MainPage/MainPage.php");
         exit();
     } else {
-        echo "<script type='text/javascript'>alert('Wrong username or password'); window.location.href = 'LoginForm.php';</script>";
+        echo "<script type='text/javascript'>alert('Wrong username or password'); window.location.href = 'Login.php';</script>";
         exit();
     }
 

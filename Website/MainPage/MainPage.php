@@ -1,8 +1,6 @@
 <?php
-// 在 MainPage.php 页面的开头调用 session_start()，以便访问 $_SESSION 中的数据
 include 'Session.php';
 ?>
-
 
 <!Doctype html>
 <html lang="en">
@@ -12,7 +10,7 @@ include 'Session.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Learning System</title>
     <link rel="stylesheet" type="text/css" href="MainPage.css">
-    <link rel="stylesheet" href="icon/iconfont.css">
+    <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="icon" type="image/x-icon" href="">
     <!-- 引入 Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -29,25 +27,28 @@ include 'Session.php';
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
-            <a href="ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
-                    <p>Shopping Cart</p>
-                </i></a>
-            <a href="UserProfilePage.php"><i class="iconfont icon-user">
-                    <p>User Info</p>
-                </i></a>
-            <a href="CoursePage.html"><i class="iconfont icon-book1">
+            <a href="../Course/CoursePage.html"><i class="iconfont icon-book1">
                     <p>Course</p>
                 </i></a>
-            <a href="QuizList.html"><i class="iconfont icon-shijuan">
+            <a href="../Quiz/QuizList.html"><i class="iconfont icon-shijuan">
                     <p>Quiz</p>
                 </i></a>
-            <a href="AboutUs.html"><i class="iconfont icon-guanyuwomen">
-                    <p>About Us</p>
+            <a href="../ShoppingCart/ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
+                    <p>Shopping Cart</p>
                 </i></a>
-            <a href=""><i class="iconfont icon-dianhua">
+            <a href="../UserProfile/UserProfile.php"><i class="iconfont icon-user">
+                    <p>User Info</p>
+                </i></a>
+            <a href="../ContactUs/ContactUs.html"><i class="iconfont icon-dianhua">
                     <p>Contact Us</p>
                 </i></a>
-            <a href="CommentPage.php"><i class="iconfont icon-comment">
+            <a href="../AboutUS/AboutUs.html"><i class="iconfont icon-guanyuwomen">
+                    <p>About Us</p>
+                </i></a>
+            <a href="../Tutor/AboutTheTutor.html"><i class="iconfont icon-xuexiao">
+                    <p>Tutor</p>
+                </i></a>
+            <a href="../Comment/Comment.php"><i class="iconfont icon-comment">
                     <p>Comment</p>
                 </i></a>
         </div>
@@ -68,15 +69,16 @@ include 'Session.php';
             <ul class="menu">
                 <li class="item">Category<span></span>
                     <ul>
-                        <li onclick="window.location.href = 'CoursePage.html'">Course</li>
-                        <li onclick="window.location.href = 'QuizList.html'">Quiz</li>
-                        <li onclick="window.location.href = 'CommentPage.php'">Comment</li>
+                        <li onclick="window.location.href = '../Course/CoursePage.html'">Course</li>
+                        <li onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</li>
                     </ul>
                 </li>
                 <li class="item">About<span></span>
                     <ul>
-                        <li onclick="window.location.href = 'AboutUs.html'">About Us</li>
-                        <li onclick="window.location.href = 'AboutTheTutor.html'">Our Lecturer</li>
+                        <li onclick="window.location.href = '../Comment/Comment.php'">Comment</li>
+                        <li onclick="window.location.href = '../ContactUs/ContactUs.html'">Contact Us</li>
+                        <li onclick="window.location.href = '../AboutUS/AboutUs.html'">About Us</li>
+                        <li onclick="window.location.href = '../Tutor/AboutTheTutor.html'">Our Lecturer</li>
                     </ul>
                 </li>
             </ul>
@@ -106,8 +108,9 @@ include 'Session.php';
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
-            <i class="iconfont icon-31gouwuchexuanzhong" onclick="window.location.href='ShoppingCart.html'"></i>
-            <i class="iconfont icon-user" onclick="window.location.href='UserProfilePage.php'"></i>
+            <i class="iconfont icon-31gouwuchexuanzhong"
+                onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
+            <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
         </div>
     </header>
 
@@ -132,16 +135,16 @@ include 'Session.php';
             <div class="swiper-button-prev"></div>
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="img/Lecturer Img 0.png" alt="Picture 1">
+                    <img src="../img/Lecturer Img 0.png" alt="Picture 1">
                 </div>
                 <div class="swiper-slide">
-                    <img src="img/Lecturer Img 1.png" alt="Picture 2">
+                    <img src="../img/Lecturer Img 1.png" alt="Picture 2">
                 </div>
                 <div class="swiper-slide">
-                    <img src="img/Lecturer 2.png" alt="PIcture 3">
+                    <img src="../img/Lecturer 2.png" alt="PIcture 3">
                 </div>
                 <div class="swiper-slide">
-                    <img src="img/lecturer 3.png" alt="Picture 4">
+                    <img src="../img/lecturer 3.png" alt="Picture 4">
                 </div>
             </div>
         </div>
@@ -164,7 +167,7 @@ include 'Session.php';
         <div class="introduce-container">
             <p>Simple online learning system assignments from</p>
             <div style="display: flex;">
-                <img src="img/new-era-university-college.png" alt="New Era University College">
+                <img src="../img/new-era-university-college.png" alt="New Era University College">
             </div>
         </div>
         <script>

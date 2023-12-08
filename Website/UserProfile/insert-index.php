@@ -1,6 +1,6 @@
 <?php
-include 'Session.php';
-include 'ConnectDB.php';
+include '../ConnectDB.php';
+include '../Session.php';
 
 if (isset($_POST['save'])) {
     $username = isset($_POST['Username']) ? $_POST['Username'] : '';
@@ -24,26 +24,28 @@ if (isset($_POST['save'])) {
 
         if ($check === false) {
             echo "File is not an image.";
+            echo "<script>alert('File is not an image.'); window.location.href = 'UserProfile.php';</script>";
             $uploadOk = 0;
         }
 
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            echo "<script>alert('Sorry, only JPG, JPEG, PNG & GIF files are allowed.'); window.location.href = 'UserProfile.php';</script>";
             $uploadOk = 0;
         }
 
         if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
+            echo "<script>alert('Sorry, your file was not uploaded.'); window.location.href = 'UserProfile.php';</script>";
         } else {
             if (move_uploaded_file($_FILES["userImage"]["tmp_name"], $targetFile)) {
                 echo "The file " . basename($_FILES["userImage"]["name"]) . " has been uploaded.";
                 $imagePath = $targetFile;
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                echo "<script>alert('Sorry, there was an error uploading your file.'); window.location.href = 'UserProfile.php';</script>";
             }
         }
     } else {
-        echo "No image uploaded.";
+        echo "<script>alert('No image uploaded.'); window.location.href = 'UserProfile.php';</script>";
+
         $imagePath = ''; // Set a default value for image path if no image is uploaded
     }
 
@@ -65,13 +67,13 @@ if (isset($_POST['save'])) {
         }
 
         if ($stmt->execute()) {
-            echo "<script>alert('Record $action successfully!'); window.location.href = 'UserProfilePage.php';</script>";
+            echo "<script>alert('Record $action successfully!'); window.location.href = 'UserProfile.php';</script>";
         } else {
-            echo "<script>alert('Record $stmt->error!'); window.location.href = 'UserProfilePage.php';</script>";
+            echo "<script>alert('Record $stmt->error!'); window.location.href = 'UserProfile.php';</script>";
         }
         $stmt->close();
     } else {
-        echo "<script>alert('No data to save!');</script>";
+        echo "<script>alert('No data to save!'); window.location.href = 'UserProfile.php';</script>";
     }
 }
 

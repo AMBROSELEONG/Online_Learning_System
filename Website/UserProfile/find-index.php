@@ -1,6 +1,6 @@
 <?php
-include 'Session.php';
-include 'ConnectDB.php';
+include '../ConnectDB.php';
+include '../Session.php';
 
 $sql = "SELECT * FROM userprofile WHERE UserID = $userID"; // Assuming UserID is an integer
 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Receipt Design</title>
+</head>
+
+<body>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header text-center">
+            <h4>Receipt</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <p><strong>Receipt No:</strong> 12345</p>
+                <p id="currentDate"><strong>Date:</strong></p>
+              </div>
+              <div class="col-md-4 text-right">
+                <p><strong>Receipt Type:</strong> Pay</p>
+              </div>
+            </div>
+            <hr>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Quantity</th>
+                  <th>Price Per Unit</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>商品A</td>
+                  <td>2</td>
+                  <td>$20.00</td>
+                  <td>$40.00</td>
+                </tr>
+                <tr>
+                  <td>商品B</td>
+                  <td>1</td>
+                  <td>$15.00</td>
+                  <td>$15.00</td>
+                </tr>
+                <!-- 添加更多商品行 -->
+              </tbody>
+            </table>
+            <hr>
+            <div class="text-right">
+              <p><strong>Total:</strong> $55.00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top: 5%;">
+      <!-- 添加按钮 -->
+      <button class="btn btn-primary" onclick="window.location.href='../MainPage/MainPage.php'">Continue To Buy</button>
+    </div>
+  </div>
+  <script>
+    var currentDate = new Date();
+
+    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    var formattedDate = currentDate.toLocaleDateString('en-US', options);
+
+    document.getElementById('currentDate').innerHTML = '<strong>Date:</strong> ' + formattedDate;
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

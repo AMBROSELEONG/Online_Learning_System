@@ -1,5 +1,5 @@
 <?php
-include 'UserProfileFindData.php';
+include 'find-index.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,17 +9,17 @@ include 'UserProfileFindData.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" type="text/css" href="UserProfile.css">
-    <link rel="stylesheet" href="icon/iconfont.css">
+    <link rel="stylesheet" href="../icon/iconfont.css">
 </head>
 
 <body>
     <div class="container-upper">
         <div class="container-right">
             <button>Profile</button>
-            <button onclick="window.location.href='UserResume.html'"
-                script="window.location.replace('UserRusume.html')">Resume</button>
-            <button onclick="window.location.href='UserHistory.html'"
-                script="window.location.replace('UserHistory.html')">History</button>
+            <button onclick="window.location.href='../UserResume/UserResume.html'"
+                script="window.location.replace('../UserResume/UserRusume.html')">Resume</button>
+            <button onclick="window.location.href='../UserHistory/UserHistory.html'"
+                script="window.location.replace('../UserHistory/UserHistory.html')">History</button>
         </div>
     </div>
     <img src="<?php echo $image; ?>" alt="User Image" class="user-img">
@@ -58,7 +58,7 @@ include 'UserProfileFindData.php';
 </body>
 
 <div id="id01" class="modal">
-    <form class="modal-content animate" action="UserProfilePHP.php" method="post" enctype="multipart/form-data">
+    <form class="modal-content animate" action="insert-index.php" method="post" enctype="multipart/form-data">
         <div class="imgcontainer">
             <span onclick="document.getElementById('id01').style.display='none'" class="close"
                 title="Close Modal">&times;</span>
@@ -107,7 +107,6 @@ include 'UserProfileFindData.php';
             reader.readAsDataURL(input.files[0]);
         }
     }
-
 </script>
 
 </html>

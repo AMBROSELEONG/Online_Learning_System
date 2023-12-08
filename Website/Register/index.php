@@ -1,7 +1,7 @@
 <?php
 include 'RegisterForm.php';
-include 'ConnectDB.php';
-include 'Session.php';
+include '../ConnectDB.php';
+include '../Session.php';
 function verify($username, $password, $email, $contactnumber)
 {
     $errors = array(); // Create an array to store validation error messages
