@@ -18,7 +18,7 @@
     }
 </style>
 
-<body style="background-image: url(img/background.jpg);">
+<body style="background-image: url(../img/background.jpg);">
     <div class="container">
         <div class="row centered-form">
             <div class="col"></div>
@@ -36,7 +36,7 @@
                         <input type="password" class="form-control" id="repeatpassword" name="repeatpassword" required>
                     </div>
                     <button type="reset" class="btn btn-secondary"
-                        onclick="window.location.href='LoginForm.php'">Back to Login</button>
+                        onclick="window.location.href='../Login/Login.php'">Back to Login</button>
                     <button type="submit" class="btn btn-primary"
                         style="background-color: rgb(255, 140, 0);">Save</button>
                 </form>
