@@ -25,8 +25,10 @@
             <div class="col-sm-6 p-3 my-3"
                 style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255, 0.2);">
                 <h1 style="text-align: center; color: gray;">Forget User Name or Password</h1>
-                <form id="registrationForm" style="text-align: center;">
+                <form id="registrationForm" style="text-align: center;" action="email-verify.php" method="post">
                     <div class="form-group">
+                        <label for="username" style="color: gray;">Enter your username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
                         <label for="email" style="color: gray;">Enter your email to verify and reset the
                             password</label>
                         <input type="email" class="form-control" id="email" name="email" required>

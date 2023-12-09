@@ -37,7 +37,7 @@
                     <p>Not registered yet? <span style="color: blue; cursor: pointer;"><a href="../Register/RegisterForm.php">
                                 Register
                                 Now</a></span></p>
-                    <p style="color: blue; cursor: pointer;"><a href="../ResetPassword/ForgetPassword.html">Forget User Name or
+                    <p style="color: blue; cursor: pointer;"><a href="../ResetPassword/ForgetPassword.php">Forget User Name or
                             Password?</a></p>
                     <button type="reset" class="btn btn-secondary">Reset</button>
                     <button type="submit" class="btn btn-primary"

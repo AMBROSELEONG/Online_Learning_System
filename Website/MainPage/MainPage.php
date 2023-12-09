@@ -1,5 +1,5 @@
 <?php
-include 'Session.php';
+include '../Session.php';
 ?>
 
 <!Doctype html>

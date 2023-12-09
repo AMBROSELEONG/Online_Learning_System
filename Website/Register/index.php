@@ -1,7 +1,6 @@
 <?php
 include 'RegisterForm.php';
 include '../ConnectDB.php';
-include '../Session.php';
 function verify($username, $password, $email, $contactnumber)
 {
     $errors = array(); // Create an array to store validation error messages
@@ -45,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     text: 'Registration successful!',
                     icon: 'success'
                 }).then(() => {
-                    window.location.href = 'LoginForm.php'; // Redirect to login page after 'OK' is clicked
+                    window.location.href = '../Login/Login.php'; // Redirect to login page after 'OK' is clicked
                 });
             </script>";
     } else {
