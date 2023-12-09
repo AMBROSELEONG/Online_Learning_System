@@ -1,4 +1,8 @@
 <?php
+     include '../ConnectDB.php';
+     include '../Session.php';
+    
+    
     if(isset($_POST['submit'])){ // Assuming the submit button has name="submit"
 
         $password = $_POST['password'];
