@@ -16,8 +16,8 @@ include 'find-index.php';
     <div class="container-upper">
         <div class="container-right">
             <button>Profile</button>
-            <button onclick="window.location.href='../UserResume/UserResume.html'"
-                script="window.location.replace('../UserResume/UserRusume.html')">Resume</button>
+            <button onclick="window.location.href='../UserResume/UserResume.php'"
+                script="window.location.replace('../UserResume/UserRusume.php')">Resume</button>
             <button onclick="window.location.href='../UserHistory/UserHistory.html'"
                 script="window.location.replace('../UserHistory/UserHistory.html')">History</button>
         </div>
@@ -95,18 +95,24 @@ include 'find-index.php';
 </div>
 
 <script>
+    // 当文件发生变化时，触发函数
     function fileChange(input) {
+        // 判断是否有文件存在
         if (input.files && input.files[0]) {
+            // 创建文件读取对象
             var reader = new FileReader();
 
+            // 当文件读取完毕时，触发回调函数
             reader.onload = function (e) {
+                // 获取图片元素
                 var imgShow = document.getElementById('img-show');
+                // 将文件内容赋值给图片元素
                 imgShow.src = e.target.result;
             };
 
+            // 读取文件内容
             reader.readAsDataURL(input.files[0]);
         }
     }
 </script>
-
 </html>

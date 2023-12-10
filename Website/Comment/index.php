@@ -1,17 +1,23 @@
 <?php
+// 声明一个空数组用于存储错误信息
 $errors = [];
+// 判断请求方式是否为POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // 获取表单中的数据
     $name = $_POST['name'];
     $comment = $_POST['comment'];
     $course = $_POST['course'];
+    // 获取当前时间
     $post_time = date('Y-m-d H:i:s');
 
+    // 连接数据库
     include '../ConnectDB.php';
 
     // 将评论内容插入数据库
     $stmt = $conn->prepare("INSERT INTO comments (UserName, CommentContent, CourseName, CommentDate) VALUES (?,?,?,?)");
     $stmt->bind_param("ssss", $name, $comment, $course, $post_time);
 
+    // 执行插入操作
     if ($stmt->execute()) {
         // 插入成功
         echo "Comment added successfully!";
@@ -20,10 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Error: " . $stmt->error;
     }
 
+    // 查询数据库中的评论
     $sql = "SELECT * FROM comments ORDER BY CommentDate DESC";
     $result = $conn->query($sql);
 
     // Output each comment
+    // 输出每个评论
     if ($result->num_rows > 0) {
         echo '<ul id="commentList" class="list-group">';
         while ($row = $result->fetch_assoc()) {
@@ -34,10 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "No comments yet.";
     }
 
+    // 关闭数据库连接
     $stmt->close();
     $conn->close();
 } else {
-    // Handle errors (display or log them)
+    // 处理错误信息
     foreach ($errors as $error) {
         echo $error . "<br>";
     }

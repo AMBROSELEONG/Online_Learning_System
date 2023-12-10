@@ -5,7 +5,7 @@ include '../ConnectDB.php';
 include '../Session.php';
 
 // 查询数据库中指定用户ID的用户信息
-$sql = "SELECT * FROM userprofile WHERE UserID = $userID";
+$sql = "SELECT * FROM resumeprofile WHERE UserID = $userID";
 
 // 执行查询
 $result = $conn->query($sql);
@@ -16,25 +16,18 @@ if ($result === false) {
 } else {
     // 检查查询结果是否为空
     if ($result->num_rows > 0) {
-
         // 获取查询结果
         $row = $result->fetch_assoc();
         $image = $row['UserImage'];
-        $username = $row['UserName'];
-        $collegename = $row['CollegeName'];
-        $gmail = $row['Gmail'];
-        $phone = $row['Phone'];
-        $about = $row['About'];
-    } else {
-        // 查询结果为空，设置用户信息为空
-        $username = "None";
-        $collegename = "None";
-        $gmail = "None";
-        $phone = "None";
-        $about = "None";
+        $experience = $row['Experience'];
+        $education = $row['Education'];
+        $skillset = $row['Professional_Skill'];
+        $language = $row['Language_'];
+    } else{
+        $experience = "None";
+        $education = "None";
     }
 }
-
 // 关闭数据库连接
 $conn->close();
 ?>

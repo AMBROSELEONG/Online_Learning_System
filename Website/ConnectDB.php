@@ -1,4 +1,5 @@
 <?php
+// 连接数据库
 $servername = "localhost";
 $username = "root";
 $password = "";
