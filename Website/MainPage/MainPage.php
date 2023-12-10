@@ -171,35 +171,41 @@ include '../Session.php';
             </div>
         </div>
         <script>
+            // 打开页面函数
             function openPage(pageName, elmnt, color) {
+                // 获取所有tabcontent元素
                 var i, tabcontent, tablinks;
                 tabcontent = document.getElementsByClassName("tabcontent");
+                // 遍历tabcontent，将其display属性设置为none
                 for (i = 0; i < tabcontent.length; i++) {
                     tabcontent[i].style.display = "none";
                 }
+                // 获取所有tablinks元素
                 tablinks = document.getElementsByClassName("tablink");
+                // 遍历tablinks，将其backgroundColor属性设置为空
                 for (i = 0; i < tablinks.length; i++) {
                     tablinks[i].style.backgroundColor = "";
                 }
+                // 获取指定pageName的元素，将其display属性设置为block
                 document.getElementById(pageName).style.display = "block";
+                // 获取指定elmnt的元素，将其backgroundColor属性设置为color
                 elmnt.style.backgroundColor = color;
             }
 
-            // Get the element with id="defaultOpen" and click on it
+            // 获取id为defaultOpen的元素，并点击它
             document.getElementById("defaultOpen").click();
         </script>
-
         <div class="aboutus-container">
             <p>We have everything you need to study online</p>
             <div class="aboutus-container-outside">
                 <div class="aboutus-container-inner">
-                    <img src="" alt="">
+                    <img src="../img/high_quality.jpg" alt="High Quality">
                     <div class="content">
                         <p>High quality, carefully planned courses</p>
                     </div>
                 </div>
                 <div class="aboutus-container-inner">
-                    <img src="" alt="">
+                    <img src="../img/tutor.jpg" alt="Professional Lecturer">
                     <div class="content">
                         <p>Professional Lecturer</p>
                     </div>
@@ -207,19 +213,19 @@ include '../Session.php';
             </div>
             <div class="aboutus-container-outside">
                 <div class="aboutus-container-inner">
-                    <img src="" alt="">
+                    <img src="../img/LiveWebinars.jpg" alt="Live Webinars">
                     <div class="content">
                         <p>Live Webinars and more</p>
                     </div>
                 </div>
                 <div class="aboutus-container-inner">
-                    <img src="" alt="">
+                    <img src="../img/Communities.jpg" alt="Communities">
                     <div class="content">
                         <p>Engage with communities</p>
                     </div>
                 </div>
                 <div class="aboutus-container-inner">
-                    <img src="" alt="">
+                    <img src="../img/Course.jpg" alt="Course">
                     <div class="content">
                         <p>Create a course that sells</p>
                     </div>
@@ -231,24 +237,24 @@ include '../Session.php';
                 <img src="" alt="">
                 <p>Tutorial-container</p>
                 <ul>
-                    <li>Good</li>
-                    <li>Good</li>
-                    <li>Good</li>
+                    <li>Test your professional talent!</li>
+                    <li>Discover your creative talents!</li>
+                    <li>Reveal your unique personality!</li>
                 </ul>
-                <button>Go to buy tutorial</button>
+                <button onclick="window.location.href = '../Course/CoursePage.html'">Go to buy course</button>
             </div>
             <div class="tutorial-container-inner-right">
-                <img src="" alt="">
+                <video src="../img/MainPageVideo.mp4" controls style="width:100%; height:100%" autoplay muted loop>
             </div>
         </div>
     </section>
     <footer>
         <div class="footer-container-left">
-            <p>About US</p>
-            <p>Contact US</p>
+            <p onclick="window.location.href = '../AboutUS/AboutUs.html'">About US</p>
+            <p onclick="window.location.href = '../ContactUs/ContactUs.html'">Contact US</p>
             <p>Term</p>
             <p>Privacy Policy</p>
-            <p>New Era University College</p>
+            <p onclick="window.location.href = 'https://www.newera.edu.my/index.php'">New Era University College</p>
         </div>
         <div class="footer-container-center">
             <div>
@@ -273,9 +279,9 @@ include '../Session.php';
             </div>
         </div>
         <div class="footer-container-right">
-            <p>Tutorial</p>
-            <p>Quiz</p>
-            <p>Lecturer</p>
+            <p onclick="window.location.href = '../Course/CoursePage.html'">Course</p>
+            <p onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</p>
+            <p onclick="window.location.href = '../Tutor/AboutTheTutor.html'">Lecturer</p>
             <p>Help And Support</p>
             <p>Copyright © 2021 New Era University College. All Rights Reserved.</p>
         </div>

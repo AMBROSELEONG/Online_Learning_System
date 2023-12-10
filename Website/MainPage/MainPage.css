@@ -420,11 +420,12 @@ body section {
     border: 0.1rem solid rgb(60, 60, 60);
 }
 
-.tutorial-container-inner-right img {
+.tutorial-container-inner-right video{
     width: 100%;
     height: 100%;
     object-fit: cover;
     background-color: #6a6f73;
+    
 }
 
 footer {
