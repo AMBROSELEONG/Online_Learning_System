@@ -6,147 +6,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="CourseDatail.css">
     <link rel="stylesheet" href="../icon/iconfont.css">
-    <title>CourseDetail</title>
+    <title>Course Detail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
-    <header>
-        <div id="mySidepanel" class="sidepanel">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-            <form action="" id="search-bar-form">
-                <input type="text" id="search-bar" placeholder="Search...">
-                <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
-            </form>
-            <a href="../MainPage/MainPage.php"><i class="iconfont icon-book1">
-                    <p>Home</p>
-                </i></a>
-            <a href="../Course/CoursePage.html"><i class="iconfont icon-book1">
-                    <p>Course</p>
-                </i></a>
-            <a href="../Quiz/QuizList.html"><i class="iconfont icon-shijuan">
-                    <p>Quiz</p>
-                </i></a>
-            <a href="../ShoppingCart/ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
-                    <p>Shopping Cart</p>
-                </i></a>
-            <a href="../UserProfile/UserProfile.php"><i class="iconfont icon-user">
-                    <p>User Info</p>
-                </i></a>
-            <a href="../ContactUs/ContactUs.html"><i class="iconfont icon-dianhua">
-                    <p>Contact Us</p>
-                </i></a>
-            <a href="../AboutUS/AboutUs.html"><i class="iconfont icon-guanyuwomen">
-                    <p>About Us</p>
-                </i></a>
-            <a href="../Tutor/AboutTheTutor.html"><i class="iconfont icon-xuexiao">
-                    <p>Tutor</p>
-                </i></a>
-            <a href="../Comment/Comment.php"><i class="iconfont icon-comment">
-                    <p>Comment</p>
-                </i></a>
+    <div style="background-color: rgb(255, 140, 0);">
+        <div class="container py-4">
+            <!-- Breadcrumb -->
+            <nav class="d-flex">
+                <h6 class="mb-0">
+                    <a href="../MainPage/MainPage.php" class="text-white-50">Home</a>
+                    <span class="text-white-50 mx-2"> > </span>
+                    <a href="../Course/CoursePage.html" class="text-white-50">Course</a>
+                    <span class="text-white-50 mx-2"> > </span>
+                    <a href="" class="text-white"><u>Course Detail</u></a>
+                </h6>
+            </nav>
+            <!-- Breadcrumb -->
         </div>
+    </div>
+    <!-- content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row gx-5">
+                <aside class="col-lg-6">
+                    <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                        <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image"
+                            href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp">
+                            <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
+                                src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" />
+                        </a>
+                    </div>
+                </aside>
+                <main class="col-lg-6">
+                    <div class="ps-lg-3">
+                        <h4 class="title text-dark">
+                            JAVA
+                        </h4>
+                        <div class="mb-3">
+                            <span class="h5">$75.00</span>
+                        </div>
+                        <p>
+                            Modern look and quality demo item is a streetwear-inspired collection that continues to
+                            break away from the conventions of mainstream fashion. Made in Italy, these black and brown
+                            clothing low-top shirts for
+                            men.
+                        </p>
 
-        <button class="openbtn" onclick="openNav()">☰</button>
+                        <div class="row">
+                            <dt class="col-3">Type:</dt>
+                            <dd class="col-9">Regular</dd>
 
-        <script>
-            function openNav() {
-                document.getElementById("mySidepanel").style.width = "30rem";
-            }
+                            <dt class="col-3">Lecturer</dt>
+                            <dd class="col-9">Hi</dd>
 
-            function closeNav() {
-                document.getElementById("mySidepanel").style.width = "0rem";
-            }
-        </script>
-        <div class="left-bar">
-            <div id="logo" onclick="window.location.href = 'MainPage.php'">LOGO</div>
-            <ul class="menu">
-                <li class="item">Category<span></span>
-                    <ul>
-                        <li onclick="window.location.href = '../MainPage/MainPage.php'">Home</li>
-                        <li onclick="window.location.href = '../Course/CoursePage.html'">Course</li>
-                        <li onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</li>
-                    </ul>
-                </li>
-                <li class="item">About<span></span>
-                    <ul>
-                        <li onclick="window.location.href = '../Comment/Comment.php'">Comment</li>
-                        <li onclick="window.location.href = '../ContactUs/ContactUs.html'">Contact Us</li>
-                        <li onclick="window.location.href = '../AboutUS/AboutUs.html'">About Us</li>
-                        <li onclick="window.location.href = '../Tutor/AboutTheTutor.html'">Our Lecturer</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <script>
-            const menuItems = document.querySelectorAll('.menu > li');
+                            <dt class="col-3">Lecturer Qualifications</dt>
+                            <dd class="col-9">10 Years</dd>
 
-            menuItems.forEach((menuItem) => {
-                const submenu = menuItem.querySelector('ul');
+                            <dt class="col-3">Study Duration</dt>
+                            <dd class="col-9">1 Years</dd>
 
-                // 计算子菜单的最大高度
-                submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                            <dt class="col-3">Learning Platform</dt>
+                            <dd class="col-9">Zoom, Google Meet</dd>
+                        </div>
 
-                // 当鼠标悬停在菜单项上时，将 max-height 设置为计算值
-                menuItem.addEventListener('mouseenter', () => {
-                    submenu.style.maxHeight = submenu.scrollHeight + 'px';
-                });
-
-                // 当鼠标离开时，将 max-height 重置为 0
-                menuItem.addEventListener('mouseleave', () => {
-                    submenu.style.maxHeight = '0';
-                });
-            });
-        </script>
-        <div class="right-bar">
-            <form action="" id="search-bar-form">
-                <input type="text" id="search-bar" placeholder="Search...">
-                <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
-            </form>
-            <i class="iconfont icon-31gouwuchexuanzhong"
-                onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
-            <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
-        </div>
-    </header>
-    <section>
-        <div class="container-upper">
-            <div class="description">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse debitis assumenda nostrum,
-                    perspiciatis aut ratione error in quod culpa consequatur eligendi officia voluptatibus modi
-                    asperiores tenetur, sapiente facere illum. Ex?</p>
-            </div>
-        </div>
-        <div class="container-lower">
-            <div class="outer-container">
-                <div class="inner-container">
-                    Beginner
+                        <hr />
+                        <a href="#" class="btn btn-warning shadow-0"> Buy now </a>
+                        <a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to
+                            cart </a>
+                    </div>
+                </main>
+                <div class="tab-content" id="ex1-content">
+                    <h4 class="title text-dark">
+                        Learning Result
+                    </h4>
+                    <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                        <p>
+                            With supporting text below as a natural lead-in to additional content. Lorem ipsum dolor sit
+                            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqua. Ut
+                            enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                            dolore eu fugiat nulla
+                            pariatur.
+                        </p>
+                        <h4 class="title text-dark">
+                            Course Outline
+                        </h4>
+                        <div class="row mb-2">
+                            <div class="col-12 col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>Some great feature name here</li>
+                                    <li>Lorem ipsum dolor sit amet,consectetur</li>
+                                    <li>Duis aute irure dolor in reprehenderit</li>
+                                    <li>Optical heart sensor</li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>Some great feature name here</li>
+                                    <li>Lorem ipsum dolor sit amet,consectetur</li>
+                                    <li>Duis aute irure dolor in reprehenderit</li>
+                                    <li>Optical heart sensor</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="inner-container">
-                    3 Months
-                </div>
-                <div class="inner-container">
-                    39 downloadable resources
-                </div>
-                <div class="inner-container">
-                    Completion Certificate
-                </div>
-                <div class="inner-container">
-                    Last Updated October 29, 2023
-                </div>
-            </div>
-        </div>
-        <div class="overlay">
-            <img src="">
-            <h1>Course Name</h1>
-            <div class="course-detail">
-                <p>Lecturer :</p>
-                <p>Evalute : Mr Ng</p>
-                <p>Price : RM 500</p>
-            </div>
-            <div class="course-button">
-                <button onclick="window.location.href='../ShoppingCart/ShoppingCart.html'">Add To Cart</button>
-            </div>
-        </div>
     </section>
+    <!-- content -->
+
+    <footer class="text-center text-lg-start text-muted mt-3" style="background-color: rgb(255, 140, 0);">
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start pt-4 pb-4">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <div class="col-6 col-sm-4 col-lg-4">
+                        <ul class="list-unstyled mb-4">
+                            <li><a class="text-white-50" href="../AboutUS/AboutUs.html">About us</a></li>
+                            <li><a class="text-white-50" href="../ContactUs/ContactUs.html">Contact Us</a></li>
+                            <li><a class="text-white-50" href="#">Term</a></li>
+                            <li><a class="text-white-50" href="#">Privacy Policy</a></li>
+                            <li><a class="text-white-50" href="https://www.newera.edu.my/index.php">New Era University
+                                    College</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-4">
+                        <ul class="list-unstyled mb-4">
+                            <li><a class="text-white-50" href="#">Instagram</a></li>
+                            <li><a class="text-white-50" href="#">Facebook</a></li>
+                            <li><a class="text-white-50" href="#">Whatsapp</a></li>
+                            <li><a class="text-white-50" href="#">Wechat</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-4">
+                        <ul class="list-unstyled mb-4">
+                            <li><a class="text-white-50" href="../Course/CoursePage.html">Course</a></li>
+                            <li><a class="text-white-50" href="../Quiz/QuizList.html">Quiz</a></li>
+                            <li><a class="text-white-50" href="../Tutor/AboutTheTutor.html">Lecturer</a></li>
+                            <li><a class="text-white-50" href="#">Help And Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

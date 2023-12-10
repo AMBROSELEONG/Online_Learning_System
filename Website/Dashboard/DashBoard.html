@@ -1,145 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="CodeHim">
-    <title>Dashboard </title>
-    <!-- Style CSS -->
-    <link rel="stylesheet" href="dashboardstyle.css">
-    <link rel="stylesheet" href="dashboarddemo.css">
-    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'>
-    <link rel='stylesheet' href='https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css'>
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <link rel='stylesheet' href='icon2/iconfont.css'>
     <link rel="stylesheet" href="icon/iconfont.css">
-    <link rel='stylesheet'
-        href='https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
 </head>
 
 <body>
-    <header class="cd__intro">
-        <h1>Online Learning System</h1>
-    </header>
-    <main class="cd__main">
-        <div class="main-header"></div>
-        <nav class="sidebar close">
+    <div class='dashboard'>
+        <div class="dashboard-nav">
             <header>
-                <div class="image-text"> <a href="#" class="text-logo-a">
-                        <span class="image">
-                            <img src="#" alt="">
-                        </span>
-                        <div class="text logo-text">
-                            <span class="name">Online Learning System</span>
-                    </a>
-                    <span class="profession">👋 Hello, Vincent</span>
-                </div>
-                </div>
-                <i class='bx bx-chevron-right toggle'></i>
+                <a href="#" class="brand-logo">
+                    <span></span>
+                </a>
             </header>
-            <div class="menu-bar">
-                <div class="menu">
-                    <li class="search-box">
-                    </li>
-                    <ul class="menu-links">
-                        <li class="nav-link">
-                            <a data-page="home.html" class="menu-link">
-                                <i class='bx bx-home-alt icon'></i>
-                                <span class="text nav-text">Home</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a href="#" data-page="Course.html" class="menu-link">
-                                <i class='iconfont icon-kecheng- icon'></i>
-                                <span class="text nav-text">Course</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a data-page="Quiz.html" class="menu-link">
-                                <i class='iconfont icon-zuoye icon'></i>
-                                <span class="text nav-text">Quiz</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a data-page="Tutor.html" class="menu-link">
-                                <i class='iconfont icon-daoshi icon'></i>
-                                <span class="text nav-text">Tutor</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a data-page="User.html" class="menu-link">
-                                <i class='iconfont icon-user-group icon'></i>
-                                <span class="text nav-text">User</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a data-page="Order.html" class="menu-link">
-                                <i class='bx bx-wallet icon'></i>
-                                <span class="text nav-text">Order</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a data-page="Contact.html" class="menu-link">
-                                <i class='bx bx-bell icon'></i>
-                                <span class="text nav-text">Contact</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a data-page="Comment.html" class="menu-link">
-                                <i class='iconfont icon-liuyan icon'></i>
-                                <span class="text nav-text">Comment</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="bottom-content">
-                    <li class="">
-                        <a href="#">
-                            <i class='bx bx-log-out icon'></i>
-                            <span class="text nav-text">Logout</span>
-                        </a>
-                    </li>
-                    <li class="mode">
-                        <div class="sun-moon">
-                            <i class='bx bx-moon icon moon'></i>
-                            <i class='bx bx-sun icon sun'></i>
+            <nav class="dashboard-nav-list">
+                <a data-page="home.html" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-home icon"></i>Home
+                </a>
+                <a data-page="Course.html" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-kecheng- icon"></i>Course
+                </a>
+                <a data-page="Quiz.html" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-zuoye icon"></i> Quiz
+                </a>
+                <a data-page="Tutor.html" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-daoshi icon"></i> Lecturer
+                </a>
+                <a data-page="User.html" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-user-group icon"></i> User
+                </a>
+                <a data-page="Order.html" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-order_unread icon"></i> Order
+                </a>
+                <a data-page="Contact.html" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-contacts icon"></i> Contact
+                </a>
+                <a data-page="Comment.html" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-liuyan icon"></i> Comment
+                </a>
+                <div class="nav-item-divider"></div>
+                <a href="#" class="dashboard-nav-item">
+                    <i class="iconfont icon-Logout icon"></i> Logout
+                </a>
+            </nav>
+        </div>
+        <div class='dashboard-app'>
+            <div class='dashboard-content'>
+                <header class="cd__intro">
+                    <h1><span style="cursor: pointer;" onclick="window.location.href='../MainPage/MainPage.php'">Online
+                            Learning System</span> > Dashboard</h1>
+                </header>
+                <div class='container'>
+                    <div class='card'>
+                        <div class='card-header'>
+                            <h1>Hello</h1>
                         </div>
-                        <span class="mode-text text">Dark mode</span>
-                        <div class="toggle-switch">
-                            <span class="switch"></span>
+                        <div class='card-body'>
+                            <div class="page-container" id="page-content">
+                                <!-- 加载指定页面信息 -->
+                            </div>
                         </div>
-                    </li>
+                    </div>
                 </div>
             </div>
-        </nav>
-        <div class="page-container" id="page-content">
-            <!-- 加载指定页面信息 -->
         </div>
-    </main>
-    <footer class="cd__credit">Author: Vincent Van Goggles - Distributed By: <a title="Free web design code & scripts"
-            href="https://www.codehim.com?source=demo-page" target="_blank">CodeHim</a></footer>
-
-    <script>
-        const body = document.querySelector("body"),
-            sidebar = body.querySelector("nav"),
-            toggle = body.querySelector(".toggle"),
-            searchBtn = body.querySelector(".search-box"),
-            modeSwitch = body.querySelector(".toggle-switch"),
-            modeText = body.querySelector(".mode-text");
-        toggle.addEventListener("click", () => {
-            sidebar.classList.toggle("close");
-        });
-        searchBtn.addEventListener("click", () => {
-            sidebar.classList.remove("close");
-        });
-        modeSwitch.addEventListener("click", () => {
-            body.classList.toggle("dark");
-            if (body.classList.contains("dark")) {
-                modeText.innerText = "Light mode";
-            } else {
-                modeText.innerText = "Dark mode";
-            }
-        });
-    </script>
+    </div>
     <script>
         // Get all menu links
         const menuLinks = document.querySelectorAll('.menu-link');
@@ -149,15 +79,19 @@
             event.preventDefault();
             const page = this.getAttribute('data-page');
             const pageContent = document.getElementById('page-content');
+            const cardHeader = document.querySelector('.card-header h1');
 
-            // Use fetch or any other method to load content from the specified page
             fetch(page)
                 .then(response => response.text())
                 .then(html => {
                     pageContent.innerHTML = html;
+
+                    const menuItem = this.textContent.trim();
+                    cardHeader.textContent = menuItem !== 'Logout' ? menuItem : 'Dashboard';
                 })
                 .catch(error => console.log(error));
         }
+
         // Attach click event listeners to menu links
         menuLinks.forEach(link => {
             link.addEventListener('click', loadPageContent);
@@ -174,6 +108,8 @@
         window.addEventListener('load', loadHomeInterface);
 
     </script>
+
+
 </body>
 
 </html>
