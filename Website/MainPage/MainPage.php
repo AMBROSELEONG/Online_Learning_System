@@ -45,7 +45,7 @@ include '../Session.php';
             <a href="../AboutUS/AboutUs.html"><i class="iconfont icon-guanyuwomen">
                     <p>About Us</p>
                 </i></a>
-            <a href="../Tutor/AboutTheTutor.html"><i class="iconfont icon-xuexiao">
+            <a href="../Lecturer/AboutTheTutor.html"><i class="iconfont icon-xuexiao">
                     <p>Tutor</p>
                 </i></a>
             <a href="../Comment/Comment.php"><i class="iconfont icon-comment">
@@ -78,7 +78,7 @@ include '../Session.php';
                         <li onclick="window.location.href = '../Comment/Comment.php'">Comment</li>
                         <li onclick="window.location.href = '../ContactUs/ContactUs.html'">Contact Us</li>
                         <li onclick="window.location.href = '../AboutUS/AboutUs.html'">About Us</li>
-                        <li onclick="window.location.href = '../Tutor/AboutTheTutor.html'">Our Lecturer</li>
+                        <li onclick="window.location.href = '../Lecturer/AboutTheTutor.html'">Our Lecturer</li>
                     </ul>
                 </li>
             </ul>
@@ -281,7 +281,7 @@ include '../Session.php';
         <div class="footer-container-right">
             <p onclick="window.location.href = '../Course/CoursePage.html'">Course</p>
             <p onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</p>
-            <p onclick="window.location.href = '../Tutor/AboutTheTutor.html'">Lecturer</p>
+            <p onclick="window.location.href = '../Lecturer/AboutTheTutor.html'">Lecturer</p>
             <p>Help And Support</p>
             <p>Copyright © 2021 New Era University College. All Rights Reserved.</p>
         </div>
