@@ -250,7 +250,7 @@ body section {
 
 .tutorDiv img{
     width: 100%;
-    height: 65%;
+    height: 15rem;
     background-color: rgb(255, 140, 0);
 }
 
@@ -376,6 +376,8 @@ footer {
     background-color: rgb(60, 60, 60);
     padding: 5%;
     display: flex;
+    position: fixed;
+    bottom: 0%;
 }
 
 .footer-container-left,
