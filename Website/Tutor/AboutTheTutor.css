@@ -5,6 +5,7 @@
 
 html {
     font-size: 10px;
+    height: 100%;
 }
 
 header {
@@ -213,9 +214,8 @@ body section {
 
 
 .Ourmentors {
-    width: 94%;
-    height: 40rem;
-    padding: 3%;
+    width: 80%;
+    padding: 10%;
     text-align: center;
 
 }
@@ -234,13 +234,13 @@ body section {
 .tutorflex{
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .tutorDiv {
     background-color: #ffffff;
-    width: 15%;
-    height: 30rem;
-    margin: 1.5%;
+    width: calc(20% - 2rem);
+    margin: 2.5%;
     color: black;
     text-align: center;
     padding: 1rem;
@@ -259,25 +259,6 @@ body section {
     font-size: 2rem;
     margin: 5%;
 }
-
-.tutorDiv p{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border: none;
-    outline: 0;
-    padding: 1rem;
-    color: white;
-    background-color: rgb(255, 140, 0);
-    text-align: center;
-    cursor: pointer;
-    width: calc(100% - 2rem);
-    font-size: 1.6rem;
-}
-.tutorDiv p:hover{
-    opacity: 0.7;
-}
-
 
 .tutorDiv>li{
     position: absolute;
@@ -376,8 +357,6 @@ footer {
     background-color: rgb(60, 60, 60);
     padding: 5%;
     display: flex;
-    position: fixed;
-    bottom: 0%;
 }
 
 .footer-container-left,
@@ -536,6 +515,11 @@ footer {
         width: 94%;
         padding: 3%;
     }
+
+    .footer{
+        position: absolute;
+        bottom: 0%;
+    }
 }
 
 @media all and (max-width: 576px){
@@ -593,6 +577,10 @@ footer {
 
     .tutorial-container {
         margin-bottom: 5%;
+    }
+    .footer{
+        position: absolute;
+        bottom: 0%;
     }
 
     .footer-container-left,
