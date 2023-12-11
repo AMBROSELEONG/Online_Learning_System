@@ -1,3 +1,6 @@
+<?php
+    include 'find-user.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,15 +113,17 @@
 
             <div class="contactus">
                 <div class="contactus-form">
-                    <form action="" method="post">
+                    <form action="insert.php" method="post">
+                        <input type="hidden" name="UserID" id="UserID" value="<?php echo isset($userID) ? $userID : ''; ?>">
                         <p>Your name</p>
-                        <input class="form-name" name="name" placeholder="Name..." /><br>
+                        <input class="form-name" name="UserName" placeholder="Name..." id="UserName" value="<?php echo isset($name) ? $name : ''; ?>"required/><br>
                         <p>Your phone number</p>
-                        <input class="form-phone" name="phone" placeholder="Phone..." /><br>
+                        <input class="form-phone" name="ContactNumber" placeholder="Phone..." id="ContactNumber" value="<?php echo isset($phone) ? $phone : ''; ?>"required/><br>
                         <p>Your email address</p>
-                        <input class="form-email" name="email" placeholder="E-mail..." /><br>
+                        <input class="form-email" name="Email" placeholder="E-mail..." id="Email" value="<?php echo isset($email) ? $email : ''; ?>" required/><br>
                         <p>Your message</p>
-                        <textarea class="form-text" name="text" placeholder="How can we help you?"></textarea><br>
+                        <textarea class="form-text" name="Message" placeholder="How can we help you?" id="Message" required></textarea><br>
+                        <input type="hidden" name="replyStatus" value="Waiting Reply">
                         <input class="btn-send" type="submit" value="Send" /><br><br>
                     </form>
                 </div>
