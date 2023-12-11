@@ -39,7 +39,7 @@ include '../Session.php';
             <a href="../UserProfile/UserProfile.php"><i class="iconfont icon-user">
                     <p>User Info</p>
                 </i></a>
-            <a href="../ContactUs/ContactUs.html"><i class="iconfont icon-dianhua">
+            <a href="../ContactUs/ContactUs.php"><i class="iconfont icon-dianhua">
                     <p>Contact Us</p>
                 </i></a>
             <a href="../AboutUS/AboutUs.html"><i class="iconfont icon-guanyuwomen">
@@ -76,7 +76,7 @@ include '../Session.php';
                 <li class="item">About<span></span>
                     <ul>
                         <li onclick="window.location.href = '../Comment/Comment.php'">Comment</li>
-                        <li onclick="window.location.href = '../ContactUs/ContactUs.html'">Contact Us</li>
+                        <li onclick="window.location.href = '../ContactUs/ContactUs.php'">Contact Us</li>
                         <li onclick="window.location.href = '../AboutUS/AboutUs.html'">About Us</li>
                         <li onclick="window.location.href = '../Lecturer/AboutTheTutor.html'">Our Lecturer</li>
                     </ul>
@@ -251,7 +251,7 @@ include '../Session.php';
     <footer>
         <div class="footer-container-left">
             <p onclick="window.location.href = '../AboutUS/AboutUs.html'">About US</p>
-            <p onclick="window.location.href = '../ContactUs/ContactUs.html'">Contact US</p>
+            <p onclick="window.location.href = '../ContactUs/ContactUs.php'">Contact US</p>
             <p>Term</p>
             <p>Privacy Policy</p>
             <p onclick="window.location.href = 'https://www.newera.edu.my/index.php'">New Era University College</p>
