@@ -93,9 +93,9 @@ body {
     width: 90%;
     height: auto;
     padding: 5%;
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-bottom: 3%;
-    /* display: flex; */
+    display: flex;
     flex-wrap: wrap;
 }
 
