@@ -23,112 +23,101 @@
                 <div class="col">
                     <h1 style="text-align: center;">Shopping Cart</h1>
                     <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="h5">Course</th>
-                                    <th scope="col">Format</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        <div class=" align-items-center">
-                                            <p>JAVA</p>
-                                            <p>LECTURER</p>
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Product ID</td>
+                                <td>Product Name</td>
+                                <td>Product Type</td>
+                                <td>Price</td>
+                                <td>Operating</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button type="button" class="btn btn-danger">X</button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    </th>
-                    <td class="align-middle">
-                        <p class="mb-0" style="font-weight: 500;">BACKEND</p>
-                    </td>
-                    <td class="align-middle">
-                        <p class="mb-0" style="font-weight: 500;">$9.99</p>
-                    </td>
-                    <td class="align-middle">
-                        <button type="button" class="btn btn-danger">X</button>
-                    </td>
-                    </tr>
-                    </tbody>
-                    </table>
-                </div>
 
-                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
-                    <div class="card-body p-4">
+                    <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                        <div class="card-body p-4">
 
-                        <div class="row" style="padding: 10px;">
-                            <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
-                                <form>
-                                    <div class="d-flex flex-row pb-3">
-                                        <div class="d-flex align-items-center pe-2">
-                                            <input class="form-check-input" type="radio" name="radioNoLabel"
-                                                id="radioNoLabel1v" value="" aria-label="..." checked />
+                            <div class="row" style="padding: 10px;">
+                                <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
+                                    <form>
+                                        <div class="d-flex flex-row pb-3">
+                                            <div class="d-flex align-items-center pe-2">
+                                                <input class="form-check-input" type="radio" name="radioNoLabel"
+                                                    id="radioNoLabel1v" value="" aria-label="..." checked />
+                                            </div>
+                                            <div class="rounded border w-100 p-3">
+                                                <p class="d-flex align-items-center mb-0">
+                                                    <i class="fab fa-cc-mastercard fa-2x text-dark pe-2"></i>Credit
+                                                    Card
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="rounded border w-100 p-3">
-                                            <p class="d-flex align-items-center mb-0">
-                                                <i class="fab fa-cc-mastercard fa-2x text-dark pe-2"></i>Credit
-                                                Card
-                                            </p>
+                                        <div class="d-flex flex-row pb-3">
+                                            <div class="d-flex align-items-center pe-2">
+                                                <input class="form-check-input" type="radio" name="radioNoLabel"
+                                                    id="radioNoLabel2v" value="" aria-label="..." />
+                                            </div>
+                                            <div class="rounded border w-100 p-3">
+                                                <p class="d-flex align-items-center mb-0">
+                                                    <i class="fab fa-cc-visa fa-2x fa-lg text-dark pe-2"></i>Debit Card
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="d-flex flex-row pb-3">
-                                        <div class="d-flex align-items-center pe-2">
-                                            <input class="form-check-input" type="radio" name="radioNoLabel"
-                                                id="radioNoLabel2v" value="" aria-label="..." />
+                                        <div class="d-flex flex-row">
+                                            <div class="d-flex align-items-center pe-2">
+                                                <input class="form-check-input" type="radio" name="radioNoLabel"
+                                                    id="radioNoLabel3v" value="" aria-label="..." />
+                                            </div>
+                                            <div class="rounded border w-100 p-3">
+                                                <p class="d-flex align-items-center mb-0">
+                                                    <i class="fab fa-cc-paypal fa-2x fa-lg text-dark pe-2"></i>PayPal
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="rounded border w-100 p-3">
-                                            <p class="d-flex align-items-center mb-0">
-                                                <i class="fab fa-cc-visa fa-2x fa-lg text-dark pe-2"></i>Debit Card
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-row">
-                                        <div class="d-flex align-items-center pe-2">
-                                            <input class="form-check-input" type="radio" name="radioNoLabel"
-                                                id="radioNoLabel3v" value="" aria-label="..." />
-                                        </div>
-                                        <div class="rounded border w-100 p-3">
-                                            <p class="d-flex align-items-center mb-0">
-                                                <i class="fab fa-cc-paypal fa-2x fa-lg text-dark pe-2"></i>PayPal
-                                            </p>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-6">
-
-                            </div>
-                            <div class="col-lg-4 col-xl-3">
-                                <div class="d-flex justify-content-between" style="font-weight: 500;">
-                                    <p class="mb-2">Subtotal</p>
-                                    <p class="mb-2">$23.49</p>
+                                    </form>
                                 </div>
+                                <div class="col-md-6 col-lg-4 col-xl-6">
 
-                                <div class="d-flex justify-content-between" style="font-weight: 500;">
-                                    <p class="mb-0">Shipping</p>
-                                    <p class="mb-0">$2.99</p>
                                 </div>
-
-                                <hr class="my-4">
-
-                                <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
-                                    <p class="mb-2">Total (tax included)</p>
-                                    <p class="mb-2">$26.48</p>
-                                </div>
-
-                                <button type="button" class="btn btn-primary btn-block btn-lg">
-                                    <div class="d-flex justify-content-between">
-                                        <span>Checkout</span>
-                                        <span>$26.48</span>
+                                <div class="col-lg-4 col-xl-3">
+                                    <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                        <p class="mb-2">Subtotal</p>
+                                        <p class="mb-2">$23.49</p>
                                     </div>
-                                </button>
+
+                                    <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                        <p class="mb-0">Shipping</p>
+                                        <p class="mb-0">$2.99</p>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
+                                        <p class="mb-2">Total (tax included)</p>
+                                        <p class="mb-2">$26.48</p>
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary btn-block btn-lg">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Checkout</span>
+                                            <span>$26.48</span>
+                                        </div>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
