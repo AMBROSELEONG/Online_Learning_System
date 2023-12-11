@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 连接数据库
     include '../ConnectDB.php';
     // 将评论内容插入数据库
-    $stmt = $conn->prepare("INSERT INTO comments (UserID, UserName, CommentContent, CourseName, CommentDate) VALUES (?,?,?,?,?)");
-    $stmt->bind_param("issss", $userID, $name, $comment, $course, $post_time);
+    $stmt = $conn->prepare("INSERT INTO comments (UserID, UserName, CourseName, Content, PostDate) VALUES (?,?,?,?,?)");
+    $stmt->bind_param("issss", $userID, $name, $course, $comment, $post_time);
 
     // 执行插入操作
     if ($stmt->execute()) {
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // 查询数据库中的评论
-    $sql = "SELECT * FROM comments ORDER BY CommentDate DESC";
+    $sql = "SELECT * FROM comments ORDER BY PostDate DESC";
     $result = $conn->query($sql);
 
     // Output each comment
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result->num_rows > 0) {
         echo '<ul id="commentList" class="list-group">';
         while ($row = $result->fetch_assoc()) {
-            echo '<li class="list-group-item"><strong>' . htmlspecialchars($row['UserName']) . ':</strong><br>' . htmlspecialchars($row['CommentContent']) . '<br>' . htmlspecialchars($row['CourseName']) . '<br><small>Posted on ' . htmlspecialchars($row['CommentDate']) . '</small></li>';
+            echo '<li class="list-group-item"><strong>' . htmlspecialchars($row['UserName']) . ':</strong><br>' . htmlspecialchars($row['CourseName']) . '<br>' . htmlspecialchars($row['Content']) . '<br><small>Posted on ' . htmlspecialchars($row['PostDate']) . '</small></li>';
         }
         echo '</ul>';
     } else {

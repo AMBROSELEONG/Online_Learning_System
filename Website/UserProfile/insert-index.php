@@ -96,10 +96,11 @@ if (isset($_POST['save'])) {
 
             $insertResumeImage = $conn->prepare("INSERT INTO userresume (UserID, UserImage) VALUES (?, ?)");
             $insertResumeImage->bind_param("is", $userID, $imagePath);
+            $insertResumeImage->execute();
 
             $insertHistoryImage = $conn->prepare("INSERT INTO userhistory (UserID, UserImage) VALUES (?, ?)");
-            $insertResumeImage->bind_param("is", $userID, $imagePath);
-            $insertResumeImage->execute();
+            $insertHistoryImage->bind_param("is", $userID, $imagePath);
+            $insertHistoryImage->execute();
         }
 
         // 执行语句

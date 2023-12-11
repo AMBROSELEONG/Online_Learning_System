@@ -1,10 +1,9 @@
 <?php
 include '../ConnectDB.php';
 include 'index.php';
-include '../Session.php';
 
 // 执行SQL语句，获取所有评论，按评论时间降序排列
-$sql = "SELECT * FROM comments ORDER BY CommentDate DESC";
+$sql = "SELECT * FROM comments ORDER BY PostDate DESC";
 $result = $conn->query($sql);
 
 // 获取用户名
@@ -105,12 +104,12 @@ function getUsernameFromUserID($conn, $userID)
                         value="<?php echo getUsernameFromUserID($conn, $_SESSION['UserID']); ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="comment" class="form-label">Content:</label>
-                    <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
-                </div>
-                <div class="mb-3">
                     <label for="course" class="form-label">Course:</label>
                     <textarea class="form-control" id="course" name="course" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Content:</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
