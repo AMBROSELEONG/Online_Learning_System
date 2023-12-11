@@ -1,11 +1,32 @@
 <?php
 include '../ConnectDB.php';
 include 'index.php';
+include '../Session.php';
 
+// 执行SQL语句，获取所有评论，按评论时间降序排列
 $sql = "SELECT * FROM comments ORDER BY CommentDate DESC";
 $result = $conn->query($sql);
-?>
 
+// 获取用户名
+function getUsernameFromUserID($conn, $userID)
+{
+
+    // 转义用户ID，防止注入
+    $userID = mysqli_real_escape_string($conn, $userID);
+
+    // 执行SQL语句，获取用户名
+    $query = "SELECT UserName FROM users WHERE UserID = '$userID'";
+    $result = mysqli_query($conn, $query);
+
+    // 如果查询成功，返回用户名
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['UserName'];
+    } else {
+        return '';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,7 +101,8 @@ $result = $conn->query($sql);
             <form id="commentForm" action="index.php" method="post">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name" required
+                        value="<?php echo getUsernameFromUserID($conn, $_SESSION['UserID']); ?>">
                 </div>
                 <div class="mb-3">
                     <label for="comment" class="form-label">Content:</label>

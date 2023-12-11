@@ -5,7 +5,7 @@ include '../ConnectDB.php';
 include '../Session.php';
 
 // 从数据库中获取用户图片
-$getUserImage = $conn->prepare("SELECT UserImage FROM resumeprofile WHERE UserID = ?");
+$getUserImage = $conn->prepare("SELECT UserImage FROM userresume WHERE UserID = ?");
 $getUserImage->bind_param("i", $userID);
 $getUserImage->execute();
 $getUserImage->store_result();
@@ -30,19 +30,19 @@ if (isset($_POST['save'])) {
 
     if ($experience != '' && $education != '' && $skillset != '' && $language != '') {
         // 检查用户是否存在
-        $checkUser = $conn->prepare("SELECT UserID FROM resumeprofile WHERE UserID = ?");
+        $checkUser = $conn->prepare("SELECT UserID FROM userresume WHERE UserID = ?");
         $checkUser->bind_param("i", $userID);
         $checkUser->execute();
         $checkUser->store_result();
 
         if ($checkUser->num_rows == 0) {
             // 如果用户存在，则插入用户数据
-            $stmt = $conn->prepare("INSERT INTO resumeprofile (UserID, Experience, Education, Professional_Skill, Language_) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO userresume (UserID, Experience, Education, Skill, Language_) VALUES (?, ?, ?, ?, ?)");
             $stmt->bind_param("issss", $userID, $experience, $education, $skillset, $language);
             $action = 'inserted';
         } else {
             // 如果用户不存在，则更新用户数据
-            $stmt = $conn->prepare("UPDATE resumeprofile SET Experience = ?, Education = ?, Professional_Skill = ?, Language_ = ? WHERE UserID = ?");
+            $stmt = $conn->prepare("UPDATE userresume SET Experience = ?, Education = ?, Skill = ?, Language_ = ? WHERE UserID = ?");
             $stmt->bind_param("ssssi", $experience, $education, $skillset, $language, $userID);
             $action = 'updated';
         }

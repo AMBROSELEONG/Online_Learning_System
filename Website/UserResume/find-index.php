@@ -5,7 +5,7 @@ include '../ConnectDB.php';
 include '../Session.php';
 
 // 查询数据库中指定用户ID的用户信息
-$sql = "SELECT * FROM resumeprofile WHERE UserID = $userID";
+$sql = "SELECT * FROM userresume WHERE UserID = $userID";
 
 // 执行查询
 $result = $conn->query($sql);
@@ -21,11 +21,13 @@ if ($result === false) {
         $image = $row['UserImage'];
         $experience = $row['Experience'];
         $education = $row['Education'];
-        $skillset = $row['Professional_Skill'];
+        $skillset = $row['Skill'];
         $language = $row['Language_'];
     } else{
         $experience = "None";
         $education = "None";
+        $skillset = "None";
+        $language = "None";
     }
 }
 // 关闭数据库连接

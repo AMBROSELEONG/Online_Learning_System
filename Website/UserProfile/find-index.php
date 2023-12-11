@@ -22,7 +22,7 @@ if ($result === false) {
         $image = $row['UserImage'];
         $username = $row['UserName'];
         $collegename = $row['CollegeName'];
-        $gmail = $row['Gmail'];
+        $gmail = $row['Email'];
         $phone = $row['Phone'];
         $about = $row['About'];
     } else {

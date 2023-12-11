@@ -81,7 +81,7 @@ if (isset($_POST['save'])) {
         // 检查用户是否存在
         if ($checkUser->num_rows > 0) {
             // 如果用户存在，则更新数据
-            $stmt = $conn->prepare("UPDATE userprofile SET UserName = ?, CollegeName = ?, Gmail = ?, Phone = ?, About = ?, UserImage = ? WHERE UserID = ?");
+            $stmt = $conn->prepare("UPDATE userprofile SET UserName = ?, CollegeName = ?, Email = ?, Phone = ?, About = ?, UserImage = ? WHERE UserID = ?");
             $stmt->bind_param("ssssssi", $username, $collegename, $gmail, $phone, $about, $imagePath, $userID);
             $action = 'updated';
 
@@ -90,11 +90,14 @@ if (isset($_POST['save'])) {
             $updateResumeImage->execute();
         } else {
             // 如果用户不存在，则插入数据
-            $stmt = $conn->prepare("INSERT INTO userprofile (UserID, UserName, CollegeName, Gmail, Phone, About, UserImage) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO userprofile (UserID, UserName, CollegeName, Email, Phone, About, UserImage) VALUES (?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("issssss", $userID, $username, $collegename, $gmail, $phone, $about, $imagePath);
             $action = 'inserted';
 
-            $insertResumeImage = $conn->prepare("INSERT INTO resumeprofile (UserID, UserImage) VALUES (?, ?)");
+            $insertResumeImage = $conn->prepare("INSERT INTO userresume (UserID, UserImage) VALUES (?, ?)");
+            $insertResumeImage->bind_param("is", $userID, $imagePath);
+
+            $insertHistoryImage = $conn->prepare("INSERT INTO userhistory (UserID, UserImage) VALUES (?, ?)");
             $insertResumeImage->bind_param("is", $userID, $imagePath);
             $insertResumeImage->execute();
         }

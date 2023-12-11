@@ -42,7 +42,21 @@ if (isset($_POST['submit'])) {
                 // 判断更新是否成功
                 if ($run_update) {
                     echo "<script>alert('Password Update Successful'); window.location.href = '../Login/Login.php';</script>";
-                    exit();
+                    // 获取当前时间
+                    $currentTime = date("Y-m-d H:i:s");
+                    // 插入新数据到 userresetpassword 表格
+                    $insert_query = "INSERT INTO userresetpassword (UserID, UserName, NewPassword, Email, ResetDate) VALUES ('$user_id', '$username', '$hashed_password', '$email', '$currentTime')";
+                    $run_insert_query = mysqli_query($conn, $insert_query);
+                    // 判断插入是否成功
+                    if ($run_insert_query) {
+                        // 如果成功插入，提示密码更新成功，并跳转到登录页面
+                        echo "<script>alert('Password Update Successful'); window.location.href = '../Login/Login.php';</script>";
+                        exit();
+                    } else {
+                        // 如果插入失败，提示错误并保留在重置密码页面
+                        echo "<script>alert('Error updating password'); window.location.href = 'ResetPassword.php';</script>";
+                        exit();
+                    }
                 } else {
                     echo "<script>alert('Error updating password'); window.location.href = 'ResetPassword.php';</script>";
                     exit();

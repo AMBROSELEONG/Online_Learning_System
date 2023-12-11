@@ -1,4 +1,5 @@
 <?php
+include '../Session.php';
 // 声明一个空数组用于存储错误信息
 $errors = [];
 // 判断请求方式是否为POST
@@ -12,10 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // 连接数据库
     include '../ConnectDB.php';
-
     // 将评论内容插入数据库
-    $stmt = $conn->prepare("INSERT INTO comments (UserName, CommentContent, CourseName, CommentDate) VALUES (?,?,?,?)");
-    $stmt->bind_param("ssss", $name, $comment, $course, $post_time);
+    $stmt = $conn->prepare("INSERT INTO comments (UserID, UserName, CommentContent, CourseName, CommentDate) VALUES (?,?,?,?,?)");
+    $stmt->bind_param("issss", $userID, $name, $comment, $course, $post_time);
 
     // 执行插入操作
     if ($stmt->execute()) {
