@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="Dashboard.css">
     <link rel='stylesheet' href='icon2/iconfont.css'>
     <link rel="stylesheet" href="icon/iconfont.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -21,34 +20,34 @@
                 </a>
             </header>
             <nav class="dashboard-nav-list">
-                <a onclick="loadPage('home.html')" class="dashboard-nav-item menu-link">
+                <a href="Home.html" target="content" class="dashboard-nav-item menu-link">
                     <i class="iconfont icon-home icon"></i>Home
                 </a>
-                <a onclick="loadPage('Course.html')" class="dashboard-nav-item menu-link">
+                <a href="Course.html" target="content" class="dashboard-nav-item menu-link">
                     <i class="iconfont icon-kecheng- icon"></i>Course
                 </a>
-                <a onclick="loadPage('CourseType.php')" class="dashboard-nav-item menu-link">
+                <a href="CourseType/CourseType.php" target="content" class="dashboard-nav-item menu-link">
                     <i class="iconfont icon-kecheng- icon"></i>CourseType
                 </a>
-                <a onclick="loadPage('Quiz.html')" class="dashboard-nav-item menu-link">
+                <a href="Quiz.html" target="content" class="dashboard-nav-item menu-link">
                     <i class="iconfont icon-zuoye icon"></i> Quiz
                 </a>
-                <a onclick="loadPage('QuizType.html')" class="dashboard-nav-item menu-link">
+                <a href="QuizType/QuizType.php" target="content" class="dashboard-nav-item menu-link">
                     <i class="iconfont icon-zuoye icon"></i> QuizType
                 </a>
-                <a onclick="loadPage('Lecturer.html')" class="dashboard-nav-item menu-link">
+                <a href="Lecturer.html" target="content" class="dashboard-nav-item menu-link">
                     <i class="iconfont icon-daoshi icon"></i> Lecturer
                 </a>
-                <a onclick="loadPage('User.html')" class="dashboard-nav-item menu-link">
+                <a href="User.html" target="content" class="dashboard-nav-item menu-link">
                     <i class="iconfont icon-user-group icon"></i> User
                 </a>
-                <a onclick="loadPage('Order.html')" class="dashboard-nav-item menu-link">
+                <a href="Order.html" target="content" class="dashboard-nav-item menu-link">
                     <i class="iconfont icon-order_unread icon"></i> Order
                 </a>
-                <a onclick="loadPage('Contact.html')" class="dashboard-nav-item menu-link">
+                <a href="Contact.html" target="content" class="dashboard-nav-item menu-link">
                     <i class="iconfont icon-contacts icon"></i> Contact
                 </a>
-                <a onclick="loadPage('Comment.html')" class="dashboard-nav-item menu-link">
+                <a href="Comment.html" target="content" class="dashboard-nav-item menu-link">
                     <i class="iconfont icon-liuyan icon"></i> Comment
                 </a>
                 <div class="nav-item-divider"></div>
@@ -61,28 +60,30 @@
             <div class='dashboard-content'>
                 <header class="cd__intro">
                     <h1><span style="cursor: pointer;" onclick="window.location.href='../MainPage/MainPage.php'">Online
-                            Learning System</span>Dashboard</h1>
+                            Learning System</span> > Dashboard</h1>
                 </header>
                 <div class='container'>
                     <div class='card'>
-                        <div class='card-header'>
-                            <h1>Hello</h1>
-                        </div>
-                        <div class='card-body'>
-                            <div class="page-container" id="page-content">
-                                <!-- 加载指定页面信息 -->
-                            </div>
-                        </div>
+                        <h1 style="text-align: center; margin: 10px;"></h1>
+                        <iframe name="content" src="Home.html" frameborder="0" width="100%" height="100%"></iframe>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    </div>
 </body>
-<script src="Dashboard.js"></script>
-<script src="CourseType.js"></script>
+<script>
+    // 在页面加载完毕后，获取 iframe 中加载的页面的标题
+    window.onload = function () {
+        var iframe = document.getElementsByName('content')[0];
+        iframe.onload = function () {
+            var pageTitle = iframe.contentDocument.title; // 获取 iframe 中加载的页面标题
+            var helloTitle = document.querySelector('.card h1'); // 获取 Hello 的标题元素
+            helloTitle.innerText = pageTitle; // 将 iframe 页面标题设置为 Hello 的内容
+        };
+    };
+
+</script>
 
 </html>
