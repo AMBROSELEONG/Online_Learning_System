@@ -123,7 +123,7 @@ function getUsernameFromUserID($conn, $userID)
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo '<li class="list-group-item">
-                    <strong>' . htmlspecialchars($row['UserName']) . ':</strong><br>' . htmlspecialchars($row['CommentContent']) . '<br>' . htmlspecialchars($row['CourseName']) . '<br>';
+                    <strong>' . htmlspecialchars($row['UserName']) . ':</strong><br>' . htmlspecialchars($row['Content']) . '<br>' . htmlspecialchars($row['CourseName']) . '<br>';
                     }
                 } else {
                     echo "No comments yet.";
