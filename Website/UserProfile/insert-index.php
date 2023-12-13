@@ -79,29 +79,67 @@ if (isset($_POST['save'])) {
         $checkUser->store_result();
 
         // 检查用户是否存在
-        if ($checkUser->num_rows > 0) {
+       if ($checkUser->num_rows > 0) {
             // 如果用户存在，则更新数据
             $stmt = $conn->prepare("UPDATE userprofile SET UserName = ?, CollegeName = ?, Email = ?, Phone = ?, About = ?, UserImage = ? WHERE UserID = ?");
             $stmt->bind_param("ssssssi", $username, $collegename, $gmail, $phone, $about, $imagePath, $userID);
             $action = 'updated';
 
-            $updateResumeImage = $conn->prepare("UPDATE resumeprofile SET UserImage = ? WHERE UserID = ?");
-            $updateResumeImage->bind_param("si", $imagePath, $userID);
-            $updateResumeImage->execute();
         } else {
             // 如果用户不存在，则插入数据
             $stmt = $conn->prepare("INSERT INTO userprofile (UserID, UserName, CollegeName, Email, Phone, About, UserImage) VALUES (?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("issssss", $userID, $username, $collegename, $gmail, $phone, $about, $imagePath);
             $action = 'inserted';
 
+            // 插入简历图片
             $insertResumeImage = $conn->prepare("INSERT INTO userresume (UserID, UserImage) VALUES (?, ?)");
             $insertResumeImage->bind_param("is", $userID, $imagePath);
             $insertResumeImage->execute();
 
+            // 插入历史图片
             $insertHistoryImage = $conn->prepare("INSERT INTO userhistory (UserID, UserImage) VALUES (?, ?)");
             $insertHistoryImage->bind_param("is", $userID, $imagePath);
             $insertHistoryImage->execute();
         }
+
+        // 检查简历图片是否存在
+        $checkResume = $conn->prepare("SELECT UserID FROM userresume WHERE UserID = ?");
+        $checkResume->bind_param("i", $userID);
+        $checkResume->execute();
+        $checkResume->store_result();
+
+        if ($checkResume->num_rows > 0) {
+            // 如果简历图片存在，则更新简历图片
+            $updateResumeImage = $conn->prepare("UPDATE userresume SET UserImage = ? WHERE UserID = ?");
+            $updateResumeImage->bind_param("si", $imagePath, $userID);
+            $updateResumeImage->execute();
+
+        } else {
+            // 如果简历图片不存在，则插入简历图片
+            $insertResumeImage = $conn->prepare("INSERT INTO userresume (UserID, UserImage) VALUES (?, ?)");
+            $insertResumeImage->bind_param("is", $userID, $imagePath);
+            $insertResumeImage->execute();
+        }
+
+        // 检查历史图片是否存在
+        $checkHistory = $conn->prepare("SELECT UserID FROM userhistory WHERE UserID = ?");
+        $checkHistory->bind_param("i", $userID);
+        $checkHistory->execute();
+        $checkHistory->store_result();
+
+        if ($checkHistory->num_rows > 0) {
+            // 如果历史图片存在，则更新历史图片
+            $updateHistoryImage = $conn->prepare("UPDATE userhistory SET UserImage = ? WHERE UserID = ?");
+            $updateHistoryImage->bind_param("si", $imagePath, $userID);
+            $updateHistoryImage->execute();
+
+        } else {
+            // 如果历史图片不存在，则插入历史图片
+            $insertHistoryImage = $conn->prepare("INSERT INTO userhistory (UserID, UserImage) VALUES (?, ?)");
+            $insertHistoryImage->bind_param("is", $userID, $imagePath);
+            $insertHistoryImage->execute();
+        }
+
 
         // 执行语句
         if ($stmt->execute()) {

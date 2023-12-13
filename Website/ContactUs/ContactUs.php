@@ -14,7 +14,7 @@ include 'find-user.php';
 </head>
 
 <body>
-<header>
+    <header>
         <div id="mySidepanel" class="sidepanel">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
             <form action="" id="search-bar-form">
@@ -47,6 +47,9 @@ include 'find-user.php';
                 </i></a>
             <a href="../Comment/Comment.php"><i class="iconfont icon-comment">
                     <p>Comment</p>
+                </i></a>
+            <a href="../Mailbox/Mailbox.php"><i class="iconfont icon-youxiang">
+                    <p>Mailbox</p>
                 </i></a>
         </div>
 
@@ -106,7 +109,7 @@ include 'find-user.php';
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
-            <i class="iconfont icon-youxiang" onclick="window.location.href='../Message/Message.html'"></i>
+            <i class="iconfont icon-youxiang" onclick="window.location.href='../Mailbox/Mailbox.php'"></i>
             <i class="iconfont icon-31gouwuchexuanzhong"
                 onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>

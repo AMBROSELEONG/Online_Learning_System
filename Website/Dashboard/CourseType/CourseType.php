@@ -11,49 +11,76 @@
 
 <body>
     <div class="container">
-        <form method="post">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
             <div style="width: 100%; justify-content: space-between; margin: 1% 0; display: flex;">
                 <a class="btn btn-primary" href="coursetype-add.php" role="button">New Category</a>
                 <div>
-                    <input type="text" name="search" id="search" placeholder="Search CourseCategory">
+                    <input type="text" name="search" id="search" placeholder="Search Course Category"
+                        value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
                     <input type="submit" name="searchsub" id="searchsub" value="Search">
                 </div>
             </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <td>CategoryID</td>
-                        <td>CategoryName</td>
-                        <td>Operating</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    include '../../ConnectDB.php';
+        </form>
 
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>CategoryID</td>
+                    <td>CategoryName</td>
+                    <td>Operating</td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                include '../../ConnectDB.php';
+
+                // 判断是否有搜索值
+                if (isset($_GET['search'])) {
+                    $filterValue = $_GET['search'];
+                    $query = "SELECT * FROM coursecategory WHERE CategoryID LIKE '%$filterValue%' OR CategoryName LIKE '%$filterValue%'";
+                    $result = $conn->query($query);
+
+                    if (!$result) {
+                        die("Invalid query" . $conn->error);
+                    }
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                                        <td>{$row['CategoryID']}</td>
+                                        <td>{$row['CategoryName']}</td>
+                                        <td>
+                                            <a href='coursetype-edit.php?CategoryID={$row['CategoryID']}' class='btn btn-primary btn-sm'>Edit</a>
+                                            <a href='coursetype-delete.php?CategoryID={$row['CategoryID']}' class='btn btn-danger btn-sm'>Delete</a>
+                                        </td>
+                                    </tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='3'>No Record Found</td></tr>";
+                    }
+                } else {
+                    // 查询所有类别
                     $sql = "SELECT * FROM coursecategory";
                     $result = $conn->query($sql);
 
-                    if(!$result) {
-                        die("Invalid query" .$conn->$error);
+                    if (!$result) {
+                        die("Invalid query" . $conn->error);
                     }
 
-                    while($row = $result->fetch_assoc()) {
-                        echo " <tr>
-                                    <td>$row[CategoryID]</td>
-                                    <td>$row[CategoryName]</td>
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                                    <td>{$row['CategoryID']}</td>
+                                    <td>{$row['CategoryName']}</td>
                                     <td>
-                                        <a href='coursetype-edit.php?CategoryID=$row[CategoryID]' class='btn btn-primary btn-sm'>Edit</a>
-                                        <a href='coursetype-delete.php?CategoryID=$row[CategoryID]' class='btn btn-danger btn-sm'>Delete</a>
+                                        <a href='coursetype-edit.php?CategoryID={$row['CategoryID']}' class='btn btn-primary btn-sm'>Edit</a>
+                                        <a href='coursetype-delete.php?CategoryID={$row['CategoryID']}' class='btn btn-danger btn-sm'>Delete</a>
                                     </td>
                                 </tr>";
                     }
-                    ?>
-                   
-                </tbody>
-
-            </table>
-        </form>
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
