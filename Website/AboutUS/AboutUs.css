@@ -370,54 +370,6 @@ body section {
     font-size: 2rem;
 }
 
-footer {
-    width: 90%;
-    height: auto;
-    background-color: rgb(60, 60, 60);
-    padding: 5%;
-    display: flex;
-}
-
-.footer-container-left,
-.footer-container-right {
-    width: 30%;
-}
-
-.footer-container-left>p,
-.footer-container-right>p {
-    font: 1.7rem normal;
-    color: white;
-    margin: 1.5rem;
-    cursor: pointer;
-}
-
-.footer-container-right button {
-    border: 1px solid #f5f5f5;
-    background-color: transparent;
-    width: 10rem;
-}
-
-.footer-container-center {
-    flex: 3;
-    padding-top: 10rem;
-    display: flex;
-}
-
-.footer-container-center div {
-    margin: 1.5rem;
-    text-align: center;
-}
-
-.footer-container-center div i {
-    color: white;
-    cursor: pointer;
-}
-
-.footer-container-center div i p {
-    font: 2rem normal;
-    color: white;
-}
-
 @media all and (max-width: 768px){
     html {
         font-size: 9px;
@@ -574,16 +526,4 @@ footer {
     .student-evaluation-content{
         width: 75%;
     }
-
-    .footer-container-left,
-    .footer-container-right {
-        width: 30%;
-        text-align: center;
-    }
-
-    .footer-container-center {
-        flex-direction: column;
-        margin-top: -10%;
-    }
-
 }

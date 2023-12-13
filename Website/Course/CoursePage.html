@@ -7,6 +7,7 @@
     <title>Course</title>
     <link rel="stylesheet" type="text/css" href="CorusePage.css">
     <link rel="stylesheet" href="../icon/iconfont.css">
+    <link rel="stylesheet" href="../icon2/iconfont.css">
 </head>
 
 <body>
@@ -19,6 +20,9 @@
             </form>
             <a href="../MainPage/MainPage.php"><i class="iconfont icon-book1">
                     <p>Home</p>
+                </i></a>
+            <a href="../Course/CoursePage.html"><i class="iconfont icon-book1">
+                    <p>Course</p>
                 </i></a>
             <a href="../Quiz/QuizList.html"><i class="iconfont icon-shijuan">
                     <p>Quiz</p>
@@ -60,6 +64,7 @@
                 <li class="item">Category<span></span>
                     <ul>
                         <li onclick="window.location.href = '../MainPage/MainPage.php'">Home</li>
+                        <li onclick="window.location.href = '../Course/CoursePage.html'">Course</li>
                         <li onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</li>
                     </ul>
                 </li>
@@ -71,7 +76,6 @@
                         <li onclick="window.location.href = '../Lecturer/AboutTheTutor.html'">Our Lecturer</li>
                     </ul>
                 </li>
-
             </ul>
         </div>
         <script>
@@ -99,11 +103,13 @@
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
+            <i class="iconfont icon-youxiang" onclick="window.location.href='../Message/Message.html'"></i>
             <i class="iconfont icon-31gouwuchexuanzhong"
                 onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
         </div>
     </header>
+
     <section>
         <div class="progress-container">
             <div class="progress-bar" id="myBar"></div>
@@ -328,45 +334,7 @@
                 }
             </script>
     </section>
-    <footer>
-        <div class="footer-container-left">
-            <p onclick="window.location.href = '../AboutUS/AboutUs.html'">About US</p>
-            <p onclick="window.location.href = '../ContactUs/ContactUs.php'">Contact US</p>
-            <p>Term</p>
-            <p>Privacy Policy</p>
-            <p onclick="window.location.href = 'https://www.newera.edu.my/index.php'">New Era University College</p>
-        </div>
-        <div class="footer-container-center">
-            <div>
-                <i class="iconfont icon-instagram">
-                    <p>Instagram</p>
-                </i>
-            </div>
-            <div>
-                <i class="iconfont icon-facebook_facebook">
-                    <p>Facebook</p>
-                </i>
-            </div>
-            <div>
-                <i class="iconfont icon-whatsapp">
-                    <p>Whatsapp</p>
-                </i>
-            </div>
-            <div>
-                <i class="iconfont icon-wechat">
-                    <p>Wechat</p>
-                </i>
-            </div>
-        </div>
-        <div class="footer-container-right">
-            <p onclick="window.location.href = '../Course/CoursePage.html'">Course</p>
-            <p onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</p>
-            <p onclick="window.location.href = '../Lecturer/AboutTheTutor.html'">Lecturer</p>
-            <p>Help And Support</p>
-            <p>Copyright © 2021 New Era University College. All Rights Reserved.</p>
-        </div>
-
-    </footer>
+    <iframe src="../Footer.html" frameborder="0" width="100%" height="420px"></iframe>
 </body>
 
 </html>

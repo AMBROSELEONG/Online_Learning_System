@@ -1,5 +1,5 @@
 <?php
-    include 'find-user.php';
+include 'find-user.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,10 +10,11 @@
     <title>Contact Us</title>
     <link rel="stylesheet" type="text/css" href="ContactUs.css">
     <link rel="stylesheet" href="../icon/iconfont.css">
+    <link rel="stylesheet" href="../icon2/iconfont.css">
 </head>
 
 <body>
-    <header>
+<header>
         <div id="mySidepanel" class="sidepanel">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
             <form action="" id="search-bar-form">
@@ -34,6 +35,9 @@
                 </i></a>
             <a href="../UserProfile/UserProfile.php"><i class="iconfont icon-user">
                     <p>User Info</p>
+                </i></a>
+            <a href="../ContactUs/ContactUs.php"><i class="iconfont icon-dianhua">
+                    <p>Contact Us</p>
                 </i></a>
             <a href="../AboutUS/AboutUs.html"><i class="iconfont icon-guanyuwomen">
                     <p>About Us</p>
@@ -70,6 +74,7 @@
                 <li class="item">About<span></span>
                     <ul>
                         <li onclick="window.location.href = '../Comment/Comment.php'">Comment</li>
+                        <li onclick="window.location.href = '../ContactUs/ContactUs.php'">Contact Us</li>
                         <li onclick="window.location.href = '../AboutUS/AboutUs.html'">About Us</li>
                         <li onclick="window.location.href = '../Lecturer/AboutTheTutor.html'">Our Lecturer</li>
                     </ul>
@@ -101,11 +106,13 @@
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
+            <i class="iconfont icon-youxiang" onclick="window.location.href='../Message/Message.html'"></i>
             <i class="iconfont icon-31gouwuchexuanzhong"
                 onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
         </div>
     </header>
+
     <section>
         <div class="container">
 
@@ -114,15 +121,20 @@
             <div class="contactus">
                 <div class="contactus-form">
                     <form action="insert.php" method="post">
-                        <input type="hidden" name="UserID" id="UserID" value="<?php echo isset($userID) ? $userID : ''; ?>">
+                        <input type="hidden" name="UserID" id="UserID"
+                            value="<?php echo isset($userID) ? $userID : ''; ?>">
                         <p>Your name</p>
-                        <input class="form-name" name="UserName" placeholder="Name..." id="UserName" value="<?php echo isset($name) ? $name : ''; ?>"required/><br>
+                        <input class="form-name" name="UserName" placeholder="Name..." id="UserName"
+                            value="<?php echo isset($name) ? $name : ''; ?>" required /><br>
                         <p>Your phone number</p>
-                        <input class="form-phone" name="ContactNumber" placeholder="Phone..." id="ContactNumber" value="<?php echo isset($phone) ? $phone : ''; ?>"required/><br>
+                        <input class="form-phone" name="ContactNumber" placeholder="Phone..." id="ContactNumber"
+                            value="<?php echo isset($phone) ? $phone : ''; ?>" required /><br>
                         <p>Your email address</p>
-                        <input class="form-email" name="Email" placeholder="E-mail..." id="Email" value="<?php echo isset($email) ? $email : ''; ?>" required/><br>
+                        <input class="form-email" name="Email" placeholder="E-mail..." id="Email"
+                            value="<?php echo isset($email) ? $email : ''; ?>" required /><br>
                         <p>Your message</p>
-                        <textarea class="form-text" name="Message" placeholder="How can we help you?" id="Message" required></textarea><br>
+                        <textarea class="form-text" name="Message" placeholder="How can we help you?" id="Message"
+                            required></textarea><br>
                         <input type="hidden" name="replyStatus" value="Waiting Reply">
                         <input class="btn-send" type="submit" value="Send" /><br><br>
                     </form>
@@ -157,44 +169,7 @@
             </div>
         </div>
     </section>
-    <footer>
-        <div class="footer-container-left">
-            <p onclick="window.location.href = '../AboutUS/AboutUs.html'">About US</p>
-            <p onclick="window.location.href = '../ContactUs/ContactUs.html'">Contact US</p>
-            <p>Term</p>
-            <p>Privacy Policy</p>
-            <p onclick="window.location.href = 'https://www.newera.edu.my/index.php'">New Era University College</p>
-        </div>
-        <div class="footer-container-center">
-            <div>
-                <i class="iconfont icon-instagram">
-                    <p>Instagram</p>
-                </i>
-            </div>
-            <div>
-                <i class="iconfont icon-facebook_facebook">
-                    <p>Facebook</p>
-                </i>
-            </div>
-            <div>
-                <i class="iconfont icon-whatsapp">
-                    <p>Whatsapp</p>
-                </i>
-            </div>
-            <div>
-                <i class="iconfont icon-wechat">
-                    <p>Wechat</p>
-                </i>
-            </div>
-        </div>
-        <div class="footer-container-right">
-            <p onclick="window.location.href = '../Course/CoursePage.html'">Course</p>
-            <p onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</p>
-            <p onclick="window.location.href = '../Lecturer/AboutTheTutor.html'">Lecturer</p>
-            <p>Help And Support</p>
-            <p>Copyright © 2021 New Era University College. All Rights Reserved.</p>
-        </div>
-    </footer>
+    <iframe src="../Footer.html" frameborder="0" width="100%" height="420px"></iframe>
 </body>
 
 </html>
