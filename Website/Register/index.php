@@ -1,30 +1,27 @@
 <?php
-// 引入注册表单页面
 include 'RegisterForm.php';
-// 连接数据库
 include '../ConnectDB.php';
-// 验证用户输入的信息
+// Function to verify the input data
 function verify($username, $password, $email, $contactnumber)
 {
     $errors = array(); 
 
-    // 检查用户输入的信息是否为空
+    // Check if all fields are filled
     if (empty($username) || empty($password) || empty($email) || empty($contactnumber)) {
         $errors[] = "Please fill in all fields.";
     }
 
-
-    // 检查两次输入的密码是否一致
+    // Check if password and repeat password match
     if ($password !== $_POST["repeatpassword"]) {
         $errors[] = "Password and Repeat Password do not match.";
     }
 
-    // 检查输入的邮箱是否有效
+    // Check if email is valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Please enter a valid email address.";
     }
 
-    // 检查输入的电话号码是否有效
+    // Check if contact number is valid
     if (!preg_match("/^(01[0-9])?\d{7,8}$/", $contactnumber)) {
         $errors[] = "Please enter a valid 10-digit phone number.";
     }
@@ -32,25 +29,25 @@ function verify($username, $password, $email, $contactnumber)
     return $errors; 
 }
 
-// 判断请求方式
+// Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // 获取用户输入的信息
+    // Get the input data from the form
     $username = $_POST['UserName'];
     $password = $_POST['Password'];
     $email = $_POST['Email'];
     $contactnumber = $_POST['ContactNumber'];
 
-    // 验证用户输入的信息
+    // Call the function to verify the input data
     $errors = verify($username, $password, $email, $contactnumber); // Call the function and store the errors
 
-    // 向数据库中插入用户信息
+    // Insert the data into the database
     $insert = "INSERT INTO users(UserName, PasswordHash, Email, ContactNumber) VALUES (?, ?, ?, ?)";
     $stm = $conn->prepare($insert);
     $stm->bind_param("ssss", $username, $password, $email, $contactnumber);
 
-    // 执行插入操作
+    // Execute the query
     if ($stm->execute()) {
-        // 注册成功，弹出提示框，并跳转到登录页面
+        // Show success message
         echo "<script>
                 Swal.fire({
                     title: 'Success!',
@@ -61,15 +58,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 });
             </script>";
     } else {
-        // 注册失败，弹出错误信息
+        // Show error message
         echo "Error: " . $stm->error;
     }
 
-    // 关闭数据库连接
+    // Close the statement
     $stm->close();
+    // Close the connection
     $conn->close();
 } else {
-    // 检查输入的信息是否有效
+    // Show error messages if the request method is not POST
     foreach ($errors as $error) {
         echo "<script>
                 Swal.fire({

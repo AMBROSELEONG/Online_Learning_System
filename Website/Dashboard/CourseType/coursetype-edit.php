@@ -1,66 +1,67 @@
 <?php
-// 连接数据库
+//include the database connection file
 include '../../ConnectDB.php';
-// 定义变量
+//declare variables to store the id and name of the category
 $id = "";
 $name = "";
+//declare a variable to store any errors
 $error = "";
+//declare a variable to store any successes
 $success = "";
-// 判断请求方式
+//check if the request method is a GET request
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    // 判断是否有CategoryID参数
+    //check if the category id is set
     if (!isset($_GET['CategoryID'])) {
-        // 如果没有，跳转到CourseType.php
+        //if not, redirect to the CourseType.php page
         header("location: CourseType.php");
         exit;
     }
-    // 获取CategoryID参数
+    //store the category id
     $id = $_GET['CategoryID'];
 
-    // 查询数据库
+    //query the database to get the category name
     $sql = "SELECT * FROM coursecategory WHERE CategoryID=$id";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
-    // 判断查询结果
+    //check if the query returned a result
     if (!$row) {
-        // 如果没有，跳转到CourseType.php
+        //if not, redirect to the CourseType.php page
         header("location: CourseType.php");
         exit;
     }
 
-    // 获取查询结果
+    //store the category name
     $name = $row['CategoryName'];
 
 } else {
-    // 获取表单数据
+    //store the id and name from the POST request
     $id = $_POST['id'];
     $name = $_POST['name'];
 
-    // 循环执行
+    //loop until the query is successful
     do {
-        // 判断是否有必填字段
+        //check if the id and name are empty
         if (empty($id) || empty($name)) {
-            // 如果没有，设置错误信息
+            //if so, set the error message
             $error = "All the fields are required";
             break;
         }
-        // 更新数据库
+        //update the category name in the database
         $sql = "UPDATE coursecategory SET CategoryName='$name' WHERE CategoryID=$id";
         $result = $conn->query($sql);
-
-        // 判断更新结果
+        //check if the query was successful
         if (!$result) {
-            // 如果没有，设置错误信息
+            //if not, set the error message
             $error = "Invalid query: " . $conn->error;
             break;
         }
 
-        // 设置更新成功信息
+        //if successful, set the success message
         $success = "Category Updated Successfully";
 
-        // 跳转到CourseType.php
+        //redirect to the CourseType.php page
         header("location: CourseType.php");
         exit;
     } while (false);
@@ -82,9 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <h2>Edit Course Category</h2>
 
         <?php
-        // 判断是否有错误信息
+        // Check if there is an error message
         if (!empty($error)) {
-            // 如果有，显示错误信息
+            // Display an alert message with the error message
             echo "
                 <div class ='alert alert-warning alert-dismissible fade show' role='alert'>
                     <strong>$error</strong>
@@ -102,9 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </div>
 
             <?php
-            // 判断是否有更新成功信息
             if (!empty($success)) {
-                // 如果有，显示更新成功信息
                 echo "
                 <div class ='alert alert-warning alert-dismissible fade show' role='alert'>
                     <strong>$success</strong>

@@ -1,12 +1,12 @@
 <?php
-// 开始会话
+// Start the session
 session_start();
-// 检查是否有UserID
+// Check if the user is logged in by checking if the UserID session variable is set
 if (isset($_SESSION['UserID'])) {
-    // 如果有，则获取UserID
+    // If the UserID session variable is set, store it in the $userID variable
     $userID = $_SESSION['UserID'];
 } else {
-    // 如果没有，则跳转到登录页面
+    // If the UserID session variable is not set, redirect the user to the login page
     header("location: ../Login/Login.php");
     exit();
 }

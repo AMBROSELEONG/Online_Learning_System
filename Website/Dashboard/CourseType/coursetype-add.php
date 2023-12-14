@@ -1,33 +1,46 @@
 <?php
 include '../../ConnectDB.php';
+//Declare variables to store the name, error, and success messages
 $name = "";
 $error = "";
 $success = "";
+//Check if the request method is a POST request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //Store the name from the POST request in the $name variable
     $name = $_POST['name'];
 
+    //Loop until the name is valid
     do {
+        //Check if the name is empty
         if (empty($name)) {
+            //If empty, set the error message and break out of the loop
             $error = "Please enter a Category Name";
             break;
         }
 
+        //Create an SQL query to insert the name into the coursecategory table
         $sql = "INSERT INTO coursecategory(CategoryName) VALUES ('$name')";
+        //Execute the query
         $result = $conn->query($sql);
 
+        //Check if the query was successful
         if (!$result) {
+            //If not, set the error message and break out of the loop
             $error = "Invalid query: " . $conn->error;
             break;
         }
 
+        //Set the name and success messages
         $name = "";
         $success = "Category Added Successfully";
 
+        //Redirect the user to the CourseType.php page
         header("location: CourseType.php");
         exit;
 
     } while (false);
 }
+//Display the page with the error, success, and name messages
 ?>
 <!DOCTYPE html>
 <html lang="en">

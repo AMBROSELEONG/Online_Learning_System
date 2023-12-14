@@ -192,27 +192,29 @@
         </div>
     </div>
 
-    <script>
+   <script>
+        // Get the modal and the start and cancel buttons
         var modal = document.getElementById('quizModal');
         var startButton = document.getElementById('startQuizButton');
         var cancelButton = document.getElementById('cancelQuizButton');
 
+        // Open the modal when the start button is clicked
         function openModal() {
             modal.style.display = 'block';
         }
 
+        // Close the modal when the cancel button is clicked
         function closeModal() {
             modal.style.display = 'none';
         }
 
+        // Add an event listener to the start button to close the modal when clicked
         startButton.addEventListener('click', function () {
-            // 在这里添加处理“开始测试”的逻辑
-            // 例如：window.location.href = 'quiz.html';
             closeModal();
         });
 
+        // Add an event listener to the cancel button to close the modal when clicked
         cancelButton.addEventListener('click', function () {
-            // 在这里添加处理“取消”的逻辑
             closeModal();
         });
     </script>

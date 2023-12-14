@@ -1,67 +1,86 @@
 <?php
-// 包含数据库连接文件
+//include the connection to the database
 include '../ConnectDB.php';
-// 包含会话文件
+//include the session class
 include '../Session.php';
 
-// 从数据库中获取用户图片
+//prepare the statement to select the user image
 $getUserImage = $conn->prepare("SELECT UserImage FROM userresume WHERE UserID = ?");
+//bind the userID to the statement
 $getUserImage->bind_param("i", $userID);
+//execute the statement
 $getUserImage->execute();
+//store the result of the statement
 $getUserImage->store_result();
 
+//check if the statement returns a result
 if ($getUserImage->num_rows > 0) {
-    // 找到与 UserID 关联的 UserImage 数据
+    //bind the result to the userImage variable
     $getUserImage->bind_result($userImage);
+    //fetch the result
     $getUserImage->fetch();
 
-    // 在这里使用 $userImage 变量来展示用户图片
+    //echo the user image
     echo '<img src="' . $userImage . '" alt="User Image" class="user-img">';
 } else {
+    //echo an error message if no result is found
     echo "No UserImage found for the given UserID.";
 }
 
+//check if the save button is pressed
 if (isset($_POST['save'])) {
-    // 从表单获取数据
+    //store the values of the form in variables
     $experience = isset($_POST['Experience']) ? $_POST['Experience'] : '';
     $education = isset($_POST['Education']) ? $_POST['Education'] : '';
     $skillset = isset($_POST['Skillset']) ? $_POST['Skillset'] : '';
     $language = isset($_POST['Language']) ? $_POST['Language'] : '';
 
+    //check if all the values are not empty
     if ($experience != '' && $education != '' && $skillset != '' && $language != '') {
-        // 检查用户是否存在
+        //prepare the statement to check if the userID exists
         $checkUser = $conn->prepare("SELECT UserID FROM userresume WHERE UserID = ?");
+        //bind the userID to the statement
         $checkUser->bind_param("i", $userID);
+        //execute the statement
         $checkUser->execute();
+        //store the result of the statement
         $checkUser->store_result();
 
+        //check if the userID exists
         if ($checkUser->num_rows == 0) {
-            // 如果用户存在，则插入用户数据
+            //prepare the statement to insert the data
             $stmt = $conn->prepare("INSERT INTO userresume (UserID, Experience, Education, Skill, Language_) VALUES (?, ?, ?, ?, ?)");
+            //bind the values to the statement
             $stmt->bind_param("issss", $userID, $experience, $education, $skillset, $language);
+            //set the action to inserted
             $action = 'inserted';
         } else {
-            // 如果用户不存在，则更新用户数据
+            //prepare the statement to update the data
             $stmt = $conn->prepare("UPDATE userresume SET Experience = ?, Education = ?, Skill = ?, Language_ = ? WHERE UserID = ?");
+            //bind the values to the statement
             $stmt->bind_param("ssssi", $experience, $education, $skillset, $language, $userID);
+            //set the action to updated
             $action = 'updated';
         }
 
+        //execute the statement
         if ($stmt->execute()) {
-            // 如果执行成功，则显示成功消息
+            //echo a success message
             echo "<script>alert('Record $action successfully!'); window.location.href = 'UserResume.php';</script>";
         } else {
-            // 如果执行失败，则显示错误消息
+            //echo an error message
             echo "<script>alert('Record $stmt->error!'); window.location.href = 'UserResume.php';</script>";
         }
-        // 关闭语句
+        //close the statement
         $stmt->close();
     } else {
-        // 如果没有要保存的数据，则显示错误消息
+        //echo an error message if no data is entered
         echo "<script>alert('No data to save!'); window.location.href = 'UserResume.php';</script>";
     }
+} else {
+    //echo an error message if the save button is not pressed
+    echo "<script>alert('No data to save!'); window.location.href = 'UserResume.php';</script>";
 }
-
-// 关闭连接
+//close the connection to the database
 $conn->close();
 ?>

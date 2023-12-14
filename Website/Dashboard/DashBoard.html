@@ -74,13 +74,17 @@
     </div>
 </body>
 <script>
-    // 在页面加载完毕后，获取 iframe 中加载的页面的标题
     window.onload = function () {
+        // Get the iframe element by its name
         var iframe = document.getElementsByName('content')[0];
+        // Set the onload event handler for the iframe
         iframe.onload = function () {
-            var pageTitle = iframe.contentDocument.title; // 获取 iframe 中加载的页面标题
-            var helloTitle = document.querySelector('.card h1'); // 获取 Hello 的标题元素
-            helloTitle.innerText = pageTitle; // 将 iframe 页面标题设置为 Hello 的内容
+            // Get the title of the page in the iframe
+            var pageTitle = iframe.contentDocument.title; 
+            // Get the h1 element with the class 'card'
+            var helloTitle = document.querySelector('.card h1'); 
+            // Set the inner text of the h1 element to the page title
+            helloTitle.innerText = pageTitle; 
         };
     };
 

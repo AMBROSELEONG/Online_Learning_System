@@ -24,7 +24,7 @@ include 'find-index.php';
     </div>
     <img src="<?php echo $image; ?>" alt="User Image" class="user-img">
     <div class="container-lower">
-        <input type="" style="display: none;"> <!--不显示，单纯占地-->
+        <input type="" style="display: none;"> 
         <button class="edit-profile"
             onclick="document.getElementById('id01').style.display='block'; document.getElementById('fileInput').click()">Edit
             Profile</button>
@@ -95,22 +95,22 @@ include 'find-index.php';
 </div>
 
 <script>
-    // 当文件发生变化时，触发函数
+    //This function is used to change the image when a new file is selected
     function fileChange(input) {
-        // 判断是否有文件存在
+        //Check if the file exists and if it is the first file
         if (input.files && input.files[0]) {
-            // 创建文件读取对象
+            //Create a new FileReader object
             var reader = new FileReader();
 
-            // 当文件读取完毕时，触发回调函数
+            //Set the onload event handler
             reader.onload = function (e) {
-                // 获取图片元素
+                //Get the element with the id of img-show
                 var imgShow = document.getElementById('img-show');
-                // 将文件内容赋值给图片元素
+                //Set the src attribute of the img-show element to the result of the reader.readAsDataURL method
                 imgShow.src = e.target.result;
             };
 
-            // 读取文件内容
+            //Read the file as a Data URL
             reader.readAsDataURL(input.files[0]);
         }
     }

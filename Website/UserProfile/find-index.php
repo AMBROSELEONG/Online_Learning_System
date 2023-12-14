@@ -1,32 +1,33 @@
 <?php
-// 连接数据库
+//include the database connection file
 include '../ConnectDB.php';
-// 获取用户会话
+//include the session file
 include '../Session.php';
 
-// 查询数据库中指定用户ID的用户信息
+//create a SQL query to select the user profile information from the database
 $sql = "SELECT * FROM userprofile WHERE UserID = $userID";
 
-// 执行查询
+//execute the query and store the result in the $result variable
 $result = $conn->query($sql);
 
-// 检查查询是否失败
+//if the query fails, print an error message
 if ($result === false) {
     echo "Error: " . $conn->error;
+//if the query succeeds, check if there is a result
 } else {
-    // 检查查询结果是否为空
     if ($result->num_rows > 0) {
 
-        // 获取查询结果
+        //store the result in the $row variable
         $row = $result->fetch_assoc();
+        //store the image, username, collegename, gmail, phone, and about variables
         $image = $row['UserImage'];
         $username = $row['UserName'];
         $collegename = $row['CollegeName'];
         $gmail = $row['Email'];
         $phone = $row['Phone'];
         $about = $row['About'];
+    //if there is no result, set the username, collegename, gmail, phone, and about variables to "None"
     } else {
-        // 查询结果为空，设置用户信息为空
         $username = "None";
         $collegename = "None";
         $gmail = "None";
@@ -35,6 +36,6 @@ if ($result === false) {
     }
 }
 
-// 关闭数据库连接
+//close the database connection
 $conn->close();
 ?>

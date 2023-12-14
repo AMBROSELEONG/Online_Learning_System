@@ -1,47 +1,61 @@
 <?php
 include '../../ConnectDB.php';
+//Declare variables
 $id = "";
 $name = "";
 $error = "";
 $success = "";
+//Check if request method is GET
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
+    //Check if CategoryID is set in the GET request
     if (!isset($_GET['CategoryID'])) {
         header("location: QuizType.php");
         exit;
     }
+    //Set the id to the value of CategoryID
     $id = $_GET['CategoryID'];
 
+    //Query the database for the category name
     $sql = "SELECT * FROM quizcategory WHERE CategoryID=$id";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
+    //Check if the row is empty
     if (!$row) {
         header("location: QuizType.php");
         exit;
     }
 
+    //Set the name to the value of the row
     $name = $row['CategoryName'];
 
 } else {
+    //Set the id and name to the values of the POST request
     $id = $_POST['id'];
     $name = $_POST['name'];
 
+    //Loop until the query is successful
     do {
+        //Check if the id and name are empty
         if (empty($id) || empty($name)) {
             $error = "All the fields are required";
             break;
         }
+        //Update the database with the new name
         $sql = "UPDATE quizcategory SET CategoryName='$name' WHERE CategoryID=$id";
         $result = $conn->query($sql);
 
+        //Check if the query was successful
         if (!$result) {
             $error = "Invalid query: " . $conn->error;
             break;
         }
 
+        //Set the success message
         $success = "Category Updated Successfully";
 
+        //Redirect to the QuizType page
         header("location: QuizType.php");
         exit;
     } while (false);
@@ -81,7 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </div>
 
             <?php
+            // Check if the success variable is not empty
             if (!empty($success)) {
+                // Display an alert message with the success message
                 echo "
                 <div class ='alert alert-warning alert-dismissible fade show' role='alert'>
                     <strong>$success</strong>

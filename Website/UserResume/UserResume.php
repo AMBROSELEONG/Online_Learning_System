@@ -83,7 +83,7 @@ include 'find-index.php';
                     <input type="text" placeholder="Enter Your Professional Skillset" name="Skillset" id="Skillset"
                         value="<?php echo $skillset; ?>">
 
-                    <label for="Language"><b>Language  (Branch via '/'. Example - a/b)</b></label>
+                    <label for="Language"><b>Language (Branch via '/'. Example - a/b)</b></label>
                     <input type="text" placeholder="Enter Your Language" name="Language" id="Language"
                         value="<?php echo $language; ?>">
 
@@ -94,14 +94,19 @@ include 'find-index.php';
         </div>
     </div>
     <script>
+        // This function creates a list of items from an input field and appends them to a list element
         function createListItems(inputId, listId) {
+            // Get the input and list elements from the DOM
             const input = document.getElementById(inputId);
             const list = document.getElementById(listId);
 
+            // Add an event listener to the input field that will run a function when the input is changed
             input.addEventListener('input', function () {
-                const values = input.value.split(',');
-                list.innerHTML = ''; 
+                // Get the values from the input field, split them into an array and trim any whitespace
+                const values = input.value.split('/');
+                list.innerHTML = '';
 
+                // Loop through each value and append it to the list element if it is not empty
                 values.forEach(value => {
                     const trimmedValue = value.trim();
                     if (trimmedValue !== '') {
@@ -113,9 +118,9 @@ include 'find-index.php';
             });
         }
 
-        // 创建技能列表
+        // Call the function to create a list of items from the skillset input and append them to the skillset list
         createListItems('skillsetInput', 'skillsetList');
-        // 创建语言列表
+        // Call the function to create a list of items from the language input and append them to the language list
         createListItems('languageInput', 'languageList');
     </script>
 </body>

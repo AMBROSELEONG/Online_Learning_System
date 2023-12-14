@@ -33,20 +33,30 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
+               <?php
+                //include the connection to the database
                 include '../../ConnectDB.php';
 
+                //check if the search query is set
                 if (isset($_GET['search'])) {
+                    //store the value of the search query in a variable
                     $filterValue = $_GET['search'];
+                    //create a query to search for the course based on the filter value
                     $query = "SELECT * FROM course WHERE CourseID LIKE '%$filterValue%' OR CourseName LIKE '%$filterValue%' OR CoursePrice LIKE '%$filterValue%' OR CategoryName LIKE '%$filterValue%'";
+                    //execute the query
                     $result = $conn->query($query);
 
+                    //check if the query is valid
                     if (!$result) {
+                        //if not, throw an error
                         die("Invalid query" . $conn->error);
                     }
 
+                    //check if the query returns any results
                     if ($result->num_rows > 0) {
+                        //if yes, loop through the results
                         while ($row = $result->fetch_assoc()) {
+                            //echo the results in a table format
                             echo "<tr>
                                         <td>{$row['CourseID']}</td>
                                         <td>{$row['CourseImage']}</td>
@@ -60,17 +70,23 @@
                                     </tr>";
                         }
                     } else {
+                        //if no, echo a message
                         echo "<tr><td colspan='6'>No Record Found</td></tr>";
                     }
                 } else {
+                    //if the search query is not set, execute the following query
                     $sql = "SELECT * FROM course";
                     $result = $conn->query($sql);
 
+                    //check if the query is valid
                     if (!$result) {
+                        //if not, throw an error
                         die("Invalid query" . $conn->error);
                     }
 
+                    //check if the query returns any results
                     while ($row = $result->fetch_assoc()) {
+                        //echo the results in a table format
                         echo "<tr>
                                     <td>{$row['CourseID']}</td>
                                     <td>{$row['CourseImage']}</td>

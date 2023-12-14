@@ -11,23 +11,31 @@ $CategoryName = "";
 $error = "";
 $success = "";
 
+//check if the request method is a GET request
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //check if the course id is set
     if (!isset($_GET['CourseID'])) {
+        //if the course id is not set, redirect to the course page
         header("Location: Course.php");
         exit;
     }
 
+    //store the course id in the id variable
     $id = $_GET['CourseID'];
 
+    //query the database to get the course information
     $sql = "SELECT * FROM course WHERE CourseID = '$id'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
+    //check if the course information is returned
     if (!$row) {
+        //if the course information is not returned, redirect to the course page
         header("Location: Course.php");
         exit;
     }
 
+    //store the course information in the corresponding variables
     $CourseID = $row['CourseID'];
 
     $CourseImage = $row['CourseImage'];
@@ -37,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $CategoryName = $row['CategoryName'];
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
+    //store the file name in the Filename variable
     $Filename = $_FILES['CourseImage']['name'];
     //check if the file has been uploaded successfully
     if (
@@ -50,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         //if the file has not been uploaded successfully, store an error message in the error variable
         $error = "File could not be uploaded";
     }
+    //store the course information in the corresponding variables
     $CourseID = $_POST['CourseID'];
     $CourseName = $_POST['CourseName'];
     $CoursePrice = $_POST['CoursePrice'];
@@ -57,23 +67,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $CategoryName = $_POST['CategoryName'];
 
     do {
+        //check if any of the course information is empty
         if (empty($CourseID) || empty($CourseName) || empty($CoursePrice) || empty($CategoryID) || empty($CategoryName) || empty($CourseImage)) {
+            //if any of the course information is empty, store an error message in the error variable
             $error = "Please fill in all fields";
             break;
         }
+        //update the course information in the database
         $sql = "UPDATE course SET CourseImage = '$CourseImage', CourseName = '$CourseName', CoursePrice = '$CoursePrice', CategoryID = '$CategoryID', CategoryName = '$CategoryName' WHERE CourseID = '$CourseID'";
         $result = $conn->query($sql);
         if (!$result) {
+            //if the query fails, store an error message in the error variable
             $error = "Error updating record: " . $conn->error;
             break;
         }
+        //if the query is successful, store a success message in the success variable
         $success = "Course updated successfully";
+        //redirect to the course page
         header("location: Course.php");
         exit;
     } while (false);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -113,17 +128,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <label class="col-sm-3 col-form-label">Category Name</label>
                 <div class="col-sm-6">
                     <select type="text" class="form-control" name="CategoryID" id="CategoryID">
-                        <?php
+                       <?php
+                        //Create a query to select all the categories from the coursecategory table
                         $query1 = "SELECT CategoryID, CategoryName FROM coursecategory";
+                        //Execute the query and store the result in the $result1 variable
                         $result1 = mysqli_query($conn, $query1);
 
+                        //Check if the query was successful
                         if ($result1) {
+                            //Loop through the result set
                             while ($row = mysqli_fetch_assoc($result1)) {
+                                //Store the category ID and name in the $Category_ID and $Category_Name variables respectively
                                 $Category_ID = $row['CategoryID'];
                                 $Category_Name = $row['CategoryName'];
+                                //Echo an option element with the category ID and name as the value and text respectively
                                 echo "<option class='form-control' value='$Category_ID'>$Category_Name</option>";
                             }
                         } else {
+                            //Echo an option element with the text "No Category Found"
                             echo "<option class='form-control' value='0'>No Category Found</option>";
                         }
                         ?>
@@ -133,11 +155,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </div>
 
             <script>
+                //This code is used to select an option from the dropdown menu and display the selected option in the textbox
                 document.getElementById('CategoryID').addEventListener('change', function () {
+                    //Get the selected index of the dropdown menu
                     var selectedIndex = this.selectedIndex;
+                    //Get the selected option from the dropdown menu
                     var selectedOption = this.options[selectedIndex];
+                    //Get the text of the selected option
                     var categoryName = selectedOption.text;
 
+                    //Display the selected option in the textbox
                     document.getElementById('CategoryName').value = categoryName;
                 });
             </script>

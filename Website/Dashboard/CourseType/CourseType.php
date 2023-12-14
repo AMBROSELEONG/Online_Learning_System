@@ -34,17 +34,24 @@
                 <?php
                 include '../../ConnectDB.php';
 
-                // 判断是否有搜索值
+                // Check if the search parameter is set
                 if (isset($_GET['search'])) {
+                    // Get the filter value from the URL
                     $filterValue = $_GET['search'];
+                    // Create a query to search for the filter value in the CategoryID and CategoryName columns
                     $query = "SELECT * FROM coursecategory WHERE CategoryID LIKE '%$filterValue%' OR CategoryName LIKE '%$filterValue%'";
+                    // Execute the query
                     $result = $conn->query($query);
 
+                    // Check if the query was successful
                     if (!$result) {
+                        // If not, print an error message
                         die("Invalid query" . $conn->error);
                     }
 
+                    // Check if there are any results
                     if ($result->num_rows > 0) {
+                        // If yes, loop through the results and print them
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>
                                         <td>{$row['CategoryID']}</td>
@@ -56,18 +63,23 @@
                                     </tr>";
                         }
                     } else {
+                        // If no, print a message
                         echo "<tr><td colspan='3'>No Record Found</td></tr>";
                     }
                 } else {
-                    // 查询所有类别
+                    // If the search parameter is not set, execute the following query
                     $sql = "SELECT * FROM coursecategory";
                     $result = $conn->query($sql);
 
+                    // Check if the query was successful
                     if (!$result) {
+                        // If not, print an error message
                         die("Invalid query" . $conn->error);
                     }
 
+                    // Check if there are any results
                     while ($row = $result->fetch_assoc()) {
+                        // If yes, print them
                         echo "<tr>
                                     <td>{$row['CategoryID']}</td>
                                     <td>{$row['CategoryName']}</td>

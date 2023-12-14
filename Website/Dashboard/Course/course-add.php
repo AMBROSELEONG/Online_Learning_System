@@ -87,16 +87,22 @@ if (isset($_POST['AddCourse'])) {
                 <div class="col-sm-6">
                     <select type="text" class="form-control" name="CategoryID" id="CategoryID">
                         <?php
+                        // Get all the category from the coursecategory table
                         $query1 = "SELECT CategoryID, CategoryName FROM coursecategory";
                         $result1 = mysqli_query($conn, $query1);
 
+                        // Check if the query was successful
                         if ($result1) {
+                            // Loop through the result and display the options
                             while ($row = mysqli_fetch_assoc($result1)) {
+                                // Get the category ID and name from the result
                                 $Category_ID = $row['CategoryID'];
                                 $Category_Name = $row['CategoryName'];
+                                // Display the option
                                 echo "<option class='form-control' value='$Category_ID'>$Category_Name</option>";
                             }
                         } else {
+                            // Display a message if no category was found
                             echo "<option class='form-control' value='0'>No Category Found</option>";
                         }
                         ?>
@@ -106,11 +112,16 @@ if (isset($_POST['AddCourse'])) {
             </div>
 
             <script>
+                //This code adds an event listener to the 'CategoryID' element, which will be triggered when the user selects an option from the dropdown menu. 
                 document.getElementById('CategoryID').addEventListener('change', function () {
+                    //This variable stores the index of the selected option.
                     var selectedIndex = this.selectedIndex;
+                    //This variable stores the selected option.
                     var selectedOption = this.options[selectedIndex];
+                    //This variable stores the text of the selected option.
                     var categoryName = selectedOption.text;
 
+                    //This line sets the value of the 'CategoryName' element to the value of the 'categoryName' variable.
                     document.getElementById('CategoryName').value = categoryName;
                 });
             </script>

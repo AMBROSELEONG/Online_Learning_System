@@ -2,38 +2,38 @@
 include '../ConnectDB.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 获取表单数据
+    // Get the username and email from the form
     $username = $_POST['username'];
     $email = $_POST['email'];
-    // 转义字符串
+    // Escape the username and email to prevent SQL injections
     $username = mysqli_real_escape_string($conn, $username);
     $email = mysqli_real_escape_string($conn, $email);
 
-    // 查询数据库
+    // Query the database to check if the username and email exist
     $sql = "SELECT * FROM users WHERE Email = '$email' AND UserName = '$username'";
     $result = $conn->query($sql);
 
     if ($result) {
-        // 判断查询结果
+        // Check if the username and email exist in the database
         if ($result->num_rows == 1) {   
-            // 设置session
+            // Start the session and store the username and email in the session
             session_start();
             $_SESSION["Email"] = $email;
             $_SESSION["UserName"] = $username;
-            // 重定向
+            // Redirect the user to the ResetPassword page
             header("location: ResetPassword.php");
             exit();
         } else {
-            // 错误信息
+            // Store an error message in the session if the username and email don't exist
             $_SESSION["error_message"] = "Wrong email";
-            // 弹出错误信息
+            // Display an error message to the user
             echo "<script type='text/javascript'> alert('Wrong email'); window.location.href = 'ForgetPassword.php';</script>";
             exit();
         }
     } else {
-        // 错误信息
+        // Store an error message in the session if there was an error querying the database
         $_SESSION["error_message"] = "Error: " . $conn->error;
-        // 重定向
+        // Redirect the user to the ForgetPassword page
         header("location: ForgetPassword.php");
         exit();
     }

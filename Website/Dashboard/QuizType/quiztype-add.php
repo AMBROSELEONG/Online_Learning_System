@@ -1,33 +1,46 @@
 <?php
 include '../../ConnectDB.php';
+//Declare variables to store the name, error, and success messages
 $name = "";
 $error = "";
 $success = "";
+//Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //Store the name from the POST request in the $name variable
     $name = $_POST['name'];
 
+    //Loop until the name is valid
     do {
+        //Check if the name is empty
         if (empty($name)) {
+            //If empty, set the error message and break out of the loop
             $error = "Please enter a Category Name";
             break;
         }
 
+        //Create an SQL query to insert the name into the database
         $sql = "INSERT INTO quizcategory(CategoryName) VALUES ('$name')";
+        //Execute the query
         $result = $conn->query($sql);
 
+        //Check if the query was successful
         if (!$result) {
+            //If not, set the error message and break out of the loop
             $error = "Invalid query: " . $conn->error;
             break;
         }
 
+        //Reset the name and success messages
         $name = "";
         $success = "Category Added Successfully";
 
+        //Redirect the user to the QuizType.php page
         header("location: QuizType.php");
         exit;
 
     } while (false);
 }
+//Display the page with the error, success, and name messages
 ?>
 <!DOCTYPE html>
 <html lang="en">

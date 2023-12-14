@@ -32,16 +32,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
+                   <?php
+                    //include the connection to the database
                     include '../../ConnectDB.php';
 
+                    //create a sql query to select all data from the contact table
                     $sql = "SELECT * FROM contact";
+                    //execute the query and store the result in a variable
                     $result = $conn->query($sql);
 
+                    //if the query fails, print an error message
                     if (!$result) {
                         die("Invalid query" . $conn->$error);
                     }
 
+                    //loop through the result and echo the data into a table
                     while ($row = $result->fetch_assoc()) {
                         echo " <tr>
                                     <td>$row[ContactID]</td>

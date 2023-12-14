@@ -1,7 +1,8 @@
 <?php
+//include the ConnectDB.php file to connect to the database
 include '../../ConnectDB.php';
 
-// 获取URL中的参数
+//set the variables to empty strings
 $ContactID = $_GET['ContactID'] ?? '';
 $UserID = '';
 $UserName = '';
@@ -13,36 +14,39 @@ $replyMessage = '';
 $error = '';
 $success = '';
 
-// 判断请求方法
+//if the request method is GET
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // 检查ContactID是否为空
+    //if the ContactID is not empty
     if (!empty($ContactID)) {
-        // 查询Contact表中的数据
+        //query the database for the contact information
         $sql = "SELECT * FROM Contact WHERE ContactID = '$ContactID'";
         $result = $conn->query($sql);
 
 
-        // 如果查询到数据，则将查询到的数据赋值给对应的变量
+        //if the query returns a result
         if ($result && $result->num_rows > 0) {
+            //fetch the result
             $row = $result->fetch_assoc();
+            //set the variables to the values from the database
             $UserID = $row['UserID'] ?? '';
             $UserName = $row['UserName'] ?? '';
             $UserPhone = $row['ContactNumber'] ?? '';
             $UserEmail = $row['Email'] ?? '';
             $Message = $row['Message'] ?? '';
         } else {
-            // 如果没有查询到数据，则跳转到Contact.php页面
+            //if the query returns no result, redirect to the Contact.php page
             header("location: Contact.php");
             exit;
         }
     } else {
-        // 如果ContactID为空，则跳转到Contact.php页面
+        //if the ContactID is empty, redirect to the Contact.php page
         header("location: Contact.php");
         exit;
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // 获取表单中的数据
+    //if the request method is POST
     if (!empty($_POST['ContactID']) && !empty($_POST['UserID']) && !empty($_POST['UserName']) && !empty($_POST['ContactNumber']) && !empty($_POST['Email']) && !empty($_POST['Message']) && !empty($_POST['replyMessage'])) {
+        //set the variables to the values from the POST request
         $ContactID = $_POST['ContactID'];
         $UserID = $_POST['UserID'];
         $UserName = $_POST['UserName'];
@@ -51,26 +55,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $Title = $_POST['Title'];
         $Message = $_POST['Message'];
         $replyMessage = $_POST['replyMessage'];
+        //set the post time to the current time
         $post_time = date('Y-m-d H:i:s');
 
+        //insert the reply into the email table
         $insertReplyQuery = "INSERT INTO email (UserID, UserName, ContactNumber, Email, Title, Message, ReplyMessage, ReplyDate) VALUES ('$UserID', '$UserName', '$UserPhone', '$UserEmail', '$Title','$Message', '$replyMessage','$post_time')";
         $insertReplyResult = $conn->query($insertReplyQuery);
 
+        //if the insertion is successful
         if ($insertReplyResult) {
+            //update the Contact table to show the reply has been sent
             $updateContactQuery = "UPDATE Contact SET ReplyStatus = 'Replied' WHERE ContactID = '$ContactID'";
             $updateContactResult = $conn->query($updateContactQuery);
 
+            //if the update is successful
             if ($updateContactResult) {
+                //set the success message and redirect to the Contact.php page
                 $success = "Reply sent successfully";
                 echo "<script>alert('$success'); window.location.href = 'Contact.php';</script>";
                 exit;
             } else {
+                //if the update fails, set the error message
                 $error = "Failed to update Contact table";
             }
         } else {
+            //if the insertion fails, set the error message
             $error = "Failed to insert into reply table";
         }
     } else {
+        //if the POST request is empty, set the error message
         $error = "Please fill in all fields";
     }
 }
@@ -139,9 +152,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 </div>
             </div>
             <?php
-            // 判断是否有错误信息
+            // Check if there is an error message
             if (!empty($error)) {
-                // 如果有，显示错误信息
+                // Display an error message
                 echo "
                 <div class ='alert alert-warning alert-dismissible fade show' role='alert'>
                     <strong>$error</strong>
@@ -150,9 +163,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             }
             ?>
             <?php
-            // 判断是否有更新成功信息
+            // Check if there is a success message
             if (!empty($success)) {
-                // 如果有，显示更新成功信息
+                // Display a success message
                 echo "
                 <div class ='alert alert-warning alert-dismissible fade show' role='alert'>
                     <strong>$success</strong>

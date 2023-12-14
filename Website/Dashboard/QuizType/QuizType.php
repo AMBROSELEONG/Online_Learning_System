@@ -31,18 +31,27 @@
             </thead>
             <tbody>
                 <?php
+                //include '../quizcategory/ConnectDB.php';
                 include '../../ConnectDB.php';
 
+                //Check if the search parameter is set
                 if (isset($_GET['search'])) {
+                    //Store the value of the search parameter in a variable
                     $filterValue = $_GET['search'];
+                    //Create a query to search for the value of the filter parameter in the CategoryID and CategoryName columns
                     $query = "SELECT * FROM quizcategory WHERE CategoryID LIKE '%$filterValue%' OR CategoryName LIKE '%$filterValue%'";
+                    //Execute the query
                     $result = $conn->query($query);
 
+                    //Check if the query was successful
                     if (!$result) {
+                        //If not, throw an error
                         die("Invalid query" . $conn->error);
                     }
 
+                    //Check if there are any results
                     if ($result->num_rows > 0) {
+                        //If there are, loop through them and echo them
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>
                                         <td>{$row['CategoryID']}</td>
@@ -54,17 +63,23 @@
                                     </tr>";
                         }
                     } else {
+                        //If there are no results, echo a message
                         echo "<tr><td colspan='3'>No Record Found</td></tr>";
                     }
                 } else {
+                    //If the search parameter is not set, execute this query
                     $sql = "SELECT * FROM quizcategory";
                     $result = $conn->query($sql);
 
+                    //Check if the query was successful
                     if (!$result) {
+                        //If not, throw an error
                         die("Invalid query" . $conn->error);
                     }
 
+                    //Check if there are any results
                     while ($row = $result->fetch_assoc()) {
+                        //If there are, echo them
                         echo "<tr>
                                     <td>{$row['CategoryID']}</td>
                                     <td>{$row['CategoryName']}</td>
