@@ -25,8 +25,8 @@
                         <td>Quiz ID</td>
                         <td>Quiz Image</td>
                         <td>Quiz Name</td>
-                        <td>Category ID</td>
-                        <td>Catrgory Name</td>
+                        <td>Quiz Price</td>
+                        <td>Type</td>
                         <td>Operating</td>
                     </tr>
                 </thead>
@@ -34,6 +34,34 @@
                     <?php
                         include '../../ConnectDB.php';
 
+                        if (isset($_GET['search'])) {
+                            $filterValue = $_GET['search'];
+                            $query = "SELECT * FROM quiz WHERE QuizID LIKE '%$filterValue%' OR QuizName LIKE '%$filterValue%' OR CategoryID LIKE '%$filterValue%' OR CategoryName LIKE '%$filterValue%'";
+                            $result = $conn->query($query);
+        
+                            if (!$result) {
+                                die("Invalid query" . $conn->error);
+                            }
+        
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>
+                                                <td>$row[QuizID]</td>
+                                                <td>$row[QuizImage]</td>
+                                                <td>$row[QuizName]</td>
+                                                <td>$row[CategoryID]</td>
+                                                <td>$row[CategoryName]</td>
+                                            <td>
+                                                <a href='quiz-edit.php?QuizID={$row['QuizID']}' class='btn btn-primary btn-sm'>Edit</a>
+                                                <a href='quiz-delete.php?QuizID={$row['QuizID']}' class='btn btn-danger btn-sm'>Delete</a>
+                                            </td>
+                                        </tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='6'>No Record Found</td></tr>";
+                            }
+                        } else {
+                        
                         $sql = "SELECT * FROM quiz";
                         $result = $conn->query($sql);
 
@@ -58,6 +86,7 @@
                         ";
 
                     }
+                }
                 ?>
 
                 </tbody>
