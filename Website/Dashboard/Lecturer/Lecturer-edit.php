@@ -28,25 +28,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     $LecturerID = $row['LecturerID'];
-    $LecturerName = $row['Lecturer'];
-    $LecturerQualification = $row['Qualification'];
+    $LecturerName = $row['LecturerName'];
+    $LecturerQualification = $row['LecturerQualification'];
     $CourseID = $row['CourseID'];
     $CourseName = $row['CourseName'];
     
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
-    $LecturerID = $row['LecturerID'];
-    $LecturerName = $row['Lecturer'];
-    $LecturerQualification = $row['Qualification'];
-    $CourseID = $row['CourseID'];
-    $CourseName = $row['CourseName'];
+    $LecturerID = $_POST['LecturerID'];
+    $LecturerName = $_POST['LecturerName'];
+    $LecturerQualification = $_POST['LecturerQualification'];
+    $CourseID = $_POST['CourseID'];
+    $CourseName = $_POST['CourseName'];
 
     do {
         if (empty($LecturerID) || empty($LecturerName) || empty($LecturerQualification) || empty($CourseID) || empty($CourseName)) {
             $error = "Please fill in all fields";
             break;
         }
-        $sql = "UPDATE lecturer SET LecturerName = '$LeturerName', LecturerQualification = '$LecturerQualification', CourseID = '$CourseID', CourseName = '$CourseName' WHERE LecturerID = '$LecturerID'";
+        $sql = "UPDATE lecturer SET LecturerName = '$LecturerName', LecturerQualification = '$LecturerQualification', CourseID = '$CourseID', CourseName = '$CourseName' WHERE LecturerID = '$LecturerID'";
         $result = $conn->query($sql);
         if (!$result) {
             $error = "Error updating record: " . $conn->error;

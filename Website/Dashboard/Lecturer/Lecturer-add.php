@@ -16,7 +16,7 @@ if (isset($_POST['AddLecturer'])) {
     $query = "INSERT INTO lecturer(LecturerName, LecturerQualification, CourseID, CourseName) VALUES ('$LecturerName', '$LecturerQualification',$CourseID,'$CourseName')";
     $result = mysqli_query($conn, $query);
 
-    if (!$result) {
+    if ($result) {
         $success = "Lecturer Added Successfully";
         header("location: Lecturer.php");
     }else{
