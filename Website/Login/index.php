@@ -1,44 +1,43 @@
 <?php
-// 开始会话
+// Start the session
 session_start();
 
-// 判断请求方法是否为 POST
+// Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // 连接数据库
+    // Connect to the database
     include '../ConnectDB.php';
 
-    // 获取表单中的用户名和密码
+    // Get the username and password from the POST request
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // 使用预处理语句来查询数据库，防止 SQL 注入
+    // Create a prepared statement to select the user from the database
     $stmt = $conn->prepare("SELECT UserID FROM users WHERE UserName = ? AND PasswordHash = ?");
     $stmt->bind_param("ss", $username, $password);
 
-    // 执行查询
+    // Execute the prepared statement
     $stmt->execute();
 
-    // 获取查询结果
+    // Get the result of the query
     $result = $stmt->get_result();
 
-    // 判断查询结果是否正确
+    // Check if the username and password match an existing user
     if ($result->num_rows == 1) {
+        // If the username and password match an existing user, set the user ID in the session and redirect to the main page
         $row = $result->fetch_assoc();
 
-        // 将用户ID存入 session
         $_SESSION['UserID'] = $row['UserID'];
 
-        // 重定向到主页面
         header("location: ../MainPage/MainPage.php");
         exit();
     } else {
-        // 提示错误信息
+        // If the username and password do not match an existing user, alert the user and redirect to the login page
         echo "<script type='text/javascript'>alert('Wrong username or password'); window.location.href = 'Login.php';</script>";
         exit();
     }
 
-    // 关闭连接和语句
+    // Close the prepared statement and the connection
     $stmt->close();
     $conn->close();
 }

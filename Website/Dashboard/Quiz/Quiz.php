@@ -25,8 +25,8 @@
                         <td>Quiz ID</td>
                         <td>Quiz Image</td>
                         <td>Quiz Name</td>
-                        <td>Quiz Price</td>
-                        <td>Type</td>
+                        <td>Category ID</td>
+                        <td>Catrgory Name</td>
                         <td>Operating</td>
                     </tr>
                 </thead>

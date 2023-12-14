@@ -55,12 +55,16 @@ include 'find-user.php';
 
         <button class="openbtn" onclick="openNav()">☰</button>
 
-        <script>
+       <script>
+            //This function opens the side panel when called
             function openNav() {
+                //Get the element with the id of "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "30rem";
             }
 
+            //This function closes the side panel when called
             function closeNav() {
+                //Get the element with the id of "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "0rem";
             }
         </script>
@@ -84,21 +88,24 @@ include 'find-user.php';
                 </li>
             </ul>
         </div>
-        <script>
+       <script>
+            // Get all the menu items
             const menuItems = document.querySelectorAll('.menu > li');
 
+            // Loop through the menu items
             menuItems.forEach((menuItem) => {
+                // Get the submenu
                 const submenu = menuItem.querySelector('ul');
 
-                // 计算子菜单的最大高度
+                // Set the max height of the submenu
                 submenu.style.maxHeight = submenu.scrollHeight + 'px';
 
-                // 当鼠标悬停在菜单项上时，将 max-height 设置为计算值
+                // When the mouse enters the menu item, set the max height of the submenu
                 menuItem.addEventListener('mouseenter', () => {
                     submenu.style.maxHeight = submenu.scrollHeight + 'px';
                 });
 
-                // 当鼠标离开时，将 max-height 重置为 0
+                // When the mouse leaves the menu item, set the max height of the submenu to 0
                 menuItem.addEventListener('mouseleave', () => {
                     submenu.style.maxHeight = '0';
                 });

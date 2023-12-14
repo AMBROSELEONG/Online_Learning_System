@@ -13,10 +13,8 @@ include '../Session.php';
     <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="stylesheet" href="../icon2/iconfont.css">
     <link rel="icon" type="image/x-icon" href="">
-    <!-- 引入 Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
-    <!-- 引入 Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 
@@ -62,12 +60,16 @@ include '../Session.php';
 
         <button class="openbtn" onclick="openNav()">☰</button>
 
-        <script>
+       <script>
+            //Function to open the side panel
             function openNav() {
+                //Get the element with the id "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "30rem";
             }
 
+            //Function to close the side panel
             function closeNav() {
+                //Get the element with the id "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "0rem";
             }
         </script>
@@ -92,20 +94,22 @@ include '../Session.php';
             </ul>
         </div>
         <script>
-            const menuItems = document.querySelectorAll('.menu > li');
+           const menuItems = document.querySelectorAll('.menu > li');
 
+            //Loop through each menu item
             menuItems.forEach((menuItem) => {
+                //Get the submenu
                 const submenu = menuItem.querySelector('ul');
 
-                // 计算子菜单的最大高度
+                //Set the max height of the submenu
                 submenu.style.maxHeight = submenu.scrollHeight + 'px';
 
-                // 当鼠标悬停在菜单项上时，将 max-height 设置为计算值
+                //When the mouse enters the menu item, set the max height of the submenu
                 menuItem.addEventListener('mouseenter', () => {
                     submenu.style.maxHeight = submenu.scrollHeight + 'px';
                 });
 
-                // 当鼠标离开时，将 max-height 重置为 0
+                //When the mouse leaves the menu item, set the max height of the submenu to 0
                 menuItem.addEventListener('mouseleave', () => {
                     submenu.style.maxHeight = '0';
                 });
@@ -127,14 +131,18 @@ include '../Session.php';
         <div class="progress-container">
             <div class="progress-bar" id="myBar"></div>
         </div>
-        <script>
+       <script>
             // When the user scrolls the page, execute myFunction 
             window.onscroll = function () { myFunction() };
 
             function myFunction() {
+                // Get the scroll position
                 var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                // Get the height of the page
                 var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                // Calculate the percentage of the page that is scrolled
                 var scrolled = (winScroll / height) * 100;
+                // Set the width of the progress bar to the percentage
                 document.getElementById("myBar").style.width = scrolled + "%";
             }
         </script>
@@ -159,9 +167,8 @@ include '../Session.php';
         </div>
         <script>
             var mySwiper = new Swiper('.swiper-container', {
-                // 自动播放配置
                 autoplay: {
-                    delay: 3000, // 自动播放
+                    delay: 3000, 
                 },
                 pagination: {
                     el: '.swiper-pagination',
@@ -179,29 +186,27 @@ include '../Session.php';
                 <img src="../img/new-era-university-college.png" alt="New Era University College">
             </div>
         </div>
-        <script>
-            // 打开页面函数
+       <script>
+            //Function to open a page when a tab is clicked
             function openPage(pageName, elmnt, color) {
-                // 获取所有tabcontent元素
+                //Declare variables
                 var i, tabcontent, tablinks;
+                //Get all elements with class tabcontent and set their display to none
                 tabcontent = document.getElementsByClassName("tabcontent");
-                // 遍历tabcontent，将其display属性设置为none
                 for (i = 0; i < tabcontent.length; i++) {
                     tabcontent[i].style.display = "none";
                 }
-                // 获取所有tablinks元素
+                //Get all elements with class tablink and set their background color to empty string
                 tablinks = document.getElementsByClassName("tablink");
-                // 遍历tablinks，将其backgroundColor属性设置为空
                 for (i = 0; i < tablinks.length; i++) {
                     tablinks[i].style.backgroundColor = "";
                 }
-                // 获取指定pageName的元素，将其display属性设置为block
+                //Set the display of the element with id pageName to block and set its background color to color
                 document.getElementById(pageName).style.display = "block";
-                // 获取指定elmnt的元素，将其backgroundColor属性设置为color
                 elmnt.style.backgroundColor = color;
             }
 
-            // 获取id为defaultOpen的元素，并点击它
+            //Call the function when the default tab is clicked
             document.getElementById("defaultOpen").click();
         </script>
         <div class="aboutus-container">

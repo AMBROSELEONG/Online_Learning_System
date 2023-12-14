@@ -1,20 +1,27 @@
 <?php
-// 包含会话文件
+//include the Session and ConnectDB files
 include '../Session.php';
 include '../ConnectDB.php';
+//prepare a query to select the number of emails from the email table where the user ID matches the user ID passed in
 $EmailQuery = $conn->prepare("SELECT COUNT(*) AS ReplyID FROM email WHERE UserID = ?");
+//bind the user ID to the query
 $EmailQuery->bind_param("i", $userID);
+//execute the query
 $EmailQuery->execute();
 
+//get the result of the query
 $result = $EmailQuery->get_result();
 
+//check if the result is not empty
 if ($result->num_rows > 0) {
+    //fetch the result of the query
     $row = $result->fetch_assoc();
+    //store the result in a variable
     $EmailCount = $row['ReplyID'];
 }
 
-$EmailQuery->close();
-?>
+//close the query
+$EmailQuery->close(); ?>
 <!doctype html>
 <html lang="en">
 
@@ -92,25 +99,33 @@ $EmailQuery->close();
                                         </h3>
                                     </div>
                                 </div>
-                                <!-- Mail list-->
                                 <div class="table-responsive">
                                     <table class="table email-table no-wrap table-hover v-middle mb-0 font-14">
                                         <tbody>
                                             <?php
-                                            // 包含数据库连接文件
+                                            //include the connection to the database
                                             include '../ConnectDB.php';
 
+                                            //prepare the statement to select the data from the database
                                             $checkUser = $conn->prepare("SELECT ReplyID, UserID, Title, ReplyDate FROM email WHERE UserID = ?");
+                                            //bind the userID to the statement
                                             $checkUser->bind_param("i", $userID);
+                                            //execute the statement
                                             $checkUser->execute();
+                                            //store the result of the statement
                                             $checkUser->store_result();
 
+                                            //check if the statement executed successfully
                                             if (!$checkUser) {
+                                                //if not, print an error message
                                                 die("None Message" . $conn->error);
                                             }
+                                            //bind the result of the statement to the variables
                                             $checkUser->bind_result($ReplyID, $UserID, $Title, $ReplyDate);
 
+                                            //while loop to loop through the result of the statement
                                             while ($checkUser->fetch()) {
+                                                //print the result of the statement in a table row
                                                 echo "<tr onclick='redirectToInfoPage($ReplyID)'>
                                                         <td class='pl-3'>
                                                             <div class='custom-control custom-checkbox'>
@@ -133,7 +148,9 @@ $EmailQuery->close();
                                             }
                                             ?>
                                             <script>
+                                                //function to redirect to the information page
                                                 function redirectToInfoPage(replyID) {
+                                                    //redirect to the information page with the given replyID
                                                     window.location.href = 'Information.php?ReplyID=' + replyID;
                                                 }
                                             </script>

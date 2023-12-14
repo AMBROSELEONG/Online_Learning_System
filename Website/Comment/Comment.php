@@ -1,27 +1,34 @@
 <?php
+//include the ConnectDB.php file to connect to the database
 include '../ConnectDB.php';
+//include the index.php file
 include 'index.php';
 
-// 执行SQL语句，获取所有评论，按评论时间降序排列
+//create a SQL query to select all comments from the comments table and order them by PostDate in descending order
 $sql = "SELECT * FROM comments ORDER BY PostDate DESC";
+//execute the query and store the result in the $result variable
 $result = $conn->query($sql);
 
-// 获取用户名
+//function to get the username from a userID
 function getUsernameFromUserID($conn, $userID)
 {
 
-    // 转义用户ID，防止注入
+    //escape the userID to prevent SQL injection
     $userID = mysqli_real_escape_string($conn, $userID);
 
-    // 执行SQL语句，获取用户名
+    //create a SQL query to select the username from the users table where the userID matches the one passed in
     $query = "SELECT UserName FROM users WHERE UserID = '$userID'";
+    //execute the query and store the result in the $result variable
     $result = mysqli_query($conn, $query);
 
-    // 如果查询成功，返回用户名
+    //check if the query was successful and if there is a result
     if ($result && mysqli_num_rows($result) > 0) {
+        //fetch the result from the query and store it in the $row variable
         $row = mysqli_fetch_assoc($result);
+        //return the username from the $row variable
         return $row['UserName'];
     } else {
+        //return an empty string if the query was not successful or there is no result
         return '';
     }
 }
@@ -33,7 +40,6 @@ function getUsernameFromUserID($conn, $userID)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comment Board</title>
-    <!-- 引入Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * {
@@ -43,17 +49,6 @@ function getUsernameFromUserID($conn, $userID)
 
         .comment-box {
             margin-top: 20px;
-        }
-
-        /* 默认情况下的星星样式 */
-        .star {
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        /* 选中状态的星星样式 */
-        .star.selected {
-            color: gold;
         }
     </style>
 </head>
@@ -68,7 +63,6 @@ function getUsernameFromUserID($conn, $userID)
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <!-- Add your navigation links here -->
                     <li class="nav-item">
                         <a class="nav-link" href="../Course/CoursePage.html" style="font-size: 20px;">Course</a>
                     </li>
@@ -83,10 +77,13 @@ function getUsernameFromUserID($conn, $userID)
         </div>
     </nav>
     <script>
+        // Wait for the document to be loaded before running the code
         document.addEventListener("DOMContentLoaded", function () {
+            // Select the toggler and the navbar-collapse
             var navbarToggler = document.querySelector(".navbar-toggler");
             var navbarCollapse = document.querySelector(".navbar-collapse");
 
+            // Add an event listener to the toggler that will toggle the navbar-collapse when clicked
             navbarToggler.addEventListener("click", function () {
                 navbarCollapse.classList.toggle("show");
             });
@@ -115,73 +112,85 @@ function getUsernameFromUserID($conn, $userID)
             </form>
         </div>
 
-        <!-- 留言列表 -->
         <div class="comment-box mt-4">
             <h3>Comment List</h3>
             <ul id="commentList" class="list-group">
                 <?php
+                // Check if there are any comments
                 if ($result->num_rows > 0) {
+                    // Loop through the comments
                     while ($row = $result->fetch_assoc()) {
+                        // Print each comment
                         echo '<li class="list-group-item">
                     <strong>' . htmlspecialchars($row['UserName']) . ':</strong><br>' . htmlspecialchars($row['Content']) . '<br>' . htmlspecialchars($row['CourseName']) . '<br>';
                     }
                 } else {
+                    // Print a message if there are no comments
                     echo "No comments yet.";
                 }
 
+                // Close the connection
                 $conn->close();
                 ?>
             </ul>
         </div>
 
-        <!-- 引入Bootstrap JS 和 Popper.js（用于一些组件的工作）-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
+            // Function to get the current time
             function getCurrentTime() {
+                // Create a new Date object
                 var currentDate = new Date();
+                // Get the day, month, and year
                 var day = currentDate.getDate();
                 var month = currentDate.getMonth() + 1; // Month starts from 0
                 var year = currentDate.getFullYear();
+                // Get the hours, minutes, and seconds
                 var hours = currentDate.getHours();
                 var minutes = currentDate.getMinutes();
                 var seconds = currentDate.getSeconds();
 
-                // 格式化时间
+                // Create a formatted string with the current time
                 var formattedTime = year + '-' + addZeroBefore(month) + '-' + addZeroBefore(day) + ' ' + addZeroBefore(hours) + ':' + addZeroBefore(minutes) + ':' + addZeroBefore(seconds);
+                // Return the formatted string
                 return formattedTime;
             }
 
-            // 为单个数字添加前导零
+            // Function to add a zero before a single digit
             function addZeroBefore(number) {
+                // Return a zero if the number is less than 10, otherwise return the number
                 return (number < 10 ? '0' : '') + number;
             }
 
-            // 监听表单提交事件
+            // Add an event listener to the form submit button
             document.getElementById('commentForm').addEventListener('submit', function (event) {
+                // Prevent the default action of the form submit
                 event.preventDefault();
 
-                // 获取姓名和留言内容
+                // Get the values from the form
                 var name = document.getElementById('name').value;
                 var comment = document.getElementById('comment').value;
                 var course = document.getElementById('course').value;
                 var currentTime = getCurrentTime();
 
+                // Create a new FormData object
                 var formData = new FormData(this);
 
-                // 创建留言元素
+                // Create a new list item
                 var li = document.createElement('li');
                 li.className = 'list-group-item';
                 li.innerHTML = '<strong>' + name + ':</strong><br> ' + comment + "<br>" + course + '<br>' + '<small>Posted on ' + currentTime + '</small>';
-                // 将留言元素添加到留言列表中
 
+                // Append the list item to the list
                 document.getElementById('commentList').appendChild(li);
 
-                // 清空表单
+                // Clear the form
                 document.getElementById('name').value = '';
                 document.getElementById('comment').value = '';
                 document.getElementById('course').value = '';
 
+                // Send the form data to the server
                 fetch('index.php', {
                     method: 'POST',
                     body: formData
@@ -192,6 +201,7 @@ function getUsernameFromUserID($conn, $userID)
                         console.log(data);
                     })
                     .catch(error => {
+                        // Handle any errors
                         console.error('Error:', error);
                     });
             });

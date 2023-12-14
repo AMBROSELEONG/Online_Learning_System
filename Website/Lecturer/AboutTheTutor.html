@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>about The Tutor</title>
+    <title>About The Tutor</title>
     <link rel="stylesheet" type="text/css" href="AboutTheTutor.css">
     <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="stylesheet" href="../icon2/iconfont.css">
@@ -87,15 +87,12 @@
             menuItems.forEach((menuItem) => {
                 const submenu = menuItem.querySelector('ul');
 
-                // 计算子菜单的最大高度
                 submenu.style.maxHeight = submenu.scrollHeight + 'px';
 
-                // 当鼠标悬停在菜单项上时，将 max-height 设置为计算值
                 menuItem.addEventListener('mouseenter', () => {
                     submenu.style.maxHeight = submenu.scrollHeight + 'px';
                 });
 
-                // 当鼠标离开时，将 max-height 重置为 0
                 menuItem.addEventListener('mouseleave', () => {
                     submenu.style.maxHeight = '0';
                 });

@@ -1,20 +1,30 @@
 <?php
 include '../ConnectDB.php';
 
+//Check if the request method is GET
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
+    //Check if the ReplyID parameter is set
     if (!isset($_GET['ReplyID'])) {
+        //Redirect to the Mailbox page
         header("location: Mailbox.php");
         exit;
     }
+    //Store the ReplyID parameter
     $id = $_GET['ReplyID'];
 
+    //Create a prepared statement to select the Title, ReplyMessage and ReplyDate from the email table where the ReplyID matches the parameter
     $checkUser = $conn->prepare("SELECT Title, ReplyMessage, ReplyDate FROM email WHERE ReplyID = ?");
+    //Bind the parameter to the prepared statement
     $checkUser->bind_param("i", $id);
+    //Execute the prepared statement
     $checkUser->execute();
+    //Store the result of the prepared statement
     $checkUser->store_result();
 
+    //Bind the result of the prepared statement to the variables
     $checkUser->bind_result($Title, $ReplyMessage, $ReplyDate);
+    //Fetch the result of the prepared statement
     $checkUser->fetch();
 }
 ?>

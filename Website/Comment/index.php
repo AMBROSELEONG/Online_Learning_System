@@ -1,53 +1,61 @@
 <?php
+//include the Session.php file to start the session
 include '../Session.php';
-// 声明一个空数组用于存储错误信息
+//create an empty array to store any errors
 $errors = [];
-// 判断请求方式是否为POST
+//check if the request method is a POST request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // 获取表单中的数据
+    //store the values of the form in the variables
     $name = $_POST['name'];
     $comment = $_POST['comment'];
     $course = $_POST['course'];
-    // 获取当前时间
+    //store the current date and time in the variable
     $post_time = date('Y-m-d H:i:s');
 
-    // 连接数据库
+    //include the ConnectDB.php file to connect to the database
     include '../ConnectDB.php';
-    // 将评论内容插入数据库
+    //prepare the statement to insert the data into the database
     $stmt = $conn->prepare("INSERT INTO comments (UserID, UserName, CourseName, Content, PostDate) VALUES (?,?,?,?,?)");
+    //bind the parameters to the statement
     $stmt->bind_param("issss", $userID, $name, $course, $comment, $post_time);
 
-    // 执行插入操作
+    //execute the statement
     if ($stmt->execute()) {
-        // 插入成功
+        //if the statement executed successfully, display a success message
         echo "Comment added successfully!";
     } else {
-        // 插入失败
+        //if the statement executed unsuccessfully, display an error message
         echo "Error: " . $stmt->error;
     }
 
-    // 查询数据库中的评论
+    //select all the comments from the database and order them by post date
     $sql = "SELECT * FROM comments ORDER BY PostDate DESC";
+    //execute the statement
     $result = $conn->query($sql);
 
     // Output each comment
-    // 输出每个评论
+    //output each comment
     if ($result->num_rows > 0) {
+        //if there are comments, output them in a list
         echo '<ul id="commentList" class="list-group">';
         while ($row = $result->fetch_assoc()) {
+            //output each comment in the list
             echo '<li class="list-group-item"><strong>' . htmlspecialchars($row['UserName']) . ':</strong><br>' . htmlspecialchars($row['CourseName']) . '<br>' . htmlspecialchars($row['Content']) . '<br><small>Posted on ' . htmlspecialchars($row['PostDate']) . '</small></li>';
         }
         echo '</ul>';
     } else {
+        //if there are no comments, display a message
         echo "No comments yet.";
     }
 
-    // 关闭数据库连接
+    //close the statement
     $stmt->close();
+    //close the connection
     $conn->close();
 } else {
-    // 处理错误信息
+    //if the request method is not a POST request, check for any errors
     foreach ($errors as $error) {
+        //if there are errors, display them
         echo $error . "<br>";
     }
 }

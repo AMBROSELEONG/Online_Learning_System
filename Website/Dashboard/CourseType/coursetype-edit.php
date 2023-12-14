@@ -127,18 +127,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         crossorigin="anonymous"></script>
 </body>
 
-</html>         <div class="offset-sm-3 col-sm-3 d-grid">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-                <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="CourseType.php" role="button">Cancel</a>
-                </div>
-            </div>
-        </form>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-</body>
-
 </html>

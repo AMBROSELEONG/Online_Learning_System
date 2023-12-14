@@ -81,22 +81,27 @@
                 </li>
             </ul>
         </div>
-        <script>
+       <script>
+            // Select all menu items
             const menuItems = document.querySelectorAll('.menu > li');
 
+            // Loop through each menu item
             menuItems.forEach((menuItem) => {
+                // Select the submenu
                 const submenu = menuItem.querySelector('ul');
 
-                // 计算子菜单的最大高度
+                // Set the max height of the submenu
                 submenu.style.maxHeight = submenu.scrollHeight + 'px';
-
-                // 当鼠标悬停在菜单项上时，将 max-height 设置为计算值
+              
+                // Add an event listener to the menu item
                 menuItem.addEventListener('mouseenter', () => {
+                    // Increase the max height of the submenu when the mouse enters the menu item
                     submenu.style.maxHeight = submenu.scrollHeight + 'px';
                 });
 
-                // 当鼠标离开时，将 max-height 重置为 0
+                // Add an event listener to the menu item
                 menuItem.addEventListener('mouseleave', () => {
+                    // Decrease the max height of the submenu when the mouse leaves the menu item
                     submenu.style.maxHeight = '0';
                 });
             });
@@ -117,14 +122,18 @@
         <div class="progress-container">
             <div class="progress-bar" id="myBar"></div>
         </div>
-        <script>
+       <script>
             // When the user scrolls the page, execute myFunction 
             window.onscroll = function () { myFunction() };
 
             function myFunction() {
+                // Get the scroll position
                 var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                // Get the height of the document
                 var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                // Calculate the percentage of the page scrolled
                 var scrolled = (winScroll / height) * 100;
+                // Set the width of the progress bar
                 document.getElementById("myBar").style.width = scrolled + "%";
             }
         </script>
@@ -289,9 +298,11 @@
 
             <script>
                 filterSelection("all")
+                // Function to filter elements by class name
                 function filterSelection(c) {
                     var x, i;
                     x = document.getElementsByClassName("filterDiv");
+                    // If no filter is provided, hide all elements
                     if (c == "all") c = "";
                     // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
                     for (i = 0; i < x.length; i++) {

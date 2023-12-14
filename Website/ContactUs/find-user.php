@@ -1,34 +1,36 @@
 <?php
-// 连接数据库
+//include the connection to the database
 include '../ConnectDB.php';
-// 连接会话
+//include the session
 include '../Session.php';
 
-// 判断会话是否已存在用户ID
+//check if the user is logged in
 if (isset($_SESSION['UserID'])) {
-    // 获取用户ID
+    //get the user id
     $userID = $_SESSION['UserID'];
 
-    // 查询数据库获取用户名，邮箱，电话号码
+    //query the database to get the user details
     $query = "SELECT UserName, Email, ContactNumber FROM users WHERE UserID = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $userID);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // 判断查询结果是否为空
+    //check if the user is logged in
     if ($result->num_rows > 0) {
-        // 获取用户信息
+        //get the user details
         $userDetails = $result->fetch_assoc();
        
-        // 获取用户名，邮箱，电话号码
+        //get the user name
         $name = $userDetails['UserName'];
+        //get the user email
         $email = $userDetails['Email'];
+        //get the user phone number
         $phone = $userDetails['ContactNumber'];
     }
-    // 关闭查询语句
+    //close the statement
     $stmt->close();
-    // 关闭数据库连接
+    //close the connection
     $conn->close();
 }
 ?>
