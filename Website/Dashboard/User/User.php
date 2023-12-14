@@ -11,13 +11,15 @@
 
 <body>
     <div class="container">
-        <form method="post">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
             <div style="width: 100%; justify-content: space-between; margin: 1% 0; display: flex;">
                 <div>
-                    <input type="text" name="search" id="search" placeholder="Search CourseCategory">
+                    <input type="text" name="search" id="search" placeholder="Search User"
+                        value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
                     <input type="submit" name="searchsub" id="searchsub" value="Search">
                 </div>
             </div>
+        </form>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -33,24 +35,51 @@
                     <?php
                     include '../../ConnectDB.php';
 
-                    $sql = "SELECT * FROM users";
-                    $result = $conn->query($sql);
+                    if (isset($_GET['search'])) {
+                        $filterValue = $_GET['search'];
+                        $query = "SELECT * FROM users WHERE UserID LIKE '%$filterValue%' OR UserName LIKE '%$filterValue%'";
+                        $result = $conn->query($query);
 
-                    if (!$result) {
-                        die("Invalid query" . $conn->$error);
-                    }
+                        if (!$result) {
+                            die("Invalid query" . $conn->error);
+                        }
+    
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>
+                                            <td>{$row['UserID']}</td>
+                                            <td>{$row['UserName']}</td>
+                                            <td>$row[PasswordHash]</td>
+                                            <td>$row[Email]</td>
+                                            <td>$row[ContactNumber]</td>
+                                            <td>
+                                                <a href='delete.php?UserID={$row['UserID']}' class='btn btn-danger btn-sm'>Delete</a>
+                                            </td>
+                                        </tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='3'>No Record Found</td></tr>";
+                        }
+                    } else {
+                        $sql = "SELECT * FROM users";
+                        $result = $conn->query($sql);
 
-                    while ($row = $result->fetch_assoc()) {
-                        echo " <tr>
-                                    <td>$row[UserID]</td>
-                                    <td>$row[UserName]</td>
-                                    <td>$row[PasswordHash]</td>
-                                    <td>$row[Email]</td>
-                                    <td>$row[ContactNumber]</td>
-                                    <td>
-                                        <a href='delete.php?UserID=$row[UserID]' class='btn btn-danger btn-sm'>Delete</a>
-                                    </td>
-                                </tr>";
+                        if (!$result) {
+                            die("Invalid query" . $conn->$error);
+                        }
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo " <tr>
+                                        <td>$row[UserID]</td>
+                                        <td>$row[UserName]</td>
+                                        <td>$row[PasswordHash]</td>
+                                        <td>$row[Email]</td>
+                                        <td>$row[ContactNumber]</td>
+                                        <td>
+                                            <a href='delete.php?UserID={$row['UserID']}' class='btn btn-danger btn-sm'>Delete</a>
+                                        </td>
+                                    </tr>";
+                        }
                     }
                     ?>
 
