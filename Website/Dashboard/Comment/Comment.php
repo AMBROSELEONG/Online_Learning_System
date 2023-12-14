@@ -36,7 +36,7 @@
                                     <td>$row[CourseName]</td>
                                     <td>$row[PostDate]</td>
                                     <td>
-                                        <a href='CommentDelete.php?CommentID=$row[CommentID]' class='btn btn-danger btn-sm'>Delete</a>
+                                        <a href='comment-delete.php?CommentID=$row[CommentID]' class='btn btn-danger btn-sm'>Delete</a>
                                     </td>
                                 </tr>";
 }
