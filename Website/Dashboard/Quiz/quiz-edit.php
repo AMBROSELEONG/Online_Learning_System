@@ -44,12 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $CategoryName = $_POST['CategoryName'];
 
     do {
-        if (empty($QuizID) || empty($QuizName) || empty($CategorID) || empty($CategoryName) || empty($QuizImage)) {
+        if (empty($QuizID) || empty($QuizName) || empty($CategoryID) || empty($CategoryName) || empty($QuizImage)) {
             $error = "All the fields are required";
             break;
         }
 
-        $sql = "UPDATE quiz SET QuizImage='$QuizImage', CourseName = '$QuizName' CategoryID = '$CategoryID', CategoryName = '$CategoryName' WHERE QuizID = '$QuizID'";
+        $sql = "UPDATE quiz SET QuizImage='$QuizImage', QuizName = '$QuizName', CategoryID = '$CategoryID', CategoryName = '$CategoryName' WHERE QuizID = '$QuizID'";
         $result = $conn->query($sql);
 
         if (!$result) {
@@ -96,21 +96,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Category Name</label>
                 <div class="col-sm-6">
-                    <select type="text" class="form-control" name="CategoryID">
+                    <select type="text" class="form-control" name="CategoryID" id="CategoryID">
                         <?php
+                        //Create a query to select all the categories from the coursecategory table
                         $query1 = "SELECT CategoryID, CategoryName FROM quizcategory";
+                        //Execute the query and store the result in the $result1 variable
                         $result1 = mysqli_query($conn, $query1);
 
+                        //Check if the query was successful
                         if (mysqli_num_rows($result1) > 0) {
-                            //Echo an option element with the category ID and name as the value and text respectively
+                            //Loop through the result set
                             echo "<option value='0' selected disabled>Please Select Lecturer</option>";
-
                             while ($row = mysqli_fetch_assoc($result1)) {
+                                //Store the category ID and name in the $Category_ID and $Category_Name variables respectively
                                 $Category_ID = $row['CategoryID'];
                                 $Category_Name = $row['CategoryName'];
+                                //Echo an option element with the category ID and name as the value and text respectively
                                 echo "<option class='form-control' value='$Category_ID'>$Category_Name</option>";
                             }
                         } else {
+                            //Echo an option element with the text "No Category Found"
                             echo "<option class='form-control' value='0'>No Category Found</option>";
                         }
                         ?>
@@ -118,12 +123,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <input type="hidden" name="CategoryName" id="CategoryName" value="<?php echo $Category_Name ?>">
                 </div>
             </div>
+
             <script>
+                //This code is used to select an option from the dropdown menu and display the selected option in the textbox
                 document.getElementById('CategoryID').addEventListener('change', function () {
+                    //Get the selected index of the dropdown menu
                     var selectedIndex = this.selectedIndex;
+                    //Get the selected option from the dropdown menu
                     var selectedOption = this.options[selectedIndex];
+                    //Get the text of the selected option
                     var categoryName = selectedOption.text;
 
+                    //Display the selected option in the textbox
                     document.getElementById('CategoryName').value = categoryName;
                 });
             </script>
@@ -147,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             ?>
             <div class="row mb-3">
                 <div class="offset-sm-3 col-sm-3 d-grid">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="EditQuiz">Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
                     <a class="btn btn-outline-primary" href="Quiz.php" role="button">Cancel</a>

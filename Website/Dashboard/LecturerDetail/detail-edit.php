@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     //check if the course id is set
     if (!isset($_GET['LecturerID'])) {
         //if the course id is not set, redirect to the course page
-        header("Location: CourseDetail.php");
+        header("Location: LecturerDetail.php");
         exit;
     }
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $id = $_GET['LecturerID'];
 
     //query the database to get the course information
-    $sql = "SELECT * FROM lecterurdetail WHERE LecturerID = '$id'";
+    $sql = "SELECT * FROM lecturerdetail WHERE LecturerID = '$id'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
@@ -42,58 +42,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     //store the course information in the corresponding variables
-    $CourseID = $row['CourseID'];
-    $CourseName = $row['CourseName'];
+    $LecturerID = $row['LecturerID'];
+    $LecturerName = $row['LecturerName'];
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
     //store the course information in the corresponding variables
-    $CourseID = $_POST['CourseID'];
-    $CourseName = $_POST['CourseName'];
-    $CourseDescription = $_POST['CourseDescription'];
     $LecturerID = $_POST['LecturerID'];
-    $LecturerName = $_POST['LecturerName'];
-    $LecturerQualification = $_POST['LecturerQualification'];
-    $StudyDuration = $_POST['StudyDuration'];
-    $LearningPlatform = $_POST['LearningPlatform'];
-    $LearningResult = $_POST['LearningResult'];
-    $CourseOutline = $_POST['CourseOutline'];
-
+    $Professional = $_POST['Professional'];
+    $Country = $_POST['Country'];
+    $Github = $_POST['Github'];
+    $Twitter = $_POST['Twitter'];
+    $Instagram = $_POST['Instagram'];
+    $Facebook = $_POST['Facebook'];
+    $LecturerDesription = $_POST['LecturerDesription'];
+    $LecturerEmail = $_POST['LecturerEmail'];
+    $Phone = $_POST['Phone'];
+    $Introduction = $_POST['Introduction'];
     do {
         //check if any of the course information is empty
-        if (empty($CourseID) || empty($CourseDescription) || empty($LecturerID) || empty($LecturerName) || empty($LecturerQualification) || empty($StudyDuration) || empty($LearningPlatform) || empty($LearningResult) || empty($CourseOutline)) {
+        if (empty($LecturerID) || empty($Professional) || empty($Country) || empty($Github) || empty($Twitter) || empty($Instagram) || empty($Facebook) || empty($LecturerDesription) || empty($LecturerEmail) || empty($Phone) || empty($Introduction)) {
             //if any of the course information is empty, store an error message in the error variable
             $error = "Please fill in all fields";
             break;
         }
         //update the course information in the database
-        $sqlCourseDetail = "UPDATE coursedetail SET CourseDescription = '$CourseDescription', LecturerID = '$LecturerID', LecturerName = '$LecturerName', LecturerQualification = '$LecturerQualification', StudyDuration = '$StudyDuration', LearningPlatform = '$LearningPlatform', LearningResult = '$LearningResult', CourseOutline = '$CourseOutline' WHERE CourseID = '$CourseID'";
+        $sql = "UPDATE lecturerdetail SET Professional = '$Professional', Country = '$Country', Github = '$Github', Twitter = '$Twitter', Instagram = '$Instagram', Facebook = '$Facebook', LecturerDescription = '$LecturerDesription', LecturerEmail = '$LecturerEmail', Phone = '$Phone', Introduction = '$Introduction' WHERE LecturerID = '$LecturerID'";
 
-        $resultCourseDetail = $conn->query($sqlCourseDetail);
+        $result = $conn->query($sql);
 
-        if (!$resultCourseDetail) {
+        if (!$result) {
             // Error updating course detail
             $error = "Error updating course detail: " . $conn->error;
         } else {
-            // Update lecturer
-            $sqlLecturer = "UPDATE lecturer SET CourseID = '$CourseID', CourseName = '$CourseName' WHERE LecturerID = '$LecturerID'";
-
-            $resultLecturer = $conn->query($sqlLecturer);
-
-            $sqlLecturerDetail = "UPDATE lecturerdetail SET CourseID = '$CourseID', CourseName = '$CourseName' WHERE LecturerID = '$LecturerID'";
-            $resultLecturerDetail = $conn->query($sqlLecturerDetail);
-            if (!$resultLecturer && !$resultLecturerDetail) {
-                // Error updating lecturer
-                $error = "Error updating lecturer: " . $conn->error;
-            } else {
-                // Both updates were successful
-                $success = "Course Details updated successfully";
-                header("location: CourseDetail.php");
-                exit;
-            }
+            $error = "Error updating lecturer: " . $conn->error;
+            // Both updates were successful
+            $success = "Course Details updated successfully";
+            header("location: LecturerDetail.php");
+            exit;
         }
     } while (false);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -108,97 +98,76 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <body>
     <div class="container my-5">
         <h2>Edit Course Detail</h2>
-        <form method="post" enctype="multipart/form-data">
-            <input type="hidden" name="CourseID" value="<?php echo $CourseID; ?>">
-            <input type="hidden" name="CourseName" value="<?php echo $CourseName; ?>">
+        <form method="post">
+            <input type="hidden" name="LecturerID" value="<?php echo $LecturerID; ?>">
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Course Name</label>
+                <label class="col-sm-3 col-form-label">Professional</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="CourseName" value="<?php echo $CourseName; ?>"
+                    <input type="text" class="form-control" name="LecturerName" value="<?php echo $LecturerName; ?>"
                         disabled>
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Course Description</label>
+                <label class="col-sm-3 col-form-label">Professional</label>
                 <div class="col-sm-6">
-                    <textarea type="text" class="form-control"
-                        name="CourseDescription"><?php echo $CourseDescription; ?></textarea>
+                    <input type="text" class="form-control" name="Professional" value="<?php echo $Professional; ?>">
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Lecturer Name</label>
+                <label class="col-sm-3 col-form-label">Country</label>
                 <div class="col-sm-6">
-                    <select type="text" class="form-control" name="LecturerID" id="LecturerID">
-                        <?php
-                        //Create a query to select all the categories from the coursecategory table
-                        $query1 = "SELECT LecturerID, LecturerName, LecturerQualification FROM lecturer";
-                        //Execute the query and store the result in the $result1 variable
-                        $result1 = mysqli_query($conn, $query1);
-
-                        //Check if the query was successful
-                        if (mysqli_num_rows($result1) > 0) {
-                            //Echo an option element with the category ID and name as the value and text respectively
-                            echo "<option value='0' selected disabled>Please Select Lecturer</option>";
-                            while ($row = mysqli_fetch_assoc($result1)) {
-                                $Lecturer_ID = $row['LecturerID'];
-                                $Lecturer_Name = $row['LecturerName'];
-                                $Lecturer_Qualification = $row['LecturerQualification'];
-                                echo "<option value='$Lecturer_ID' data-qualification='$Lecturer_Qualification'>$Lecturer_Name</option>";
-                            }
-                        } else {
-                            // If no lecturer found
-                            echo "<option value='0'>No Lecturer Found</option>";
-                        }
-
-
-                        ?>
-                    </select>
-                    <input type="hidden" name="LecturerName" id="LecturerName" value="<?php echo $Lecturer_Name ?>">
-                    <input type="hidden" name="LecturerQualification" id="LecturerQualification"
-                        value="<?php echo $Lecturer_Qualification ?>">
-                </div>
-            </div>
-
-            <script>
-                // Fetch qualification based on lecturer selection
-                document.getElementById('LecturerID').addEventListener('change', function () {
-                    var selectedIndex = this.selectedIndex;
-                    var selectedOption = this.options[selectedIndex];
-                    var lecturerName = selectedOption.text;
-                    var lecturerQualification = selectedOption.getAttribute('data-qualification');
-
-                    document.getElementById('LecturerName').value = lecturerName;
-                    document.getElementById('LecturerQualification').value = lecturerQualification;
-                }); 
-            </script>
-
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Study Duration (Year)</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="StudyDuration" value="<?php echo $StudyDuration; ?>">
+                    <input type="text" class="form-control" name="Country" value="<?php echo $Country; ?>">
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Learning Platform</label>
+                <label class="col-sm-3 col-form-label">GitHub</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="LearningPlatform"
-                        value="<?php echo $LearningPlatform; ?>">
+                    <input type="text" class="form-control" name="Github" value="<?php echo $Github; ?>">
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Learning Result</label>
+                <label class="col-sm-3 col-form-label">Twitter</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="LearningResult"
-                        value="<?php echo $LearningResult; ?>">
+                    <input type="text" class="form-control" name="Twitter" value="<?php echo $Twitter; ?>">
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Course Outline</label>
+                <label class="col-sm-3 col-form-label">Instagram</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="CourseOutline" value="<?php echo $CourseOutline; ?>">
+                    <input type="text" class="form-control" name="Instagram" value="<?php echo $Instagram; ?>">
                 </div>
             </div>
-
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Facebook</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Facebook" value="<?php echo $Facebook; ?>">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Lecturer Desription</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="LecturerDesription"
+                        value="<?php echo $LecturerDesription; ?>">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="LecturerEmail" value="<?php echo $LecturerEmail; ?>">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Phone</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Phone" value="<?php echo $Phone; ?>">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Introduction</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Introduction" value="<?php echo $Introduction; ?>">
+                </div>
+            </div>
             <?php
             if (!empty($success)) {
                 echo "
@@ -218,10 +187,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             ?>
             <div class="row mb-3">
                 <div class="offset-sm-3 col-sm-3 d-grid">
-                    <button type="submit" class="btn btn-primary" name="AddCourse">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="EditLecturer">Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="CourseDetail.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="LecturerDetail.php" role="button">Cancel</a>
                 </div>
             </div>
         </form>

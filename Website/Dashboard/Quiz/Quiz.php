@@ -13,7 +13,7 @@
     <div class="container">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
             <div style="width: 100%; justify-content: space-between; margin: 1% 0; display: flex;">
-                <a class="btn btn-primary" href="create.php" role="button">New Client</a>
+                <a class="btn btn-primary" href="create.php" role="button">New Quiz</a>
                 <div>
                     <input type="text" name="search" id="search" placeholder="Search Course"
                         value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">

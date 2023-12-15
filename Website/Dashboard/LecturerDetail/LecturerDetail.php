@@ -13,7 +13,6 @@
     <div class="container">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET" name="indexf">
             <div style="width: 100%; justify-content: space-between; margin: 1% 0; display: flex;">
-                <a class="btn btn-primary" href="Lecturer-add.php" role="button">New Lecturer</a>
                 <div>
                     <input type="text" name="search" id="search" placeholder="Search Lecturer"
                         value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
@@ -22,7 +21,7 @@
             </div>
         </form>
         <table class="table table-striped">
-            <thead>
+            <thead> 
                 <tr>
                     <td>Lecturer ID</td>
                     <td>Lecturer Name</td>

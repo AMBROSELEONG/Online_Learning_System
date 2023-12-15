@@ -153,7 +153,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             echo "<option value='0'>No Lecturer Found</option>";
                         }
 
-
                         ?>
                     </select>
                     <input type="hidden" name="LecturerName" id="LecturerName" value="<?php echo $Lecturer_Name ?>">
