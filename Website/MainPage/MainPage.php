@@ -1,6 +1,6 @@
-<?php 
+<?php
 include "../Session.php"
-?>
+    ?>
 <!Doctype html>
 <html lang="en">
 
@@ -47,7 +47,7 @@ include "../Session.php"
             <a href="../AboutUS/AboutUs.html"><i class="iconfont icon-guanyuwomen">
                     <p>About Us</p>
                 </i></a>
-            <a href="../Lecturer/AboutTheTutor.html"><i class="iconfont icon-xuexiao">
+            <a href="../Lecturer/AboutTheTutor.php"><i class="iconfont icon-xuexiao">
                     <p>Tutor</p>
                 </i></a>
             <a href="../Comment/Comment.php"><i class="iconfont icon-comment">
@@ -63,7 +63,7 @@ include "../Session.php"
 
         <button class="openbtn" onclick="openNav()">☰</button>
 
-       <script>
+        <script>
             //Function to open the side panel
             function openNav() {
                 //Get the element with the id "mySidepanel"
@@ -91,13 +91,13 @@ include "../Session.php"
                         <li onclick="window.location.href = '../Comment/Comment.php'">Comment</li>
                         <li onclick="window.location.href = '../ContactUs/ContactUs.php'">Contact Us</li>
                         <li onclick="window.location.href = '../AboutUS/AboutUs.html'">About Us</li>
-                        <li onclick="window.location.href = '../Lecturer/AboutTheTutor.html'">Our Lecturer</li>
+                        <li onclick="window.location.href = '../Lecturer/AboutTheTutor.php'">Our Lecturer</li>
                     </ul>
                 </li>
             </ul>
         </div>
         <script>
-           const menuItems = document.querySelectorAll('.menu > li');
+            const menuItems = document.querySelectorAll('.menu > li');
 
             //Loop through each menu item
             menuItems.forEach((menuItem) => {
@@ -135,7 +135,7 @@ include "../Session.php"
         <div class="progress-container">
             <div class="progress-bar" id="myBar"></div>
         </div>
-       <script>
+        <script>
             // When the user scrolls the page, execute myFunction 
             window.onscroll = function () { myFunction() };
 
@@ -172,7 +172,7 @@ include "../Session.php"
         <script>
             var mySwiper = new Swiper('.swiper-container', {
                 autoplay: {
-                    delay: 3000, 
+                    delay: 3000,
                 },
                 pagination: {
                     el: '.swiper-pagination',
@@ -190,7 +190,7 @@ include "../Session.php"
                 <img src="../img/new-era-university-college.png" alt="New Era University College">
             </div>
         </div>
-       <script>
+        <script>
             //Function to open a page when a tab is clicked
             function openPage(pageName, elmnt, color) {
                 //Declare variables

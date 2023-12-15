@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="AboutTheTutor.css">
     <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="stylesheet" href="../icon2/iconfont.css">
+    <link rel="stylesheet" href="../Dashboard/icon2/iconfont.css">
 </head>
 
 <body>
@@ -39,7 +40,7 @@
             <a href="../AboutUS/AboutUs.html"><i class="iconfont icon-guanyuwomen">
                     <p>About Us</p>
                 </i></a>
-            <a href="../Lecturer/AboutTheTutor.html"><i class="iconfont icon-xuexiao">
+            <a href="../Lecturer/AboutTheTutor.php"><i class="iconfont icon-xuexiao">
                     <p>Tutor</p>
                 </i></a>
             <a href="../Comment/Comment.php"><i class="iconfont icon-comment">
@@ -83,7 +84,7 @@
                         <li onclick="window.location.href = '../Comment/Comment.php'">Comment</li>
                         <li onclick="window.location.href = '../ContactUs/ContactUs.php'">Contact Us</li>
                         <li onclick="window.location.href = '../AboutUS/AboutUs.html'">About Us</li>
-                        <li onclick="window.location.href = '../Lecturer/AboutTheTutor.html'">Our Lecturer</li>
+                        <li onclick="window.location.href = '../Lecturer/AboutTheTutor.php'">Our Lecturer</li>
                     </ul>
                 </li>
             </ul>
@@ -129,26 +130,27 @@
             <p class="declaration">Our leadership team has one goal: to help learners quickly learn knowledge in
                 different fields and develop their abilities.</p>
             <div class="tutorflex">
-                <div class="tutorDiv">
-                    <img src="" alt="">
-                    <h1>Mentor Name</h1>
-                    <h1>subjects</h1>
-                </div>
-                <div class="tutorDiv">
-                    <img src="" alt="">
-                    <h1>Mentor Name</h1>
-                    <h1>subjects</h1>
-                </div>
-                <div class="tutorDiv">
-                    <img src="" alt="">
-                    <h1>Mentor Name</h1>
-                    <h1>subjects</h1>
-                </div>
-                <div class="tutorDiv">
-                    <img src="" alt="">
-                    <h1>Mentor Name</h1>
-                    <h1>subjects</h1>
-                </div>
+                <?php 
+                include "../ConnectDB.php";
+                $sql = "SELECT * FROM lecturer";
+                $result = mysqli_query($conn, $sql);
+
+                if (!$result) {
+                    die ("Invalid Query" . $conn->error);
+                }
+
+                while ($row = $result->fetch_assoc()){
+                    $imageFolder = '../Dashboard/Lecturer/';
+                    $imagePath = $imageFolder . $row['LecturerImage'];
+
+                    echo "<div class='tutorDiv'>
+                            <img src='$imagePath' alt='Lecturer'>
+                            <h1>Lecturer Name: {$row['LecturerName']}</h1>
+                            <h2>Teaching Subject: {$row['CourseName']}</h2>
+                            <h2>Qualification: {$row['LecturerQualification']} Years</h2>
+                        </div>";
+                }
+                ?>
             </div>
         </div>
         <div class="joinour">

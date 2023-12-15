@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="CorusePage.css">
     <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="stylesheet" href="../icon2/iconfont.css">
+    <link rel="stylesheet" href="../Dashboard/icon2/iconfont.css">
 </head>
 
 <body>
@@ -39,7 +40,7 @@
             <a href="../AboutUS/AboutUs.html"><i class="iconfont icon-guanyuwomen">
                     <p>About Us</p>
                 </i></a>
-            <a href="../Lecturer/AboutTheTutor.html"><i class="iconfont icon-xuexiao">
+            <a href="../Lecturer/AboutTheTutor.php"><i class="iconfont icon-xuexiao">
                     <p>Tutor</p>
                 </i></a>
             <a href="../Comment/Comment.php"><i class="iconfont icon-comment">
@@ -83,7 +84,7 @@
                         <li onclick="window.location.href = '../Comment/Comment.php'">Comment</li>
                         <li onclick="window.location.href = '../ContactUs/ContactUs.php'">Contact Us</li>
                         <li onclick="window.location.href = '../AboutUS/AboutUs.html'">About Us</li>
-                        <li onclick="window.location.href = '../Lecturer/AboutTheTutor.html'">Our Lecturer</li>
+                        <li onclick="window.location.href = '../Lecturer/AboutTheTutor.php'">Our Lecturer</li>
                     </ul>
                 </li>
             </ul>
