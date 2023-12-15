@@ -1,7 +1,3 @@
-<?php
-include '../Session.php';
-?>
-
 <!Doctype html>
 <html lang="en">
 
@@ -255,7 +251,7 @@ include '../Session.php';
                     <li>Discover your creative talents!</li>
                     <li>Reveal your unique personality!</li>
                 </ul>
-                <button onclick="window.location.href = '../Course/CoursePage.html'">Go to buy course</button>
+                <button onclick="window.location.href = '../Course/CoursePage.php'">Go to buy course</button>
             </div>
             <div class="tutorial-container-inner-right">
                 <video src="../img/MainPageVideo.mp4" controls style="width:100%; height:100%" autoplay muted loop>
