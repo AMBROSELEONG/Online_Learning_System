@@ -19,6 +19,7 @@
             <thead>
                 <tr>
                     <td>Lecturer ID</td>
+                    <td>Lecturer Image</td>
                     <td>Lecturer Name</td>
                     <td>Lecturer Qualification</td>
                     <td>Course ID</td>
@@ -44,6 +45,7 @@
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>
                                         <td>{$row['LecturerID']}</td>
+                                        <td>{$row['LecturerImage']}</td>
                                         <td>{$row['LecturerName']}</td>
                                         <td>{$row['LecturerQualification']}</td>
                                         <td>{$row['CourseID']}</td>
@@ -55,7 +57,7 @@
                                     </tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='3'>No Record Found</td></tr>";
+                        echo "<tr><td colspan='7'>No Record Found</td></tr>";
                     }
                 } else {
                     // 查询所有类别
@@ -69,6 +71,7 @@
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>
                                     <td>{$row['LecturerID']}</td>
+                                    <td>{$row['LecturerImage']}</td>
                                     <td>{$row['LecturerName']}</td>
                                     <td>{$row['LecturerQualification']}</td>
                                     <td>{$row['CourseID']}</td>
@@ -81,7 +84,7 @@
                     }
                 }
                 ?>
-                
+
             </tbody>
         </table>
     </div>

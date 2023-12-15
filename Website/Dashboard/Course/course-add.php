@@ -77,7 +77,7 @@ if (isset($_POST['AddCourse'])) {
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Category Price</label>
+                <label class="col-sm-3 col-form-label">Coure Price</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="CoursePrice" value="<?php echo $CoursePrice; ?>">
                 </div>

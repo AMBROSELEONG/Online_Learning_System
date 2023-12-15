@@ -3,6 +3,7 @@
 include '../../ConnectDB.php';
 //declare variables to store the course image, name, price, category id and category name
 $LecturerID = "";
+$LecturerImage = "";
 $LecturerName = "";
 $LecturerQualification = "";
 $CourseID = "";
@@ -28,13 +29,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     $LecturerID = $row['LecturerID'];
+    $LecturerImage = $row['LecturerImage'];
     $LecturerName = $row['LecturerName'];
     $LecturerQualification = $row['LecturerQualification'];
     $CourseID = $row['CourseID'];
     $CourseName = $row['CourseName'];
-    
+
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
+    $Filename = $_FILES['LecturerImage']['name'];
+    //check if the file has been uploaded successfully
+    if (
+        move_uploaded_file(
+            $_FILES['LecturerImage']['tmp_name'],
+            "lecturer-image/" . $Filename)
+    ) {
+        //if the file has been uploaded successfully, store the file path in the course image variable
+        $LecturerImage = "lecturer-image/" . $Filename;
+    } else {
+        //if the file has not been uploaded successfully, store an error message in the error variable
+        $error = "File could not be uploaded";
+    }
+
     $LecturerID = $_POST['LecturerID'];
     $LecturerName = $_POST['LecturerName'];
     $LecturerQualification = $_POST['LecturerQualification'];
@@ -42,11 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $CourseName = $_POST['CourseName'];
 
     do {
-        if (empty($LecturerID) || empty($LecturerName) || empty($LecturerQualification) || empty($CourseID) || empty($CourseName)) {
+        if (empty($LecturerID) || empty($LecturerName) || empty($LecturerQualification) || empty($CourseID) || empty($CourseName) || empty($LecturerImage)) {
             $error = "Please fill in all fields";
             break;
         }
-        $sql = "UPDATE lecturer SET LecturerName = '$LecturerName', LecturerQualification = '$LecturerQualification', CourseID = '$CourseID', CourseName = '$CourseName' WHERE LecturerID = '$LecturerID'";
+        $sql = "UPDATE lecturer SET LecturerImage = '$LecturerImage', LecturerName = '$LecturerName', LecturerQualification = '$LecturerQualification', CourseID = '$CourseID', CourseName = '$CourseName' WHERE LecturerID = '$LecturerID'";
         $result = $conn->query($sql);
         if (!$result) {
             $error = "Error updating record: " . $conn->error;
@@ -77,6 +93,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <form method="post" enctype="multipart/form-data">
             <input type="hidden" name="LecturerID" value="<?php echo $LecturerID; ?>">
             <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Lecturer Image</label>
+                <div class="col-sm-6">
+                    <input type="file" class="form-control" name="LecturerImage" value="<?php echo $LecturerImage; ?>">
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Lecturer Name</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="LecturerName" value="<?php echo $LecturerName; ?>">
@@ -85,7 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Lecturer Qualification</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="LecturerQualification" value="<?php echo $LecturerQualification; ?>">
+                    <input type="text" class="form-control" name="LecturerQualification"
+                        value="<?php echo $LecturerQualification; ?>">
                 </div>
             </div>
             <div class="row mb-3">

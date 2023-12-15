@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo '<li class="list-group-item"><strong>' . htmlspecialchars($row['UserName']) . ':</strong><br>' . htmlspecialchars($row['CourseName']) . '<br>' . htmlspecialchars($row['Content']) . '<br><small>Posted on ' . htmlspecialchars($row['PostDate']) . '</small></li>';
         }
         echo '</ul>';
+        header("location: Comment.php");
     } else {
         //if there are no comments, display a message
         echo "No comments yet.";
