@@ -5,6 +5,7 @@ $QuizImage = "";
 $QuizName = "";
 $CategoryID = "";
 $CategoryName = "";
+
 $error = "";
 $success = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -26,12 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $QuizID = $row['QuizID'];
 
-
-
-    $QuizImage = $_POST['QuizImage'];
-    $QuizName = $_POST['QuizName'];
-    $CategoryID = $_POST['CategoryID'];
-    $CategoryName = $_POST['CategoryName'];
+    $QuizImage = $row['QuizImage'];
+    $QuizName = $row['QuizName'];
+    $CategoryID = $row['CategoryID'];
+    $CategoryName = $row['CategoryName'];
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $filename = $_FILES['QuizImage']['name'];
@@ -45,10 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $CategoryName = $_POST['CategoryName'];
 
     do {
-        if (empty($QuizID) || empty($QuizName) || empty($CategorID) || empty($CategoryName)) {
+        if (empty($QuizID) || empty($QuizName) || empty($CategorID) || empty($CategoryName) || empty($QuizImage)) {
             $error = "All the fields are required";
             break;
         }
+
         $sql = "UPDATE quiz SET QuizImage='$QuizImage', CourseName = '$QuizName' CategoryID = '$CategoryID', CategoryName = '$CategoryName' WHERE QuizID = '$QuizID'";
         $result = $conn->query($sql);
 
@@ -58,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
 
         $success = "Quiz Updated Successfully";
-
         header("location: Quiz.php");
         exit;
     } while (false);
@@ -77,31 +76,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </head>
 
 <body>
-    <div class="container ny-5">
-        <h2>New Client</h2>
+    <div class="container my-5">
+        <h2>Edit Quiz</h2>
 
         <form method="post" enctype="multipart/form-data">
-            <div class="mb-3">
+            <input type="hidden" class="form-control" name="QuizID" value="<?php echo $QuizID; ?>">
+            <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Quiz Image</label>
                 <div class="col-sm-6">
-                    <input type="hidden" class="form-control" name="QuizImage" value="<?php echo $QuizImage; ?>">
+                    <input type="file" class="form-control" name="QuizImage" value="<?php echo $QuizImage; ?>">
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Quiz Name</label>
                 <div class="col-sm-6">
-                    <input type="file" class="form-control" name="QuizName" value="<?php echo $QuizName; ?>">
+                    <input type="text" class="form-control" name="QuizName" value="<?php echo $QuizName; ?>">
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Category Name</label>
                 <div class="col-sm-6">
-                    <select type="text" class="form-control" name="CategoryName">
+                    <select type="text" class="form-control" name="CategoryID">
                         <?php
                         $query1 = "SELECT CategoryID, CategoryName FROM quizcategory";
                         $result1 = mysqli_query($conn, $query1);
 
-                        if ($result1) {
+                        if (mysqli_num_rows($result1) > 0) {
+                            //Echo an option element with the category ID and name as the value and text respectively
+                            echo "<option value='0' selected disabled>Please Select Lecturer</option>";
+
                             while ($row = mysqli_fetch_assoc($result1)) {
                                 $Category_ID = $row['CategoryID'];
                                 $Category_Name = $row['CategoryName'];
@@ -115,49 +118,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <input type="hidden" name="CategoryName" id="CategoryName" value="<?php echo $Category_Name ?>">
                 </div>
             </div>
-    </div>
-    <script>
-        document.getElementById('CategoryID').addEventListener('change', function () {
-            var selectedIndex = this.selectedIndex;
-            var selectedOption = this.options[selectedIndex];
-            var categoryName = selectedOption.text;
+            <script>
+                document.getElementById('CategoryID').addEventListener('change', function () {
+                    var selectedIndex = this.selectedIndex;
+                    var selectedOption = this.options[selectedIndex];
+                    var categoryName = selectedOption.text;
 
-            document.getElementById('CategoryName').value = categoryName;
-        });
-    </script>
+                    document.getElementById('CategoryName').value = categoryName;
+                });
+            </script>
 
-    <?php
-    if (!empty($successMeassage)) {
-        echo "
-                       <div class='row mb-3'>
-                            <div class='offset-sm-3 col-sm-6'>
-                                <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                                    <strong>$successMessage</strong>
-                                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                                </div>
-                            </div>
-                        </div>
-                        ";
-    }
+            <?php
+            if (!empty($success)) {
+                echo "
+                <div class ='alert alert-warning alert-dismissible fade show' role='alert'>
+                    <strong>$success</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+            }
 
-    if (!empty($errorMessage)) {
-        echo "
-                        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                        <strong>$errorMessage</strong>
-                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                        </div>";
-    }
-    ?>
-
-    <div class="row mb-3">
-        <div class="offset-sm-3 col-sm-3 d-grid">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        <div class="col-sm-3 d-grid">
-            <a class="btn btn-outline-primary" href="Quiz.php" role="button">Cancel</a>
-        </div>
-    </div>
-    </form>
+            if (!empty($error)) {
+                echo "
+                <div class ='alert alert-warning alert-dismissible fade show' role='alert'>
+                    <strong>$error</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+            }
+            ?>
+            <div class="row mb-3">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <a class="btn btn-outline-primary" href="Quiz.php" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

@@ -41,6 +41,19 @@ if (isset($_POST['AddCourse'])) {
     if ($result) {
         //if the query has been executed successfully, store a success message in the success variable
         $success = "Course Added Successfully";
+        // Additional code to insert into coursedetail table
+        $courseID = mysqli_insert_id($conn); // Get the ID of the inserted course
+
+        // Your query to insert into coursedetail table
+        $detailQuery = "INSERT INTO coursedetail (CourseID, CourseImage, CourseName, CoursePrice, CategoryID, CategoryName) VALUES ('$courseID', '$CourseImage','$CourseName','$CoursePrice','$CategoryID','$CategoryName')";
+
+        // Execute the query to add details to the coursedetail table
+        $detailResult = mysqli_query($conn, $detailQuery);
+
+        if (!$detailResult) {
+            // If insertion into coursedetail fails, handle the error
+            $error .= " Details could not be added: " . $conn->error;
+        }
         header("location: Course.php");
     } else {
         //if the query has not been executed successfully, store an error message in the error variable
@@ -92,14 +105,15 @@ if (isset($_POST['AddCourse'])) {
                         $result1 = mysqli_query($conn, $query1);
 
                         // Check if the query was successful
-                        if ($result1) {
+                        if (mysqli_num_rows($result1) > 0) {
+                            echo "<option value='0'selected disabled>Please Select Lecturer</option>";
                             // Loop through the result and display the options
                             while ($row = mysqli_fetch_assoc($result1)) {
                                 // Get the category ID and name from the result
                                 $Category_ID = $row['CategoryID'];
                                 $Category_Name = $row['CategoryName'];
                                 // Display the option
-                                echo "<option class='form-control' value='$Category_ID'>$Category_Name</option>";
+                                echo "<option class='form-control' value='$Category_ID' data-qualification='$Lecturer_Qualification'>$Category_Name</option>";
                             }
                         } else {
                             // Display a message if no category was found

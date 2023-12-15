@@ -4,8 +4,6 @@ include '../../ConnectDB.php';
 $LecturerImage = "";
 $LecturerName = "";
 $LecturerQualification = "";
-$CourseID = "";
-$CourseName = "";
 
 $error = "";
 $success = "";
@@ -28,15 +26,26 @@ if (isset($_POST['AddLecturer'])) {
 
     $LecturerName = $_POST['LecturerName'];
     $LecturerQualification = $_POST['LecturerQualification'];
-    $CourseID = $_POST['CourseID'];
-    $CourseName = $_POST['CourseName'];
 
-    $query = "INSERT INTO lecturer(LecturerImage ,LecturerName, LecturerQualification, CourseID, CourseName) VALUES ('$LecturerImage','$LecturerName', '$LecturerQualification',$CourseID,'$CourseName')";
+    $query = "INSERT INTO lecturer(LecturerImage ,LecturerName, LecturerQualification) VALUES ('$LecturerImage','$LecturerName', '$LecturerQualification')";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        $success = "Lecturer Added Successfully";
-        header("location: Lecturer.php");
+
+        $newLecturerID = mysqli_insert_id($conn);
+
+        // Now you can proceed to add the details into the lecturerdetail table
+        $queryLecturerDetail = "INSERT INTO lecturerdetail(LecturerID, LecturerName, LecturerQualification) VALUES ('$newLecturerID', '$LecturerName','$LecturerQualification')";
+
+        $resultLecturerDetail = mysqli_query($conn, $queryLecturerDetail);
+
+        if ($resultLecturerDetail) {
+            // Successfully added details into lecturerdetail
+            header("location: Lecturer.php");
+        } else {
+            // Error adding details into lecturerdetail
+            $error = "Error adding details into lecturerdetail: " . $conn->error;
+        }
     } else {
         $error = "Lecturer Added Error" . $conn->error;
     }
@@ -79,39 +88,6 @@ if (isset($_POST['AddLecturer'])) {
                         value="<?php echo $LecturerQualification; ?>">
                 </div>
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Course Name</label>
-                <div class="col-sm-6">
-                    <select type="text" class="form-control" name="CourseID" id="CourseID">
-                        <?php
-                        $query1 = "SELECT CourseID, CourseName FROM course";
-                        $result1 = mysqli_query($conn, $query1);
-
-                        if ($result1) {
-                            while ($row = mysqli_fetch_assoc($result1)) {
-                                $Course_ID = $row['CourseID'];
-                                $Course_Name = $row['CourseName'];
-                                echo "<option class='form-control' value='$Course_ID'>$Course_Name</option>";
-                            }
-                        } else {
-                            echo "<option class='form-control' value='0'>No Course Found</option>";
-                        }
-                        ?>
-                    </select>
-                    <input type="hidden" name="CourseName" id="CourseName" value="<?php echo $Course_Name ?>">
-                </div>
-            </div>
-
-            <script>
-                document.getElementById('CourseID').addEventListener('change', function () {
-                    var selectedIndex = this.selectedIndex;
-                    var selectedOption = this.options[selectedIndex];
-                    var courseName = selectedOption.text;
-
-                    document.getElementById('CourseName').value = courseName;
-                });
-            </script>
-
             <?php
             if (!empty($success)) {
                 echo "

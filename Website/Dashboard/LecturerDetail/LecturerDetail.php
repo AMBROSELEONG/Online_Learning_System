@@ -1,7 +1,10 @@
+<!doctype html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lecturer</title>
+    <title>Lecturer Detail</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -22,9 +25,11 @@
             <thead>
                 <tr>
                     <td>Lecturer ID</td>
-                    <td>Lecturer Image</td>
                     <td>Lecturer Name</td>
+                    <td>Lecturer Professional</td>
                     <td>Lecturer Qualification</td>
+                    <td>Course Name</td>
+                    <td>Lecturer Email</td>
                     <td>Operating</td>
                 </tr>
             </thead>
@@ -35,7 +40,7 @@
                 // 判断是否有搜索值
                 if (isset($_GET['search'])) {
                     $filterValue = $_GET['search'];
-                    $query = "SELECT * FROM lecturer WHERE LecturerID LIKE '%$filterValue%' OR LecturerName LIKE '%$filterValue%'";
+                    $query = "SELECT * FROM lecturerdetail WHERE LecturerID LIKE '%$filterValue%' OR LecturerName LIKE '%$filterValue%' OR Professional LIKE '%$filterValue%' OR LecturerQualification LIKE '%$filterValue%' OR CourseName LIKE '%$filterValue%' OR LecturerEmail LIKE '%$filterValue%'";
                     $result = $conn->query($query);
 
                     if (!$result) {
@@ -46,12 +51,13 @@
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>
                                         <td>{$row['LecturerID']}</td>
-                                        <td>{$row['LecturerImage']}</td>
                                         <td>{$row['LecturerName']}</td>
+                                        <td>{$row['Professional']}</td>
                                         <td>{$row['LecturerQualification']}</td>
+                                        <td>{$row['CourseName']}</td>
+                                        <td>{$row['LecturerEmail']}</td>
                                         <td>
-                                            <a href='Lecturer-edit.php?LecturerID={$row['LecturerID']}' class='btn btn-primary btn-sm'>Edit</a>
-                                            <a href='Lecturer-delete.php?LecturerID={$row['LecturerID']}' class='btn btn-danger btn-sm'>Delete</a>
+                                            <a href='detail-edit.php?LecturerID={$row['LecturerID']}' class='btn btn-primary btn-sm'>Edit</a>
                                         </td>
                                     </tr>";
                         }
@@ -60,7 +66,7 @@
                     }
                 } else {
                     // 查询所有类别
-                    $sql = "SELECT * FROM lecturer";
+                    $sql = "SELECT * FROM lecturerdetail";
                     $result = $conn->query($sql);
 
                     if (!$result) {
@@ -70,12 +76,13 @@
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>
                                     <td>{$row['LecturerID']}</td>
-                                    <td>{$row['LecturerImage']}</td>
                                     <td>{$row['LecturerName']}</td>
+                                    <td>{$row['Professional']}</td>
                                     <td>{$row['LecturerQualification']}</td>
+                                    <td>{$row['CourseName']}</td>
+                                    <td>{$row['LecturerEmail']}</td>
                                     <td>
-                                        <a href='Lecturer-edit.php?LecturerID={$row['LecturerID']}' class='btn btn-primary btn-sm'>Edit</a>
-                                        <a href='Lecturer-delete.php?LecturerID={$row['LecturerID']}' class='btn btn-danger btn-sm'>Delete</a>
+                                        <a href='detail-edit.php?LecturerID={$row['LecturerID']}' class='btn btn-primary btn-sm'>Edit</a>
                                     </td>
                                 </tr>";
                     }
@@ -92,3 +99,5 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 </body>
+
+</html>

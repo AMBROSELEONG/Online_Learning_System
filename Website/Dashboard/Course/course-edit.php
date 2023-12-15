@@ -80,12 +80,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             //if the query fails, store an error message in the error variable
             $error = "Error updating record: " . $conn->error;
             break;
+        } else {
+            // Update coursedetail table
+            $detailQuery = "UPDATE coursedetail SET CourseImage = '$CourseImage', CourseName = '$CourseName',  CoursePrice = '$CoursePrice', CategoryID = '$CategoryID', CategoryName = '$CategoryName' WHERE CourseID = '$CourseID'";
+            $detailResult = $conn->query($detailQuery);
+
+            if (!$detailResult) {
+                $error .= " Error updating record in coursedetail table: " . $conn->error;
+            } else {
+                $success = "Course and Course Details updated successfully";
+                header("location: Course.php");
+                exit;
+            }
         }
-        //if the query is successful, store a success message in the success variable
-        $success = "Course updated successfully";
-        //redirect to the course page
-        header("location: Course.php");
-        exit;
     } while (false);
 }
 ?>
@@ -128,15 +135,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <label class="col-sm-3 col-form-label">Category Name</label>
                 <div class="col-sm-6">
                     <select type="text" class="form-control" name="CategoryID" id="CategoryID">
-                       <?php
+                        <?php
                         //Create a query to select all the categories from the coursecategory table
                         $query1 = "SELECT CategoryID, CategoryName FROM coursecategory";
                         //Execute the query and store the result in the $result1 variable
                         $result1 = mysqli_query($conn, $query1);
 
                         //Check if the query was successful
-                        if ($result1) {
+                        if (mysqli_num_rows($result1) > 0) {
                             //Loop through the result set
+                            echo "<option value='0' selected disabled>Please Select Lecturer</option>";
                             while ($row = mysqli_fetch_assoc($result1)) {
                                 //Store the category ID and name in the $Category_ID and $Category_Name variables respectively
                                 $Category_ID = $row['CategoryID'];

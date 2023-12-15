@@ -6,8 +6,6 @@ $LecturerID = "";
 $LecturerImage = "";
 $LecturerName = "";
 $LecturerQualification = "";
-$CourseID = "";
-$CourseName = "";
 $error = "";
 $success = "";
 
@@ -32,8 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $LecturerImage = $row['LecturerImage'];
     $LecturerName = $row['LecturerName'];
     $LecturerQualification = $row['LecturerQualification'];
-    $CourseID = $row['CourseID'];
-    $CourseName = $row['CourseName'];
 
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
@@ -54,23 +50,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $LecturerID = $_POST['LecturerID'];
     $LecturerName = $_POST['LecturerName'];
     $LecturerQualification = $_POST['LecturerQualification'];
-    $CourseID = $_POST['CourseID'];
-    $CourseName = $_POST['CourseName'];
 
     do {
-        if (empty($LecturerID) || empty($LecturerName) || empty($LecturerQualification) || empty($CourseID) || empty($CourseName) || empty($LecturerImage)) {
+        if (empty($LecturerID) || empty($LecturerName) || empty($LecturerQualification) || empty($LecturerImage)) {
             $error = "Please fill in all fields";
             break;
         }
-        $sql = "UPDATE lecturer SET LecturerImage = '$LecturerImage', LecturerName = '$LecturerName', LecturerQualification = '$LecturerQualification', CourseID = '$CourseID', CourseName = '$CourseName' WHERE LecturerID = '$LecturerID'";
+
+        $sql = "UPDATE lecturer SET LecturerImage = '$LecturerImage', LecturerName = '$LecturerName', LecturerQualification = '$LecturerQualification' WHERE LecturerID = '$LecturerID'";
         $result = $conn->query($sql);
         if (!$result) {
-            $error = "Error updating record: " . $conn->error;
+            $error = "Error updating lecturer record: " . $conn->error;
             break;
+        } else {
+            $sqlLecturerDetail = "UPDATE lecturerdetail SET LecturerName = '$LecturerName', LecturerQualification = '$LecturerQualification' WHERE LecturerID = '$LecturerID'";
+            $resultLecturerDetail = $conn->query($sqlLecturerDetail);
+
+            if (!$resultLecturerDetail) {
+                $error = "Error updating lecturer detail: " . $conn->error;
+                break;
+            } else {
+                $success = "Lecturer updated successfully";
+                header("location: Lecturer.php");
+                exit;
+            }
         }
-        $success = "Course updated successfully";
-        header("location: Lecturer.php");
-        exit;
     } while (false);
 }
 ?>
@@ -111,38 +115,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         value="<?php echo $LecturerQualification; ?>">
                 </div>
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Course Name</label>
-                <div class="col-sm-6">
-                    <select type="text" class="form-control" name="CourseID" id="CourseID">
-                        <?php
-                        $query1 = "SELECT CourseID, CourseName FROM course";
-                        $result1 = mysqli_query($conn, $query1);
-
-                        if ($result1) {
-                            while ($row = mysqli_fetch_assoc($result1)) {
-                                $Course_ID = $row['CourseID'];
-                                $Course_Name = $row['CourseName'];
-                                echo "<option class='form-control' value='$Course_ID'>$Course_Name</option>";
-                            }
-                        } else {
-                            echo "<option class='form-control' value='0'>No Category Found</option>";
-                        }
-                        ?>
-                    </select>
-                    <input type="hidden" name="CourseName" id="CourseName" value="<?php echo $Course_Name ?>">
-                </div>
-            </div>
-
-            <script>
-                document.getElementById('CourseID').addEventListener('change', function () {
-                    var selectedIndex = this.selectedIndex;
-                    var selectedOption = this.options[selectedIndex];
-                    var courseName = selectedOption.text;
-
-                    document.getElementById('CourseName').value = courseName;
-                });
-            </script>
 
             <?php
             if (!empty($success)) {
