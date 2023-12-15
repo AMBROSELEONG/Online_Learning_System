@@ -81,7 +81,7 @@
                 </li>
             </ul>
         </div>
-       <script>
+        <script>
             // Select all menu items
             const menuItems = document.querySelectorAll('.menu > li');
 
@@ -92,7 +92,7 @@
 
                 // Set the max height of the submenu
                 submenu.style.maxHeight = submenu.scrollHeight + 'px';
-              
+
                 // Add an event listener to the menu item
                 menuItem.addEventListener('mouseenter', () => {
                     // Increase the max height of the submenu when the mouse enters the menu item
@@ -122,7 +122,7 @@
         <div class="progress-container">
             <div class="progress-bar" id="myBar"></div>
         </div>
-       <script>
+        <script>
             // When the user scrolls the page, execute myFunction 
             window.onscroll = function () { myFunction() };
 
@@ -139,162 +139,43 @@
         </script>
         <div id="myBtnContainer">
             <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-            <button class="btn" onclick="filterSelection('Category1')"> Category1</button>
-            <button class="btn" onclick="filterSelection('Category2')"> Category2</button>
+            <?php
+            include "../ConnectDB.php";
+            $sql = "SELECT * FROM coursecategory";
+            $result = mysqli_query($conn, $sql);
+
+            if (!$result) {
+                die("Invalid Query" . $conn->error);
+            }
+
+            while ($row = $result->fetch_assoc()) {
+                echo "<button class='btn' onclick=\"filterSelection('{$row['CategoryID']}')\">" . $row['CategoryName'] . "</button>";
+            }
+            ?>
         </div>
 
         <div class="container">
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
+            <?php
+            $sqlcourse = "SELECT * FROM course";
+            $resultcourse = mysqli_query($conn, $sqlcourse);
+            if (!$resultcourse) {
+                die("Invalid Query" . $conn->error);
+            }
 
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="add-to-cart">Add To Cart</button>
-            </div>
-
-
+            while ($row = $resultcourse->fetch_assoc()) {
+                // Path to the folder containing the images for courses
+                $imageFolder = '../Dashboard/Course/';
+                $imagePath = $imageFolder . $row['CourseImage']; // Assuming 'CourseImage' contains the image file name
+        
+                echo "<div class='filterDiv {$row['CategoryID']}' onclick=\"window.location.href='../CourseDetail/CourseDetail.php?CourseID={$row['CourseID']}'\">";
+                echo "<img src='$imagePath' alt='Course'>";
+                echo "<h1>{$row['CourseName']}</h1>";
+                echo "<p class='price'>RM {$row['CoursePrice']}</p>";
+                echo "<h2>{$row['CategoryName']}</h2>";
+                echo "<button class='add-to-cart'>Add To Cart</button>";
+                echo "</div>";
+            }
+            ?>
 
             <script>
                 filterSelection("all")

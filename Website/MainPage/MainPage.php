@@ -29,7 +29,7 @@ include '../Session.php';
             <a href="../MainPage/MainPage.php"><i class="iconfont icon-book1">
                     <p>Home</p>
                 </i></a>
-            <a href="../Course/CoursePage.html"><i class="iconfont icon-book1">
+            <a href="../Course/CoursePage.php"><i class="iconfont icon-book1">
                     <p>Course</p>
                 </i></a>
             <a href="../Quiz/QuizList.html"><i class="iconfont icon-shijuan">
@@ -79,7 +79,7 @@ include '../Session.php';
                 <li class="item">Category<span></span>
                     <ul>
                         <li onclick="window.location.href = '../MainPage/MainPage.php'">Home</li>
-                        <li onclick="window.location.href = '../Course/CoursePage.html'">Course</li>
+                        <li onclick="window.location.href = '../Course/CoursePage.php'">Course</li>
                         <li onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</li>
                     </ul>
                 </li>

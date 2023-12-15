@@ -241,7 +241,6 @@ body section {
 .filterDiv img {
     width: 100%;
     height: 30%;
-    background-color: rgb(255, 140, 0);
 }
 
 .filterDiv h1 {
@@ -260,7 +259,7 @@ body section {
     color: black;
     font-size: 2rem;
     margin: 5%;
-} 
+}
 
 .add-to-cart {
     position: absolute;
@@ -287,8 +286,8 @@ body section {
 
 #myBtnContainer {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
     position: fixed;
     z-index: 10;
     top: 5.8rem;
@@ -416,11 +415,11 @@ body section {
         cursor: pointer;
     }
 
-    .filterDiv{
+    .filterDiv {
         width: calc((100% - 10% - 6%)/3);
     }
 
-    .btn{
+    .btn {
         width: 15rem;
     }
 }
@@ -440,7 +439,7 @@ body section {
         margin: 0;
     }
 
-    .filterDiv{
+    .filterDiv {
         width: calc((100% - 10% - 6%)/2);
         height: 40rem;
     }

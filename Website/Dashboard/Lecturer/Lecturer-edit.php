@@ -10,22 +10,29 @@ $error = "";
 $success = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //check if the lecturer id is set
     if (!isset($_GET['LecturerID'])) {
+        //if the lecturer id is not set, redirect to the lecturer page
         header("Location: Lecturer.php");
         exit;
     }
 
+    //store the lecturer id in the id variable
     $id = $_GET['LecturerID'];
 
+    //query the database to get the lecturer details
     $sql = "SELECT * FROM lecturer WHERE LecturerID = '$id'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
+    //check if the lecturer details are not set
     if (!$row) {
+        //if the lecturer details are not set, redirect to the lecturer page
         header("Location: Lecturer.php");
         exit;
     }
 
+    //store the lecturer details in the variables
     $LecturerID = $row['LecturerID'];
     $LecturerImage = $row['LecturerImage'];
     $LecturerName = $row['LecturerName'];
@@ -33,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
+    //store the uploaded file name in the Filename variable
     $Filename = $_FILES['LecturerImage']['name'];
     //check if the file has been uploaded successfully
     if (
@@ -47,29 +55,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $error = "File could not be uploaded";
     }
 
+    //store the post values in the variables
     $LecturerID = $_POST['LecturerID'];
     $LecturerName = $_POST['LecturerName'];
     $LecturerQualification = $_POST['LecturerQualification'];
 
     do {
+        //check if the post values are empty
         if (empty($LecturerID) || empty($LecturerName) || empty($LecturerQualification) || empty($LecturerImage)) {
+            //if the post values are empty, store an error message in the error variable
             $error = "Please fill in all fields";
             break;
         }
 
+        //update the lecturer record in the database
         $sql = "UPDATE lecturer SET LecturerImage = '$LecturerImage', LecturerName = '$LecturerName', LecturerQualification = '$LecturerQualification' WHERE LecturerID = '$LecturerID'";
         $result = $conn->query($sql);
         if (!$result) {
+            //if there is an error updating the lecturer record, store the error message in the error variable
             $error = "Error updating lecturer record: " . $conn->error;
             break;
         } else {
+            //if the lecturer record has been updated successfully, update the lecturer details in the lecturerdetail table
             $sqlLecturerDetail = "UPDATE lecturerdetail SET LecturerName = '$LecturerName', LecturerQualification = '$LecturerQualification' WHERE LecturerID = '$LecturerID'";
             $resultLecturerDetail = $conn->query($sqlLecturerDetail);
 
             if (!$resultLecturerDetail) {
+                //if there is an error updating the lecturer details, store the error message in the error variable
                 $error = "Error updating lecturer detail: " . $conn->error;
                 break;
             } else {
+                //if the lecturer details have been updated successfully, store a success message in the success variable and redirect to the lecturer page
                 $success = "Lecturer updated successfully";
                 header("location: Lecturer.php");
                 exit;

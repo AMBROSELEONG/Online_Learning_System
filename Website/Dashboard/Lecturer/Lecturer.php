@@ -29,21 +29,30 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
+               <?php
+                //include the connection to the database
                 include '../../ConnectDB.php';
 
-                // 判断是否有搜索值
+                //check if the search parameter is set
                 if (isset($_GET['search'])) {
+                    //store the value of the search parameter in a variable
                     $filterValue = $_GET['search'];
+                    //create a query to search for the value of the filter
                     $query = "SELECT * FROM lecturer WHERE LecturerID LIKE '%$filterValue%' OR LecturerName LIKE '%$filterValue%'";
+                    //execute the query
                     $result = $conn->query($query);
 
+                    //check if the query was successful
                     if (!$result) {
+                        //if not, print an error message
                         die("Invalid query" . $conn->error);
                     }
 
+                    //check if the query returned any results
                     if ($result->num_rows > 0) {
+                        //if yes, loop through the results
                         while ($row = $result->fetch_assoc()) {
+                            //print the results in a table row
                             echo "<tr>
                                         <td>{$row['LecturerID']}</td>
                                         <td>{$row['LecturerImage']}</td>
@@ -56,18 +65,23 @@
                                     </tr>";
                         }
                     } else {
+                        //if no, print a message
                         echo "<tr><td colspan='7'>No Record Found</td></tr>";
                     }
                 } else {
-                    // 查询所有类别
+                    //if the search parameter is not set, execute the following query
                     $sql = "SELECT * FROM lecturer";
                     $result = $conn->query($sql);
 
+                    //check if the query was successful
                     if (!$result) {
+                        //if not, print an error message
                         die("Invalid query" . $conn->error);
                     }
 
+                    //check if the query returned any results
                     while ($row = $result->fetch_assoc()) {
+                        //print the results in a table row
                         echo "<tr>
                                     <td>{$row['LecturerID']}</td>
                                     <td>{$row['LecturerImage']}</td>
@@ -81,7 +95,6 @@
                     }
                 }
                 ?>
-
             </tbody>
         </table>
     </div>

@@ -1,30 +1,42 @@
 <?php
+//include the database connection file
 include '../../ConnectDB.php';
+//declare variables to store the values from the form
 $QuizID = "";
 $QuizImage = "";
 $QuizName = "";
 $CategoryID = "";
 $CategoryName = "";
 
+//declare variables to store error and success messages
 $error = "";
 $success = "";
+//check if the request method is GET
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
+    //check if the QuizID is set
     if (!isset($_GET['QuizID'])) {
+        //if not, redirect to the Quiz.php page
         header("location: Quiz.php");
         exit;
     }
+    //store the value of the QuizID from the GET request
     $id = $_GET['QuizID'];
 
+    //query the database to get the values of the QuizID from the GET request
     $sql = "SELECT * FROM quiz WHERE QuizID=$id";
     $result = $conn->query($sql);
+    //fetch the row from the result
     $row = $result->fetch_assoc();
 
+    //check if the row is empty
     if (!$row) {
+        //if empty, redirect to the Quiz.php page
         header("location: Quiz.php");
         exit;
     }
 
+    //store the values from the row in the variables
     $QuizID = $row['QuizID'];
 
     $QuizImage = $row['QuizImage'];
@@ -33,37 +45,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $CategoryName = $row['CategoryName'];
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //store the value of the file from the POST request
     $filename = $_FILES['QuizImage']['name'];
 
+    //move the file to the quiz-image directory
     if (move_uploaded_file($_FILES['QuizImage']['tmp_name'], "quiz-image/" . $filename)) {
+        //store the path of the file in the variable
         $QuizImage = "quiz-image/" . $filename;
     }
+    //store the values from the POST request in the variables
+    
+    $QuizID = $_GET['QuizID'];
     $QuizID = $_POST['QuizID'];
     $QuizName = $_POST['QuizName'];
     $CategoryID = $_POST['CategoryID'];
     $CategoryName = $_POST['CategoryName'];
 
+    //do the following until the condition is false
     do {
+        //check if any of the variables are empty
         if (empty($QuizID) || empty($QuizName) || empty($CategoryID) || empty($CategoryName) || empty($QuizImage)) {
+            //if empty, set the error message and break out of the loop
             $error = "All the fields are required";
             break;
         }
 
+        //update the values of the QuizID, QuizImage, QuizName, CategoryID, and CategoryName in the database
         $sql = "UPDATE quiz SET QuizImage='$QuizImage', QuizName = '$QuizName', CategoryID = '$CategoryID', CategoryName = '$CategoryName' WHERE QuizID = '$QuizID'";
         $result = $conn->query($sql);
 
+        //check if the result is empty
         if (!$result) {
+            //if empty, set the error message and break out of the loop
             $error = "Error updating record: " . $conn->error;
             break;
         }
 
+        //if successful, set the success message and redirect to the Quiz.php page
         $success = "Quiz Updated Successfully";
         header("location: Quiz.php");
         exit;
     } while (false);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

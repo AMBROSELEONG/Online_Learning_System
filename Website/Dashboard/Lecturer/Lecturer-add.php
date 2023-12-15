@@ -1,6 +1,7 @@
 <?php
 include '../../ConnectDB.php';
 
+// Initialize variables
 $LecturerImage = "";
 $LecturerName = "";
 $LecturerQualification = "";
@@ -8,8 +9,10 @@ $LecturerQualification = "";
 $error = "";
 $success = "";
 
+// Check if the AddLecturer button has been clicked
 if (isset($_POST['AddLecturer'])) {
 
+    // Get the file name from the uploaded file
     $Filename = $_FILES['LecturerImage']['name'];
     //check if the file has been uploaded successfully
     if (
@@ -24,14 +27,17 @@ if (isset($_POST['AddLecturer'])) {
         $error = "File could not be uploaded";
     }
 
+    // Get the lecturer name, qualification and file name from the form
     $LecturerName = $_POST['LecturerName'];
     $LecturerQualification = $_POST['LecturerQualification'];
 
+    // Insert the lecturer details into the lecturer table
     $query = "INSERT INTO lecturer(LecturerImage ,LecturerName, LecturerQualification) VALUES ('$LecturerImage','$LecturerName', '$LecturerQualification')";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
 
+        // Get the new lecturer ID
         $newLecturerID = mysqli_insert_id($conn);
 
         // Now you can proceed to add the details into the lecturerdetail table
@@ -47,6 +53,7 @@ if (isset($_POST['AddLecturer'])) {
             $error = "Error adding details into lecturerdetail: " . $conn->error;
         }
     } else {
+        // Error adding lecturer details into the lecturer table
         $error = "Lecturer Added Error" . $conn->error;
     }
 

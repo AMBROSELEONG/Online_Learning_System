@@ -36,7 +36,6 @@
                 <?php
                 include '../../ConnectDB.php';
 
-                // 判断是否有搜索值
                 if (isset($_GET['search'])) {
                     $filterValue = $_GET['search'];
                     $query = "SELECT * FROM lecturerdetail WHERE LecturerID LIKE '%$filterValue%' OR LecturerName LIKE '%$filterValue%' OR Professional LIKE '%$filterValue%' OR LecturerQualification LIKE '%$filterValue%' OR CourseName LIKE '%$filterValue%' OR LecturerEmail LIKE '%$filterValue%'";
@@ -64,7 +63,6 @@
                         echo "<tr><td colspan='7'>No Record Found</td></tr>";
                     }
                 } else {
-                    // 查询所有类别
                     $sql = "SELECT * FROM lecturerdetail";
                     $result = $conn->query($sql);
 

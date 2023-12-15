@@ -47,6 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
     //store the course information in the corresponding variables
+    $LecturerID = isset($_POST['LecturerID']) ? $_POST['LecturerID'] : '';
+    $LecturerName = isset($_POST['LecturerName']) ? $_POST['LecturerName'] : '';
+    // Rest of your code remains the same
     $LecturerID = $_POST['LecturerID'];
     $Professional = $_POST['Professional'];
     $Country = $_POST['Country'];
@@ -101,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <form method="post">
             <input type="hidden" name="LecturerID" value="<?php echo $LecturerID; ?>">
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Professional</label>
+                <label class="col-sm-3 col-form-label">Lecturer Name</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="LecturerName" value="<?php echo $LecturerName; ?>"
                         disabled>

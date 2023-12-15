@@ -47,6 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
     //store the file name in the Filename variable
     $Filename = $_FILES['CourseImage']['name'];
+
+    $CourseID = $_GET['CourseID'];
     //check if the file has been uploaded successfully
     if (
         move_uploaded_file(
@@ -116,19 +118,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Course Image</label>
                 <div class="col-sm-6">
-                    <input type="file" class="form-control" name="CourseImage" value="<?php echo $CourseImage; ?>">
+                    <input type="file" class="form-control" name="CourseImage" value="<?php echo $CourseImage; ?>"
+                        required>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Course Name</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="CourseName" value="<?php echo $CourseName; ?>">
+                    <input type="text" class="form-control" name="CourseName" value="<?php echo $CourseName; ?>"
+                        required>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Course Price</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="CoursePrice" value="<?php echo $CoursePrice; ?>">
+                    <input type="text" class="form-control" name="CoursePrice" value="<?php echo $CoursePrice; ?>"
+                        required>
                 </div>
             </div>
             <div class="row mb-3">

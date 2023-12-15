@@ -50,10 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
     //store the course information in the corresponding variables
+    $CourseID = $_GET['CourseID'];
     $CourseID = $_POST['CourseID'];
     $CourseName = $_POST['CourseName'];
     $CourseDescription = $_POST['CourseDescription'];
-    $LecturerID = $_POST['LecturerID'];
+    $LecturerID = isset($_POST['LecturerID']) ? $_POST['LecturerID'] : '';
     $LecturerName = $_POST['LecturerName'];
     $LecturerQualification = $_POST['LecturerQualification'];
     $StudyDuration = $_POST['StudyDuration'];
