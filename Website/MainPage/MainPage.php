@@ -1,3 +1,6 @@
+<?php 
+include "../Session.php"
+?>
 <!Doctype html>
 <html lang="en">
 
@@ -8,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="MainPage.css">
     <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="stylesheet" href="../icon2/iconfont.css">
+    <link rel="stylesheet" href="../Dashboard/icon2/iconfont.css">
     <link rel="icon" type="image/x-icon" href="">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
@@ -51,6 +55,9 @@
                 </i></a>
             <a href="../Mailbox/Mailbox.php"><i class="iconfont icon-youxiang">
                     <p>Mailbox</p>
+                </i></a>
+            <a href="../Logout.php"><i class="iconfont icon-Logout">
+                    <p>Logout</p>
                 </i></a>
         </div>
 
@@ -120,6 +127,7 @@
             <i class="iconfont icon-31gouwuchexuanzhong"
                 onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
+            <i class="iconfont icon-Logout" onclick="window.location.href='../Logout.php'"></i>
         </div>
     </header>
 

@@ -51,20 +51,23 @@ include 'find-user.php';
             <a href="../Mailbox/Mailbox.php"><i class="iconfont icon-youxiang">
                     <p>Mailbox</p>
                 </i></a>
+            <a href="../Logout.php"><i class="iconfont icon-Logout">
+                    <p>Logout</p>
+                </i></a>
         </div>
 
         <button class="openbtn" onclick="openNav()">☰</button>
 
-       <script>
-            //This function opens the side panel when called
+        <script>
+            //Function to open the side panel
             function openNav() {
-                //Get the element with the id of "mySidepanel"
+                //Get the element with the id "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "30rem";
             }
 
-            //This function closes the side panel when called
+            //Function to close the side panel
             function closeNav() {
-                //Get the element with the id of "mySidepanel"
+                //Get the element with the id "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "0rem";
             }
         </script>
@@ -88,24 +91,23 @@ include 'find-user.php';
                 </li>
             </ul>
         </div>
-       <script>
-            // Get all the menu items
+        <script>
             const menuItems = document.querySelectorAll('.menu > li');
 
-            // Loop through the menu items
+            //Loop through each menu item
             menuItems.forEach((menuItem) => {
-                // Get the submenu
+                //Get the submenu
                 const submenu = menuItem.querySelector('ul');
 
-                // Set the max height of the submenu
+                //Set the max height of the submenu
                 submenu.style.maxHeight = submenu.scrollHeight + 'px';
 
-                // When the mouse enters the menu item, set the max height of the submenu
+                //When the mouse enters the menu item, set the max height of the submenu
                 menuItem.addEventListener('mouseenter', () => {
                     submenu.style.maxHeight = submenu.scrollHeight + 'px';
                 });
 
-                // When the mouse leaves the menu item, set the max height of the submenu to 0
+                //When the mouse leaves the menu item, set the max height of the submenu to 0
                 menuItem.addEventListener('mouseleave', () => {
                     submenu.style.maxHeight = '0';
                 });
@@ -120,9 +122,10 @@ include 'find-user.php';
             <i class="iconfont icon-31gouwuchexuanzhong"
                 onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
+            <i class="iconfont icon-Logout" onclick="window.location.href='../Logout.php'"></i>
         </div>
     </header>
-
+    
     <section>
         <div class="container">
 

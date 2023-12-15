@@ -54,16 +54,23 @@
             <a href="../Mailbox/Mailbox.php"><i class="iconfont icon-youxiang">
                     <p>Mailbox</p>
                 </i></a>
+            <a href="../Logout.php"><i class="iconfont icon-Logout">
+                    <p>Logout</p>
+                </i></a>
         </div>
 
         <button class="openbtn" onclick="openNav()">☰</button>
 
         <script>
+            //Function to open the side panel
             function openNav() {
+                //Get the element with the id "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "30rem";
             }
 
+            //Function to close the side panel
             function closeNav() {
+                //Get the element with the id "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "0rem";
             }
         </script>
@@ -118,6 +125,7 @@
             <i class="iconfont icon-31gouwuchexuanzhong"
                 onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
+            <i class="iconfont icon-Logout" onclick="window.location.href='../Logout.php'"></i>
         </div>
     </header>
 

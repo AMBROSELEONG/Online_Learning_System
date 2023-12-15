@@ -48,20 +48,23 @@
             <a href="../Mailbox/Mailbox.php"><i class="iconfont icon-youxiang">
                     <p>Mailbox</p>
                 </i></a>
+            <a href="../Logout.php"><i class="iconfont icon-Logout">
+                    <p>Logout</p>
+                </i></a>
         </div>
 
         <button class="openbtn" onclick="openNav()">☰</button>
 
         <script>
-            //Function to open the side panel when called
+            //Function to open the side panel
             function openNav() {
-                //Get the element with the id of "mySidepanel"
+                //Get the element with the id "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "30rem";
             }
 
-            //Function to close the side panel when called
+            //Function to close the side panel
             function closeNav() {
-                //Get the element with the id of "mySidepanel"
+                //Get the element with the id "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "0rem";
             }
         </script>
@@ -88,18 +91,20 @@
         <script>
             const menuItems = document.querySelectorAll('.menu > li');
 
+            //Loop through each menu item
             menuItems.forEach((menuItem) => {
+                //Get the submenu
                 const submenu = menuItem.querySelector('ul');
 
-                // 计算子菜单的最大高度
+                //Set the max height of the submenu
                 submenu.style.maxHeight = submenu.scrollHeight + 'px';
 
-                // 当鼠标悬停在菜单项上时，将 max-height 设置为计算值
+                //When the mouse enters the menu item, set the max height of the submenu
                 menuItem.addEventListener('mouseenter', () => {
                     submenu.style.maxHeight = submenu.scrollHeight + 'px';
                 });
 
-                // 当鼠标离开时，将 max-height 重置为 0
+                //When the mouse leaves the menu item, set the max height of the submenu to 0
                 menuItem.addEventListener('mouseleave', () => {
                     submenu.style.maxHeight = '0';
                 });
@@ -114,6 +119,7 @@
             <i class="iconfont icon-31gouwuchexuanzhong"
                 onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
+            <i class="iconfont icon-Logout" onclick="window.location.href='../Logout.php'"></i>
         </div>
     </header>
 

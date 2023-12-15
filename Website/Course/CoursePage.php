@@ -21,7 +21,7 @@
             <a href="../MainPage/MainPage.php"><i class="iconfont icon-book1">
                     <p>Home</p>
                 </i></a>
-            <a href="../Course/CoursePage.html"><i class="iconfont icon-book1">
+            <a href="../Course/CoursePage.php"><i class="iconfont icon-book1">
                     <p>Course</p>
                 </i></a>
             <a href="../Quiz/QuizList.html"><i class="iconfont icon-shijuan">
@@ -48,16 +48,23 @@
             <a href="../Mailbox/Mailbox.php"><i class="iconfont icon-youxiang">
                     <p>Mailbox</p>
                 </i></a>
+            <a href="../Logout.php"><i class="iconfont icon-Logout">
+                    <p>Logout</p>
+                </i></a>
         </div>
 
         <button class="openbtn" onclick="openNav()">☰</button>
 
         <script>
+            //Function to open the side panel
             function openNav() {
+                //Get the element with the id "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "30rem";
             }
 
+            //Function to close the side panel
             function closeNav() {
+                //Get the element with the id "mySidepanel"
                 document.getElementById("mySidepanel").style.width = "0rem";
             }
         </script>
@@ -67,7 +74,7 @@
                 <li class="item">Category<span></span>
                     <ul>
                         <li onclick="window.location.href = '../MainPage/MainPage.php'">Home</li>
-                        <li onclick="window.location.href = '../Course/CoursePage.html'">Course</li>
+                        <li onclick="window.location.href = '../Course/CoursePage.php'">Course</li>
                         <li onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</li>
                     </ul>
                 </li>
@@ -82,26 +89,23 @@
             </ul>
         </div>
         <script>
-            // Select all menu items
             const menuItems = document.querySelectorAll('.menu > li');
 
-            // Loop through each menu item
+            //Loop through each menu item
             menuItems.forEach((menuItem) => {
-                // Select the submenu
+                //Get the submenu
                 const submenu = menuItem.querySelector('ul');
 
-                // Set the max height of the submenu
+                //Set the max height of the submenu
                 submenu.style.maxHeight = submenu.scrollHeight + 'px';
 
-                // Add an event listener to the menu item
+                //When the mouse enters the menu item, set the max height of the submenu
                 menuItem.addEventListener('mouseenter', () => {
-                    // Increase the max height of the submenu when the mouse enters the menu item
                     submenu.style.maxHeight = submenu.scrollHeight + 'px';
                 });
 
-                // Add an event listener to the menu item
+                //When the mouse leaves the menu item, set the max height of the submenu to 0
                 menuItem.addEventListener('mouseleave', () => {
-                    // Decrease the max height of the submenu when the mouse leaves the menu item
                     submenu.style.maxHeight = '0';
                 });
             });
@@ -115,6 +119,7 @@
             <i class="iconfont icon-31gouwuchexuanzhong"
                 onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
+            <i class="iconfont icon-Logout" onclick="window.location.href='../Logout.php'"></i>
         </div>
     </header>
 
@@ -166,7 +171,7 @@
                 // Path to the folder containing the images for courses
                 $imageFolder = '../Dashboard/Course/';
                 $imagePath = $imageFolder . $row['CourseImage']; // Assuming 'CourseImage' contains the image file name
-        
+            
                 echo "<div class='filterDiv {$row['CategoryID']}' onclick=\"window.location.href='../CourseDetail/CourseDetail.php?CourseID={$row['CourseID']}'\">";
                 echo "<img src='$imagePath' alt='Course'>";
                 echo "<h1>{$row['CourseName']}</h1>";
