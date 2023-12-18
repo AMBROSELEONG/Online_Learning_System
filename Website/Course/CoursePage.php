@@ -28,7 +28,7 @@
             <a href="../Quiz/QuizList.html"><i class="iconfont icon-shijuan">
                     <p>Quiz</p>
                 </i></a>
-            <a href="../ShoppingCart/ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
+            <a href="../ShoppingCart/ShoppingCart.php"><i class="iconfont icon-31gouwuchexuanzhong">
                     <p>Shopping Cart</p>
                 </i></a>
             <a href="../UserProfile/UserProfile.php"><i class="iconfont icon-user">
@@ -118,7 +118,7 @@
             </form>
             <i class="iconfont icon-youxiang" onclick="window.location.href='../Mailbox/Mailbox.php'"></i>
             <i class="iconfont icon-31gouwuchexuanzhong"
-                onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
+                onclick="window.location.href='../ShoppingCart/ShoppingCart.php'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
             <i class="iconfont icon-Logout" onclick="window.location.href='../Logout.php'"></i>
         </div>
@@ -178,7 +178,7 @@
                 echo "<h1>{$row['CourseName']}</h1>";
                 echo "<p class='price'>RM {$row['CoursePrice']}</p>";
                 echo "<h2>{$row['CategoryName']}</h2>";
-                echo "<button class='add-to-cart'>Add To Cart</button>";
+                echo "<button class='add-to-cart'>Check Detail</button>";
                 echo "</div>";
             }
             ?>

@@ -2,7 +2,6 @@
 include "../ConnectDB.php";
 
 $courseID = $_GET['CourseID'];
-
 $sql = "SELECT * FROM coursedetail WHERE CourseID = $courseID";
 $result = mysqli_query($conn, $sql);
 
@@ -11,6 +10,16 @@ if (!$result) {
 }
 
 $row = mysqli_fetch_assoc($result);
+
+// At the beginning of the page or wherever you want to display the message
+session_start();
+
+// Check if the success message exists and display it
+if (isset($_SESSION['cart_message'])) {
+    echo "<script type='text/javascript'>alert('{$_SESSION['cart_message']}')</script>";
+    unset($_SESSION['cart_message']); // Clear the message after displaying it
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +61,7 @@ $row = mysqli_fetch_assoc($result);
                             $imageFolder = '../Dashboard/Course/';
                             $imagePath = $imageFolder . $row['CourseImage'];
                             echo "<img style='max-width: 100%; max-height: 100vh; margin: auto;' class='rounded-4 fit'
-                                src='$imagePath' />"; 
+                                src='$imagePath' />";
                             ?>
                         </div>
                     </aside>
@@ -98,9 +107,10 @@ $row = mysqli_fetch_assoc($result);
                             </div>
 
                             <hr />
-                            <a href="#" class="btn btn-warning shadow-0"> Buy now </a>
-                            <a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to
-                                cart </a>
+                            <a class="btn btn-primary shadow-0"
+                                href="../ShoppingCart/index.php?CourseID=<?php echo $row['CourseID']; ?>">
+                                <i class="me-1 fa fa-shopping-basket"></i> Add to Cart
+                            </a>
                         </div>
                     </main>
                     <div class="tab-content" id="ex1-content">

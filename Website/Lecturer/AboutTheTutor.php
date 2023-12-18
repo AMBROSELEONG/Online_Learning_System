@@ -28,7 +28,7 @@
             <a href="../Quiz/QuizList.html"><i class="iconfont icon-shijuan">
                     <p>Quiz</p>
                 </i></a>
-            <a href="../ShoppingCart/ShoppingCart.html"><i class="iconfont icon-31gouwuchexuanzhong">
+            <a href="../ShoppingCart/ShoppingCart.php"><i class="iconfont icon-31gouwuchexuanzhong">
                     <p>Shopping Cart</p>
                 </i></a>
             <a href="../UserProfile/UserProfile.php"><i class="iconfont icon-user">
@@ -118,7 +118,7 @@
             </form>
             <i class="iconfont icon-youxiang" onclick="window.location.href='../Mailbox/Mailbox.php'"></i>
             <i class="iconfont icon-31gouwuchexuanzhong"
-                onclick="window.location.href='../ShoppingCart/ShoppingCart.html'"></i>
+                onclick="window.location.href='../ShoppingCart/ShoppingCart.php'"></i>
             <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
             <i class="iconfont icon-Logout" onclick="window.location.href='../Logout.php'"></i>
         </div>
@@ -130,16 +130,16 @@
             <p class="declaration">Our leadership team has one goal: to help learners quickly learn knowledge in
                 different fields and develop their abilities.</p>
             <div class="tutorflex">
-                <?php 
+                <?php
                 include "../ConnectDB.php";
                 $sql = "SELECT * FROM lecturer";
                 $result = mysqli_query($conn, $sql);
 
                 if (!$result) {
-                    die ("Invalid Query" . $conn->error);
+                    die("Invalid Query" . $conn->error);
                 }
 
-                while ($row = $result->fetch_assoc()){
+                while ($row = $result->fetch_assoc()) {
                     $imageFolder = '../Dashboard/Lecturer/';
                     $imagePath = $imageFolder . $row['LecturerImage'];
 

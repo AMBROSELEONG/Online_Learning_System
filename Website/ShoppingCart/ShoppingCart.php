@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shopping Cart</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
@@ -24,22 +24,38 @@
                     <h1 style="text-align: center;">Shopping Cart</h1>
                     <div class="table-responsive">
                         <table class="table table-striped">
-                            <tr>
-                                <td>Product ID</td>
-                                <td>Product Name</td>
-                                <td>Product Type</td>
-                                <td>Price</td>
-                                <td>Operating</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">X</button>
-                                </td>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <td>Product ID</td>
+                                    <td>Product Name</td>
+                                    <td>Product Type</td>
+                                    <td>Price</td>
+                                    <td>Operating</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                include '../ConnectDB.php';
+                                include '../Session.php';
+
+                                $sql = "SELECT * FROM `shoppingcart` WHERE `UserID` = '$userID'";
+                                $result = $conn->query($sql);
+                                $counter = 1;
+                                while ($row = $result->fetch_assoc()) {
+                                    echo " <tr>
+                                            <td>{$counter}</td>
+                                            <td>{$row['CourseName']}</td>
+                                            <td>{$row['CategoryName']}</td>
+                                            <td>RM {$row['CoursePrice']}</td>
+                                            <td>
+                                                <a href='cart-delete.php?CartID={$row['CartID']}' class='btn btn-danger btn-sm'>Delete</a>
+                                            </td>
+                                        </tr>";
+                                    $counter++;
+                                }
+                                ?>
+                            </tbody>
+
                         </table>
                     </div>
 
