@@ -8,6 +8,7 @@ $QuizImage = "";
 $QuizName = "";
 $CategoryID = "";
 $CategoryName = "";
+$QuestionText = "";
 
 $error = "";
 $success = "";
@@ -46,12 +47,24 @@ if (isset($_POST['AddQuiz'])) {
     if ($result) {
         //if the query has been executed successfully, store a success message in the success variable
         $success = "Quiz Added Successfully";
+       
+        $QuizID = mysqli_insert_id($conn);
+
+        $detailQuery = "INSERT INTO quizquestion (QuizID) VALUES ('$QuizID')";
+
+        $detailResult = mysqli_query($conn, $detailQuery);
+
+        if (!$detailResult) {
+            // If insertion into coursedetail fails, handle the error
+            $error .= " Details could not be added: " . $conn->error;
+        }
         //redirect the user to the Quiz.php page
         header("location: Quiz.php");
     } else {
         //if the query has not been executed successfully, store an error message in the error variable
-        $error = "Quiz Not Added" . $conn->error;
+        $error = "Course Not Added" . $conn->error;
     }
+        
 }
 ?>
 

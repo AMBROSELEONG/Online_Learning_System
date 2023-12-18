@@ -73,12 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         //update the values of the QuizID, QuizImage, QuizName, CategoryID, and CategoryName in the database
         $sql = "UPDATE quiz SET QuizImage='$QuizImage', QuizName = '$QuizName', CategoryID = '$CategoryID', CategoryName = '$CategoryName' WHERE QuizID = '$QuizID'";
         $result = $conn->query($sql);
-
         //check if the result is empty
         if (!$result) {
             //if empty, set the error message and break out of the loop
             $error = "Error updating record: " . $conn->error;
             break;
+        } else {
+            // Update quizquestion table
+            $detailQuery = "UPDATE quizquestion SET QuestionID = '$CategoryID' , QuestionText = '$QuizName' WHERE QuizID = '$QuizID'";
+            $detailResult = $conn->query($detailQuery);
+
+            if (!$detailResult) {
+                $error .= " Error updating record in coursedetail table: " . $conn->error;
+            } else {
+                $success = "Course and Course Details updated successfully";
+                header("location: Quiz.php");
+                exit;
+            }
         }
 
         //if successful, set the success message and redirect to the Quiz.php page
