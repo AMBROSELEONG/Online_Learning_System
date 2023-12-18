@@ -35,14 +35,22 @@
                             </thead>
                             <tbody>
                                 <?php
+                                //include the connection to the database
                                 include '../ConnectDB.php';
+                                //include the session
                                 include '../Session.php';
 
+                                //create a SQL query to select all the data from the shoppingcart table where the userID matches the userID of the current user
                                 $sql = "SELECT * FROM `shoppingcart` WHERE `UserID` = '$userID'";
+                                //execute the query
                                 $result = $conn->query($sql);
+                                //set the counter to 1
                                 $counter = 1;
+                                //set the total price to 0
                                 $totalPrice = 0;
+                                //while loop to loop through the result
                                 while ($row = $result->fetch_assoc()) {
+                                    //echo the data from the result
                                     echo " <tr>
                                             <td>{$counter}</td>
                                             <td>{$row['CourseName']}</td>
@@ -52,7 +60,9 @@
                                                 <a href='cart-delete.php?CartID={$row['CartID']}' class='btn btn-danger btn-sm'>Delete</a>
                                             </td>
                                         </tr>";
+                                    //add the course price to the total price
                                     $totalPrice += $row['CoursePrice'];
+                                    //increment the counter
                                     $counter++;
                                 }
                                 ?>
@@ -101,23 +111,35 @@
                                             </div>
                                         </div>
                                         <script>
+                                            //This function selects the credit card option
                                             function selectCreditCard() {
+                                                //Get the credit card radio button element
                                                 var creditCardRadio = document.getElementById('radioNoLabel1v');
+                                                //Check if the element exists
                                                 if (creditCardRadio) {
+                                                    //Set the radio button to checked
                                                     creditCardRadio.checked = true;
                                                 }
                                             }
 
+                                            //This function selects the debit card option
                                             function selectDebitCard() {
+                                                //Get the debit card radio button element
                                                 var debitCartRadio = document.getElementById('radioNoLabel2v');
+                                                //Check if the element exists
                                                 if (debitCartRadio) {
+                                                    //Set the radio button to checked
                                                     debitCartRadio.checked = true;
                                                 }
                                             }
 
+                                            //This function selects the paypal option
                                             function selectPaypal() {
+                                                //Get the paypal radio button element
                                                 var paypalRadio = document.getElementById('radioNoLabel3v');
+                                                //Check if the element exists
                                                 if (paypalRadio) {
+                                                    //Set the radio button to checked
                                                     paypalRadio.checked = true;
                                                 }
                                             }
@@ -169,9 +191,9 @@
                                             var totalAmount = '<?php echo $Total; ?>';
 
                                             var redirectURLs = {
-                                                radioNoLabel1v: '../CheckOut/CardCheckOut.html',
-                                                radioNoLabel2v: '../CheckOut/CardCheckOut.html',
-                                                radioNoLabel3v: '../CheckOut/FPXCheckOut.html'
+                                                radioNoLabel1v: '../CheckOut/CardCheckOut.php',
+                                                radioNoLabel2v: '../CheckOut/CardCheckOut.php',
+                                                radioNoLabel3v: '../CheckOut/FPXCheckOut.php'
                                             };
 
                                             if (selectedOption in redirectURLs) {
@@ -180,7 +202,14 @@
                                                     totalAmount: totalAmount
                                                 };
                                                 var jsonData = JSON.stringify(data);
-                                                window.location.href = redirectURLs[selectedOption] + '?totalAmount=' + totalAmount; // 将总金额作为URL参数传递
+
+                                                // Use AJAX to store totalAmount in session
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.open('POST', 'totalSession.php'); // Replace with your PHP script to handle session storage
+                                                xhr.setRequestHeader('Content-Type', 'application/json');
+                                                xhr.send(jsonData);
+
+                                                window.location.href = redirectURLs[selectedOption] + '?totalAmount=' + totalAmount;
                                             } else {
                                                 console.error('Page');
                                             }

@@ -1,3 +1,17 @@
+<?php
+include '../ConnectDB.php';
+include '../ShoppingCart/totalSession.php';
+
+$CartID = $_GET['cartIDs'];
+$sql = "SELECT * FROM orders WHERE CartID = '$CartID'";
+$result = $conn->query($sql);
+
+if (!$result) {
+  die("Invalid query" . $conn->error);
+}
+
+$cartIDs = isset($_GET['cartIDs']) ? explode(',', $_GET['cartIDs']) : [];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,11 +19,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <title>Receipt Design</title>
+  <title>Receipt</title>
 </head>
 
 <body>
-
+  <script type='text/javascript'>alert('Payment Successful');</script>
   <div class="container mt-4">
     <div class="row">
       <div class="col-md-6 offset-md-3">
@@ -20,41 +34,51 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-8">
-                <p><strong>Receipt No:</strong> 12345</p>
-                <p id="currentDate"><strong>Date:</strong></p>
-              </div>
-              <div class="col-md-4 text-right">
-                <p><strong>Receipt Type:</strong> Pay</p>
+                <p><strong>Receipt No: </strong>
+                  <?php
+                  $receiptNo = rand(10000, 99999);
+                  echo $receiptNo;
+                  ?>
+                </p>
+                <p id="currentDate"><strong>Date: </strong>
+                  <?php echo "{['OrderDate']}" ?>
+                </p>
               </div>
             </div>
             <hr>
             <table class="table">
               <thead>
                 <tr>
-                  <th>Course</th>
-                  <th>Quantity</th>
-                  <th>Price Per Unit</th>
+                  <th>No</th>
+                  <th>Course Name</th>
                   <th>Price</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>商品A</td>
-                  <td>2</td>
-                  <td>$20.00</td>
-                  <td>$40.00</td>
-                </tr>
-                <tr>
-                  <td>商品B</td>
-                  <td>1</td>
-                  <td>$15.00</td>
-                  <td>$15.00</td>
-                </tr>
+                <?php
+                $counter = 1;
+                foreach ($cartIDs as $cartID) {
+                  $sql = "SELECT * FROM orders WHERE CartID = '$cartID'";
+                  $result = $conn->query($sql);
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      echo "<tr>";
+                      echo "<td>{$counter}</td>";
+                      echo "<td>{$row['CourseName']}</td>";
+                      echo "<td>{$row['CoursePrice']}</td>";
+                      echo "</tr>";
+                      $counter++;
+                    }
+                  }
+                }
+                ?>
               </tbody>
             </table>
             <hr>
             <div class="text-right">
-              <p><strong>Total:</strong> $55.00</p>
+              <p><strong>Total:</strong>
+                <?php echo isset($_SESSION['totalAmount']) ? $_SESSION['totalAmount'] : ''; ?>
+              </p>
             </div>
           </div>
         </div>
