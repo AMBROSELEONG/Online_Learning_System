@@ -143,7 +143,7 @@
                     $imageFolder = '../Dashboard/Lecturer/';
                     $imagePath = $imageFolder . $row['LecturerImage'];
 
-                    echo "<div class='tutorDiv'>
+                    echo "<div class='tutorDiv'onclick=\"window.location.href='../LecturerDetail/LecturerDetail.php?LecturerID={$row['LecturerID']}'\">
                             <img src='$imagePath' alt='Lecturer'>
                             <h1>Lecturer Name: {$row['LecturerName']}</h1>
                             <h2>Teaching Subject: {$row['CourseName']}</h2>
