@@ -18,8 +18,8 @@ include 'find-index.php';
             <button>Profile</button>
             <button onclick="window.location.href='../UserResume/UserResume.php'"
                 script="window.location.replace('../UserResume/UserRusume.php')">Resume</button>
-            <button onclick="window.location.href='../UserHistory/UserHistory.html'"
-                script="window.location.replace('../UserHistory/UserHistory.html')">History</button>
+            <button onclick="window.location.href='../UserHistory/UserHistory.php'"
+                script="window.location.replace('../UserHistory/UserHistory.php')">History</button>
         </div>
     </div>
     <img src="<?php echo $image; ?>" alt="User Image" class="user-img">

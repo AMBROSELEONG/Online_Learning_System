@@ -18,25 +18,41 @@
             <button>History</button>
         </div>
     </div>
-    <img class="user-img" src=""></img>
     <div class="container-lower">
         <div class="container-content">
             <h1>Purchase History</h1>
             <h2 style="font-weight: normal;">Manage your recent orders & invoices</h2>
             <table>
                 <tr>
-                    <th>Invoice ID</th>
+                    <th>Order ID</th>
                     <th>Course Name</th>
-                    <th>Status</th>
-                    <th>Purchase Date</th>
+                    <th>Course Price</th>
+                    <th>Order Date</th>
                 </tr>
-                <tr>
-                    <th>DWD-1</th>
-                    <th>HTML</th>
-                    <th>Paid</th>
-                    <th>5/11/2023</th>
-                </tr>
+                <tbody>
+                    <?php
+                    include '../Session.php';
+                    include '../ConnectDB.php';
 
+                    $sql = "SELECT * FROM orders WHERE UserID = '$userID'";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {
+                        die("Invalid query" . $conn->$error);
+                    }
+
+                    while ($row = $result->fetch_assoc()) {
+                        echo "  <tr>
+                                    <td>$row[OrderID]</td>
+                                    <td>$row[CourseName]</td>
+                                    <td>$row[CoursePrice]</td>
+                                    <td>$row[OrderDate]</td>
+                                </tr>";
+                    }
+                    ?>
+
+                </tbody>
             </table>
         </div>
     </div>
