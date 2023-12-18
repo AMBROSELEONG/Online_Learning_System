@@ -41,6 +41,7 @@
                                 $sql = "SELECT * FROM `shoppingcart` WHERE `UserID` = '$userID'";
                                 $result = $conn->query($sql);
                                 $counter = 1;
+                                $totalPrice = 0;
                                 while ($row = $result->fetch_assoc()) {
                                     echo " <tr>
                                             <td>{$counter}</td>
@@ -51,6 +52,7 @@
                                                 <a href='cart-delete.php?CartID={$row['CartID']}' class='btn btn-danger btn-sm'>Delete</a>
                                             </td>
                                         </tr>";
+                                    $totalPrice += $row['CoursePrice'];
                                     $counter++;
                                 }
                                 ?>
@@ -107,25 +109,37 @@
                                 <div class="col-lg-4 col-xl-3">
                                     <div class="d-flex justify-content-between" style="font-weight: 500;">
                                         <p class="mb-2">Subtotal</p>
-                                        <p class="mb-2">$23.49</p>
+                                        <p class="mb-2">RM
+                                            <?php echo "$totalPrice" ?>
+                                        </p>
                                     </div>
 
+                                    <?php
+                                    $Tax = $totalPrice * 0.05;
+                                    $Total = $totalPrice + $Tax;
+                                    ?>
                                     <div class="d-flex justify-content-between" style="font-weight: 500;">
-                                        <p class="mb-0">Shipping</p>
-                                        <p class="mb-0">$2.99</p>
+                                        <p class="mb-0">Service Fee</p>
+                                        <p class="mb-0">RM
+                                            <?php echo "$Tax" ?>
+                                        </p>
                                     </div>
 
                                     <hr class="my-4">
 
                                     <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
                                         <p class="mb-2">Total (tax included)</p>
-                                        <p class="mb-2">$26.48</p>
+                                        <p class="mb-2">RM
+                                            <?php echo "$Total" ?>
+                                        </p>
                                     </div>
 
                                     <button type="button" class="btn btn-primary btn-block btn-lg">
                                         <div class="d-flex justify-content-between">
                                             <span>Checkout</span>
-                                            <span>$26.48</span>
+                                            <span>RM
+                                                <?php echo "$Total" ?>
+                                            </span>
                                         </div>
                                     </button>
                                 </div>
