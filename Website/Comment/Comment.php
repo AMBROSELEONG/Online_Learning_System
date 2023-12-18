@@ -64,7 +64,7 @@ function getUsernameFromUserID($conn, $userID)
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../Course/CoursePage.html" style="font-size: 20px;">Course</a>
+                        <a class="nav-link" href="../Course/CoursePage.php" style="font-size: 20px;">Course</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Quiz/QuizList.html" style="font-size: 20px;">Quiz</a>
