@@ -68,39 +68,60 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
                                     <form>
                                         <div class="d-flex flex-row pb-3">
+                                            <div class="rounded border w-100 p-3" onclick="selectCreditCard()">
+                                                <p class="d-flex align-items-center mb-0">
+                                                    <i class="fab fa-cc-mastercard fa-2x text-dark pe-2"></i>Credit Card
+                                                </p>
+                                            </div>
                                             <div class="d-flex align-items-center pe-2">
                                                 <input class="form-check-input" type="radio" name="radioNoLabel"
                                                     id="radioNoLabel1v" value="" aria-label="..." checked />
                                             </div>
-                                            <div class="rounded border w-100 p-3">
-                                                <p class="d-flex align-items-center mb-0">
-                                                    <i class="fab fa-cc-mastercard fa-2x text-dark pe-2"></i>Credit
-                                                    Card
-                                                </p>
-                                            </div>
                                         </div>
                                         <div class="d-flex flex-row pb-3">
-                                            <div class="d-flex align-items-center pe-2">
-                                                <input class="form-check-input" type="radio" name="radioNoLabel"
-                                                    id="radioNoLabel2v" value="" aria-label="..." />
-                                            </div>
-                                            <div class="rounded border w-100 p-3">
+                                            <div class="rounded border w-100 p-3" onclick="selectDebitCard()">
                                                 <p class="d-flex align-items-center mb-0">
                                                     <i class="fab fa-cc-visa fa-2x fa-lg text-dark pe-2"></i>Debit Card
                                                 </p>
                                             </div>
-                                        </div>
-                                        <div class="d-flex flex-row">
                                             <div class="d-flex align-items-center pe-2">
                                                 <input class="form-check-input" type="radio" name="radioNoLabel"
-                                                    id="radioNoLabel3v" value="" aria-label="..." />
+                                                    id="radioNoLabel2v" value="" aria-label="..." />
                                             </div>
-                                            <div class="rounded border w-100 p-3">
+                                        </div>
+                                        <div class="d-flex flex-row">
+                                            <div class="rounded border w-100 p-3" onclick="selectPaypal()">
                                                 <p class="d-flex align-items-center mb-0">
                                                     <i class="fab fa-cc-paypal fa-2x fa-lg text-dark pe-2"></i>PayPal
                                                 </p>
                                             </div>
+                                            <div class="d-flex align-items-center pe-2">
+                                                <input class="form-check-input" type="radio" name="radioNoLabel"
+                                                    id="radioNoLabel3v" value="" aria-label="..." />
+                                            </div>
                                         </div>
+                                        <script>
+                                            function selectCreditCard() {
+                                                var creditCardRadio = document.getElementById('radioNoLabel1v');
+                                                if (creditCardRadio) {
+                                                    creditCardRadio.checked = true;
+                                                }
+                                            }
+
+                                            function selectDebitCard() {
+                                                var debitCartRadio = document.getElementById('radioNoLabel2v');
+                                                if (debitCartRadio) {
+                                                    debitCartRadio.checked = true;
+                                                }
+                                            }
+
+                                            function selectPaypal() {
+                                                var paypalRadio = document.getElementById('radioNoLabel3v');
+                                                if (paypalRadio) {
+                                                    paypalRadio.checked = true;
+                                                }
+                                            }
+                                        </script>
                                     </form>
                                 </div>
                                 <div class="col-md-6 col-lg-4 col-xl-6">
@@ -134,14 +155,37 @@
                                         </p>
                                     </div>
 
-                                    <button type="button" class="btn btn-primary btn-block btn-lg">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg" onclick="checkout()">
                                         <div class="d-flex justify-content-between">
                                             <span>Checkout</span>
-                                            <span>RM
+                                            <span id="totalAmount">RM
                                                 <?php echo "$Total" ?>
                                             </span>
                                         </div>
                                     </button>
+                                    <script>
+                                        function checkout() {
+                                            var selectedOption = document.querySelector('input[name="radioNoLabel"]:checked').id;
+                                            var totalAmount = '<?php echo $Total; ?>';
+
+                                            var redirectURLs = {
+                                                radioNoLabel1v: '../CheckOut/CardCheckOut.html',
+                                                radioNoLabel2v: '../CheckOut/CardCheckOut.html',
+                                                radioNoLabel3v: '../CheckOut/FPXCheckOut.html'
+                                            };
+
+                                            if (selectedOption in redirectURLs) {
+                                                var data = {
+                                                    selectedOption: selectedOption,
+                                                    totalAmount: totalAmount
+                                                };
+                                                var jsonData = JSON.stringify(data);
+                                                window.location.href = redirectURLs[selectedOption] + '?totalAmount=' + totalAmount; // 将总金额作为URL参数传递
+                                            } else {
+                                                console.error('Page');
+                                            }
+                                        }
+                                    </script>
                                 </div>
                             </div>
                         </div>

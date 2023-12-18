@@ -10,12 +10,29 @@
 
 <body>
     <div class="container mt-5">
-            <img src="https://www.ditaselia.my/wp-content/uploads/2020/09/FPX-Logo.png" alt="FPX-Logo"
-                style="width: 30%; margin: 0 35%;"></img>
+        <img src="https://www.ditaselia.my/wp-content/uploads/2020/09/FPX-Logo.png" alt="FPX-Logo"
+            style="width: 30%; margin: 0 35%;"></img>
+        <div class="mb-3" id="totalAmount">
+            <label for="total" class="form-label">Total (RM)</label>
+            <input type="text" class="form-control" id="totalAmountDisplay" value="" disabled>
+        </div>
+        <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const totalAmount = urlParams.get('totalAmount');
+
+                const totalAmountDisplay = document.getElementById('totalAmountDisplay');
+                if (totalAmountDisplay) {
+                    totalAmountDisplay.value = totalAmount;
+                    // 将 totalAmount 存储在会话存储中
+                    sessionStorage.setItem('totalAmount', totalAmount);
+                }
+            });
+        </script>
         <form>
             <div class="mb-3">
                 <label for="bankSelect" class="form-label">Bank</label>
-                <select class="form-select" id="bankSelect">
+                <select class="form-select" id="bankSelect" required>
                     <option selected disabled>Select Bank</option>
                     <option value="bank1">CIMB Bank</option>
                     <option value="bank2">Public Bank</option>
@@ -37,8 +54,9 @@
                 <input type="password" class="form-control" id="password" placeholder="Enter Password">
             </div>
             <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 2%;">Next</button>
-            <button type="submit" class="btn btn-secondary" style="width: 100%;">Cancel</button>
         </form>
+        <button class="btn btn-secondary" style="width: 100%"
+            onclick="window.location.href='../ShoppingCart/ShoppingCart.php'">Cancel</button>
     </div>
 
     <!-- Bootstrap JavaScript -->
