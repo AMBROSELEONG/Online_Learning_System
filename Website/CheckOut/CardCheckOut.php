@@ -1,9 +1,5 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    include '../ShoppingCart/totalSession.php';
-}
-
-
+include '../ShoppingCart/totalSession.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -125,64 +121,205 @@ if (session_status() == PHP_SESSION_NONE) {
     <h2 style="text-align: center; color: white;">Checkout</h2>
     <div class="row">
         <div class="col-75">
-            <div class="container">
-                <div class="row">
-                    <div class="col-50">
-                        <h3>Billing Address</h3>
-                        <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                        <input type="text" id="fname" name="firstname" placeholder="Full Name">
-                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                        <input type="text" id="email" name="email" placeholder="email@example.com">
-                        <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-                        <input type="text" id="adr" name="address" placeholder="No.1 Exmaple 12">
-                        <label for="city"><i class="fa fa-institution"></i> City</label>
-                        <input type="text" id="city" name="city" placeholder="Kajang">
+            <form method="post">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-50">
+                            <h3>Billing Address</h3>
+                            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                            <input type="text" id="fname" name="firstname" placeholder="Full Name" required>
+                            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                            <input type="text" id="email" name="email" placeholder="email@example.com" required>
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                            <input type="text" id="adr" name="address" placeholder="No.1 Exmaple 12" required>
+                            <label for="city"><i class="fa fa-institution"></i> City</label>
+                            <input type="text" id="city" name="city" placeholder="Kajang" required>
 
-                        <div class="row">
-                            <div class="col-50">
-                                <label for="state">State</label>
-                                <input type="text" id="state" name="state" placeholder="Selangorr">
-                            </div>
-                            <div class="col-50">
-                                <label for="zip">Zip</label>
-                                <input type="text" id="zip" name="zip" placeholder="10000">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-50">
-                        <h3>Payment</h3>
-                        <label for="fname">Accepted Cards</label>
-                        <div class="icon-container">
-                            <i class="fa fa-cc-visa" style="color:navy;"></i>
-                            <i class="fa fa-cc-amex" style="color:blue;"></i>
-                            <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                            <i class="fa fa-cc-discover" style="color:orange;"></i>
-                        </div>
-                        <label for="cname">Name on Card</label>
-                        <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-                        <label for="ccnum">Credit card number</label>
-                        <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                        <label for="expmonth">Exp Month</label>
-                        <input type="text" id="expmonth" name="expmonth" placeholder="September">
-                        <div class="row">
-                            <div class="col-50">
-                                <label for="expyear">Exp Year</label>
-                                <input type="text" id="expyear" name="expyear" placeholder="2018">
-                            </div>
-                            <div class="col-50">
-                                <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" name="cvv" placeholder="352">
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="state">State</label>
+                                    <input type="text" id="state" name="state" placeholder="Selangor" required>
+                                </div>
+                                <div class="col-50">
+                                    <label for="zip">Zip</label>
+                                    <input type="text" id="zip" name="zip" placeholder="10000" required>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-50">
+                            <h3>Payment</h3>
+                            <label for="fname">Accepted Cards</label>
+                            <div class="icon-container">
+                                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fa fa-cc-discover" style="color:orange;"></i>
+                            </div>
+                            <label for="cname">Name on Card</label>
+                            <input type="text" id="cname" name="cardname" placeholder="John More Doe" required>
+                            <label for="ccnum">Credit card number</label>
+                            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required>
+                            <label for="expmonth">Exp Month</label>
+                            <input type="text" id="expmonth" name="expmonth" placeholder="September" required>
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="expyear">Exp Year</label>
+                                    <input type="text" id="expyear" name="expyear" placeholder="2018" required>
+                                </div>
+                                <div class="col-50">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="352" required>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
+                    <label>
+                        <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+                    </label>
+                    <?php
+                    $error = '';
+                    class Verify
+                    {
+                        public $email, $city, $state, $zip, $cardname, $cardnumber, $expmonth, $expyear, $cvv;
+
+                        function email($email)
+                        {
+                            $verify = "/^[^\s@]+@[^\s@]+\.[^\s@]+$/";
+                            if (preg_match($verify, $email)) {
+                                return true;
+                            } else {
+                                $this->error = "Invalid email address";
+                                return false;
+                            }
+                        }
+
+                        function city($city)
+                        {
+                            $this->city = $city;
+                            $verify = "/^[a-zA-Z ]*$/";
+                            if (preg_match($verify, $city)) {
+                                return true;
+                            } else {
+                                $this->error = "Invalid city";
+                                return false;
+                            }
+                        }
+
+                        function state($state)
+                        {
+                            $this->state = $state;
+                            $verify = "/^[a-zA-Z ]*$/";
+                            if (preg_match($verify, $state)) {
+                                return true;
+                            } else {
+                                $this->error = "Invalid state";
+                                return false;
+                            }
+                        }
+                        function zip($zip)
+                        {
+                            $this->zip = $zip;
+                            $verify = "/^[0-9]{5}$/";
+                            if (preg_match($verify, $zip)) {
+                                return true;
+                            } else {
+                                $this->error = "Invalid zip";
+                                return false;
+                            }
+                        }
+
+                        function cardname($cardname)
+                        {
+                            $this->cardname = $cardname;
+                            $verify = "/^[a-zA-Z ]*$/";
+                            if (preg_match($verify, $cardname)) {
+                                return true;
+                            } else {
+                                $this->error = "Invalid card name";
+                                return false;
+                            }
+                        }
+
+                        function cardnumber($cardnumber)
+                        {
+                            $this->cardnumber = $cardnumber;
+                            $verify = "/^[0-9]{16}$/";
+                            if (preg_match($verify, $cardnumber)) {
+                                return true;
+                            } else {
+                                $this->error = "Invalid card number";
+                                return false;
+                            }
+                        }
+                        function cvv($cvv)
+                        {
+                            $this->cvv = $cvv;
+                            $verify = "/^[0-9]{3}$/";
+                            if (preg_match($verify, $cvv)) {
+                                return true;
+                            } else {
+                                $this->error = "Invalid cvv";
+                                return false;
+                            }
+                        }
+                        function expmonth($expmonth)
+                        {
+                            $this->expmonth = $expmonth;
+                            $verify = '/^(January|February|March|April|May|June|July|August|September|October|November|December)$/';
+                            if (preg_match($verify, $expmonth)) {
+                                return true;
+                            } else {
+                                $this->error = "Invalid expiry month";
+                                return false;
+                            }
+                        }
+                        function expyear($expyear)
+                        {
+                            $this->expmonth = $expyear;
+                            $verify = "/^[0-9]{4}$/";
+                            if (preg_match($verify, $expyear)) {
+                                return true;
+                            } else {
+                                $this->error = "Invalid expiry year";
+                                return false;
+                            }
+                        }
+                    }
+
+                    if (isset($_POST['submit'])) {
+                        $verify = new Verify();
+
+                        if (
+                            $verify->email($_POST['email']) &&
+                            $verify->city($_POST['city']) &&
+                            $verify->state($_POST['state']) &&
+                            $verify->zip($_POST['zip']) &&
+                            $verify->cardname($_POST['cardname']) &&
+                            $verify->cardnumber($_POST['cardnumber']) &&
+                            $verify->expyear($_POST['expyear']) &&
+                            $verify->expmonth($_POST['expmonth']) &&
+                            $verify->cvv($_POST['cvv'])
+                        ) {
+                            echo "<script>alert('Successfully submitted!')</script>";
+                        } else {
+                            $error = $verify->error;
+                        }
+                    }
+
+                    // Check if there is an error message
+                    if (!empty($verify->error)) {
+                        echo "
+                        <div class ='alert alert-warning alert-dismissible fade show' role='alert'>
+                            <strong>{$verify->error}</strong>
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                        </div>";
+                    }
+                    ?>
+                    <button type="submit" class="btn" id="submit" name="submit"
+                        onclick="window.location.href='../CheckOut/Progress.php'">Continue to checkout</button>
                 </div>
-                <label>
-                    <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-                </label>
-                <button type="submit" class="btn" id="submitBtn"
-                    onclick="window.location.href='../CheckOut/Progress.php'">Continue to checkout</button>
-            </div>
+            </form>
         </div>
         <div class="col-25">
             <div class="container">

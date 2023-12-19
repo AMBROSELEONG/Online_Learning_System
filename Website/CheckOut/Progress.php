@@ -23,8 +23,6 @@ if ($result->num_rows > 0) {
     if ($conn->query($createOrderQuery) === TRUE) {
         $clearCartQuery = "DELETE FROM shoppingcart WHERE UserID = '$userID'";
         $conn->query($clearCartQuery);
-
-        echo "Order created successfully!";
         $cartIDString = implode(',', $CartIDs);
         echo "<script type='text/javascript'>
         setTimeout(function () {
