@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Course Detail</title>
+    <title>Question Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -23,7 +23,12 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <td>Quiz ID</td>
+                    <td>QuizID</td>
+                    <td>Question Text</td>
+                    <td>Options1</td>
+                    <td>Options2</td>
+                    <td>Options3</td>
+                    <td>Answers</td>
                     <td>Operating</td>
                 </tr>
             </thead>
@@ -37,7 +42,7 @@
                     //store the value of the search query in a variable
                     $filterValue = $_GET['search'];
                     //create a query to search for the course based on the filter value
-                    $query = "SELECT * FROM quizquestion WHERE QuizID LIKE '%$filterValue%' OR QuestionID LIKE '%$filterValue%'";
+                    $query = "SELECT * FROM quizquestion WHERE QuizID LIKE '%$filterValue%'";
                     //execute the query
                     $result = $conn->query($query);
 
@@ -54,8 +59,12 @@
                             //echo the results in a table format
                             echo "<tr>
                                         <td>$row[QuizID]</td>
-                                        <td>
-                                            <a href='course-edit.php?CourseID={$row['CourseID']}' class='btn btn-primary btn-sm'>Edit</a>
+                                        <td>$row[QuestionText]</td>
+                                        <td>$row[option1]</td>
+                                        <td>$row[option2]</td>
+                                        <td>$row[option3]</td>
+                                        <td>$row[answers]</td>
+                                            <a href='QuizQuestion-edit.php?QuizID={$row['QuizID']}' class='btn btn-primary btn-sm'>Edit</a>
                                         </td>
                                     </tr>";
                         }
@@ -78,7 +87,12 @@
                     while ($row = $result->fetch_assoc()) {
                         //echo the results in a table format
                         echo "<tr>
-                                    <td>$row[QuizID]</td>
+                                    <td>$row[QuizID]</td>                               
+                                    <td>$row[QuestionText]</td>
+                                    <td>$row[option1]</td>
+                                    <td>$row[option2]</td>
+                                    <td>$row[option3]</td>
+                                    <td>$row[answers]</td>
                                     <td>
                                         <a href='QuizQuestion-edit.php?QuizID={$row['QuizID']}' class='btn btn-primary btn-sm'>Edit</a>
                                     </td>

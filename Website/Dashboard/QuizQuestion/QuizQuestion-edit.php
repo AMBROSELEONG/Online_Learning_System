@@ -3,11 +3,12 @@
 include '../../ConnectDB.php';
 //declare variables to store the course image, name, price, category id and category name
 $QuizID = "";
-$QuizImage = "";
-$QuizName = "";
-$CategoryID = "";
-$CategoryName = "";
-
+$QuestionID = "";
+$QuestionText = "";
+$option1 = "";
+$option2 = "";
+$option3 = "";
+$answers = "";
 
 $error = "";
 $success = "";
@@ -38,29 +39,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     //store the course information in the corresponding variables
     $QuizID = $row['QuizID'];
-    $QuizName = $row['QuizName'];
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
     //store the course information in the corresponding variables
     $QuizID = $_GET['QuizID'];
-    $QuizID = $_POST['QuizID'];
-    $QuizName = $_POST['QuizName'];
+    $QuestionText = $_POST['QuestionText'];
+    $option1 = $_POST['option1'];
+    $option2 = $_POST['option2'];
+    $option3 = $_POST['option3'];
+    $answers = $_POST['answers'];
 
     do {
         //check if any of the course information is empty
-        if (empty($QuizID) || empty($QuizName)) {
+        if (empty($QuizID) || empty($QuestionText) || empty($option1) || empty($option2) || empty($option3) || empty($answers)) {
             //if any of the course information is empty, store an error message in the error variable
             $error = "Please fill in all fields";
             break;
         }
         //update the course information in the database
-        $sqlQuizDetail = "UPDATE quizquestion SET UPDATE quizquestion SET QuestionID = '$CategoryID' , QuestionText = '$QuizName' WHERE QuizID = '$QuizID'";
+        $sqlQuizDetail = "UPDATE quizquestion SET QuestionText = '$QuestionText' , option1 = '$option1' , option2 = '$option2' , option3 = '$option3' , answers = '$answers' WHERE QuizID = '$QuizID'";
 
         $resultQuizDetail = $conn->query($sqlQuizDetail);
 
         if (!$resultQuizDetail) {
             // Error updating course detail
-            $error = "Error updating course detail: " . $conn->error;
+            $error = "Error updating question detail: " . $conn->error;
         } else {
             $success = "Course Details updated successfully";
             header("location: QuizQuestion.php");
@@ -75,47 +78,109 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit</title>
+    <title>Question</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="container my-5">
-        <h2>Edit Quiz</h2>
+        <h2>Add Question</h2>
 
         <form method="post" enctype="multipart/form-data">
             <input type="hidden" class="form-control" name="QuizID" value="<?php echo $QuizID; ?>">
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Quiz Name</label>
+                <label class="col-sm-3 col-form-label">Question Text</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="QuizName" value="<?php echo $QuizName; ?>"disabled>
-                    <select type="text" class="form-control" name="QuizID" id="QuizID">
+                    <input type="textarea" class="form-control" name="QuestionText" value="<?php echo $QuestionText; ?>">
                         <?php
                         //Create a query to select all the categories from the coursecategory table
-                        $query1 = "SELECT QuizID FROM quizquestion";
+                        $query1 = "SELECT * FROM quizquestion";
                         //Execute the query and store the result in the $result1 variable
                         $result1 = mysqli_query($conn, $query1);
 
-                        //Check if the query was successful
-                        if (mysqli_num_rows($result1) > 0) {
-                            //Loop through the result set
-                            echo "<option value='0' selected disabled>Please Select Category</option>";
-                            while ($row = mysqli_fetch_assoc($result1)) {
-                                //Store the category ID and name in the $Category_ID and $Category_Name variables respectively
-                                $Quiz_ID = $row['QuizID'];
-                                //Echo an option element with the category ID and name as the value and text respectively
-                                echo "<option class='form-control' value='$Quiz_ID'</option>";
+                        if($result1){
+                            while($row = mysqli_fetch_assoc($result1)){
+                                $QuestionText = $row['QuestionText'];
+                                echo "<option value='$QuestionText'</option>";
                             }
-                        } else {
-                            //Echo an option element with the text "No Category Found"
-                            echo "<option class='form-control' value='0'>No Category Found</option>";
                         }
+
                         ?>
-                    </select>
-                    <input type="hidden" name="CategoryName" id="CategoryName" value="<?php echo $Category_Name ?>">
+                    
                 </div>
-            </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Option 1</label>
+                        <div class="col-sm-6">
+                            <input type="textarea" class="form-control" name="option1" value="<?php echo $option1; ?>">
+                                <?php
+                                    $query2 = "SELECT * FROM quizquestion";
+
+                                    $result2 = mysqli_query($conn, $query2);
+
+                                    if($result2){
+                                        while($row = mysqli_fetch_assoc($result2)){
+                                            $option1 = $row['option1'];
+                                            echo "<option value='$option1'</option>";
+                                        }
+                                    }
+                                ?>
+                        </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Option 2</label>
+                        <div class="col-sm-6">
+                            <input type="textarea" class="form-control" name="option2" value="<?php echo $option2; ?>">
+                                <?php
+                                        $query3 = "SELECT * FROM quizquestion";
+
+                                        $result3 = mysqli_query($conn, $query3);
+
+                                        if($result3){
+                                            while($row = mysqli_fetch_assoc($result3)){
+                                                $option2 = $row['option2'];
+                                                echo "<option value='$option2'</option>";
+                                            }
+                                        }
+                                    ?>                            
+                        </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Option 3</label>
+                        <div class="col-sm-6">
+                            <input type="textarea" class="form-control" name="option3" value="<?php echo $option3; ?>">
+                                <?php
+                                        $query4 = "SELECT * FROM quizquestion";
+
+                                        $result4 = mysqli_query($conn, $query4);
+
+                                        if($result4){
+                                            while($row = mysqli_fetch_assoc($result4)){
+                                                $option3 = $row['option3'];
+                                                echo "<option value='$option3'</option>";
+                                            }
+                                        }
+                                    ?>                
+                        </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Answers</label>
+                        <div class="col-sm-6">
+                            <input type="textarea" class="form-control" name="answers" value="<?php echo $answers; ?>">
+                                <?php
+                                        $query5 = "SELECT * FROM quizquestion";
+
+                                        $result5 = mysqli_query($conn, $query5);
+
+                                        if($result5){
+                                            while($row = mysqli_fetch_assoc($result2)){
+                                                $answers = $row['answers'];
+                                                echo "<option value='$answers'</option>";
+                                            }
+                                        }
+                                    ?>               
+                        </div>
+                </div>
 
             <script>
                 //This code is used to select an option from the dropdown menu and display the selected option in the textbox
