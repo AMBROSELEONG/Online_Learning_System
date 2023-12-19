@@ -9,7 +9,6 @@ $sql = "SELECT * FROM comments ORDER BY PostDate DESC";
 //execute the query and store the result in the $result variable
 $result = $conn->query($sql);
 
-//function to get the username from a userID
 function getUsernameFromUserID($conn, $userID)
 {
 

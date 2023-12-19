@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="stylesheet" href="../icon2/iconfont.css">
     <link rel="stylesheet" href="../Dashboard/icon2/iconfont.css">
-</head>
-
+    
 <body>
     <header>
         <div id="mySidepanel" class="sidepanel">
