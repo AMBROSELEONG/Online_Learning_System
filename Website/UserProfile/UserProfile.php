@@ -86,7 +86,7 @@ include 'find-index.php';
             <br>
             <label for="About"><b>About Me</b></label>
             <br>
-            <textarea name="About" id="About" cols="30rem" rows="10"><?php echo $about; ?></textarea>
+            <textarea name="About" id="About" cols="30rem" rows="10" style="padding: 10px"><?php echo $about; ?></textarea>
             <br>
             <button type="submit" name="save"
                 style="width: 20rem; height: 5rem; border: none; background-color: rgb(255, 140, 0);">Save</button>

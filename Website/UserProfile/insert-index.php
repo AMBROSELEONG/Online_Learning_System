@@ -56,10 +56,8 @@ if (isset($_POST['save'])) {
                 echo "<script>alert('Sorry, there was an error uploading your file.'); window.location.href = 'UserProfile.php';</script>";
             }
         }
-    }else {
-        echo "<script>alert('No image uploaded.'); window.location.href = 'UserProfile.php';</script>";
-
-        $imagePath = ''; 
+    } else {
+        $imagePath = '';
     }
 
     // Check if the username, collegename, gmail, phone, about, and imagePath are empty
@@ -70,7 +68,7 @@ if (isset($_POST['save'])) {
         $checkUser->execute();
         $checkUser->store_result();
 
-       if ($checkUser->num_rows > 0) {
+        if ($checkUser->num_rows > 0) {
             // Update the userprofile table
             $stmt = $conn->prepare("UPDATE userprofile SET UserName = ?, CollegeName = ?, Email = ?, Phone = ?, About = ?, UserImage = ? WHERE UserID = ?");
             $stmt->bind_param("ssssssi", $username, $collegename, $gmail, $phone, $about, $imagePath, $userID);
