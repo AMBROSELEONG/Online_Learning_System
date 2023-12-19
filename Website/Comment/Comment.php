@@ -39,6 +39,7 @@ function getUsernameFromUserID($conn, $userID)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comment Board</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * {
@@ -107,10 +108,9 @@ function getUsernameFromUserID($conn, $userID)
                     <label for="comment" class="form-label">Content:</label>
                     <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Publish</button>
             </form>
         </div>
-
         <div class="comment-box mt-4">
             <h3>Comment List</h3>
             <ul id="commentList" class="list-group">

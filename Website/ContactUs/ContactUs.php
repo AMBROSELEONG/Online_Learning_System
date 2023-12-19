@@ -11,6 +11,7 @@ include 'find-user.php';
     <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="stylesheet" href="../icon2/iconfont.css">
     <link rel="stylesheet" href="../Dashboard/icon2/iconfont.css">
+    <link rel="stylesheet" href="ContactUs.css">
 </head>
 
 <body>

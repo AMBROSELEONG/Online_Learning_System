@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         echo '</ul>';
         header("location: Comment.php");
+        exit();
     } else {
         //if there are no comments, display a message
         echo "No comments yet.";
