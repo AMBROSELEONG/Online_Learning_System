@@ -1,7 +1,8 @@
 <?php
 // Start the session
 session_start();
-
+$error = "";
+$success = "";
 // Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -26,14 +27,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows == 1) {
         // If the username and password match an existing user, set the user ID in the session and redirect to the main page
         $row = $result->fetch_assoc();
-
         $_SESSION['UserID'] = $row['UserID'];
+        $_SESSION['success'] = $success;
 
-        header("location: ../MainPage/MainPage.php");
+        echo "<script>alert('Login Successful!'); window.location.href = '../MainPage/MainPage.php'</script>";
         exit();
     } else {
         // If the username and password do not match an existing user, alert the user and redirect to the login page
-        echo "<script type='text/javascript'>alert('Wrong username or password'); window.location.href = 'Login.php';</script>";
+        $error = "Wrong username or password";
+        $_SESSION['error'] = $error;
+        header("location: Login.php");
         exit();
     }
 
