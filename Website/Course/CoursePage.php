@@ -24,7 +24,7 @@
             <a href="../Course/CoursePage.php"><i class="iconfont icon-book1">
                     <p>Course</p>
                 </i></a>
-            <a href="../Quiz/QuizList.html"><i class="iconfont icon-shijuan">
+            <a href="../Quiz/QuizList.php"><i class="iconfont icon-shijuan">
                     <p>Quiz</p>
                 </i></a>
             <a href="../ShoppingCart/ShoppingCart.php"><i class="iconfont icon-31gouwuchexuanzhong">

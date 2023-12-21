@@ -15,7 +15,7 @@
     <header>
         <div id="mySidepanel" class="sidepanel">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-            <form action="" id="search-bar-form">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" id="search-bar-form">
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
             </form>
@@ -25,7 +25,7 @@
             <a href="../Course/CoursePage.php"><i class="iconfont icon-book1">
                     <p>Course</p>
                 </i></a>
-            <a href="../Quiz/QuizList.html"><i class="iconfont icon-shijuan">
+            <a href="../Quiz/QuizList.php"><i class="iconfont icon-shijuan">
                     <p>Quiz</p>
                 </i></a>
             <a href="../ShoppingCart/ShoppingCart.php"><i class="iconfont icon-31gouwuchexuanzhong">
@@ -140,173 +140,40 @@
             }
         </script>
         <div id="myBtnContainer">
-            <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-            <button class="btn" onclick="filterSelection('Category1')"> Category1</button>
-            <button class="btn" onclick="filterSelection('Category2')"> Category2</button>
+        <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+            <?php
+                include '../ConnectDB.php';
+                $sql = "SELECT * FROM quiz";
+                $result = mysqli_query($conn, $sql);
+
+                if(!$result){
+                    die("Invalid Query" . $conn->error);
+                }
+                while ($row = $result->fetch_assoc()) {
+                    echo "<button class='btn' onclick=\"filterSelection('{$row['QuizID']}')\">" . $row['QuizName'] . "</button>";
+                }
+            ?>
         </div>
 
         <div class="container">
-            <div class="filterDiv Category1" onclick="openModal()">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
+            <?php
+                $sqlquiz = "SELECT * FROM quiz";
+                $resultquiz = mysqli_query($conn,$sqlquiz);
+                if(!$resultquiz){
+                    die("Invalid Query" . $conn->error);
+                }
+                while ($row = $resultquiz->fetch_assoc()) {
+                    $imageFolder = '../Dashboard/Quiz/';
+                    $imagePath = $imageFolder . $row['QuizImage'];
 
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-
-            <div class="filterDiv Category1" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-            <div class="filterDiv Category2" onclick="location.href=''">
-                <img src="" alt="">
-                <h1>Course:</h1>
-                <p class="price">RM 100</p>
-                <h2>Licturer</h2>
-                <button class="try-quiz">Let's Try Quiz</button>
-            </div>
-
-            <div id="quizModal" class="modal">
-                <div class="modal-content">
-                    <div>
-                        <h1>READY FOR A QUIZ?</h1>
-                    </div>
-                    <button id="startQuizButton" onclick="window.location.href='Quiz.html'">Yes</button>
-                    <button id="cancelQuizButton">No</button>
-                </div>
-            </div>
-
-
+                    echo "<div class='filterDiv {$row['QuizID']}'>";
+                    echo "<img src='$imagePath' alt='Quiz'>";
+                    echo "<h1>{$row['QuizName']}</h1>";
+                    echo "<button class='try-quiz {$row['QuizName']}' onclick=\"window.location.href='../QuizDetail/Quiz.php?QuizID={$row['QuizName']}'\">Start Quiz</button>";
+                    echo "</div>";
+                }
+            ?>
+            
             <script>
                 filterSelection("all")
                 function filterSelection(c) {

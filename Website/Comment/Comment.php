@@ -67,7 +67,7 @@ function getUsernameFromUserID($conn, $userID)
                         <a class="nav-link" href="../Course/CoursePage.php" style="font-size: 20px;">Course</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Quiz/QuizList.html" style="font-size: 20px;">Quiz</a>
+                        <a class="nav-link" href="../Quiz/QuizList.php" style="font-size: 20px;">Quiz</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../ContactUs/ContactUs.php" style="font-size: 20px;">Contact</a>

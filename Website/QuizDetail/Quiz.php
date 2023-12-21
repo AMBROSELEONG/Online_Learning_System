@@ -1,9 +1,32 @@
+<?php
+include "../ConnectDB.php";
+
+$QuizID = $_GET['QuizID'];
+$sql = "SELECT * FROM quizquestion WHERE QuestionText = 'Artificial Scientifically Intelligence'";
+$result = mysqli_query($conn, $sql);
+
+if (!$result) {
+    die("Invalid Query" . $conn->error);
+}
+
+$row = mysqli_fetch_assoc($result);
+
+// At the beginning of the page or wherever you want to display the message
+session_start();
+
+// Check if the success message exists and display it
+if (isset($_SESSION['cart_message'])) {
+    echo "<script type='text/javascript'>alert('{$_SESSION['cart_message']}')</script>";
+    unset($_SESSION['cart_message']); // Clear the message after displaying it
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
-    <title>Quiz</title>
+    <title> Artificial Scientifically Intelligence Quiz </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
@@ -59,58 +82,61 @@
 </style>
 
 <body style="background-image: url(../img/quiz.jpg); background-repeat: no-repeat; background-size: cover;">
+<form method="post" action="<?php echo $row['QuizID']; ?>">
     <div class="container">
         <div class="row">
             <div class="col-md-12" style="text-align: center; margin-top: 10%;">
                 <h1>QUIZ</h1>
             </div>
-            <div class="col-md-12">
-                <div class="card"
-                    style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
-                    <div class="card-body">
-                        <h5 class="card-title">Question 1</h5>
-                        <form>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q1" id="q1-option1" value="option1">
-                                <label class="form-check-label" for="q1-option1">Option 1</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q1" id="q1-option2" value="option2">
-                                <label class="form-check-label" for="q1-option2">Option 2</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q1" id="q1-option3" value="option3">
-                                <label class="form-check-label" for="q1-option3">Option 3</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q1" id="q1-option4" value="option4">
-                                <label class="form-check-label" for="q1-option4">Option 4</label>
-                            </div>
-                        </form>
+                <div class="col-md-12">
+                    <div class="card"
+                        style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
+                        <div class="card-body">
+                            <h5 class="card-title">Question 1</h5>
+                            <h5>Which HTML element is not considered a landmark element?*</h5>
+                            <form>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="q1" id="q1-option1" value="option1">
+                                    <label class="form-check-label" for="q1-option1">form</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="q1" id="q1-option2" value="option2">
+                                    <label class="form-check-label" for="q1-option2">ul</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="q1" id="q1-option3" value="option3">
+                                    <label class="form-check-label" for="q1-option3">main</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="q1" id="q1-option4" value="option4">
+                                    <label class="form-check-label" for="q1-option4">nav</label>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
             <div class="col-md-12">
                 <div class="card"
                     style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
                     <div class="card-body">
-                        <h5 class="card-title">Question 1</h5>
+                        <h5 class="card-title">Question 2</h5>
+                        <h5>Which choice is not part of CSS box model*</h5>
                         <form>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q2" id="q2-option1" value="option1">
-                                <label class="form-check-label" for="q2-option1">Option 1</label>
+                                <label class="form-check-label" for="q2-option1">margin</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q2" id="q2-option2" value="option2">
-                                <label class="form-check-label" for="q2-option2">Option 2</label>
+                                <label class="form-check-label" for="q2-option2">border</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q2" id="q2-option3" value="option3">
-                                <label class="form-check-label" for="q2-option3">Option 3</label>
+                                <label class="form-check-label" for="q2-option3">padding</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q2" id="q2-option4" value="option4">
-                                <label class="form-check-label" for="q2-option4">Option 4</label>
+                                <label class="form-check-label" for="q2-option4">paragraph</label>
                             </div>
                         </form>
                     </div>
@@ -120,23 +146,24 @@
                 <div class="card"
                     style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
                     <div class="card-body">
-                        <h5 class="card-title">Question 1</h5>
+                        <h5 class="card-title">Question 3</h5>
+                        <h5>What is the <label> element used for?*</h5>
                         <form>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q3" id="q3-option1" value="option1">
-                                <label class="form-check-label" for="q3-option1">Option 1</label>
+                                <label class="form-check-label" for="q3-option1">to identify the difference parts of a figure</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q3" id="q3-option2" value="option2">
-                                <label class="form-check-label" for="q3-option2">Option 2</label>
+                                <label class="form-check-label" for="q3-option2">to explain what needs to be entered into a form field</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q3" id="q3-option3" value="option3">
-                                <label class="form-check-label" for="q3-option3">Option 3</label>
+                                <label class="form-check-label" for="q3-option3">as a caption for images</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q3" id="q3-option4" value="option4">
-                                <label class="form-check-label" for="q3-option4">Option 4</label>
+                                <label class="form-check-label" for="q3-option4">as a heading for tables</label>
                             </div>
                         </form>
                     </div>
@@ -146,23 +173,24 @@
                 <div class="card"
                     style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
                     <div class="card-body">
-                        <h5 class="card-title">Question 1</h5>
+                        <h5 class="card-title">Question 4</h5>
+                        <h5>What does the === comparison operator do?*</h5>
                         <form>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q4" id="q4-option1" value="option1">
-                                <label class="form-check-label" for="q4-option1">Option 1</label>
+                                <label class="form-check-label" for="q4-option1">It sets one variable equal to another in both value and type</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q4" id="q4-option2" value="option2">
-                                <label class="form-check-label" for="q4-option2">Option 2</label>
+                                <label class="form-check-label" for="q4-option2">It tests for equality of type only</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q4" id="q4-option3" value="option3">
-                                <label class="form-check-label" for="q4-option3">Option 3</label>
+                                <label class="form-check-label" for="q4-option3">It tests for equality of value only</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q4" id="q4-option4" value="option4">
-                                <label class="form-check-label" for="q4-option4">Option 4</label>
+                                <label class="form-check-label" for="q4-option4">It tests for equality of value and type</label>
                             </div>
                         </form>
                     </div>
@@ -172,14 +200,10 @@
                 <p>Please Be Aware!! There are a few precautions and rules during the examination start as below:</p>
                 <p>1. DO NOT USED ChatGPT</p>
                 <p>2. Your actions of cheating WILL BE on the COURT OF LAWS.</p>
-                <p>3. During the examination, your actions are being monitoring until you had done your online exams
+                <p>3. During the examination, your actions are being monitored until you had done your online exams
                     sheet.
                 </p>
 
-            </div>
-            <div class="col-md-12">
-                <button class="btn btn-primary col-md-12" style="margin-bottom: 5%;"
-                    onclick="openModal()">Submit</button>
             </div>
         </div>
     </div>
@@ -188,10 +212,10 @@
             <div>
                 <h1>YOUR GRADE IS </h1>
             </div>
-            <button id="startQuizButton" onclick="window.location.href='../Quiz/QuizList.html'">Yes</button>
+            <button id="startQuizButton" onclick="window.location.href='../Quiz/QuizList.php'">Yes</button>
         </div>
     </div>
-
+    
    <script>
         // Get the modal and the start and cancel buttons
         var modal = document.getElementById('quizModal');
@@ -218,6 +242,20 @@
             closeModal();
         });
     </script>
-</body>
+    <?php
+    echo '<body style="background-image: url(../img/quiz.jpg); background-repeat: no-repeat; background-size: cover;">';
 
+    echo '<button class="btn btn-primary col-md-12" style="margin-bottom: 5%;" onclick="openModal()">Submit</button>';
+    
+    echo '<div id="quizModal" class="modal">';
+    echo '<div class="modal-content">';
+    echo '<div>';
+    echo '<h1>YOUR GRADE IS </h1>';
+    echo '</div>';
+    echo '<button id="startQuizButton" onclick="window.location.href=\'../Quiz/QuizList.php\'">Yes</button>';
+    echo '</div>';
+    echo '</div>';
+?>
+</form>
+</body>
 </html>
