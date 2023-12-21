@@ -1,6 +1,7 @@
 <?php
 include '../ConnectDB.php';
-
+session_start();
+$error = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the username and email from the form
     $username = $_POST['username'];
@@ -15,24 +16,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result) {
         // Check if the username and email exist in the database
-        if ($result->num_rows == 1) {   
+        if ($result->num_rows == 1) {
             // Start the session and store the username and email in the session
-            session_start();
+
             $_SESSION["Email"] = $email;
             $_SESSION["UserName"] = $username;
+            echo "<script>alert('Verify Successful!'); window.location.href = 'ResetPassword.php'</script>";
             // Redirect the user to the ResetPassword page
-            header("location: ResetPassword.php");
             exit();
         } else {
             // Store an error message in the session if the username and email don't exist
-            $_SESSION["error_message"] = "Wrong email";
+            $_SESSION["error"] = "Wrong UserName And Email";
+            header("location: ForgetPassword.php");
             // Display an error message to the user
-            echo "<script type='text/javascript'> alert('Wrong email'); window.location.href = 'ForgetPassword.php';</script>";
             exit();
         }
     } else {
         // Store an error message in the session if there was an error querying the database
-        $_SESSION["error_message"] = "Error: " . $conn->error;
+        $_SESSION["error"] = "Error: " . $conn->error;
         // Redirect the user to the ForgetPassword page
         header("location: ForgetPassword.php");
         exit();

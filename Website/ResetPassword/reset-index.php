@@ -1,76 +1,128 @@
 <?php
-//include the connection to the database
+// Include the connection to the database
 include '../ConnectDB.php';
-//start the session
+
+// Start the session
 session_start();
 
-//check if the submit button was clicked
+$errors = []; // Error variable declaration
+
 if (isset($_POST['submit'])) {
 
-    //store the password and confirm password from the form
+    // Store the password and confirm password from the form
     $password = $_POST['password'];
     $confpassword = $_POST['repeatpassword'];
 
-    //check if the passwords match
-    if ($password !== $confpassword) {
-        //if they don't match, alert the user and redirect them to the ResetPassword page
-        echo "<script>alert('Passwords do not match'); window.location.href = 'ResetPassword.php';</script>";
-    } else {
-        //check if the session variables are set
+    // Function to validate the password format
+    function validatePassword($password)
+    {
+        $errors = [];
+        if (strlen($password) < 8) {
+            $errors[] = "Password length must be at least 8 characters.";
+        }
+
+        if (!preg_match('/[a-z]/', $password)) {
+            $errors[] = "Password should contain at least one lowercase letter.";
+        }
+
+        if (!preg_match('/[A-Z]/', $password)) {
+            $errors[] = "Password should contain at least one uppercase letter.";
+        }
+
+        if (!preg_match('/\d/', $password)) {
+            $errors[] = "Password should contain at least one number.";
+        }
+
+        if (!preg_match('/[^a-zA-Z\d]/', $password)) {
+            $errors[] = "Password should contain at least one special character.";
+        }
+        return $errors;
+    }
+
+    // Validate password format
+    $passwordErrors = validatePassword($password);
+
+    // Check if the passwords match
+    function verify($password)
+    {
+        $errors = [];
+        if ($password !== $_POST['repeatpassword']) {
+            $errors[] = "Passwords do not match.";
+        }
+        return $errors;
+    }
+    $inputErrors = verify($password);
+
+    // Store errors in $errors if any
+    $errors = array_merge($passwordErrors, $inputErrors);
+
+    if (empty($errors)) {
+        // Check if the session variables are set
         if (isset($_SESSION["Email"]) && isset($_SESSION['UserName'])) {
-            //store the session variables in the variables
+            // Store the session variables in the variables
             $email = mysqli_real_escape_string($conn, $_SESSION["Email"]);
             $username = mysqli_real_escape_string($conn, $_SESSION['UserName']);
 
-            //select the user from the database
+            // Select the user from the database
             $select_query = "SELECT * FROM users WHERE Email = '$email' AND UserName = '$username'";
             $run_select_query = mysqli_query($conn, $select_query);
 
-            //check if the user was found
+            // Check if the user was found
             if ($run_select_query && mysqli_num_rows($run_select_query) === 1) {
-                //store the user data in the user_data variable
+                // Store the user data in the user_data variable
                 $user_data = mysqli_fetch_assoc($run_select_query);
                 $user_id = $user_data['UserID'];
 
-                //store the hashed password in the variable
-                $hashed_password = $password;
+                // Store the hashed password in the variable
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                //update the user's password in the database
+                // Update the user's password in the database
                 $update_posts = "UPDATE users SET PasswordHash='$hashed_password' WHERE UserID='$user_id'";
                 $run_update = mysqli_query($conn, $update_posts);
 
-                //check if the update was successful
+                // Check if the update was successful
                 if ($run_update) {
-                    //if successful, alert the user and redirect them to the Login page
+                    // Alert the user and redirect them to the Login page
                     echo "<script>alert('Password Update Successful'); window.location.href = '../Login/Login.php';</script>";
-                    //store the current time in the variable
+                    // Store the current time in the variable
                     $currentTime = date("Y-m-d H:i:s");
-                    //insert the user's data into the userresetpassword table
+                    // Insert the user's data into the userresetpassword table
                     $insert_query = "INSERT INTO userresetpassword (UserID, UserName, NewPassword, Email, ResetDate) VALUES ('$user_id', '$username', '$hashed_password', '$email', '$currentTime')";
                     $run_insert_query = mysqli_query($conn, $insert_query);
-                    //check if the insert was successful
+
+                    // Check if the insert was successful
                     if ($run_insert_query) {
-                        //if successful, alert the user and redirect them to the Login page
+                        // Alert the user and redirect them to the Login page
                         echo "<script>alert('Password Update Successful'); window.location.href = '../Login/Login.php';</script>";
                         exit();
                     } else {
-                        //if unsuccessful, alert the user and redirect them to the ResetPassword page
-                        echo "<script>alert('Error updating password'); window.location.href = 'ResetPassword.php';</script>";
+                        // If unsuccessful, alert the user and redirect them to the ResetPassword page
+                        $_SESSION['error'] = 'Error updating password';
+                        header("location: ResetPassword.php");
                         exit();
                     }
                 } else {
-                    //if unsuccessful, alert the user and redirect them to the ResetPassword page
-                    echo "<script>alert('Error updating password'); window.location.href = 'ResetPassword.php';</script>";
+                    // If unsuccessful, alert the user and redirect them to the ResetPassword page
+                    $_SESSION['error'] = 'Error updating password';
+                    header("location: ResetPassword.php");
                     exit();
                 }
             } else {
-                //if the user was not found, alert the user and redirect them to the ResetPassword page
-                echo "<script>alert('No email or username was found'); window.location.href = 'ResetPassword.php';</script>";
+                // If the user was not found, alert the user and redirect them to the ResetPassword page
+                $_SESSION['error'] = 'No email or username was found';
+                header("location: ResetPassword.php");
+                exit();
             }
         } else {
-            //if the session variables are not set, alert the user and redirect them to the ResetPassword page
-            echo "<script>alert('Session variables are not set'); window.location.href = 'ResetPassword.php';</script>";
+            // If the session variables are not set, alert the user and redirect them to the ResetPassword page
+            $_SESSION['error'] = 'Session variables are not set';
+            header("location: ResetPassword.php");
+            exit;
         }
+    } else {
+        $_SESSION['error'] = $errors;
+        header("location: ResetPassword.php");
+        exit;
     }
 }
 ?>
