@@ -24,11 +24,10 @@
             <thead>
                 <tr>
                     <td>QuizID</td>
-                    <td>Question Text</td>
-                    <td>Options1</td>
-                    <td>Options2</td>
-                    <td>Options3</td>
-                    <td>Answers</td>
+                    <td>Question One</td>
+                    <td>Question Two</td>
+                    <td>Question Three</td>
+                    <td>Question Four</td>
                     <td>Operating</td>
                 </tr>
             </thead>
@@ -59,18 +58,18 @@
                             //echo the results in a table format
                             echo "<tr>
                                         <td>$row[QuizID]</td>
-                                        <td>$row[QuestionText]</td>
-                                        <td>$row[option1]</td>
-                                        <td>$row[option2]</td>
-                                        <td>$row[option3]</td>
-                                        <td>$row[answers]</td>
+                                        <td>$row[QuestionOne]</td>
+                                        <td>$row[QuestionTwo]</td>
+                                        <td>$row[QuestionThree]</td>
+                                        <td>$row[QuestionFour]</td>
+                                        <td>
                                             <a href='QuizQuestion-edit.php?QuizID={$row['QuizID']}' class='btn btn-primary btn-sm'>Edit</a>
                                         </td>
                                     </tr>";
                         }
                     } else {
                         //if no, echo a message
-                        echo "<tr><td colspan='13'>No Record Found</td></tr>";
+                        echo "<tr><td colspan='6'>No Record Found</td></tr>";
                     }
                 } else {
                     //if the search query is not set, execute the following query
@@ -88,11 +87,10 @@
                         //echo the results in a table format
                         echo "<tr>
                                     <td>$row[QuizID]</td>                               
-                                    <td>$row[QuestionText]</td>
-                                    <td>$row[option1]</td>
-                                    <td>$row[option2]</td>
-                                    <td>$row[option3]</td>
-                                    <td>$row[answers]</td>
+                                    <td>$row[QuestionOne]</td>
+                                    <td>$row[QuestionTwo]</td>
+                                    <td>$row[QuestionThree]</td>
+                                    <td>$row[QuestionFour]</td>
                                     <td>
                                         <a href='QuizQuestion-edit.php?QuizID={$row['QuizID']}' class='btn btn-primary btn-sm'>Edit</a>
                                     </td>

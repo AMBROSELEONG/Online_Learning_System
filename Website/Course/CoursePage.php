@@ -75,7 +75,7 @@
                     <ul>
                         <li onclick="window.location.href = '../MainPage/MainPage.php'">Home</li>
                         <li onclick="window.location.href = '../Course/CoursePage.php'">Course</li>
-                        <li onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</li>
+                        <li onclick="window.location.href = '../Quiz/QuizList.php'">Quiz</li>
                     </ul>
                 </li>
                 <li class="item">About<span></span>

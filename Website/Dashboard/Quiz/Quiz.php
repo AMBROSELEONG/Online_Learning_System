@@ -51,10 +51,10 @@
                                                 <td>$row[QuizImage]</td>
                                                 <td>$row[QuizName]</td>
                                                 <td>$row[CategoryName]</td>
-                                            <td>
-                                                <a href='quiz-edit.php?QuizID={$row['QuizID']}' class='btn btn-primary btn-sm'>Edit</a>
-                                                <a href='quiz-delete.php?QuizID={$row['QuizID']}' class='btn btn-danger btn-sm'>Delete</a>
-                                            </td>
+                                                <td>
+                                                    <a href='quiz-edit.php?QuizID={$row['QuizID']}' class='btn btn-primary btn-sm'>Edit</a>
+                                                    <a href='quiz-delete.php?QuizID={$row['QuizID']}' class='btn btn-danger btn-sm'>Delete</a>
+                                                </td>
                                         </tr>";
                         }
                     } else {

@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $QuizImage = "quiz-image/" . $filename;
     }
     //store the values from the POST request in the variables
-    
+
     $QuizID = $_GET['QuizID'];
     $QuizID = $_POST['QuizID'];
     $QuizName = $_POST['QuizName'];
@@ -78,18 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             //if empty, set the error message and break out of the loop
             $error = "Error updating record: " . $conn->error;
             break;
-        } else {
-            // Update quizquestion table
-            $detailQuery = "UPDATE quizquestion SET QuestionID = '$CategoryID' , QuestionText = '$QuizName' WHERE QuizID = '$QuizID'";
-            $detailResult = $conn->query($detailQuery);
-
-            if (!$detailResult) {
-                $error .= " Error updating record in coursedetail table: " . $conn->error;
-            } else {
-                $success = "Course and Course Details updated successfully";
-                header("location: Quiz.php");
-                exit;
-            }
         }
 
         //if successful, set the success message and redirect to the Quiz.php page

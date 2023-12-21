@@ -57,16 +57,15 @@
                         while ($row = $result->fetch_assoc()) {
                             //echo the results in a table format
                             echo "<tr>
-                                        <td>{$row['CourseID']}</td>
-                                        <td>{$row['CourseName']}</td>
-                                        <td>{$row['CourseDescription']}</td>
-                                        <td>{$row['CategoryName']}</td>
-                                        <td>{$row['LecturerName']}</td>
-                                        <td>{$row['CourseOutline']}</td>
-                                        <td>
-                                            <a href='course-edit.php?CourseID={$row['CourseID']}' class='btn btn-primary btn-sm'>Edit</a>
-                                        </td>
-                                    </tr>";
+                                    <td>{$row['CourseID']}</td>
+                                    <td>{$row['CourseName']}</td>
+                                    <td>{$row['CourseDescription']}</td>
+                                    <td>{$row['CategoryName']}</td>
+                                    <td>{$row['LecturerName']}</td>
+                                    <td>
+                                        <a href='edit-detail.php?CourseID={$row['CourseID']}' class='btn btn-primary btn-sm'>Edit</a>
+                                    </td>
+                                </tr>";
                         }
                     } else {
                         //if no, echo a message

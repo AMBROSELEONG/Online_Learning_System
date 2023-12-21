@@ -4,12 +4,26 @@ include '../../ConnectDB.php';
 //declare variables to store the course image, name, price, category id and category name
 $QuizID = "";
 $QuestionID = "";
-$QuestionText = "";
-$option1 = "";
-$option2 = "";
-$option3 = "";
-$answers = "";
-
+$QuestionOne = "";
+$OptOne1 = "";
+$OptOne2 = "";
+$OptOne3 = "";
+$AnsOne = "";
+$QuestionTwo = "";
+$OptTwo1 = "";
+$OptTwo2 = "";
+$OptTwo3 = "";
+$AnsTwo = "";
+$QuestionThree = "";
+$OptThree1 = "";
+$OptThree2 = "";
+$OptThree3 = "";
+$AnsThree = "";
+$QuestionFour = "";
+$OptFour1 = "";
+$OptFour2 = "";
+$OptFour3 = "";
+$AnsFour = "";
 $error = "";
 $success = "";
 
@@ -23,10 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     //store the course id in the id variable
-    $id = $_GET['QuizID'];
+    $QuizID = $_GET['QuizID'];
 
     //query the database to get the course information
-    $sql = "SELECT * FROM quizquestion WHERE QuizID = '$id'";
+    $sql = "SELECT * FROM quizquestion WHERE QuizID = '$QuizID'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
@@ -39,25 +53,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     //store the course information in the corresponding variables
     $QuizID = $row['QuizID'];
+    $QuestionOne = $row['QuestionOne'];
+    $OptOne1 = $row['OptOne1'];
+    $OptOne2 = $row['OptOne2'];
+    $OptOne3 = $row['OptOne3'];
+    $AnsOne = $row['AnsOne'];
+    $QuestionTwo = $row['QuestionTwo'];
+    $OptTwo1 = $row['OptTwo1'];
+    $OptTwo2 = $row['OptTwo2'];
+    $OptTwo3 = $row['OptTwo3'];
+    $AnsTwo = $row['AnsTwo'];
+    $QuestionThree = $row['QuestionThree'];
+    $OptThree1 = $row['OptThree1'];
+    $OptThree2 = $row['OptThree2'];
+    $OptThree3 = $row['OptThree3'];
+    $AnsThree = $row['AnsThree'];
+    $QuestionFour = $row['QuestionFour'];
+    $OptFour1 = $row['OptFour1'];
+    $OptFour2 = $row['OptFour2'];
+    $OptFour3 = $row['OptFour3'];
+    $AnsFour = $row['AnsFour'];
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
     //store the course information in the corresponding variables
     $QuizID = $_GET['QuizID'];
-    $QuestionText = $_POST['QuestionText'];
-    $option1 = $_POST['option1'];
-    $option2 = $_POST['option2'];
-    $option3 = $_POST['option3'];
-    $answers = $_POST['answers'];
+    $QuestionOne = $_POST['QuestionOne'];
+    $OptOne1 = $_POST['OptOne1'];
+    $OptOne2 = $_POST['OptOne2'];
+    $OptOne3 = $_POST['OptOne3'];
+    $AnsOne = $_POST['AnsOne'];
+    $QuestionTwo = $_POST['QuestionTwo'];
+    $OptTwo1 = $_POST['OptTwo1'];
+    $OptTwo2 = $_POST['OptTwo2'];
+    $OptTwo3 = $_POST['OptTwo3'];
+    $AnsTwo = $_POST['AnsTwo'];
+    $QuestionThree = $_POST['QuestionThree'];
+    $OptThree1 = $_POST['OptThree1'];
+    $OptThree2 = $_POST['OptThree2'];
+    $OptThree3 = $_POST['OptThree3'];
+    $AnsThree = $_POST['AnsThree'];
+    $QuestionFour = $_POST['QuestionFour'];
+    $OptFour1 = $_POST['OptFour1'];
+    $OptFour2 = $_POST['OptFour2'];
+    $OptFour3 = $_POST['OptFour3'];
+    $AnsFour = $_POST['AnsFour'];
 
     do {
         //check if any of the course information is empty
-        if (empty($QuizID) || empty($QuestionText) || empty($option1) || empty($option2) || empty($option3) || empty($answers)) {
+        if (empty($QuestionOne) || empty($OptOne1) || empty($OptOne2) || empty($OptOne3) || empty($AnsOne) || empty($QuestionTwo) || empty($OptTwo1) || empty($OptTwo2) || empty($OptTwo3) || empty($AnsTwo) || empty($QuestionThree) || empty($OptThree1) || empty($OptThree2) || empty($OptThree3) || empty($AnsThree) || empty($QuestionFour) || empty($OptFour1) || empty($OptFour2) || empty($OptFour3) || empty($AnsFour)) {
             //if any of the course information is empty, store an error message in the error variable
             $error = "Please fill in all fields";
             break;
         }
         //update the course information in the database
-        $sqlQuizDetail = "UPDATE quizquestion SET QuestionText = '$QuestionText' , option1 = '$option1' , option2 = '$option2' , option3 = '$option3' , answers = '$answers' WHERE QuizID = '$QuizID'";
+        $sqlQuizDetail = "UPDATE quizquestion SET QuestionOne = '$QuestionOne' , OptOne1 = '$OptOne1' , OptOne2 = '$OptOne2' , OptOne3 = '$OptOne3' , AnsOne = '$AnsOne', QuestionTwo = '$QuestionTwo', OptTwo1 = '$OptTwo1', OptTwo2 = '$OptTwo2', OptTwo3 = '$OptTwo3', AnsTwo = '$AnsTwo', QuestionThree = '$QuestionThree', OptThree1 = '$OptThree1', OptThree2 = '$OptThree2', OptThree3 = '$OptThree3', AnsThree = '$AnsThree', QuestionFour = '$QuestionFour', OptFour1 = '$OptFour1', OptFour2 = '$OptFour2', OptFour3 = '$OptFour3', AnsFour = '$AnsFour'  WHERE QuizID = '$QuizID'";
 
         $resultQuizDetail = $conn->query($sqlQuizDetail);
 
@@ -90,113 +139,129 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <form method="post" enctype="multipart/form-data">
             <input type="hidden" class="form-control" name="QuizID" value="<?php echo $QuizID; ?>">
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Question Text</label>
+                <label class="col-sm-3 col-form-label">Question One</label>
                 <div class="col-sm-6">
-                    <input type="textarea" class="form-control" name="QuestionText" value="<?php echo $QuestionText; ?>">
-                        <?php
-                        //Create a query to select all the categories from the coursecategory table
-                        $query1 = "SELECT * FROM quizquestion";
-                        //Execute the query and store the result in the $result1 variable
-                        $result1 = mysqli_query($conn, $query1);
-
-                        if($result1){
-                            while($row = mysqli_fetch_assoc($result1)){
-                                $QuestionText = $row['QuestionText'];
-                                echo "<option value='$QuestionText'</option>";
-                            }
-                        }
-
-                        ?>
-                    
+                    <textarea class="form-control" name="QuestionOne" value="<?php echo $QuestionOne; ?>"></textarea>
                 </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Option 1</label>
-                        <div class="col-sm-6">
-                            <input type="textarea" class="form-control" name="option1" value="<?php echo $option1; ?>">
-                                <?php
-                                    $query2 = "SELECT * FROM quizquestion";
-
-                                    $result2 = mysqli_query($conn, $query2);
-
-                                    if($result2){
-                                        while($row = mysqli_fetch_assoc($result2)){
-                                            $option1 = $row['option1'];
-                                            echo "<option value='$option1'</option>";
-                                        }
-                                    }
-                                ?>
-                        </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option One</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptOne1" value="<?php echo $OptOne1; ?>"></textarea>
                 </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Option 2</label>
-                        <div class="col-sm-6">
-                            <input type="textarea" class="form-control" name="option2" value="<?php echo $option2; ?>">
-                                <?php
-                                        $query3 = "SELECT * FROM quizquestion";
-
-                                        $result3 = mysqli_query($conn, $query3);
-
-                                        if($result3){
-                                            while($row = mysqli_fetch_assoc($result3)){
-                                                $option2 = $row['option2'];
-                                                echo "<option value='$option2'</option>";
-                                            }
-                                        }
-                                    ?>                            
-                        </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Two</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptOne2" value="<?php echo $OptOne2; ?>"></textarea>
                 </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Option 3</label>
-                        <div class="col-sm-6">
-                            <input type="textarea" class="form-control" name="option3" value="<?php echo $option3; ?>">
-                                <?php
-                                        $query4 = "SELECT * FROM quizquestion";
-
-                                        $result4 = mysqli_query($conn, $query4);
-
-                                        if($result4){
-                                            while($row = mysqli_fetch_assoc($result4)){
-                                                $option3 = $row['option3'];
-                                                echo "<option value='$option3'</option>";
-                                            }
-                                        }
-                                    ?>                
-                        </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Three</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptOne3" value="<?php echo $OptOne3; ?>"></textarea>
                 </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Answers</label>
-                        <div class="col-sm-6">
-                            <input type="textarea" class="form-control" name="answers" value="<?php echo $answers; ?>">
-                                <?php
-                                        $query5 = "SELECT * FROM quizquestion";
-
-                                        $result5 = mysqli_query($conn, $query5);
-
-                                        if($result5){
-                                            while($row = mysqli_fetch_assoc($result2)){
-                                                $answers = $row['answers'];
-                                                echo "<option value='$answers'</option>";
-                                            }
-                                        }
-                                    ?>               
-                        </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Answer</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="AnsOne" value="<?php echo $AnsOne; ?>"></textarea>
                 </div>
-
-            <script>
-                //This code is used to select an option from the dropdown menu and display the selected option in the textbox
-                document.getElementById('QuizID').addEventListener('change', function () {
-                    //Get the selected index of the dropdown menu
-                    var selectedIndex = this.selectedIndex;
-                    //Get the selected option from the dropdown menu
-                    var selectedOption = this.options[selectedIndex];
-                    //Get the text of the selected option
-                    var categoryName = selectedOption.text;
-
-                    //Display the selected option in the textbox
-                    document.getElementById('QuizName').value = quizName;
-                });
-            </script>
-
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Question Two</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="QuestionTwo" value="<?php echo $QuestionTwo; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option One</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptTwo1" value="<?php echo $OptTwo1; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Two</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptTwo2" value="<?php echo $OptTwo2; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Three</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptTwo3" value="<?php echo $OptTwo3; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Answer</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="AnsTwo" value="<?php echo $AnsTwo; ?>"></textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Question Three</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="QuestionThree"
+                        value="<?php echo $QuestionThree; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option One</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptThree1" value="<?php echo $OptThree1; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Two</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptThree2" value="<?php echo $OptThree2; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Three</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptThree3" value="<?php echo $OptThree3; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Answer</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="AnsThree" value="<?php echo $AnsThree; ?>"></textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Question Four</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="QuestionFour" value="<?php echo $QuestionFour; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option One</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptFour1" value="<?php echo $OptFour1; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Two</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptFour2" value="<?php echo $OptFour2; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Three</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="OptFour3" value="<?php echo $OptFour3; ?>"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Answer</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="AnsFour" value="<?php echo $AnsFour; ?>"></textarea>
+                </div>
+            </div>
             <?php
             if (!empty($success)) {
                 echo "

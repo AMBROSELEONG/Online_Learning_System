@@ -76,7 +76,7 @@
                     <ul>
                         <li onclick="window.location.href = '../MainPage/MainPage.php'">Home</li>
                         <li onclick="window.location.href = '../Course/CoursePage.php'">Course</li>
-                        <li onclick="window.location.href = '../Quiz/QuizList.html'">Quiz</li>
+                        <li onclick="window.location.href = '../Quiz/QuizList.php'">Quiz</li>
                     </ul>
                 </li>
                 <li class="item">About<span></span>
@@ -140,40 +140,40 @@
             }
         </script>
         <div id="myBtnContainer">
-        <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+            <button class="btn active" onclick="filterSelection('all')"> Show all</button>
             <?php
-                include '../ConnectDB.php';
-                $sql = "SELECT * FROM quiz";
-                $result = mysqli_query($conn, $sql);
+            include '../ConnectDB.php';
+            $sql = "SELECT * FROM quizcategory";
+            $result = mysqli_query($conn, $sql);
 
-                if(!$result){
-                    die("Invalid Query" . $conn->error);
-                }
-                while ($row = $result->fetch_assoc()) {
-                    echo "<button class='btn' onclick=\"filterSelection('{$row['QuizID']}')\">" . $row['QuizName'] . "</button>";
-                }
+            if (!$result) {
+                die("Invalid Query" . $conn->error);
+            }
+            while ($row = $result->fetch_assoc()) {
+                echo "<button class='btn' onclick=\"filterSelection('{$row['CategoryID']}')\">" . $row['CategoryName'] . "</button>";
+            }
             ?>
         </div>
 
         <div class="container">
             <?php
-                $sqlquiz = "SELECT * FROM quiz";
-                $resultquiz = mysqli_query($conn,$sqlquiz);
-                if(!$resultquiz){
-                    die("Invalid Query" . $conn->error);
-                }
-                while ($row = $resultquiz->fetch_assoc()) {
-                    $imageFolder = '../Dashboard/Quiz/';
-                    $imagePath = $imageFolder . $row['QuizImage'];
+            $sqlquiz = "SELECT * FROM quiz";
+            $resultquiz = mysqli_query($conn, $sqlquiz);
+            if (!$resultquiz) {
+                die("Invalid Query" . $conn->error);
+            }
+            while ($row = $resultquiz->fetch_assoc()) {
+                $imageFolder = '../Dashboard/Quiz/';
+                $imagePath = $imageFolder . $row['QuizImage'];
 
-                    echo "<div class='filterDiv {$row['QuizID']}'>";
-                    echo "<img src='$imagePath' alt='Quiz'>";
-                    echo "<h1>{$row['QuizName']}</h1>";
-                    echo "<button class='try-quiz {$row['QuizName']}' onclick=\"window.location.href='../QuizDetail/Quiz.php?QuizID={$row['QuizName']}'\">Start Quiz</button>";
-                    echo "</div>";
-                }
+                echo "<div class='filterDiv {$row['CategoryID']}'>";
+                echo "<img src='$imagePath' alt='Quiz'>";
+                echo "<h1>{$row['QuizName']}</h1>";
+                echo "<button class='try-quiz {$row['QuizID']}' onclick=\"window.location.href='../QuizDetail/Quiz.php?QuizID={$row['QuizID']}'\">Start Quiz</button>";
+                echo "</div>";
+            }
             ?>
-            
+
             <script>
                 filterSelection("all")
                 function filterSelection(c) {
