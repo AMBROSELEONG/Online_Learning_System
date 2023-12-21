@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1962965",
+      "name": "icon_用户管理",
+      "font_class": "icon_yonghuguanli",
+      "unicode": "e87e",
+      "unicode_decimal": 59518
+    },
+    {
+      "icon_id": "11170360",
+      "name": "销量",
+      "font_class": "xiaoliang",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "17602729",
+      "name": "订单-",
+      "font_class": "dingdan-",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "34115742",
+      "name": "课程首页-研学课程",
+      "font_class": "kechengshouye-yanxuekecheng",
+      "unicode": "e680",
+      "unicode_decimal": 59008
+    }
+  ]
+}

@@ -14,7 +14,7 @@ if ($result->num_rows > 0) {
         $CourseName = $row['CourseName'];
         $CoursePrice = $row['CoursePrice'];
 
-        $createOrderQuery .= "('$userID','$CartID','$CourseID','$CourseName','$CoursePrice', NOW()),";
+        $createOrderQuery .= "('$userID','$CartID','$CourseID','$CourseName','$CoursePrice', CURDATE()),";
         $CartIDs[] = $CartID;
     }
 
