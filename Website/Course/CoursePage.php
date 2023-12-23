@@ -44,16 +44,48 @@
                             <li><a class="dropdown-item" href=".../Comment/Comment.php">Comment</a></li>
                             <li><a class="dropdown-item" href="../ContactUs/ContactUs.php'">Contact Us</a></li>
                             <li><a class="dropdown-item" href="../AboutUS/AboutUs.html">About Us</a></li>
-                            <li><a class="dropdown-item" href="../Lecturer/AboutTheTutor.php" >Our Lecturer</a></li>
+                            <li><a class="dropdown-item" href="../Lecturer/AboutTheTutor.php">Our Lecturer</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        <!-- ... 之前的代码 ... -->
+
+                        <form class="d-flex" onsubmit="return false;">
+                            <input class="form-control me-2" id="searchInput" type="search" placeholder="Search"
+                                aria-label="Search">
                         </form>
+
+                        <div id="searchResults" class="mt-3"></div> 
+
+                        <script>
+                            const searchInput = document.getElementById('searchInput');
+                            const searchResults = document.getElementById('searchResults');
+
+                            searchInput.addEventListener('input', function () {
+                                const searchValue = this.value.trim();
+
+                                if (searchValue.length > 0) {
+                                    const xhr = new XMLHttpRequest();
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                                            if (xhr.status === 200) {
+                                                searchResults.innerHTML = xhr.responseText;
+                                            } else {
+                                                console.error('Request failed:', xhr.status);
+                                            }
+                                        }
+                                    };
+
+                                    xhr.open('POST', '../search.php');
+                                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                                    xhr.send(`search=${searchValue}`);
+                                } else {
+                                    searchResults.innerHTML = ''; 
+                                }
+                            });
+                        </script>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Mailbox/Mailbox.php">
@@ -145,7 +177,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script>
-       function filterSelection() {
+        function filterSelection() {
             // Get all checkboxes
             var checkboxes = document.querySelectorAll('.form-check-input');
             // Create array to store checked categories
