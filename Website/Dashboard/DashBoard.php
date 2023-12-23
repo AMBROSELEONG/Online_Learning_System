@@ -1,3 +1,49 @@
+<?php
+session_start();
+
+// Check if AdminID is set in the session
+if (isset($_SESSION['AdminID'])) {
+    // Get the AdminID from the session
+    $adminID = $_SESSION['AdminID'];
+
+    // Include your database connection
+    include '../ConnectDB.php';
+
+    // Create a prepared statement to select the UserName based on AdminID
+    $stmt = $conn->prepare("SELECT UserName FROM admin WHERE AdminID = ?");
+    $stmt->bind_param("i", $adminID); // Assuming AdminID is an integer, adjust the type accordingly
+
+    // Execute the prepared statement
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+
+    // Check if a row is found
+    if ($result->num_rows > 0) {
+        // Fetch the UserName
+        $row = $result->fetch_assoc();
+        $userName = $row['UserName'];
+
+        // Now $userName contains the UserName corresponding to the AdminID
+
+        // Free the result set and close the prepared statement
+        $stmt->free_result();
+        $stmt->close();
+
+        // Close the database connection
+        $conn->close();
+
+        // Use $userName as needed in your code
+    }
+} else {
+    // If AdminID is not set in the session, redirect to login page
+    header("location: Login/Login.php");
+    exit();
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -15,9 +61,11 @@
     <div class='dashboard'>
         <div class="dashboard-nav">
             <header>
-                <a href="#" class="brand-logo">
-                    <span></span>
-                </a>
+                <div style="padding: 20px;">
+                    <h3 style="color: white">Welcome,
+                        <?php echo $userName ?>
+                    </h3>
+                </div>
             </header>
             <nav class="dashboard-nav-list">
                 <a href="Home.php" target="content" class="dashboard-nav-item menu-link">
@@ -60,7 +108,7 @@
                     <i class="iconfont icon-liuyan icon"></i> Comment
                 </a>
                 <div class="nav-item-divider"></div>
-                <a href="#" class="dashboard-nav-item">
+                <a href="Logout.php" class="dashboard-nav-item">
                     <i class="iconfont icon-Logout icon"></i> Logout
                 </a>
             </nav>
