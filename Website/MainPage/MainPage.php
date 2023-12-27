@@ -22,9 +22,6 @@ include "../Session.php"
     <header>
         <div id="mySidepanel" class="sidepanel">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-            <a href="../MainPage/MainPage.php"><i class="iconfont icon-book1">
-                    <p>Home</p>
-                </i></a>
             <a href="../Course/CoursePage.php"><i class="iconfont icon-book1">
                     <p>Course</p>
                 </i></a>

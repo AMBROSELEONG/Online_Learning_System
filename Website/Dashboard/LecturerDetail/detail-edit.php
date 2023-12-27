@@ -44,6 +44,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     //store the course information in the corresponding variables
     $LecturerID = $row['LecturerID'];
     $LecturerName = $row['LecturerName'];
+    $Professional = $row['Professional'];
+    $Country = $row['Country'];
+    $Github = $row['Github'];
+    $Twitter = $row['Twitter'];
+    $Instagram = $row['Instagram'];
+    $Facebook = $row['Facebook'];
+    $LecturerDesription = $row['LecturerDescription'];
+    $LecturerEmail = $row['LecturerEmail'];
+    $Phone = $row['Phone'];
+    $Introduction = $row['Introduction'];
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
     //store the course information in the corresponding variables
@@ -69,19 +79,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             break;
         }
         //update the course information in the database
-        $sql = "UPDATE lecturerdetail SET Professional = '$Professional', Country = '$Country', Github = '$Github', Twitter = '$Twitter', Instagram = '$Instagram', Facebook = '$Facebook', LecturerDescription = '$LecturerDesription', LecturerEmail = '$LecturerEmail', Phone = '$Phone', Introduction = '$Introduction' WHERE LecturerID = '$LecturerID'";
+        $sql = "UPDATE lecturerdetail SET Professional = ?, Country = ?, Github = ?, Twitter = ?, Instagram = ?, Facebook = ?, LecturerDescription = ?, LecturerEmail = ?, Phone = ?, Introduction = ? WHERE LecturerID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssssssssssi", $Professional, $Country, $Github, $Twitter, $Instagram, $Facebook, $LecturerDesription, $LecturerEmail, $Phone, $Introduction, $LecturerID);
+        $stmt->execute();
 
-        $result = $conn->query($sql);
-
-        if (!$result) {
-            // Error updating course detail
-            $error = "Error updating course detail: " . $conn->error;
-        } else {
-            $error = "Error updating lecturer: " . $conn->error;
-            // Both updates were successful
+        if ($stmt->affected_rows > 0) {
             $success = "Course Details updated successfully";
             header("location: LecturerDetail.php");
             exit;
+        } else {
+            $error = "Error updating course detail: " . $conn->error;
+
         }
     } while (false);
 }
@@ -147,10 +156,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Lecturer Desription</label>
+                <label class="col-sm-3 col-form-label">Lecturer Description</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="LecturerDesription"
-                        value="<?php echo $LecturerDesription; ?>">
+                    <textarea class="form-control"
+                        name="LecturerDesription"><?php echo $LecturerDesription; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
@@ -168,7 +177,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Introduction</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Introduction" value="<?php echo $Introduction; ?>">
+                    <textarea type="text" class="form-control"
+                        name="Introduction"><?php echo $Introduction; ?></textarea>
                 </div>
             </div>
             <?php

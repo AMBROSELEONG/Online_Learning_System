@@ -65,6 +65,10 @@
                                     //increment the counter
                                     $counter++;
                                 }
+                                if ($result->num_rows === 0) {
+                                    echo "<tr><td colspan='5'>Your shopping cart is empty.</td></tr>";
+                                }
+                                $isCartEmpty = ($result->num_rows === 0);
                                 ?>
                             </tbody>
 
@@ -177,7 +181,9 @@
                                         </p>
                                     </div>
 
-                                    <button type="button" class="btn btn-primary btn-block btn-lg" onclick="checkout()">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg" onclick="checkout()"
+                                        <?php if ($isCartEmpty)
+                                            echo 'disabled'; ?>>
                                         <div class="d-flex justify-content-between">
                                             <span>Checkout</span>
                                             <span id="totalAmount">RM

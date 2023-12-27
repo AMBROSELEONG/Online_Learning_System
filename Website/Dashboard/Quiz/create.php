@@ -107,7 +107,8 @@ if (isset($_POST['AddQuiz'])) {
                         $result1 = mysqli_query($conn, $query1);
 
                         // Check if the query was successful
-                        if ($result1) {
+                        if (mysqli_num_rows($result1) > 0) {
+                            echo "<option value='0'selected disabled>Please Select Category</option>";
                             // Loop through the result set
                             while ($row = mysqli_fetch_assoc($result1)) {
                                 // Store the values from the result set in the $CategoryID and $CategoryName variables

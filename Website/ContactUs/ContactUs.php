@@ -33,9 +33,6 @@ include 'find-user.php';
             <a href="../UserProfile/UserProfile.php"><i class="iconfont icon-user">
                     <p>User Info</p>
                 </i></a>
-            <a href="../ContactUs/ContactUs.php"><i class="iconfont icon-dianhua">
-                    <p>Contact Us</p>
-                </i></a>
             <a href="../AboutUS/AboutUs.html"><i class="iconfont icon-guanyuwomen">
                     <p>About Us</p>
                 </i></a>

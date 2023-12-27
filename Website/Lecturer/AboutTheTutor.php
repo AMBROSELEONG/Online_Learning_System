@@ -36,9 +36,6 @@
             <a href="../AboutUS/AboutUs.html"><i class="iconfont icon-guanyuwomen">
                     <p>About Us</p>
                 </i></a>
-            <a href="../Lecturer/AboutTheTutor.php"><i class="iconfont icon-xuexiao">
-                    <p>Tutor</p>
-                </i></a>
             <a href="../Comment/Comment.php"><i class="iconfont icon-comment">
                     <p>Comment</p>
                 </i></a>

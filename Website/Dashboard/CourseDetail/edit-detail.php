@@ -47,6 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     //store the course information in the corresponding variables
     $CourseID = $row['CourseID'];
     $CourseName = $row['CourseName'];
+    $CourseDescription = $row['CourseDescription'];
+    $LecturerName = $row['LecturerName'];
+    $LecturerQualification = $row['LecturerQualification'];
+    $StudyDuration = $row['StudyDuration'];
+    $LearningPlatform = $row['LearningPlatform'];
+    $LearningResult = $row['LearningResult'];
+    $CourseOutline = $row['CourseOutline'];
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') { // Use elseif here instead of else
     //store the course information in the corresponding variables
@@ -198,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Course Outline</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="CourseOutline" value="<?php echo $CourseOutline; ?>">
+                    <textarea type="text" class="form-control" name="CourseOutline"><?php echo $CourseOutline; ?></textarea>
                 </div>
             </div>
 
