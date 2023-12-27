@@ -70,7 +70,7 @@ include "../Session.php"
             }
         </script>
         <div class="left-bar">
-            <div id="logo">LOGO</div>
+            <div><img src="../img/Logo_Icon.png" alt="Logo" id="logo"></div>
             <ul class="menu">
                 <li class="item">Category<span></span>
                     <ul>
@@ -176,7 +176,7 @@ include "../Session.php"
         <div class="introduce-container">
             <p>Simple online learning system assignments from</p>
             <div style="display: flex;">
-                <img src="../img/new-era-university-college.png" alt="New Era University College">
+                <img src="../img/Logo.png" alt="New Era">
             </div>
         </div>
         <script>
