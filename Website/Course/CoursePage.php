@@ -50,42 +50,12 @@
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <!-- ... 之前的代码 ... -->
-
-                        <form class="d-flex" onsubmit="return false;">
-                            <input class="form-control me-2" id="searchInput" type="search" placeholder="Search"
-                                aria-label="Search">
+                        <form class="d-flex" method="post">
+                            <input class="form-control me-2" id="searchInput" type="search" placeholder="Search Course"
+                                aria-label="Search" name="search">
+                            <button type="submit" id="search-bar-submit" name="submit"><i
+                                    class="iconfont icon-sousuo"></i></button>
                         </form>
-
-                        <div id="searchResults" class="mt-3"></div> 
-
-                        <script>
-                            const searchInput = document.getElementById('searchInput');
-                            const searchResults = document.getElementById('searchResults');
-
-                            searchInput.addEventListener('input', function () {
-                                const searchValue = this.value.trim();
-
-                                if (searchValue.length > 0) {
-                                    const xhr = new XMLHttpRequest();
-                                    xhr.onreadystatechange = function () {
-                                        if (xhr.readyState === XMLHttpRequest.DONE) {
-                                            if (xhr.status === 200) {
-                                                searchResults.innerHTML = xhr.responseText;
-                                            } else {
-                                                console.error('Request failed:', xhr.status);
-                                            }
-                                        }
-                                    };
-
-                                    xhr.open('POST', '../search.php');
-                                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                                    xhr.send(`search=${searchValue}`);
-                                } else {
-                                    searchResults.innerHTML = ''; 
-                                }
-                            });
-                        </script>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Mailbox/Mailbox.php">
@@ -141,31 +111,71 @@
             <div class="col-md-9">
                 <div class="row g-2" id="productDisplay">
                     <?php
-                    $sqlcourse = "SELECT * FROM course";
-                    $resultcourse = mysqli_query($conn, $sqlcourse);
-                    if (!$resultcourse) {
-                        die("Invalid Query" . $conn->error);
-                    }
 
-                    while ($row = $resultcourse->fetch_assoc()) {
-                        $imageFolder = '../Dashboard/Course/';
-                        $imagePath = $imageFolder . $row['CourseImage'];
+                    if (isset($_POST['search'])) {
+                        $filterValue = $_POST['search'];
+                        //create a query to search for the course based on the filter value
+                        $query = "SELECT * FROM course WHERE CourseID LIKE '%$filterValue%' OR CourseName LIKE '%$filterValue%' OR CoursePrice LIKE '%$filterValue%' OR CategoryName LIKE '%$filterValue%'";
+                        //execute the query
+                        $resultsearch = $conn->query($query);
 
-                        echo "<div class='filterDiv category{$row['CategoryID']} col-md-4 product-card' onclick=\"window.location.href='../CourseDetail/CourseDetail.php?CourseID={$row['CourseID']}'\">";
-                        echo "<div class='product py-4'>";
-                        echo "<div class='text-center'>";
-                        echo "<img src='$imagePath' width='200' alt='Course Image'>";
-                        echo "</div>";
-                        echo "<div class='about text-center'>";
-                        echo "<h5>{$row['CourseName']}</h5>";
-                        echo "<h6>{$row['CategoryName']}</h6>";
-                        echo "<span>RM {$row['CoursePrice']}</span>";
-                        echo "</div>";
-                        echo "<div class='cart-button mt-3 px-2 d-flex justify-content-between align-items-center'>";
-                        echo "<button class='btn btn-primary text-uppercase'>Check Detail</button>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</div>";
+                        //check if the query is valid
+                        if (!$resultsearch) {
+                            //if not, throw an error
+                            die("Invalid query" . $conn->error);
+                        }
+
+                        if ($resultsearch->num_rows > 0) {
+                            while ($row = $resultsearch->fetch_assoc()) {
+                                $imageFolder = '../Dashboard/Course/';
+                                $imagePath = $imageFolder . $row['CourseImage'];
+
+                                echo "<div class='filterDiv category{$row['CategoryID']} col-md-4 product-card' onclick=\"window.location.href='../CourseDetail/CourseDetail.php?CourseID={$row['CourseID']}'\">";
+                                echo "<div class='product py-4'>";
+                                echo "<div class='text-center'>";
+                                echo "<img src='$imagePath' width='200' alt='Course Image'>";
+                                echo "</div>";
+                                echo "<div class='about text-center'>";
+                                echo "<h5>{$row['CourseName']}</h5>";
+                                echo "<h6>{$row['CategoryName']}</h6>";
+                                echo "<span>RM {$row['CoursePrice']}</span>";
+                                echo "</div>";
+                                echo "<div class='cart-button mt-3 px-2 d-flex justify-content-between align-items-center'>";
+                                echo "<button class='btn btn-primary text-uppercase'>Check Detail</button>";
+                                echo "</div>";
+                                echo "</div>";
+                                echo "</div>";
+                            }
+                        } else {
+                            echo "0 results";
+                        }
+                    } else {
+                        $sqlcourse = "SELECT * FROM course";
+                        $resultcourse = mysqli_query($conn, $sqlcourse);
+                        if (!$resultcourse) {
+                            die("Invalid Query" . $conn->error);
+                        }
+
+                        while ($row = $resultcourse->fetch_assoc()) {
+                            $imageFolder = '../Dashboard/Course/';
+                            $imagePath = $imageFolder . $row['CourseImage'];
+
+                            echo "<div class='filterDiv category{$row['CategoryID']} col-md-4 product-card' onclick=\"window.location.href='../CourseDetail/CourseDetail.php?CourseID={$row['CourseID']}'\">";
+                            echo "<div class='product py-4'>";
+                            echo "<div class='text-center'>";
+                            echo "<img src='$imagePath' width='200' alt='Course Image'>";
+                            echo "</div>";
+                            echo "<div class='about text-center'>";
+                            echo "<h5>{$row['CourseName']}</h5>";
+                            echo "<h6>{$row['CategoryName']}</h6>";
+                            echo "<span>RM {$row['CoursePrice']}</span>";
+                            echo "</div>";
+                            echo "<div class='cart-button mt-3 px-2 d-flex justify-content-between align-items-center'>";
+                            echo "<button class='btn btn-primary text-uppercase'>Check Detail</button>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
                     }
                     ?>
                 </div>

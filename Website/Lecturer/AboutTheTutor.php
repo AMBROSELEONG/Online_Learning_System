@@ -15,10 +15,6 @@
     <header>
         <div id="mySidepanel" class="sidepanel">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-            <form action="" id="search-bar-form">
-                <input type="text" id="search-bar" placeholder="Search...">
-                <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
-            </form>
             <a href="../MainPage/MainPage.php"><i class="iconfont icon-book1">
                     <p>Home</p>
                 </i></a>
@@ -112,10 +108,6 @@
             });
         </script>
         <div class="right-bar">
-            <form action="" id="search-bar-form">
-                <input type="text" id="search-bar" placeholder="Search...">
-                <button type="submit" id="search-bar-submit"><i class="iconfont icon-sousuo"></i></button>
-            </form>
             <i class="iconfont icon-youxiang" onclick="window.location.href='../Mailbox/Mailbox.php'"></i>
             <i class="iconfont icon-31gouwuchexuanzhong"
                 onclick="window.location.href='../ShoppingCart/ShoppingCart.php'"></i>
