@@ -94,7 +94,7 @@
     <div class="container-fluid mt-5 mb-5">
         <div class="row g-2">
             <div class="col-md-3">
-                <div class="p-2">
+                <div class="p-2 mt-5">
                     <div class="heading d-flex justify-content-between align-items-center">
                         <h6 class="text-uppercase">Categories</h6>
                         <span>--</span>
