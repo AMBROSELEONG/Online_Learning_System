@@ -17,7 +17,7 @@
 <body style="background-color: #f0f0f0;">
     <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">LOGO</a>
+            <a class="navbar-brand" href=""><img src="../Img/Logo_Icon.png" alt="" class="navbar-brand" style="width: 10%"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
