@@ -7,6 +7,7 @@ include '../ShoppingCart/totalSession.php';
 <head>
     <meta charset="UTF-8">
     <title>FPX Check Out</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>

@@ -5,6 +5,8 @@ include '../ShoppingCart/totalSession.php';
 <html>
 
 <head>
+    <title>CheckOut</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>

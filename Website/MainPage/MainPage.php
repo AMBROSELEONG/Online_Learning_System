@@ -12,7 +12,7 @@ include "../Session.php"
     <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="stylesheet" href="../icon2/iconfont.css">
     <link rel="stylesheet" href="../Dashboard/icon2/iconfont.css">
-    <link rel="icon" type="image/x-icon" href="">
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>

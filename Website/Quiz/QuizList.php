@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Quiz</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
     <link rel="stylesheet" type="text/css" href="QuizList.css">
     <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="stylesheet" href="../icon2/iconfont.css">

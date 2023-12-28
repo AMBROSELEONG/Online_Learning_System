@@ -8,6 +8,7 @@ include 'find-index.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Resume</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
     <link rel="stylesheet" type="text/css" href="UserResume.css">
 </head>
 
