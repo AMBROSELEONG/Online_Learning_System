@@ -141,125 +141,124 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Question One</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="QuestionOne" value="<?php echo $QuestionOne; ?>"></textarea>
+                    <textarea class="form-control" name="QuestionOne"><?php echo $QuestionOne; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option One</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptOne1" value="<?php echo $OptOne1; ?>"></textarea>
+                    <textarea class="form-control" name="OptOne1"><?php echo $OptOne1; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option Two</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptOne2" value="<?php echo $OptOne2; ?>"></textarea>
+                    <textarea class="form-control" name="OptOne2"><?php echo $OptOne2; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option Three</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptOne3" value="<?php echo $OptOne3; ?>"></textarea>
+                    <textarea class="form-control" name="OptOne3"><?php echo $OptOne3; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Answer</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="AnsOne" value="<?php echo $AnsOne; ?>"></textarea>
+                    <textarea class="form-control" name="AnsOne"><?php echo $AnsOne; ?></textarea>
                 </div>
             </div>
             <hr>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Question Two</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="QuestionTwo" value="<?php echo $QuestionTwo; ?>"></textarea>
+                    <textarea class="form-control" name="QuestionTwo"><?php echo $QuestionTwo; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option One</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptTwo1" value="<?php echo $OptTwo1; ?>"></textarea>
+                    <textarea class="form-control" name="OptTwo1"><?php echo $OptTwo1; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option Two</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptTwo2" value="<?php echo $OptTwo2; ?>"></textarea>
+                    <textarea class="form-control" name="OptTwo2"><?php echo $OptTwo2; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option Three</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptTwo3" value="<?php echo $OptTwo3; ?>"></textarea>
+                    <textarea class="form-control" name="OptTwo3"><?php echo $OptTwo3; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Answer</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="AnsTwo" value="<?php echo $AnsTwo; ?>"></textarea>
+                    <textarea class="form-control" name="AnsTwo"><?php echo $AnsTwo; ?></textarea>
                 </div>
             </div>
             <hr>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Question Three</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="QuestionThree"
-                        value="<?php echo $QuestionThree; ?>"></textarea>
+                    <textarea class="form-control" name="QuestionThree"><?php echo $QuestionThree; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option One</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptThree1" value="<?php echo $OptThree1; ?>"></textarea>
+                    <textarea class="form-control" name="OptThree1"><?php echo $OptThree1; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option Two</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptThree2" value="<?php echo $OptThree2; ?>"></textarea>
+                    <textarea class="form-control" name="OptThree2"><?php echo $OptThree2; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option Three</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptThree3" value="<?php echo $OptThree3; ?>"></textarea>
+                    <textarea class="form-control" name="OptThree3"><?php echo $OptThree3; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Answer</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="AnsThree" value="<?php echo $AnsThree; ?>"></textarea>
+                    <textarea class="form-control" name="AnsThree"><?php echo $AnsThree; ?></textarea>
                 </div>
             </div>
             <hr>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Question Four</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="QuestionFour" value="<?php echo $QuestionFour; ?>"></textarea>
+                    <textarea class="form-control" name="QuestionFour"><?php echo $QuestionFour; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option One</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptFour1" value="<?php echo $OptFour1; ?>"></textarea>
+                    <textarea class="form-control" name="OptFour1"><?php echo $OptFour1; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option Two</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptFour2" value="<?php echo $OptFour2; ?>"></textarea>
+                    <textarea class="form-control" name="OptFour2"><?php echo $OptFour2; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Option Three</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="OptFour3" value="<?php echo $OptFour3; ?>"></textarea>
+                    <textarea class="form-control" name="OptFour3"><?php echo $OptFour3; ?></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Answer</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="AnsFour" value="<?php echo $AnsFour; ?>"></textarea>
+                    <textarea class="form-control" name="AnsFour"><?php echo $AnsFour; ?></textarea>
                 </div>
             </div>
             <?php

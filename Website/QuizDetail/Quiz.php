@@ -36,12 +36,16 @@ $OptFour = array(
     $row['OptFour3'],
     $row['AnsFour']
 );
+$decodedQuestionOne = array_map('htmlspecialchars_decode',$OptOne);
+$decodedQuestionTwo = array_map('htmlspecialchars_decode',$OptTwo);
+$decodedQuestionThree = array_map('htmlspecialchars_decode',$OptThree);
+$decodedQuestionFour = array_map('htmlspecialchars_decode',$OptFour);
 
 // Shuffle options randomly
-shuffle($OptOne);
-shuffle($OptTwo);
-shuffle($OptThree);
-shuffle($OptFour);
+shuffle($decodedQuestionOne);
+shuffle($decodedQuestionTwo);
+shuffle($decodedQuestionThree);
+shuffle($decodedQuestionFour);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $total_score = 0;
@@ -153,30 +157,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </h5>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q1" id="q1-option1"
-                                    value="<?php echo $OptOne[0]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionOne[0]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q1-option1">
-                                    <?php echo $OptOne[0]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionOne[0]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q1" id="q1-option2"
-                                    value="<?php echo $OptOne[1]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionOne[1]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q1-option2">
-                                    <?php echo $OptOne[1]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionOne[1]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q1" id="q1-option3"
-                                    value="<?php echo $OptOne[2]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionOne[2]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q1-option3">
-                                    <?php echo $OptOne[2]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionOne[2]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q1" id="q1-option4"
-                                    value="<?php echo $OptOne[3]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionOne[3]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q1-option4">
-                                    <?php echo $OptOne[3]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionOne[3]); ?>
                                 </label>
                             </div>
                         </div>
@@ -192,30 +196,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </h5>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q2" id="q2-option1"
-                                    value="<?php echo $OptTwo[0]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionTwo[0]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q2-option1">
-                                    <?php echo $OptTwo[0]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionTwo[0]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q2" id="q2-option2"
-                                    value="<?php echo $OptTwo[1]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionTwo[1]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q2-option2">
-                                    <?php echo $OptTwo[1]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionTwo[1]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q2" id="q2-option3"
-                                    value="<?php echo $OptTwo[2]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionTwo[2]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q2-option3">
-                                    <?php echo $OptTwo[2]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionTwo[2]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q2" id="q2-option4"
-                                    value="<?php echo $OptTwo[3]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionTwo[3]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q2-option4">
-                                    <?php echo $OptTwo[3]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionTwo[3]); ?>
                                 </label>
                             </div>
                         </div>
@@ -231,30 +235,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </h5>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q3" id="q3-option1"
-                                    value="<?php echo $OptThree[0]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionThree[0]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q3-option1">
-                                    <?php echo $OptThree[0]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionThree[0]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q3" id="q3-option2"
-                                    value="<?php echo $OptThree[1]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionThree[1]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q3-option2">
-                                    <?php echo $OptThree[1]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionThree[1]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q3" id="q3-option3"
-                                    value="<?php echo $OptThree[2]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionThree[2]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q3-option3">
-                                    <?php echo $OptThree[2]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionThree[2]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q3" id="q3-option4"
-                                    value="<?php echo $OptThree[3]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionThree[3]) ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q3-option4">
-                                    <?php echo $OptThree[3]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionThree[3]); ?>
                                 </label>
                             </div>
                         </div>
@@ -270,30 +274,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </h5>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q4" id="q4-option1"
-                                    value="<?php echo $OptFour[0]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionFour[0]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q4-option1">
-                                    <?php echo $OptFour[0]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionFour[0]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q4" id="q4-option2"
-                                    value="<?php echo $OptFour[1]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionFour[1]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q4-option2">
-                                    <?php echo $OptFour[1]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionFour[1]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q4" id="q4-option3"
-                                    value="<?php echo $OptFour[2]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionFour[2]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q4-option3">
-                                    <?php echo $OptFour[2]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionFour[2]); ?>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q4" id="q4-option4"
-                                    value="<?php echo $OptFour[3]; ?>" onchange="checkSelection()">
+                                    value="<?php echo htmlspecialchars($decodedQuestionFour[3]); ?>" onchange="checkSelection()">
                                 <label class="form-check-label" for="q4-option4">
-                                    <?php echo $OptFour[3]; ?>
+                                    <?php echo htmlspecialchars($decodedQuestionFour[3]); ?>
                                 </label>
                             </div>
                         </div>
