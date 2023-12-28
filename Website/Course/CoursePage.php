@@ -42,8 +42,8 @@
                             About
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href=".../Comment/Comment.php">Comment</a></li>
-                            <li><a class="dropdown-item" href="../ContactUs/ContactUs.php'">Contact Us</a></li>
+                            <li><a class="dropdown-item" href="../Comment/Comment.php">Comment</a></li>
+                            <li><a class="dropdown-item" href="../ContactUs/ContactUs.php">Contact Us</a></li>
                             <li><a class="dropdown-item" href="../AboutUS/AboutUs.html">About Us</a></li>
                             <li><a class="dropdown-item" href="../Lecturer/AboutTheTutor.php">Our Lecturer</a></li>
                         </ul>
