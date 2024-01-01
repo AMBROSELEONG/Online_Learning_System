@@ -241,14 +241,13 @@ include "../Session.php"
         </div>
         <div class="tutorial-container">
             <div class="tutorial-container-inner-left">
-                <img src="" alt="">
                 <p>Tutorial-container</p>
                 <ul>
                     <li>Test your professional talent!</li>
                     <li>Discover your creative talents!</li>
                     <li>Reveal your unique personality!</li>
                 </ul>
-                <button onclick="window.location.href = '../Course/CoursePage.php'">Go to buy course</button>
+                <button onclick="window.location.href = '../Course/CoursePage.php'">Our course</button>
             </div>
             <div class="tutorial-container-inner-right">
                 <video src="../img/MainPageVideo.mp4" controls style="width:100%; height:100%" autoplay muted loop>
