@@ -18,8 +18,8 @@ include 'find-user.php';
     <section>
         <div class="container mt-5">
             <h3 class="heading mb-4">Contact us</h3>
-            <div class="row g-4">
-                <div class="col p-3 m-1" style="border: 1px solid black; border-radius: 5%">
+            <div class="row">
+                <div class="col-md-6 p-3 " style="border: 1px solid black; border-radius: 5%">
                     <form action="insert.php" method="post">
                         <input type="hidden" name="UserID" id="UserID"
                             value="<?php echo isset($userID) ? $userID : ''; ?>">
@@ -49,7 +49,7 @@ include 'find-user.php';
                         </div>
                     </form>
                 </div>
-                <div class="col p-3 m-1 bg-light">
+                <div class="col-md-6 p-3 bg-light">
                     <div class="contactus-question">
                         <h1>Have a question for us?</h1>
                         <div class="row g-4">

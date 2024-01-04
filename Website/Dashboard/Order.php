@@ -1,5 +1,6 @@
 <!Doctype html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
                     <tr>
                         <td>OrderID</td>
                         <td>UserID</td>
+                        <td>UserName</td>
                         <td>CourseName</td>
                         <td>Price</td>
                         <td>OrderDate</td>
@@ -25,7 +27,9 @@
                     <?php
                     include '../ConnectDB.php';
 
-                    $sql = "SELECT * FROM orders";
+                    $sql = "SELECT o.OrderID, o.UserID, o.CourseName, o.CoursePrice, o.OrderDate, u.UserName
+                            FROM orders o
+                            INNER JOIN users u ON o.UserID = u.UserID";
 
                     $result = $conn->query($sql);
 
@@ -37,6 +41,7 @@
                         echo "  <tr>
                                     <td>$row[OrderID]</td>
                                     <td>$row[UserID]</td>
+                                    <td>$row[UserName]</td>
                                     <td>$row[CourseName]</td>
                                     <td>$row[CoursePrice]</td>
                                     <td>$row[OrderDate]</td>
@@ -55,4 +60,5 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

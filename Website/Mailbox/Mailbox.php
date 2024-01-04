@@ -82,124 +82,187 @@ $EmailQuery->close(); ?>
         .font-light {
             font-weight: 300;
         }
+
+        .vertical-nav {
+            min-width: 17rem;
+            width: 17rem;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s;
+        }
+
+        .page-content {
+            width: calc(100% - 17rem);
+            margin-left: 17rem;
+            transition: all 0.4s;
+        }
+
+        /* for toggle behavior */
+
+        #sidebar.active {
+            margin-left: -17rem;
+        }
+
+        #content.active {
+            width: 100%;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            #sidebar {
+                margin-left: -17rem;
+            }
+
+            #sidebar.active {
+                margin-left: 0;
+            }
+
+            #content {
+                width: 100%;
+                margin: 0;
+            }
+
+            #content.active {
+                margin-left: 17rem;
+                width: calc(100% - 17rem);
+            }
+        }
     </style>
 </head>
 
 <body>
-
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <nav
-                    class="navbar navbar-expand-md navbar-dark bg-primary flex-md-column flex-row align-items-start py-2">
-                    <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav flex-md-column flex-row w-100 justify-content-between">
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="../MainPage/MainPage.php"
-                                        target="_top">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="../Course/CoursePage.php"
-                                        target="_top">Course</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="../Quiz/QuizList.php" target="_top">Quiz</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="../Lecturer/AboutTheTutor.php"
-                                        target="_top">Lecturer</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="../AboutUS/AboutUs.html" target="_top">About
-                                        Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="../ContactUs/ContactUs.php"
-                                        target="_top">Contact
-                                        Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="../Comment/Comment.php"
-                                        target="_top">Comment</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="../ShoppingCart/ShoppingCart.php"
-                                        target="_top"><i class="fas fa-shopping-cart"></i> Cart</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-user"></i> User
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="../UserProfile/UserProfile.php"
-                                            target="_top">User
-                                            Profile</a>
-                                        <a class="dropdown-item" href="../UserResume/UserResume.php" target="_top">User
-                                            Resume</a>
-                                        <a class="dropdown-item" href="../UserHistory/UserHistory.php"
-                                            target="_top">User
-                                            History</a>
-                                        <a class="dropdown-item" href="../Mailbox/Mailbox.php" target="_top">Mail
-                                            Box</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="../Logout.php">Logout</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+        <div class="vertical-nav bg-white" id="sidebar">
+            <h4 class="text-gray font-weight-bold text-uppercase px-3 pb-4 mb-0 mt-5">Main</h4>
+            <ul class="nav flex-column bg-white mb-0">
+                <li class="nav-item">
+                    <a href="../MainPage/MainPage.php" class="nav-link text-dark font-italic bg-light">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Course/CoursePage.php" class="nav-link text-dark font-italic">
+                        Course
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Quiz/QuizList.php" class="nav-link text-dark font-italic">
+                        Quiz
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Lecturer/AboutTheTutor.php" class="nav-link text-dark font-italic">
+                        Lecturer
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../AboutUS/AboutUs.html" class="nav-link text-dark font-italic">
+                        About Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../ContactUs/ContactUs.php" class="nav-link text-dark font-italic">
+                        Contact Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Comment/Comment.php" class="nav-link text-dark font-italic">
+                        Comment
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../ShoppingCart/ShoppingCart.php" class="nav-link text-dark font-italic">
+                        Shopping Cart
+                    </a>
+                </li>
+            </ul>
+            <h4 class="text-gray font-weight-bold text-uppercase px-3  pb-4 mb-0 mt-5">User</h4>
+            <ul class="nav flex-column bg-white mb-0">
+                <li class="nav-item">
+                    <a href="../UserProfile/UserProfile.php" class="nav-link text-dark font-italic">
+                        User Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../UserResume/UserResume.php" class="nav-link text-dark font-italic">
+                        User Resume
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../UserHistory/UserHistory.php" class="nav-link text-dark font-italic">
+                        User History
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Mailbox/Mailbox.php" class="nav-link text-dark font-italic">
+                        MailBox
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Logout.php" class="nav-link text-dark font-italic">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            // Sidebar toggle behavior
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content').toggleClass('active');
+            });
+        });
+    </script>
+    <div class="page-content p-5" id="content">
+        <!-- Toggle button -->
+        <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i
+                class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
+        <div class="card">
+            <div class="card-body bg-primary text-white mailbox-widget pb-0">
+                <h2 class="text-white pb-3">Your Mailbox</h2>
             </div>
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body bg-primary text-white mailbox-widget pb-0">
-                        <h2 class="text-white pb-3">Your Mailbox</h2>
-                    </div>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade active show" id="inbox" aria-labelledby="inbox-tab" role="tabpanel">
-                            <div>
-                                <div class="row p-4 no-gutters align-items-center">
-                                    <div class="col-sm-12 col-md-6">
-                                        <h3 class="font-light mb-0"><i class="ti-email mr-2"></i>
-                                            <?php echo $EmailCount ?> Emails
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table email-table no-wrap table-hover v-middle mb-0 font-14">
-                                        <tbody>
-                                            <?php
-                                            //include the connection to the database
-                                            include '../ConnectDB.php';
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade active show" id="inbox" aria-labelledby="inbox-tab" role="tabpanel">
+                    <div>
+                        <div class="row p-4 no-gutters align-items-center">
+                            <div class="col-sm-12 col-md-6">
+                                <h3 class="font-light mb-0"><i class="ti-email mr-2"></i>
+                                    <?php echo $EmailCount ?> Emails
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table email-table no-wrap table-hover v-middle mb-0 font-14">
+                                <tbody>
+                                    <?php
+                                    //include the connection to the database
+                                    include '../ConnectDB.php';
 
-                                            //prepare the statement to select the data from the database
-                                            $checkUser = $conn->prepare("SELECT ReplyID, UserID, Title, ReplyDate FROM email WHERE UserID = ?");
-                                            //bind the userID to the statement
-                                            $checkUser->bind_param("i", $userID);
-                                            //execute the statement
-                                            $checkUser->execute();
-                                            //store the result of the statement
-                                            $checkUser->store_result();
+                                    //prepare the statement to select the data from the database
+                                    $checkUser = $conn->prepare("SELECT ReplyID, UserID, Title, ReplyDate FROM email WHERE UserID = ?");
+                                    //bind the userID to the statement
+                                    $checkUser->bind_param("i", $userID);
+                                    //execute the statement
+                                    $checkUser->execute();
+                                    //store the result of the statement
+                                    $checkUser->store_result();
 
-                                            //check if the statement executed successfully
-                                            if (!$checkUser) {
-                                                //if not, print an error message
-                                                die("None Message" . $conn->error);
-                                            }
-                                            //bind the result of the statement to the variables
-                                            $checkUser->bind_result($ReplyID, $UserID, $Title, $ReplyDate);
+                                    //check if the statement executed successfully
+                                    if (!$checkUser) {
+                                        //if not, print an error message
+                                        die("None Message" . $conn->error);
+                                    }
+                                    //bind the result of the statement to the variables
+                                    $checkUser->bind_result($ReplyID, $UserID, $Title, $ReplyDate);
 
-                                            //while loop to loop through the result of the statement
-                                            while ($checkUser->fetch()) {
-                                                //print the result of the statement in a table row
-                                                echo "<tr onclick='redirectToInfoPage($ReplyID)'>
+                                    //while loop to loop through the result of the statement
+                                    while ($checkUser->fetch()) {
+                                        //print the result of the statement in a table row
+                                        echo "<tr onclick='redirectToInfoPage($ReplyID)'>
                                                         <td class='pl-3'>
                                                             <div class='custom-control custom-checkbox'>
                                                                 <label class='custom-control-label' for='cst1'>&nbsp;</label>
@@ -215,26 +278,23 @@ $EmailQuery->close(); ?>
                                                         </td>
                                                         <td class='text-muted'>$ReplyDate</td>
                                                     </tr>";
-                                            }
-                                            ?>
-                                            <script>
-                                                //function to redirect to the information page
-                                                function redirectToInfoPage(replyID) {
-                                                    //redirect to the information page with the given replyID
-                                                    window.location.href = 'Information.php?ReplyID=' + replyID;
-                                                }
-                                            </script>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                    }
+                                    ?>
+                                    <script>
+                                        //function to redirect to the information page
+                                        function redirectToInfoPage(replyID) {
+                                            //redirect to the information page with the given replyID
+                                            window.location.href = 'Information.php?ReplyID=' + replyID;
+                                        }
+                                    </script>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
