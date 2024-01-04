@@ -67,7 +67,7 @@ include 'find-user.php';
             }
         </script>
         <div class="left-bar">
-            <div id="logo">LOGO</div>
+             <div><img src="../img/Logo_Icon.png" alt="Logo" id="logo"></div>
             <ul class="menu">
                 <li class="item">Category<span></span>
                     <ul>

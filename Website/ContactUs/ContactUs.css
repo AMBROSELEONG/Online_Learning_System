@@ -212,8 +212,8 @@ body section {
 }
 
 .container {
-    width: 94%;
-    height: 62rem;
+    width: calc(100%-4rem);
+    height: auto;
     padding: 2rem;
     text-align: center;
 }
@@ -224,7 +224,7 @@ body section {
 }
 
 .contactus{
-    width: 98%;
+    width: 94%;
     padding: 3%;
     overflow: hidden;
     display: flex;
@@ -240,7 +240,7 @@ body section {
 }
 
 .contactus-form p{
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     margin: 1rem;
     text-align: left;
 }
@@ -288,7 +288,6 @@ body section {
 }
 
 .btn-send{
-    width: 20%;
     background-color: rgb(255, 140, 0);
     color: white;
     padding: 14px 20px;
@@ -310,13 +309,14 @@ body section {
     font-size: 3rem;
     color:#6a6f73;
 }
+
 .questionDiv-flex{
     display: flex;
     justify-content: center;
 }
 
 .questionDiv{
-    width: 40%;
+    width: calc(50% - 5rem - 2px);
     height: 18rem;
     background-color: #f5f5f5;
     margin: 1.5rem;
@@ -332,7 +332,7 @@ body section {
 
 .questionDiv>p{
     margin-top: 1.5rem;
-    font-size: 1.6rem;
+    font-size: 2rem;
     color: #6a6f73;
 }
 
@@ -414,7 +414,7 @@ body section {
 
     .sidepanel a>i {
         color: white;
-        margin: 2rem;
+        margin: 1rem;
         display: block;
         margin-right: 2rem;
         display: flex;
@@ -423,13 +423,12 @@ body section {
 
     .sidepanel a,
     .sidepanel p {
-        font-size: 2.5rem;
+        font-size: 2rem;
         color: white;
         display: block;
         margin-left: 3rem;
         cursor: pointer;
         text-decoration: none;
-        padding: 0.1rem;
     }
 
     .sidepanel a:hover {
@@ -437,14 +436,9 @@ body section {
     }
 
     .sidepanel a {
-        font-size: 3rem;
-        margin: 1rem;
         cursor: pointer;
     }
 
-    .questionDiv>p{
-        margin-top: 1.2rem;
-    }
 }
 
 @media all and (max-width: 57.6rem) {
@@ -463,7 +457,7 @@ body section {
     }
 
     .container{
-        height: 114rem;
+        height: auto;
         padding: 1rem;
     }
 
@@ -472,7 +466,7 @@ body section {
     }
 
     .contactus-form{
-        width: 94%;
+        width: auto;
         height: 58rem;
     }
 
@@ -486,9 +480,14 @@ body section {
         height: auto;
         margin: 2% 0;
     }
-
-    .questionDiv{
-        height: 12rem;
+    
+    .questionDiv-flex {
+        flex-direction: column;
     }
 
+    .questionDiv{
+        width: calc(100% - 5rem - 2px);
+        height: auto;
+    }
+    
 }

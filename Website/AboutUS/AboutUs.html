@@ -1,271 +1,161 @@
-<!Doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>About Us</title>
-    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
     <link rel="stylesheet" type="text/css" href="AboutUs.css">
-    <link rel="stylesheet" href="../icon/iconfont.css">
-    <link rel="stylesheet" href="../icon2/iconfont.css">
-    <link rel="stylesheet" href="../Dashboard/icon2/iconfont.css">
-
-    <link rel="icon" type="image/x-icon" href="">
-    <!-- import Swiper CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
-    <!-- import Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
-    <header>
-        <div id="mySidepanel" class="sidepanel">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-            <a href="../MainPage/MainPage.php"><i class="iconfont icon-book1">
-                    <p>Home</p>
-                </i></a>
-            <a href="../Course/CoursePage.php"><i class="iconfont icon-book1">
-                    <p>Course</p>
-                </i></a>
-            <a href="../Quiz/QuizList.php"><i class="iconfont icon-shijuan">
-                    <p>Quiz</p>
-                </i></a>
-            <a href="../ShoppingCart/ShoppingCart.php"><i class="iconfont icon-31gouwuchexuanzhong">
-                    <p>Shopping Cart</p>
-                </i></a>
-            <a href="../UserProfile/UserProfile.php"><i class="iconfont icon-user">
-                    <p>User Info</p>
-                </i></a>
-            <a href="../ContactUs/ContactUs.php"><i class="iconfont icon-dianhua">
-                    <p>Contact Us</p>
-                </i></a>
-            <a href="../Lecturer/AboutTheTutor.php"><i class="iconfont icon-xuexiao">
-                    <p>Tutor</p>
-                </i></a>
-            <a href="../Comment/Comment.php"><i class="iconfont icon-comment">
-                    <p>Comment</p>
-                </i></a>
-            <a href="../Mailbox/Mailbox.php"><i class="iconfont icon-youxiang">
-                    <p>Mailbox</p>
-                </i></a>
-            <a href="../Logout.php"><i class="iconfont icon-Logout">
-                    <p>Logout</p>
-                </i></a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
+        <div class="container"><a href="#" class="navbar-brand d-flex align-items-center"> <i
+                    class="fa fa-snowflake-o fa-lg text-primary mr-2"></i><strong>NEW ERA</strong></a>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="../MainPage/MainPage.php" class="nav-link font-italic"> Home
+                        </a></li>
+                    <li class="nav-item active"><a href="../Course/CoursePage.php" class="nav-link font-italic"> Course
+                        </a></li>
+                    <li class="nav-item active"><a href="../Quiz/QuizList.php" class="nav-link font-italic"> Quiz </a>
+                    </li>
+                    <li class="nav-item active"><a href="../ContactUs/ContactUs.php" class="nav-link font-italic">
+                            Contact</a></li>
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <button class="openbtn" onclick="openNav()">☰</button>
-
-        <script>
-            //Function to open the side panel
-            function openNav() {
-                //Get the element with the id "mySidepanel"
-                document.getElementById("mySidepanel").style.width = "30rem";
-            }
-
-            //Function to close the side panel
-            function closeNav() {
-                //Get the element with the id "mySidepanel"
-                document.getElementById("mySidepanel").style.width = "0rem";
-            }
-        </script>
-        <div class="left-bar">
-            <div id="logo">LOGO</div>
-            <ul class="menu">
-                <li class="item">Category<span></span>
-                    <ul>
-                        <li onclick="window.location.href = '../MainPage/MainPage.php'">Home</li>
-                        <li onclick="window.location.href = '../Course/CoursePage.php'">Course</li>
-                        <li onclick="window.location.href = '../Quiz/QuizList.php'">Quiz</li>
-                    </ul>
-                </li>
-                <li class="item">About<span></span>
-                    <ul>
-                        <li onclick="window.location.href = '../Comment/Comment.php'">Comment</li>
-                        <li onclick="window.location.href = '../ContactUs/ContactUs.php'">Contact Us</li>
-                        <li onclick="window.location.href = '../AboutUS/AboutUs.html'">About Us</li>
-                        <li onclick="window.location.href = '../Lecturer/AboutTheTutor.php'">Our Lecturer</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <script>
-            const menuItems = document.querySelectorAll('.menu > li');
-
-            //Loop through each menu item
-            menuItems.forEach((menuItem) => {
-                //Get the submenu
-                const submenu = menuItem.querySelector('ul');
-
-                //Set the max height of the submenu
-                submenu.style.maxHeight = submenu.scrollHeight + 'px';
-
-                //When the mouse enters the menu item, set the max height of the submenu
-                menuItem.addEventListener('mouseenter', () => {
-                    submenu.style.maxHeight = submenu.scrollHeight + 'px';
-                });
-
-                //When the mouse leaves the menu item, set the max height of the submenu to 0
-                menuItem.addEventListener('mouseleave', () => {
-                    submenu.style.maxHeight = '0';
-                });
-            });
-        </script>
-        <div class="right-bar">
-            <i class="iconfont icon-youxiang" onclick="window.location.href='../Mailbox/Mailbox.php'"></i>
-            <i class="iconfont icon-31gouwuchexuanzhong"
-                onclick="window.location.href='../ShoppingCart/ShoppingCart.php'"></i>
-            <i class="iconfont icon-user" onclick="window.location.href='../UserProfile/UserProfile.php'"></i>
-            <i class="iconfont icon-Logout" onclick="window.location.href='../Logout.php'"></i>
-        </div>
-    </header>
-
-    <section>
-        <div class="progress-container">
-            <div class="progress-bar" id="myBar"></div>
-        </div>
-        <script>
-            // When the user scrolls the page, execute myFunction 
-            window.onscroll = function () { myFunction() };
-
-            function myFunction() {
-                // Get the scroll position
-                var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                // Get the height of the document
-                var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                // Calculate the percentage of the page that has been scrolled
-                var scrolled = (winScroll / height) * 100;
-                // Set the width of the element with id "myBar" to the percentage of scroll
-                document.getElementById("myBar").style.width = scrolled + "%";
-            }
-        </script>
-        <div class="Us-content-1">
-            <div id="title-logo-about-flex">
-                <div class="title-logo">
-                    <p>About Us</p>
-                    <div class="logo-image">LOGO</div>
-                </div>
-                <div class="Aboutus-content">
-                    <p>"Welcome to New Era Online Learning System, where learning knows no bounds! We're passionate
+    <div class="bg-light">
+        <div class="container py-5">
+            <div class="row h-100 align-items-center py-5">
+                <div class="col-lg-6">
+                    <h1 class="display-4">ABOUT US</h1>
+                    <p class="lead text-muted mb-0">"Welcome to New Era Online Learning System, where learning knows no
+                        bounds! We're passionate
                         about empowering
                         individuals to unlock their potential through accessible, innovative online education. Our
                         platform offers a diverse range of courses curated by experts, designed to inspire, challenge,
                         and ignite curiosity."</p>
-                    <p></p>
+
                 </div>
+                <div class="col-lg-6 d-none d-lg-block"><img
+                        src="https://bootstrapious.com/i/snippets/sn-about/illus.png" alt="" class="img-fluid"></div>
             </div>
-            <div class="character-content">
-                <div class="character-flex">
-                    <div class="character-list">
-                        <p style="margin-top: 15%;">Get valuable certificates </p>
-                    </div>
-                    <div class="character-list">
-                        <p>4.7/5</p>
-                        <p>Average rating given by students </p>
-                    </div>
+        </div>
+    </div>
+
+    <div class="bg-white py-5">
+        <div class="container py-5">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
+                    <h2 class="font-weight-light">Our Lecturer</h2>
+                    <p class="font-italic text-muted mb-4">Tutors play an important role in our courses. They are
+                        experienced and passionate professionals dedicated to mentoring and supporting students. Our
+                        tutor team is composed of experts in various fields. They not only have rich knowledge and
+                        skills, but also have the ability to teach and care for students. Tutors not only impart
+                        knowledge, but also focus on inspiring students' thinking, stimulating creativity, and helping
+                        them thrive in the learning process. They provide personalized tutoring and advice, ensuring
+                        each student receives the best possible support and guidance.
+                    </p>
+                    <a href="../Lecturer/AboutTheTutor.php" class="btn btn-light px-5 rounded-pill shadow-sm">Learn
+                        More</a>
                 </div>
-                <div class="character-flex">
-                    <div class="character-list">
-                        <p style="margin-top: 15%;">Flexible study time arrangements</p>
-                    </div>
-                    <div class="character-list">
-                        <p>200+</p>
-                        <p>Industry experts in our mentor network </p>
-                    </div>
+                <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img
+                        src="https://bootstrapious.com/i/snippets/sn-about/img-1.jpg" alt=""
+                        class="img-fluid mb-4 mb-lg-0"></div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-5 px-5 mx-auto"><img src="https://bootstrapious.com/i/snippets/sn-about/img-2.jpg"
+                        alt="" class="img-fluid mb-4 mb-lg-0"></div>
+                <div class="col-lg-6"><i class="fa fa-leaf fa-2x mb-3 text-primary"></i>
+                    <h2 class="font-weight-light">Our Course</h2>
+                    <p class="font-italic text-muted mb-4">Our courses strive to provide a comprehensive learning
+                        experience, covering a variety of topics and areas. Whether you want to learn programming or
+                        various IT technologies. We all have courses tailored to meet your needs. Our courses cover
+                        basic knowledge and practical skills, and help students master knowledge and apply it in
+                        practice through highly interactive, lively and interesting teaching methods. Our aim is to
+                        inspire learners to their potential and provide them with a strong foundation for the future.
+                    </p><a href="../Course/CoursePage.php" class="btn btn-light px-5 rounded-pill shadow-sm">Learn
+                        More</a>
                 </div>
             </div>
         </div>
-        <div class="swiper-container">
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="student-evaluate">
-                        <div class="student-intro">
-                            <div>
-                                <img src="../img/1699588927143.jpg" alt="LEONG">
-                            </div>
-                            <div class="student-name">
-                                <p>LEONG WEI JUN</p>
-                            </div>
-                        </div>
-                        <div class="student-evaluation-content">
-                            <p>I'm LEONG WEI JUN, Study in the Diploma Course in Web Development at New Era University
-                                College. I'm responsible for designing, coding and managing this website. Also designed
-                                and compiled the database.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="student-evaluate">
-                        <div class="student-intro">
-                            <div class="student-image">
-                                <img src="" alt="">
-                            </div>
-                            <div class="student-name">
-                                <p>ROY NG RUEY JYH</p>
-                            </div>
-                        </div>
-                        <div class="student-evaluation-content">
-                            <p>I'm NG RUEY JYH, Study in the Diploma Course in E-Commerce at New Era University College.
-                                I'm responsible for designing, coding and managing this website. Also designed and
-                                compiled the database.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="student-evaluate">
-                        <div class="student-intro">
-                            <div class="student-image">
-                                <img src="" alt="">
-                            </div>
-                            <div class="student-name">
-                                <p>LEE JUN HO</p>
-                            </div>
-                        </div>
-                        <div class="student-evaluation-content">
-                            <p>Student evaluation content</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="student-evaluate">
-                        <div class="student-intro">
-                            <div class="student-image">
-                                <img src="" alt="">
-                            </div>
-                            <div class="student-name">
-                                <p>ERIC CHONG WAI</p>
-                            </div>
-                        </div>
-                        <div class="student-evaluation-content">
-                            <p>Student evaluation content</p>
-                        </div>
-                    </div>
+    </div>
+
+    <div class="bg-light py-5">
+        <div class="container py-5">
+            <div class="row mb-4">
+                <div class="col-lg-5">
+                    <h2 class="display-4 font-weight-light">Our team</h2>
                 </div>
             </div>
+
+            <div class="row text-center">
+                <!-- Team item-->
+                <div class="col-xl-3 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img src="../img/1699588927143.jpg" alt=""
+                            width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">LEONG WEI JUN</h5><span class="small text-uppercase text-muted">Website
+                            Developer</span>
+                    </div>
+                </div>
+                <!-- End-->
+
+                <!-- Team item-->
+                <div class="col-xl-3 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                            src="../img/WhatsApp Image 2024-01-03 at 1.03.56 PM.jpeg" alt="" width="100"
+                            class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">ROY NG RUEY JYH</h5><span class="small text-uppercase text-muted">Website
+                            Developer</span>
+                    </div>
+                </div>
+                <!-- End-->
+
+                <div class="col-xl-3 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                            src="../img/069b247b-a044-49b9-9ce0-3b1f4a985a20.jpg" alt="" width="100"
+                            class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">LEE JUN HO</h5><span class="small text-uppercase text-muted">Website
+                            Developer</span>
+                    </div>
+                </div>
+                <!-- End-->
+
+                <!-- Team item-->
+                <div class="col-xl-3 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                            src="../img/acd04d69-d95b-4585-99cc-86affad7ba38.jpg" alt="" width="100"
+                            class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">ERIC CHONG WAI</h5><span class="small text-uppercase text-muted">Website
+                            Developer</span>
+                    </div>
+                </div>
+                <!-- End-->
+            </div>
         </div>
-    </section>
-    <script>
-        //Create a Swiper instance
-        var mySwiper = new Swiper('.swiper-container', {
-            //Set the automatic switching time interval 
-            autoplay: {
-                delay: 3000,
-            },
-            // Set up pager
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            // Set up navigator
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    </script>
-    <iframe src="../Footer.html" frameborder="0" width="100%" height="420px"></iframe>
+    </div>
+
+
+    <footer class="bg-light pb-5">
+        <div class="container text-center">
+            <p class="font-italic text-muted mb-0">&copy; Copyrights neweraonlinelearningsystem.com All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
+</html>

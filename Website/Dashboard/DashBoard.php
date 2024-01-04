@@ -44,7 +44,7 @@ if (isset($_SESSION['AdminID'])) {
 
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -60,8 +60,9 @@ if (isset($_SESSION['AdminID'])) {
 <body>
     <div class='dashboard'>
         <div class="dashboard-nav">
+            <button class="close-btn">X</button>
             <header>
-                <div style="padding: 20px;">
+                <div style="padding: 20px; display:flex">
                     <h3 style="color: white">Welcome,
                         <?php echo $userName ?>
                     </h3>
@@ -115,9 +116,11 @@ if (isset($_SESSION['AdminID'])) {
         </div>
         <div class='dashboard-app'>
             <div class='dashboard-content'>
-                <header class="cd__intro">
-                    <h1><span style="cursor: pointer;" onclick="window.location.href='../MainPage/MainPage.php'">Online
-                            Learning System</span> > Dashboard</h1>
+                <header class="cd__intro" style="display:flex">
+                    <h1>
+                        <button class="menu-toggle" onclick="showNav()">MENU</button>
+                        <span style="cursor: pointer;" onclick="window.location.href='../MainPage/MainPage.php'">Online Learning System</span> > Dashboard
+                    </h1>
                 </header>
                 <div class='container'>
                     <div class='card'>
@@ -147,5 +150,25 @@ if (isset($_SESSION['AdminID'])) {
     };
 
 </script>
+<script>
+    function showNav() {
+        var dashboardNav = document.querySelector('.dashboard-nav');
+        dashboardNav.classList.add('mobile-show');
+    }
+    
+    function toggleNav() {
+        var dashboardNav = document.querySelector('.dashboard-nav');
+        var dashboardApp = document.querySelector('.dashboard-app');
+        dashboardNav.classList.toggle('mobile-show');
+        dashboardApp.classList.toggle('expanded');
+    }
+    
+    document.querySelector('.close-btn').addEventListener('click', function() {
+        var dashboardNav = document.querySelector('.dashboard-nav');
+        var dashboardApp = document.querySelector('.dashboard-app');
+        dashboardNav.classList.remove('mobile-show');
+        dashboardApp.classList.remove('expanded');
+    });
 
+</script>
 </html>

@@ -11,12 +11,7 @@ if (isset($_GET['CourseID'])) {
 
     // Execute the SQL statement to delete records from coursedetail table
     if ($conn->query($sql_detail) === TRUE) {
-        // Delete associated lecturer records
-        $sql_lecturer = "DELETE FROM lecturer WHERE CourseID = $id";
-        if ($conn->query($sql_lecturer) === TRUE) {
-            // If lecturer records are deleted, proceed to delete from course table
             $sql_course = "DELETE FROM course WHERE CourseID = $id";
-
             // Execute the SQL statement to delete records from course table
             if ($conn->query($sql_course) === TRUE) {
                 // Redirect the user to the Course.php page
@@ -27,10 +22,6 @@ if (isset($_GET['CourseID'])) {
                 echo "Error deleting record from course table: " . $conn->error;
             }
         } else {
-            // Display an error message if the records could not be deleted from the lecturer table
-            echo "Error deleting records from lecturer table: " . $conn->error;
-        }
-    } else {
         // Display an error message if the records could not be deleted from the coursedetail table
         echo "Error deleting record from coursedetail table: " . $conn->error;
     }

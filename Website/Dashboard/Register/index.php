@@ -1,9 +1,6 @@
 <?php
-session_start();
-
-include 'Register.php';
 include '../../ConnectDB.php';
-
+session_start();
 // Check if password is valid
 function validatePassword($password)
 {
@@ -95,6 +92,18 @@ function verifyOccupationAndCode($occupation, $verifycode)
     return $errors;
 }
 
+function isUsernameUnique($conn, $username) {
+    // Check if the username already exists in the database
+    $checkUsernameQuery = "SELECT UserName FROM admin WHERE UserName = ?";
+    $stmt = $conn->prepare($checkUsernameQuery);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->store_result();
+
+    // If the username exists, return false; else, return true
+    return $stmt->num_rows === 0;
+}
+
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get the input data from the form
@@ -111,37 +120,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $inputErrors = verify($username, $password, $email, $contactnumber, $IC, $occupation, $verifycode);
     $errors = array_merge($passwordErrors, $inputErrors, $verifyerror);
 
-    if (empty($errors)) {
-        // Insert the data into the database
+    if (empty($errors) && isUsernameUnique($conn, $username)) {
+        // Insert data into the database
         $insert = "INSERT INTO admin(UserName, Password, Email, ContactNumber, IC, Occupation) VALUES (?, ?, ?, ?, ?, ?)";
         $stm = $conn->prepare($insert);
         $stm->bind_param("ssssss", $username, $password, $email, $contactnumber, $IC, $occupation);
 
         // Execute the query
         if ($stm->execute()) {
-            // Show success message
-            echo "<script>
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Registration successful!',
-                    icon: 'success'
-                }).then(() => {
-                    window.location.href = '../Login/Login.php'; // Redirect to login page after 'OK' is clicked
-                });
-            </script>";
+           echo "<script>alert('Register Successful!'); window.location.href = '../Login/Login.php'</script>";
+            exit();
         }
 
         // Close the statement
         $stm->close();
     } else {
-        // Store errors in session
+        // If username is not unique, add an error message
+        $errors[] = "Username is already taken. Please choose a different username.";
         $_SESSION['errors'] = $errors;
+        header('Location: Register.php');
         exit();
     }
+
     // Close the connection
     $conn->close();
 } else {
     $_SESSION['error_message'] = "Invalid request method."; // Store error in session for invalid request method
+     header('Location: Register.php');
     exit();
 }
 ?>

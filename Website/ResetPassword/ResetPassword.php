@@ -1,3 +1,6 @@
+<?php 
+session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,9 +43,7 @@
                         <label for="repeatpassword" style="color: gray;">Repeat New Password</label>
                         <input type="password" class="form-control" id="repeatpassword" name="repeatpassword" required>
                     </div>
-                    <?php
-                    session_start();
-                    ?>
+                  
                     <?php if (isset($_SESSION['error']) && is_array($_SESSION['error']) && !empty($_SESSION['error'])): ?>
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>Error(s) occurred:</strong>

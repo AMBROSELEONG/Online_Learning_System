@@ -1,3 +1,9 @@
+<?php
+ //include the connection to the database
+include '../ConnectDB.php';
+//include the session
+include '../Session.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,11 +42,6 @@
                             </thead>
                             <tbody>
                                 <?php
-                                //include the connection to the database
-                                include '../ConnectDB.php';
-                                //include the session
-                                include '../Session.php';
-
                                 //create a SQL query to select all the data from the shoppingcart table where the userID matches the userID of the current user
                                 $sql = "SELECT * FROM `shoppingcart` WHERE `UserID` = '$userID'";
                                 //execute the query
@@ -163,13 +164,12 @@
                                     </div>
 
                                     <?php
-                                    $Tax = $totalPrice * 0.05;
-                                    $Total = $totalPrice + $Tax;
+                                    $Total = $totalPrice;
                                     ?>
                                     <div class="d-flex justify-content-between" style="font-weight: 500;">
                                         <p class="mb-0">Service Fee</p>
                                         <p class="mb-0">RM
-                                            <?php echo "$Tax" ?>
+                                            <?php echo "0" ?>
                                         </p>
                                     </div>
 
@@ -204,19 +204,22 @@
                                             };
 
                                             if (selectedOption in redirectURLs) {
-                                                var data = {
-                                                    selectedOption: selectedOption,
+                                                 var data = {
                                                     totalAmount: totalAmount
                                                 };
                                                 var jsonData = JSON.stringify(data);
-
-                                                // Use AJAX to store totalAmount in session
+                                            
                                                 var xhr = new XMLHttpRequest();
-                                                xhr.open('POST', 'totalSession.php'); // Replace with your PHP script to handle session storage
+                                                xhr.open('POST', 'totalSession.php'); 
                                                 xhr.setRequestHeader('Content-Type', 'application/json');
+                                                xhr.onload = function() {
+                                                    if (xhr.status === 200) {
+                                                        window.location.href = redirectURLs[selectedOption];
+                                                    } else {
+                                                        console.error('Error storing totalAmount in session');
+                                                    }
+                                                };
                                                 xhr.send(jsonData);
-
-                                                window.location.href = redirectURLs[selectedOption] + '?totalAmount=' + totalAmount;
                                             } else {
                                                 console.error('Page');
                                             }

@@ -1,3 +1,8 @@
+<?php
+session_start();
+$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
+unset($_SESSION['errors']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,19 +65,15 @@
                     <p>Already registered? Go <span style="color: blue; cursor: pointer;"><a
                                 href="../Login/Login.php">Login
                                 Now</a></span></p>
-                    <?php if (isset($_SESSION['errors']) && !empty($_SESSION['errors'])): ?>
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <?php if (!empty($errors)) : ?>
+                        <div class="alert alert-warning" role="alert">
                             <strong>Error(s) occurred:</strong>
                             <ul>
-                                <?php foreach ($_SESSION['errors'] as $error): ?>
-                                    <li>
-                                        <?php echo $error; ?>
-                                    </li>
+                                <?php foreach ($errors as $error): ?>
+                                    <li><?php echo $error; ?></li>
                                 <?php endforeach; ?>
                             </ul>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        <?php unset($_SESSION['errors']); ?>
                     <?php endif; ?>
                     <button type="reset" class="btn btn-secondary">Reset</button>
                     <button type="submit" class="btn btn-primary" id="submit" name="submit"

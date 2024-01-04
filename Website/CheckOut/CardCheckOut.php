@@ -118,12 +118,11 @@ include '../ShoppingCart/totalSession.php';
         }
     </style>
 </head>
-
 <body style="background-image: url(../img/background.jpg);">
     <h2 style="text-align: center; color: white;">Checkout</h2>
     <div class="row">
         <div class="col-75">
-            <form method="post">
+            <form method="post" id="checkoutForm">
                 <div class="container">
                     <div class="row">
                         <div class="col-50">
@@ -160,7 +159,7 @@ include '../ShoppingCart/totalSession.php';
                             <label for="cname">Name on Card</label>
                             <input type="text" id="cname" name="cardname" placeholder="John More Doe" required>
                             <label for="ccnum">Credit card number</label>
-                            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required>
+                            <input type="text" id="ccnum" name="cardnumber" placeholder="1111222233334444" required>
                             <label for="expmonth">Exp Month</label>
                             <input type="text" id="expmonth" name="expmonth" placeholder="September" required>
                             <div class="row">
@@ -184,6 +183,7 @@ include '../ShoppingCart/totalSession.php';
                     class Verify
                     {
                         public $email, $city, $state, $zip, $cardname, $cardnumber, $expmonth, $expyear, $cvv;
+                        public $error = "";
 
                         function email($email)
                         {
@@ -291,46 +291,72 @@ include '../ShoppingCart/totalSession.php';
 
                     if (isset($_POST['submit'])) {
                         $verify = new Verify();
-
+                        $isValid = true;
                         if (
-                            $verify->email($_POST['email']) &&
-                            $verify->city($_POST['city']) &&
-                            $verify->state($_POST['state']) &&
-                            $verify->zip($_POST['zip']) &&
-                            $verify->cardname($_POST['cardname']) &&
-                            $verify->cardnumber($_POST['cardnumber']) &&
-                            $verify->expyear($_POST['expyear']) &&
-                            $verify->expmonth($_POST['expmonth']) &&
-                            $verify->cvv($_POST['cvv'])
+                            !$verify->email($_POST['email']) ||
+                            !$verify->city($_POST['city']) ||
+                            !$verify->state($_POST['state']) ||
+                            !$verify->zip($_POST['zip']) ||
+                            !$verify->cardname($_POST['cardname']) ||
+                            !$verify->cardnumber($_POST['cardnumber']) ||
+                            !$verify->expyear($_POST['expyear']) ||
+                            !$verify->expmonth($_POST['expmonth']) ||
+                            !$verify->cvv($_POST['cvv'])
                         ) {
-                            echo "<script>alert('Successfully submitted!')</script>";
-                        } else {
+                            $isValid = false;
                             $error = $verify->error;
+                        }
+                    
+                        if ($isValid) {
+                            echo "<script>alert('Successfully submitted!')</script>";
+                            // Redirect to the progress page after successful submission
+                            echo "<script>window.location.href='../CheckOut/Progress.php'</script>";
                         }
                     }
 
                     // Check if there is an error message
-                    if (!empty($verify->error)) {
+                   if (!empty($error)) {
                         echo "
                         <div class ='alert alert-warning alert-dismissible fade show' role='alert'>
-                            <strong>{$verify->error}</strong>
+                            <strong>{$error}</strong>
                             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                         </div>";
                     }
                     ?>
                     <button type="submit" class="btn" id="submit" name="submit"
-                        onclick="window.location.href='../CheckOut/Progress.php'">Continue to checkout</button>
+                        onclick="window.location.href='../CheckOut/Progress.php'" disabled>Continue to checkout</button>
                 </div>
+                <script>
+                    // Get the form and submit button
+                    const form = document.getElementById('checkoutForm');
+                    const submitButton = document.getElementById('submit');
+
+                    // Function to check if any field is empty
+                    function checkFormValidity() {
+                        const inputs = form.querySelectorAll('input[required]');
+                        let isValid = true;
+
+                        inputs.forEach((input) => {
+                            if (input.value.trim() === '') {
+                                isValid = false;
+                            }
+                        });
+
+                        submitButton.disabled = !isValid;
+                    }
+
+                    // Check form validity on input change
+                    form.addEventListener('input', checkFormValidity);
+                </script>
             </form>
         </div>
         <div class="col-25">
             <div class="container">
                 <p>Total <span class="price" style="color:black"><b>
-                            <?php echo isset($_SESSION['totalAmount']) ? $_SESSION['totalAmount'] : ''; ?>
-                        </b></span></p>
+                             <?php echo !empty($_SESSION['totalAmount']) ? $_SESSION['totalAmount'] : '0.00'; ?>
+                    </b></span></p>
             </div>
         </div>
     </div>
 </body>
-
 </html>

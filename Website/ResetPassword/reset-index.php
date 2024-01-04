@@ -1,10 +1,7 @@
 <?php
 // Include the connection to the database
 include '../ConnectDB.php';
-
-// Start the session
 session_start();
-
 $errors = []; // Error variable declaration
 
 if (isset($_POST['submit'])) {
@@ -74,7 +71,7 @@ if (isset($_POST['submit'])) {
                 $user_id = $user_data['UserID'];
 
                 // Store the hashed password in the variable
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                $hashed_password =  $password;
 
                 // Update the user's password in the database
                 $update_posts = "UPDATE users SET PasswordHash='$hashed_password' WHERE UserID='$user_id'";

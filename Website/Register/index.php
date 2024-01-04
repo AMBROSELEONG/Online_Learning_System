@@ -1,9 +1,6 @@
 <?php
-session_start();
-
-include 'RegisterForm.php';
 include '../ConnectDB.php';
-
+session_start();
 
 // Check if password is valid
 function validatePassword($password)
@@ -65,46 +62,54 @@ function verify($username, $password, $email, $contactnumber)
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get the input data from the form
     $username = $_POST['UserName'];
     $password = $_POST['Password'];
     $email = $_POST['Email'];
     $contactnumber = $_POST['ContactNumber'];
 
-    $passwordErrors = validatePassword($password); // Get the array of errors
-    $inputErrors = verify($username, $password, $email, $contactnumber); // Get the array of errors
+    $passwordErrors = validatePassword($password);
+    $inputErrors = verify($username, $password, $email, $contactnumber);
     $errors = array_merge($passwordErrors, $inputErrors);
-    if (empty($errors)) {
-        // Insert the data into the database
-        $insert = "INSERT INTO users(UserName, PasswordHash, Email, ContactNumber) VALUES (?, ?, ?, ?)";
-        $stm = $conn->prepare($insert);
-        $stm->bind_param("ssss", $username, $password, $email, $contactnumber);
 
-        // Execute the query
-        if ($stm->execute()) {
-            // Show success message
-            echo "<script>
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Registration successful!',
-                    icon: 'success'
-                }).then(() => {
-                    window.location.href = '../Login/Login.php'; // Redirect to login page after 'OK' is clicked
-                });
-            </script>";
+    if (empty($errors)) {
+        // Check if the username already exists
+        $checkExistingUser = "SELECT UserName FROM users WHERE UserName = ?";
+        $checkStmt = $conn->prepare($checkExistingUser);
+        $checkStmt->bind_param("s", $username);
+        $checkStmt->execute();
+        $checkStmt->store_result();
+
+        if ($checkStmt->num_rows > 0) {
+            $errors[] = "Username already exists. Please choose a different username.";
+            $_SESSION['errors'] = $errors;
+            header('Location: RegisterForm.php');
+            exit();
         }
 
-        // Close the statement
+        $checkStmt->close();
+
+        // Proceed with inserting the user since the username is unique
+        $insert = "INSERT INTO users(UserName, PasswordHash, Email, ContactNumber) VALUES (?, ?, ?, ?)";
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Hash the password
+        $stm = $conn->prepare($insert);
+        $stm->bind_param("ssss", $username, $hashedPassword, $email, $contactnumber);
+
+        if ($stm->execute()) {
+            echo "<script>alert('Register Successful!'); window.location.href = '../Login/Login.php'</script>";
+            exit();
+        }
+
         $stm->close();
     } else {
-        // Store errors in session
         $_SESSION['errors'] = $errors;
+        header('Location: RegisterForm.php');
         exit();
     }
-    // Close the connection
+
     $conn->close();
 } else {
-    $_SESSION['error_message'] = "Invalid request method."; // Store error in session for invalid request method
+    $_SESSION['error_message'] = "Invalid request method.";
+    header('Location: RegisterForm.php');
     exit();
 }
 ?>

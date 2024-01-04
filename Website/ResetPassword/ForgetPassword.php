@@ -1,6 +1,8 @@
+<?php 
+session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,9 +40,6 @@
                             password</label>
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
-                    <?php
-                    session_start();
-                    ?>
                     <?php if (isset($_SESSION['error'])): ?>
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>

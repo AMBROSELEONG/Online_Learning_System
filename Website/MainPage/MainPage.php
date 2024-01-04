@@ -176,7 +176,7 @@ include "../Session.php"
         <div class="introduce-container">
             <p>Simple online learning system assignments from</p>
             <div style="display: flex;">
-                <img src="../img/Logo.png" alt="New Era">
+                <img src="../img/LOGO.png" alt="New Era">
             </div>
         </div>
         <script>

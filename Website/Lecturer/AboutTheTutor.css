@@ -435,13 +435,12 @@ body section {
 
     .sidepanel a,
     .sidepanel p {
-        font-size: 2.5rem;
+        font-size: 2rem;
         color: white;
         display: block;
         margin-left: 3rem;
         cursor: pointer;
         text-decoration: none;
-        padding: 0.1rem;
     }
 
     .sidepanel a:hover {
@@ -472,6 +471,10 @@ body section {
     .footer {
         position: absolute;
         bottom: 0%;
+    }
+     
+    .tutorDiv {
+        width: calc(45% - 2rem);
     }
 }
 
@@ -531,5 +534,8 @@ body section {
     .tutorial-container {
         margin-bottom: 5%;
     }
-
+    
+    .tutorDiv {
+        width: calc(100% - 2rem);
+    }
 }

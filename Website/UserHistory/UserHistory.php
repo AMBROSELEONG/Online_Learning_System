@@ -1,3 +1,7 @@
+<?php 
+include '../Session.php';
+include '../ConnectDB.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,8 +36,6 @@
                 </tr>
                 <tbody>
                     <?php
-                    include '../Session.php';
-                    include '../ConnectDB.php';
 
                     $sql = "SELECT * FROM orders WHERE UserID = '$userID'";
 
