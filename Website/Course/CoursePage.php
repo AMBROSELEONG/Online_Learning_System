@@ -10,78 +10,13 @@
     <link rel="stylesheet" href="../icon/iconfont.css">
     <link rel="stylesheet" href="../icon2/iconfont.css">
     <link rel="stylesheet" href="../Dashboard/icon2/iconfont.css">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body style="background-color: #f0f0f0;">
-    <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href=""><img src="../Img/Logo_Icon.png" alt="" class="navbar-brand" style="width: 10%"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Category
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="../MainPage/MainPage.php">Home</a></li>
-                            <li><a class="dropdown-item" href="../Course/CoursePage.php">Course</a></li>
-                            <li><a class="dropdown-item" href="../Quiz/QuizList.php">Quiz</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            About
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="../Comment/Comment.php">Comment</a></li>
-                            <li><a class="dropdown-item" href="../ContactUs/ContactUs.php">Contact Us</a></li>
-                            <li><a class="dropdown-item" href="../AboutUS/AboutUs.html">About Us</a></li>
-                            <li><a class="dropdown-item" href="../Lecturer/AboutTheTutor.php">Our Lecturer</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <form class="d-flex" method="post">
-                            <input class="form-control me-2" id="searchInput" type="search" placeholder="Search Course"
-                                aria-label="Search" name="search">
-                            <button type="submit" id="search-bar-submit" name="submit"><i
-                                    class="iconfont icon-sousuo"></i></button>
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Mailbox/Mailbox.php">
-                            <i class="iconfont icon-youxiang" style="font-size: 30px"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../ShoppingCart/ShoppingCart.php">
-                            <i class="iconfont icon-31gouwuchexuanzhong icon" style="font-size: 30px"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../UserProfile/UserProfile.php">
-                            <i class="iconfont icon-user" style="font-size: 30px"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Logout.php">
-                            <i class="iconfont icon-Logout" style="font-size: 30px"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
+    <header class="headerpage"></header>
     <?php
     include "../ConnectDB.php";
     $sql = "SELECT * FROM coursecategory";
@@ -183,7 +118,7 @@
             </div>
         </div>
     </div>
-
+    <footer class="footerpage"></footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
@@ -242,6 +177,12 @@
 
         // Initial display of all products
         filterSelection();
+    </script>
+    <script>
+        $(function () {
+            $(".headerpage").load("../Header.html");
+            $(".footerpage").load("../Footer.html");
+        });
     </script>
 
 </body>

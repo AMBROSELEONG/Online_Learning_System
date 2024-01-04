@@ -41,6 +41,7 @@ function getUsernameFromUserID($conn, $userID)
     <title>Comment Board</title>
     <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * {
@@ -55,28 +56,7 @@ function getUsernameFromUserID($conn, $userID)
 </head>
 
 <body style="background-image: url(../img/comment.jpg);">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(60, 60, 60); padding: 1% 4%;">
-        <div class="container">
-            <a class="navbar-brand" href="../MainPage/MainPage.php">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Course/CoursePage.php" style="font-size: 20px;">Course</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Quiz/QuizList.php" style="font-size: 20px;">Quiz</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../ContactUs/ContactUs.php" style="font-size: 20px;">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <header class="headerpage"></header>
     <script>
         // Wait for the document to be loaded before running the code
         document.addEventListener("DOMContentLoaded", function () {
@@ -134,7 +114,7 @@ function getUsernameFromUserID($conn, $userID)
                 ?>
             </ul>
         </div>
-
+        <footer class="footerpage"></footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
@@ -204,6 +184,12 @@ function getUsernameFromUserID($conn, $userID)
                         // Handle any errors
                         console.error('Error:', error);
                     });
+            });
+        </script>
+        <script>
+            $(function () {
+                $(".headerpage").load("../Header.html");
+                $(".footerpage").load("../Footer.html");
             });
         </script>
 </body>

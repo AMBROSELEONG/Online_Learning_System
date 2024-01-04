@@ -3,33 +3,30 @@
 include '../ConnectDB.php';
 //include the session file
 include '../Session.php';
-
+$image = $experience = $education = $skillset = $language = $username = $collegename = "None";
 //create a SQL query to select the resume information from the database
-$sql = "SELECT * FROM userresume WHERE UserID = $userID";
+$resumeSql = "SELECT * FROM userresume WHERE UserID = $userID";
+// Query to fetch profile information
+$profileSql = "SELECT * FROM userprofile WHERE UserID = $userID";
+// Execute the query for resume information
+$resumeResult = $conn->query($resumeSql);
+// Execute the query for profile information
+$profileResult = $conn->query($profileSql);
 
-//execute the query and store the result in the $result variable
-$result = $conn->query($sql);
+if ($resumeResult && $resumeResult->num_rows > 0) {
+    $row = $resumeResult->fetch_assoc();
+    $image = $row['UserImage'];
+    $experience = $row['Experience'];
+    $education = $row['Education'];
+    $skillset = $row['Skill'];
+    $language = $row['Language_'];
+} 
 
-//if the query fails, print an error message
-if ($result === false) {
-    echo "Error: " . $conn->error;
-    //if the query is successful, check if there is any resume information in the database
-} else {
-    if ($result->num_rows > 0) {
-        //if there is resume information, fetch the resume information from the database
-        $row = $result->fetch_assoc();
-        $image = $row['UserImage'];
-        $experience = $row['Experience'];
-        $education = $row['Education'];
-        $skillset = $row['Skill'];
-        $language = $row['Language_'];
-        //if there is no resume information, set the resume information to "None"
-    } else {
-        $experience = "None";
-        $education = "None";
-        $skillset = "None";
-        $language = "None";
-    }
+if ($profileResult && $profileResult->num_rows > 0) {
+    // Checking profile results and fetching profile information
+    $row = $profileResult->fetch_assoc();
+    $username = $row['UserName'];
+    $collegename = $row['CollegeName'];
 }
 //close the database connection
 $conn->close();

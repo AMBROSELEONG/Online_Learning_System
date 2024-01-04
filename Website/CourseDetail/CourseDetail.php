@@ -1,6 +1,5 @@
 <?php
 include "../ConnectDB.php";
-
 $courseID = $_GET['CourseID'];
 $sql = "SELECT * FROM coursedetail WHERE CourseID = $courseID";
 $result = mysqli_query($conn, $sql);
@@ -28,31 +27,18 @@ if (isset($_SESSION['cart_message'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="CourseDatail.css">
-    <link rel="stylesheet" href="../icon/iconfont.css">
-    <link rel="stylesheet" href="../icon2/iconfont.css">
     <title>
         <?php echo "{$row['CourseName']}" ?>
     </title>
     <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
+    <header class="headerpage"></header>
     <?php if ($row) { ?>
-        <div style="background-color: rgb(255, 140, 0);">
-            <div class="container py-4">
-                <nav class="d-flex">
-                    <h6 class="mb-0">
-                        <a href="../MainPage/MainPage.php" class="text-white-50">Home</a>
-                        <span class="text-white-50 mx-2"> > </span>
-                        <a href="../Course/CoursePage.php" class="text-white-50">Course</a>
-                        <span class="text-white-50 mx-2"> > </span>
-                        <a href="" class="text-white"><u>Course Detail</u></a>
-                    </h6>
-                </nav>
-            </div>
-        </div>
         <section class="py-5">
             <div class="container">
                 <div class="row gx-5">
@@ -134,8 +120,13 @@ if (isset($_SESSION['cart_message'])) {
                     </div>
                 </div>
         </section>
-
-        <iframe src="../Footer.html" frameborder="0" width="100%" height="420px"></iframe>
+        <footer class="footerpage"></footer>
+        <script>
+            $(function () {
+                $(".headerpage").load("../Header.html");
+                $(".footerpage").load("../Footer.html");
+            });
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>

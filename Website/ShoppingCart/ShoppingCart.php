@@ -1,5 +1,5 @@
 <?php
- //include the connection to the database
+//include the connection to the database
 include '../ConnectDB.php';
 //include the session
 include '../Session.php';
@@ -12,8 +12,9 @@ include '../Session.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         @media (min-width: 1025px) {
             .h-custom {
@@ -24,6 +25,7 @@ include '../Session.php';
 </head>
 
 <body>
+    <header class="headerpage"></header>
     <section class="h-100 h-custom">
         <div class="container h-100 py-5">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -204,15 +206,15 @@ include '../Session.php';
                                             };
 
                                             if (selectedOption in redirectURLs) {
-                                                 var data = {
+                                                var data = {
                                                     totalAmount: totalAmount
                                                 };
                                                 var jsonData = JSON.stringify(data);
-                                            
+
                                                 var xhr = new XMLHttpRequest();
-                                                xhr.open('POST', 'totalSession.php'); 
+                                                xhr.open('POST', 'totalSession.php');
                                                 xhr.setRequestHeader('Content-Type', 'application/json');
-                                                xhr.onload = function() {
+                                                xhr.onload = function () {
                                                     if (xhr.status === 200) {
                                                         window.location.href = redirectURLs[selectedOption];
                                                     } else {
@@ -233,16 +235,16 @@ include '../Session.php';
             </div>
         </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    <footer class="footerpage"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-
 </body>
+<script>
+    $(function () {
+        $(".headerpage").load("../Header.html");
+        $(".footerpage").load("../Footer.html");
+    });
+</script>
 
 </html>

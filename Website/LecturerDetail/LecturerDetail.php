@@ -33,6 +33,7 @@ $rowImage = mysqli_fetch_array($resultImage);
     <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
             background: #f7f7ff;
@@ -60,6 +61,7 @@ $rowImage = mysqli_fetch_array($resultImage);
 </head>
 
 <body>
+    <header class="headerpage mb-4"></header>
     <?php if ($row) { ?>
         <div class="container">
             <div class="main-body">
@@ -69,12 +71,12 @@ $rowImage = mysqli_fetch_array($resultImage);
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <?php
-                                        $imageFolder = '../Dashboard/Lecturer/';
-                                        $imagePath = $imageFolder . $rowImage['LecturerImage'];
-                                        echo "
+                                    $imageFolder = '../Dashboard/Lecturer/';
+                                    $imagePath = $imageFolder . $rowImage['LecturerImage'];
+                                    echo "
                                     <img src='$imagePath' alt='Lecturer'
                                         class='rounded-circle p-1 bg-primary' width='110'>";
-                                    
+
                                     ?>
                                     <div class="mt-3">
                                         <h4>
@@ -216,10 +218,17 @@ $rowImage = mysqli_fetch_array($resultImage);
                 </div>
             </div>
         </div>
+        <footer class="footerpage"></footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
     <?php } ?>
+    <script>
+        $(function () {
+            $(".headerpage").load("../Header.html");
+            $(".footerpage").load("../Footer.html");
+        });
+    </script>
 </body>
 
 </html>
