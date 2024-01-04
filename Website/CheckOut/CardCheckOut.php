@@ -118,6 +118,7 @@ include '../ShoppingCart/totalSession.php';
         }
     </style>
 </head>
+
 <body style="background-image: url(../img/background.jpg);">
     <h2 style="text-align: center; color: white;">Checkout</h2>
     <div class="row">
@@ -178,185 +179,163 @@ include '../ShoppingCart/totalSession.php';
                     <label>
                         <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
                     </label>
-                    <?php
-                    $error = '';
-                    class Verify
-                    {
-                        public $email, $city, $state, $zip, $cardname, $cardnumber, $expmonth, $expyear, $cvv;
-                        public $error = "";
-
-                        function email($email)
-                        {
-                            $verify = "/^[^\s@]+@[^\s@]+\.[^\s@]+$/";
-                            if (preg_match($verify, $email)) {
-                                return true;
-                            } else {
-                                $this->error = "Invalid email address";
-                                return false;
-                            }
-                        }
-
-                        function city($city)
-                        {
-                            $this->city = $city;
-                            $verify = "/^[a-zA-Z ]*$/";
-                            if (preg_match($verify, $city)) {
-                                return true;
-                            } else {
-                                $this->error = "Invalid city";
-                                return false;
-                            }
-                        }
-
-                        function state($state)
-                        {
-                            $this->state = $state;
-                            $verify = "/^[a-zA-Z ]*$/";
-                            if (preg_match($verify, $state)) {
-                                return true;
-                            } else {
-                                $this->error = "Invalid state";
-                                return false;
-                            }
-                        }
-                        function zip($zip)
-                        {
-                            $this->zip = $zip;
-                            $verify = "/^[0-9]{5}$/";
-                            if (preg_match($verify, $zip)) {
-                                return true;
-                            } else {
-                                $this->error = "Invalid zip";
-                                return false;
-                            }
-                        }
-
-                        function cardname($cardname)
-                        {
-                            $this->cardname = $cardname;
-                            $verify = "/^[a-zA-Z ]*$/";
-                            if (preg_match($verify, $cardname)) {
-                                return true;
-                            } else {
-                                $this->error = "Invalid card name";
-                                return false;
-                            }
-                        }
-
-                        function cardnumber($cardnumber)
-                        {
-                            $this->cardnumber = $cardnumber;
-                            $verify = "/^[0-9]{16}$/";
-                            if (preg_match($verify, $cardnumber)) {
-                                return true;
-                            } else {
-                                $this->error = "Invalid card number";
-                                return false;
-                            }
-                        }
-                        function cvv($cvv)
-                        {
-                            $this->cvv = $cvv;
-                            $verify = "/^[0-9]{3}$/";
-                            if (preg_match($verify, $cvv)) {
-                                return true;
-                            } else {
-                                $this->error = "Invalid cvv";
-                                return false;
-                            }
-                        }
-                        function expmonth($expmonth)
-                        {
-                            $this->expmonth = $expmonth;
-                            $verify = '/^(January|February|March|April|May|June|July|August|September|October|November|December)$/';
-                            if (preg_match($verify, $expmonth)) {
-                                return true;
-                            } else {
-                                $this->error = "Invalid expiry month";
-                                return false;
-                            }
-                        }
-                        function expyear($expyear)
-                        {
-                            $this->expmonth = $expyear;
-                            $verify = "/^[0-9]{4}$/";
-                            if (preg_match($verify, $expyear)) {
-                                return true;
-                            } else {
-                                $this->error = "Invalid expiry year";
-                                return false;
-                            }
-                        }
-                    }
-
-                    if (isset($_POST['submit'])) {
-                        $verify = new Verify();
-                        $isValid = true;
-                        if (
-                            !$verify->email($_POST['email']) ||
-                            !$verify->city($_POST['city']) ||
-                            !$verify->state($_POST['state']) ||
-                            !$verify->zip($_POST['zip']) ||
-                            !$verify->cardname($_POST['cardname']) ||
-                            !$verify->cardnumber($_POST['cardnumber']) ||
-                            !$verify->expyear($_POST['expyear']) ||
-                            !$verify->expmonth($_POST['expmonth']) ||
-                            !$verify->cvv($_POST['cvv'])
-                        ) {
-                            $isValid = false;
-                            $error = $verify->error;
-                        }
-                    
-                        if ($isValid) {
-                            echo "<script>alert('Successfully submitted!')</script>";
-                            // Redirect to the progress page after successful submission
-                            echo "<script>window.location.href='../CheckOut/Progress.php'</script>";
-                        }
-                    }
-
-                    // Check if there is an error message
-                   if (!empty($error)) {
-                        echo "
-                        <div class ='alert alert-warning alert-dismissible fade show' role='alert'>
-                            <strong>{$error}</strong>
-                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                        </div>";
-                    }
-                    ?>
-                    <button type="submit" class="btn" id="submit" name="submit"
-                        onclick="window.location.href='../CheckOut/Progress.php'" disabled>Continue to checkout</button>
+                    <button type="submit" class="btn" id="submit" name="submit" disabled>Continue to checkout</button>
                 </div>
-                <script>
-                    // Get the form and submit button
-                    const form = document.getElementById('checkoutForm');
-                    const submitButton = document.getElementById('submit');
-
-                    // Function to check if any field is empty
-                    function checkFormValidity() {
-                        const inputs = form.querySelectorAll('input[required]');
-                        let isValid = true;
-
-                        inputs.forEach((input) => {
-                            if (input.value.trim() === '') {
-                                isValid = false;
-                            }
-                        });
-
-                        submitButton.disabled = !isValid;
-                    }
-
-                    // Check form validity on input change
-                    form.addEventListener('input', checkFormValidity);
-                </script>
             </form>
         </div>
         <div class="col-25">
             <div class="container">
                 <p>Total <span class="price" style="color:black"><b>
-                             <?php echo !empty($_SESSION['totalAmount']) ? $_SESSION['totalAmount'] : '0.00'; ?>
-                    </b></span></p>
+                            <?php echo !empty($_SESSION['totalAmount']) ? $_SESSION['totalAmount'] : '0.00'; ?>
+                        </b></span></p>
             </div>
         </div>
     </div>
+    <script>
+        let isValid = false;
+        function validateEmail(email) {
+            const verify = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return verify.test(email);
+        }
+
+        function validateCity(city) {
+            const verify = /^[a-zA-Z ]*$/;
+            return verify.test(city);
+        }
+
+        function validateState(state) {
+            const verify = /^[a-zA-Z ]*$/;
+            return verify.test(state);
+        }
+
+        function validateZip(zip) {
+            const verify = /^[0-9]{5}$/;
+            return verify.test(zip);
+        }
+
+        function validateCardname(cardname) {
+            const verify = /^[a-zA-Z ]*$/;
+            return verify.test(cardname);
+        }
+
+        function validateCardnumber(cardnumber) {
+            const verify = /^[0-9]{16}$/;
+            return verify.test(cardnumber);
+        }
+
+        function validateCvv(cvv) {
+            const verify = /^[0-9]{3}$/;
+            return verify.test(cvv);
+        }
+
+        function validateExpmonth(expmonth) {
+            const verify = /^(January|February|March|April|May|June|July|August|September|October|November|December)$/;
+            return verify.test(expmonth);
+        }
+
+        function validateExpyear(expyear) {
+            const verify = /^[0-9]{4}$/;
+            return verify.test(expyear);
+        }
+
+        // Function to handle form submission
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Retrieve form field values
+            const form = document.getElementById('checkoutForm');
+            const email = document.getElementById('email').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zip = document.getElementById('zip').value;
+            const cardname = document.getElementById('cname').value;
+            const cardnumber = document.getElementById('ccnum').value;
+            const cvv = document.getElementById('cvv').value;
+            const expmonth = document.getElementById('expmonth').value;
+            const expyear = document.getElementById('expyear').value;
+
+            let errorMessage = '';
+
+            if (!validateEmail(email)) {
+                errorMessage += 'Invalid email address';
+            }
+
+            if (!validateCity(city)) {
+                errorMessage += 'Invalid city';
+            }
+
+            if (!validateState(state)) {
+                errorMessage += 'Invalid state';
+            }
+
+            if (!validateZip(zip)) {
+                errorMessage += 'Invalid zip code';
+            }
+
+            if (!validateCardname(cardname)) {
+                errorMessage += 'Invalid card name';
+            }
+
+            if (!validateCardnumber(cardnumber)) {
+                errorMessage += 'Invalid card number';
+            }
+            if (!validateCvv(cvv)) {
+                errorMessage += 'Invalid CVV';
+            }
+
+            if (!validateExpmonth(expmonth)) {
+                errorMessage += 'Invalid expiry month';
+            }
+
+            if (!validateExpyear(expyear)) {
+                errorMessage += 'Invalid expiry year';
+            }
+            isValid = errorMessage === '';
+
+            if (!isValid) {
+                alert(errorMessage); // Show concatenated error messages
+
+                // Handle marking invalid fields if needed
+            }
+
+            document.getElementById('submit').disabled = !isValid;
+        }
+
+        // Add event listener for form submission
+        const form = document.getElementById('checkoutForm');
+        // Function to check form validity on input change
+        function checkFormValidity() {
+            const inputs = form.querySelectorAll('input[required]');
+            let isFormValid = true;
+
+            inputs.forEach((input) => {
+                if (input.value.trim() === '') {
+                    isFormValid = false;
+                }
+            });
+
+            isValid = isFormValid; // Update isValid based on form validity
+            document.getElementById('submit').disabled = !isValid;
+        }
+
+        // Check form validity on input change
+        form.addEventListener('input', checkFormValidity);
+
+        // Function to handle successful form submission
+        function handleSuccessfulSubmission() {
+            // Redirect to progress.php
+            window.location.href = 'Progress.php';
+        }
+
+        // Check for successful form submission
+        form.addEventListener('submit', (event) => {
+            handleSubmit(event); // Handle form submission
+            if (isValid) {
+                handleSuccessfulSubmission(); // If form is valid, redirect
+            }
+        });
+    </script>
+
 </body>
+
 </html>
