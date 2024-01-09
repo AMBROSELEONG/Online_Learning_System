@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="CourseDatail.css">
+    <title id='CourseName'>
+    </title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <header class="headerpage"></header>
+    <section class="py-5">
+        <div class="container">
+            <div class="row gx-5">
+                <aside class="col-lg-6">
+                    <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                        <img style='max-width: 100%; max-height: 100vh; margin: auto;' class='rounded-4 fit'
+                            id='CourseImage' />
+                    </div>
+                </aside>
+                <main class="col-lg-6">
+                    <div class="ps-lg-3">
+                        <h1 class="title text-dark" id='CourseName'>
+                        </h1>
+                        <div class="mb-3">RM
+                            <span class="h5" id='CoursePrice'>
+                            </span>
+                        </div>
+                        <p id='CourseDescription'>
+                        </p>
+
+                        <div class="row">
+                            <dt class="col-3">Category:</dt>
+                            <dd class="col-9" id='CategoryName'>
+                            </dd>
+
+                            <dt class="col-3">Lecturer</dt>
+                            <dd class="col-9" id='LecturerName'>
+                            </dd>
+
+                            <dt class="col-3">Lecturer Qualifications</dt>
+                            <dd class="col-9" id='LecturerQualification'>
+                            </dd>
+
+                            <dt class="col-3">Study Duration (Week)</dt>
+                            <dd class="col-9" id='StudyDuration'>
+                            </dd>
+
+                            <dt class="col-3">Learning Platform</dt>
+                            <dd class="col-9" id='LearningPlatform'>
+                            </dd>
+                        </div>
+
+                        <hr />
+                        <a class="btn btn-primary shadow-0" id="addToCartButton">
+                            <i class="me-1 fa fa-shopping-basket"></i> Add to Cart
+                        </a>
+                    </div>
+                </main>
+                <div class="tab-content" id="ex1-content">
+                    <h4 class="title text-dark">
+                        Learning Result
+                    </h4>
+                    <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                        <p id='LearningResult'>
+                        </p>
+                        <h4 class="title text-dark">
+                            Course Outline
+                        </h4>
+                        <div class="row mb-2">
+                            <div class="col-12 col-md-6" id="CourseOutline">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <footer class="footerpage"></footer>
+    <script>
+        $(function () {
+            $(".headerpage").load("../Header.html");
+            $(".footerpage").load("../Footer.html");
+        });
+    </script>
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var CourseID = getParameterByName('CourseID');
+        console.log(CourseID);
+
+        function getLecturerByID(CourseID) {
+            const request = window.indexedDB.open("online_learning_system", 1);
+
+            request.onerror = function (event) {
+                console.error("Database failed to open:", event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+                const transaction = db.transaction(["coursedetail"], "readonly");
+                const objectStore = transaction.objectStore('coursedetail');
+
+                const request = objectStore.get(parseInt(CourseID));
+                request.onerror = function (event) {
+                    console.error("Error getting data from database:", event.target.error);
+                };
+
+                request.onsuccess = function (event) {
+                    const data = event.target.result;
+
+                    if (data) {
+                        diplayData(data);
+                    } else {
+                        console.log('No contact found with the specified ID.');
+                    }
+                };
+            }
+        }
+
+        getLecturerByID(CourseID);
+
+        function diplayData(data) {
+            document.getElementById('CourseImage').src = data.CourseImage || '';
+            document.getElementById('CourseName').textContent = data.CourseName || '';
+            document.getElementById('CoursePrice').textContent = data.CoursePrice || '';
+            document.getElementById('CourseDescription').textContent = data.CourseDescription || '';
+            document.getElementById('CategoryName').textContent = data.CategoryName || '';
+            document.getElementById('LecturerName').textContent = data.LecturerName || '';
+            document.getElementById('LecturerQualification').textContent = data.LecturerQualification || '';
+            document.getElementById('StudyDuration').textContent = data.StudyDuration || '';
+            document.getElementById('LearningPlatform').textContent = data.LearningPlatform || '';
+            document.getElementById('LearningResult').textContent = data.LearningResult || '';
+            document.getElementById('CourseOutline').textContent = data.CourseOutline || '';
+        }
+
+        function addToCart(courseID, userID, courseName, coursePrice, categoryName) {
+            const request = window.indexedDB.open("online_learning_system", 1);
+
+            request.onerror = function (event) {
+                console.error("Database failed to open:", event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+                const transaction = db.transaction(["shoppingcart"], "readwrite");
+                const objectStore = transaction.objectStore("shoppingcart");
+
+                // Add the CourseID to the cart in IndexedDB
+                const newItem = {
+                    CourseID: courseID,
+                    UserID: userID,
+                    CourseName: courseName,
+                    CoursePrice: coursePrice,
+                    CategoryName: categoryName
+                };
+
+                const requestAdd = objectStore.add(newItem);
+
+                requestAdd.onsuccess = function () {
+                    alert("Course added to cart successful");
+                    // You can display a message or perform other actions upon successful addition to cart
+                };
+
+                requestAdd.onerror = function (error) {
+                    console.error("Error adding course to cart:", error);
+                };
+            };
+        }
+
+        // Add click event listener to the button
+        document.getElementById("addToCartButton").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent the default link behavior
+            const courseID = getParameterByName("CourseID");
+            const userID = sessionStorage.getItem("UserID");
+            const courseName = document.getElementById("CourseName").textContent;
+            const coursePrice = document.getElementById("CoursePrice").textContent;
+            const categoryName = document.getElementById("CategoryName").textContent;
+            addToCart(courseID, userID, courseName, coursePrice, categoryName);
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

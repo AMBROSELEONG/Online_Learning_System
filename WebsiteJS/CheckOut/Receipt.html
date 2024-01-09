@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Receipt</title>
+  <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
+</head>
+
+<body>
+  <script type='text/javascript'>alert('Payment Successful');</script>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header text-center">
+            <h4>Receipt</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <p><strong>Receipt No: <span id="receiptNo"></span></strong>
+                </p>
+                <p id="currentDate"><strong>Date: <span id="OrderDate"></span></strong>
+                </p>
+              </div>
+            </div>
+            <hr>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Course Name</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody id="cart-items">
+              </tbody>
+            </table>
+            <hr>
+            <div class="text-right">
+              <p><strong>Total: <span id="totalAmount"></span></strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top: 5%;">
+      <button class="btn btn-primary" onclick="window.location.href='../MainPage/MainPage.html'">Continue To Buy</button>
+    </div>
+  </div>
+  <script>
+    var currentDate = new Date();
+
+    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    var formattedDate = currentDate.toLocaleDateString('en-US', options);
+
+    document.getElementById('currentDate').innerHTML = '<strong>Date:</strong> ' + formattedDate;
+  </script>
+
+  <script>
+    const receiptNo = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+    document.getElementById("receiptNo").innerHTML = receiptNo;
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const totalPrice = sessionStorage.getItem('TotalPrice');
+
+      if (!totalPrice) {
+        window.location.href = '../ShoppingCart/ShoppingCart.html';
+      } else {
+        getTotal(totalPrice);
+        getCourseByIDs(CartIDs);
+
+      }
+    });
+
+    function getTotal(totalPrice) {
+      document.getElementById('totalAmount').textContent = 'RM' + totalPrice;
+    }
+
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+
+      // Handling multiple values
+      const values = results[2].split(','); // Splitting values by comma
+      return values.map(value => decodeURIComponent(value.replace(/\+/g, " ")));
+    }
+
+    const CartIDs = getParameterByName('CartID');
+    console.log(CartIDs);
+
+    function getCourseByIDs(CartIDs) {
+      const request = window.indexedDB.open("online_learning_system", 1);
+
+      request.onerror = function (event) {
+        console.error("Database failed to open:", event.target.errorCode);
+      };
+
+      request.onsuccess = function (event) {
+        const db = event.target.result;
+        const transaction = db.transaction(['orders'], 'readwrite');
+        const objectStore = transaction.objectStore('orders');
+        const index = objectStore.index('CartID');
+
+        // Iterating over each CartID in the array
+        CartIDs.forEach(CartID => {
+          const getRequest = index.getAll(parseInt(CartID));
+          getRequest.onerror = function (event) {
+            console.error('Error retrieving history:', event.target.errorCode);
+          };
+
+          getRequest.onsuccess = function (event) {
+            const cartItems = event.target.result;
+            console.log(cartItems);
+
+            const tableBody = document.getElementById('cart-items');
+            cartItems.forEach(function (cartItem, index) {
+              const row = document.createElement('tr');
+              row.innerHTML = `
+            <td>${cartItem.CourseID}</td>
+            <td>${cartItem.CourseName}</td>
+            <td>${cartItem.CoursePrice}</td>
+          `;
+              tableBody.appendChild(row);
+            });
+          }
+        });
+      }
+    }
+
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

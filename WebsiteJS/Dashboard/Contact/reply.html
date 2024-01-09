@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reply</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h2>Reply Contact</h2>
+        <form id="reply-form">
+            <input type="hidden" name="ContactID" id="ContactID">
+            <input type="hidden" name="UserID" id="UserID">
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">User Name</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="UserName" id="UserName" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">User Phone</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">User Email</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Email" id="Email" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Message</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Message" id="Message" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Title</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Title" id="Title" placeholder="Your reply title">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Reply</label>
+                <div class="col-sm-6">
+                    <textarea name="ReplyMessage" id="ReplyMessage" placeholder="Your reply message"
+                        class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class="btn btn-primary">Reply</button>
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <a class="btn btn-outline-primary" href="Contact.html" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var ContactID = getParameterByName('ContactID');
+
+        function getContactByID(ContactID) {
+            const request = window.indexedDB.open('online_learning_system', 1);
+
+            request.onerror = function (event) {
+                console.error('Database error:', event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+                const transaction = db.transaction(['contact'], 'readonly');
+                const objectStore = transaction.objectStore('contact');
+                console.log(objectStore)
+                const request = objectStore.get(parseInt(ContactID));
+                request.onerror = function (event) {
+                    console.error('Error retrieving data:', event.target.errorCode)
+                };
+
+                request.onsuccess = function (event) {
+                    const data = event.target.result;
+                    if (data) {
+                        displayContactDetails(data);
+                    } else {
+                        console.log('No contact found with the specified ID.');
+                    }
+                };
+            }
+        }
+        getContactByID(ContactID);
+
+        function displayContactDetails(data) {
+            document.getElementById('ContactID').value = data.ContactID;
+            document.getElementById('UserID').value = data.UserID;
+            document.getElementById('UserName').value = data.UserName;
+            document.getElementById('ContactNumber').value = data.ContactNumber;
+            document.getElementById('Email').value = data.Email;
+            document.getElementById('Message').value = data.Message;
+        }
+
+        const form = document.getElementById('reply-form');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const replyData = {
+                UserID: form.elements['UserID'].value,
+                UserName: form.elements['UserName'].value,
+                ContactNumber: form.elements['ContactNumber'].value,
+                Email: form.elements['Email'].value,
+                Message: form.elements['Message'].value,
+                Title: form.elements['Title'].value,
+                ReplyMessage: form.elements['ReplyMessage'].value,
+                ReplyDate: new Date().toISOString().slice(0, 10)
+            }
+
+            AddData(ContactID, replyData);
+        });
+
+        function AddData(ContactID, replyData) {
+            const request = indexedDB.open('online_learning_system', 1);
+
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+
+                const transaction = db.transaction(['email', 'contact'], 'readwrite');
+                const objectStore = transaction.objectStore('email');
+
+                const data = {
+                    UserID: replyData.UserID,
+                    UserName: replyData.UserName,
+                    ContactNumber: replyData.ContactNumber,
+                    Email: replyData.Email,
+                    Message: replyData.Message,
+                    Title: replyData.Title,
+                    ReplyMessage: replyData.ReplyMessage,
+                    ReplyDate: replyData.ReplyDate
+                };
+
+                const addRequest = objectStore.add(data);
+
+                addRequest.onsuccess = function (event) {
+                    alert('Reply Successful!');
+
+                    const contactObjectStore = transaction.objectStore('contact');
+                    const getRequest = contactObjectStore.get(parseInt(ContactID));
+
+                    getRequest.onsuccess = function (event) {
+                        const contactData = event.target.result;
+                        if (contactData) {
+                            contactData.ReplyStatus = "Replies";
+                            contactObjectStore.put(contactData);
+                            alert("Reply Status Update Successful")
+                            window.location.href = 'Contact.html';
+                        }
+                    };
+                }
+
+                addRequest.onerror = function (event) {
+                    console.error("Error replying: ", event.target.error);
+                };
+            }
+
+            request.onerror = function (event) {
+                console.error("Error opening database: ", event.target.error);
+            }
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

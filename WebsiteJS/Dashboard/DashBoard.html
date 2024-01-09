@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <link rel='stylesheet' href='icon2/iconfont.css'>
+    <link rel="stylesheet" href="icon/iconfont.css">
+
+</head>
+
+<body>
+    <div class='dashboard'>
+        <div class="dashboard-nav">
+            <button class="close-btn">X</button>
+            <header>
+                <div style="padding: 20px; display:flex">
+                    <h3 style="color: white">Welcome, <span id="AdminName"></span>
+                    </h3>
+                </div>
+            </header>
+            <nav class="dashboard-nav-list">
+                <a href="Home.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-home icon"></i>Home
+                </a>
+                <a href="Course/Course.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-kecheng- icon"></i>Course
+                </a>
+                <a href="CourseType/CourseType.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-kecheng- icon"></i>CourseType
+                </a>
+                <a href="CourseDetail/CourseDetail.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-kecheng- icon"></i>CourseDetail
+                </a>
+                <a href="Quiz/Quiz.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-zuoye icon"></i> Quiz
+                </a>
+                <a href="QuizType/QuizType.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-zuoye icon"></i> QuizType
+                </a>
+                <a href="QuizQuestion/QuizQuestion.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-zuoye icon"></i> QuizQuestion
+                </a>
+                <a href="Lecturer/Lecturer.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-daoshi icon"></i> Lecturer
+                </a>
+                <a href="LecturerDetail/LecturerDetail.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-daoshi icon"></i> LecturerDetail
+                </a>
+                <a href="User/User.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-user-group icon"></i> User
+                </a>
+                <a href="Order.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-order_unread icon"></i> Order
+                </a>
+                <a href="Contact/Contact.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-contacts icon"></i> Contact
+                </a>
+                <a href="Comment/Comment.html" target="content" class="dashboard-nav-item menu-link">
+                    <i class="iconfont icon-liuyan icon"></i> Comment
+                </a>
+                <div class="nav-item-divider"></div>
+                <a class="dashboard-nav-item" onclick="logoutUser()">
+                    <i class="iconfont icon-Logout icon"></i> Logout
+                </a>
+            </nav>
+        </div>
+        <div class='dashboard-app'>
+            <div class='dashboard-content'>
+                <header class="cd__intro" style="display:flex">
+                    <h1>
+                        <button class="menu-toggle" onclick="showNav()">MENU</button>
+                        <span style="cursor: pointer;" onclick="window.location.href='../MainPage/MainPage.html'">Online
+                            Learning System</span> > Dashboard
+                    </h1>
+                </header>
+                <div class='container'>
+                    <div class='card'>
+                        <h1 style="text-align: center; margin: 10px;"></h1>
+                        <title>Home</title>
+                        <iframe name="content" src="Home.html" frameborder="0" width="100%" height="100%"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        // Get the iframe element by its name
+        var iframe = document.getElementsByName('content')[0];
+        // Set the onload event handler for the iframe
+        iframe.onload = function () {
+            // Get the title of the page in the iframe
+            var pageTitle = iframe.contentDocument.title;
+            // Get the h1 element with the class 'card'
+            var helloTitle = document.querySelector('.card h1');
+            // Set the inner text of the h1 element to the page title
+            helloTitle.innerText = pageTitle;
+        };
+    };
+
+</script>
+<script>
+    function showNav() {
+        var dashboardNav = document.querySelector('.dashboard-nav');
+        dashboardNav.classList.add('mobile-show');
+    }
+
+    function toggleNav() {
+        var dashboardNav = document.querySelector('.dashboard-nav');
+        var dashboardApp = document.querySelector('.dashboard-app');
+        dashboardNav.classList.toggle('mobile-show');
+        dashboardApp.classList.toggle('expanded');
+    }
+
+    document.querySelector('.close-btn').addEventListener('click', function () {
+        var dashboardNav = document.querySelector('.dashboard-nav');
+        var dashboardApp = document.querySelector('.dashboard-app');
+        dashboardNav.classList.remove('mobile-show');
+        dashboardApp.classList.remove('expanded');
+    });
+
+</script>
+<script>
+    const adminID = sessionStorage.getItem('AdminID');
+
+    if (adminID == null) {
+        window.location.href = 'Login/Login.html';
+    } else {
+        const request = window.indexedDB.open('online_learning_system', 1);
+
+        request.onerror = function (event) {
+            console.log('Database error: ' + event.target.errorCode);
+        };
+
+        request.onsuccess = function (event) {
+            const db = event.target.result;
+            const transaction = db.transaction(['admin'], 'readonly');
+            const objectStore = transaction.objectStore('admin');
+
+            const getRequest = objectStore.get(parseInt(adminID));
+
+            getRequest.onsuccess = function (event) {
+                const data = event.target.result;
+
+                if (data) {
+                    document.getElementById("AdminName").textContent = data.UserName || '';
+                } else {
+                    console.log('No user data found for admin ID:', adminID);
+                }
+            };
+        };
+    }
+
+</script>
+
+<script>
+    function logoutUser() {
+
+        // Remove UserID from sessionStorage
+        sessionStorage.removeItem('AdminID');
+
+        // Redirect to the login page
+        window.location.href = 'Login/Login.html'; // Replace 'login.html' with your actual login page URL
+    }
+</script>
+
+</html>

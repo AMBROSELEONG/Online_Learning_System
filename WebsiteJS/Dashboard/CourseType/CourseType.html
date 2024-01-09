@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Type</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <form method="GET">
+            <div style="width: 100%; justify-content: space-between; margin: 1% 0; display: flex;">
+                <a class="btn btn-primary" href="coursetype-add.html" role="button">New Category</a>
+                <div>
+                    <input type="text" name="search" id="search" placeholder="Search Course Category">
+                    <input type="submit" name="searchsub" id="searchsub" value="Search">
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>CategoryID</td>
+                    <td>CategoryName</td>
+                    <td>Operating</td>
+                </tr>
+            </thead>
+            <tbody id="data-table-body"></tbody>
+        </table>
+    </div>
+    <script>
+        let db;
+
+        function openDatabase() {
+            const request = window.indexedDB.open('online_learning_system', 1);
+            request.onerror = function (event) {
+                console.error('Database error:', event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                db = event.target.result;
+                console.log('Database opened successfully.');
+                displayData();
+            };
+        }
+
+        function EditCategory(CategoryID) {
+            window.location.href = `coursetype-edit.html?CategoryID=${CategoryID}`;
+        }
+
+        function displayData() {
+            if (!db) {
+                console.error('Database is not available.');
+                return;
+            }
+
+            const transaction = db.transaction(['coursecategory'], 'readonly');
+            const objectStore = transaction.objectStore('coursecategory');
+            const request = objectStore.getAll();
+
+            request.onerror = function (event) {
+                console.error('Error retrieving data:', event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const allData = event.target.result;
+                if (allData && allData.length > 0) {
+                    const table = document.getElementById('data-table-body');
+                    table.innerHTML = '';
+
+                    allData.forEach(data => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = ` <td>${data.CategoryID}</td>
+                                        <td>${data.CategoryName}</td>
+                                        <td>
+                                            <a class='btn btn-primary btn-sm' onclick='EditCategory(${data.CategoryID})'>Edit</a>
+                                            <a class='btn btn-danger btn-sm' onclick='DeleteCategory(${data.CategoryID})'>Delete</a>
+                                        </td>`;
+                        table.appendChild(row);
+                    });
+                } else {
+                    console.log('No data found in the database.');
+                }
+            }
+        }
+
+        function DeleteCategory(CategoryID) {
+            if (!db) {
+                console.error('Database is not available.');
+                return;
+            }
+
+            const transaction = db.transaction(['coursecategory'], 'readwrite');
+            const Store = transaction.objectStore('coursecategory');
+            const request = Store.delete(CategoryID);
+
+            request.onsuccess = function (event) {
+                alert('Category deleted successfully.');
+                displayData();
+                location.reload();
+            };
+
+            request.onerror = function (event) {
+                console.error('Error deleting category:', event.target.errorCode);
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', openDatabase);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

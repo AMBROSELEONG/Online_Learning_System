@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h2>Edit Quiz</h2>
+
+        <form id="edit-form">
+            <input type="hidden" class="form-control" name="QuizID" id="QuizID">
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Quiz Image</label>
+                <div class="col-sm-6">
+                    <input type="file" class="form-control" name="QuizImage" id="QuizImage">
+                    <img id="previewImage" src="" style="display: none; max-width: 200px; margin-top: 10px;">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Quiz Name</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="QuizName" id="QuizName">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Category Name</label>
+                <div class="col-sm-6">
+                    <select type="text" class="form-control" name="CategoryID" id="CategoryID"></select>
+                    <input type="hidden" name="CategoryName" id="CategoryName">
+                </div>
+            </div>
+            <script>
+                //This code is used to select an option from the dropdown menu and display the selected option in the textbox
+                document.getElementById('CategoryID').addEventListener('change', function () {
+                    //Get the selected index of the dropdown menu
+                    var selectedIndex = this.selectedIndex;
+                    //Get the selected option from the dropdown menu
+                    var selectedOption = this.options[selectedIndex];
+                    //Get the text of the selected option
+                    var categoryName = selectedOption.text;
+
+                    //Display the selected option in the textbox
+                    document.getElementById('CategoryName').value = categoryName;
+                });
+            </script>
+            <div class="row mb-3">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class="btn btn-primary" name="EditQuiz">Submit</button>
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <a class="btn btn-outline-primary" href="Quiz.php" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        let db;
+        const request = indexedDB.open('online_learning_system', 1);
+
+        request.onsuccess = function (event) {
+            db = event.target.result;
+            getQuizData();
+            populateCategories();
+        }
+
+        document.getElementById('QuizImage').addEventListener('change', handleImageChange);
+
+        document.getElementById('edit-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const editData = {
+                QuizID: document.getElementById('QuizID').value,
+                QuizName: document.getElementById('QuizName').value,
+                CategoryID: document.getElementById('CategoryID').value,
+                CategoryName: document.getElementById('CategoryName').value
+            };
+            EditData(editData);
+        });
+
+        function handleImageChange(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const imageData = event.target.result;
+                document.getElementById('previewImage').src = imageData;
+                document.getElementById('previewImage').style.display = 'block';
+                saveImageData(imageData);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveImageData(imageData) {
+            const transaction = db.transaction(['quiz'], 'readwrite');
+            const objectStore = transaction.objectStore('quiz');
+            const QuizID = getParameterByName('QuizID');
+            const request = objectStore.get(parseInt(QuizID));
+
+            request.onerror = function (event) {
+                console.error('Error getting data from database:', event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const data = event.target.result;
+                if (data) {
+                    data.QuizImage = imageData;
+                    const requestUpdate = objectStore.put(data);
+                    requestUpdate.onsuccess = function (event) {
+                        alert('Image data updated successfully');
+                        window.location.reload('Quiz.html');
+                    };
+                    requestUpdate.onerror = function (event) {
+                        console.error('Error updating image data in database:', event.target.errorCode);
+                    };
+                } else {
+                    console.log('No quiz found with the specified ID');
+                }
+            };
+        }
+
+        function EditData(editData) {
+            const transaction = db.transaction(['quiz'], 'readwrite');
+            const objectStore = transaction.objectStore('quiz');
+            const request = objectStore.get(parseInt(editData.QuizID));
+
+            request.onerror = function (event) {
+                console.error('Error getting data from database:', event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const data = event.target.result;
+                if (data) {
+                    data.QuizImage = editData.QuizImage;
+                    data.QuizName = editData.QuizName;
+                    data.CategoryID = editData.CategoryID;
+                    data.CategoryName = editData.CategoryName;
+
+                    const requestUpdate = objectStore.put(data);
+                    requestUpdate.onsuccess = function (event) {
+                        alert('Data updated successfully');
+                        window.location.replace('Quiz.html');
+                    };
+
+                    requestUpdate.onerror = function (event) {
+                        console.error('Error updating data in database:', event.target.errorCode);
+                    };
+                } else {
+                    console.log('No contact found with the specified ID');
+                }
+            };
+        }
+
+        function getQuizData() {
+            const QuizID = getParameterByName('QuizID');
+            if (QuizID) {
+                getQuizByID(QuizID);
+            } else {
+                console.log('No QuizID provided.');
+            }
+        }
+
+        function getQuizByID(QuizID) {
+            const request = indexedDB.open('online_learning_system', 1);
+
+            request.onerror = function (event) {
+                console.error("Database failed to open:", event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+
+                const transaction = db.transaction(['quiz'], 'readonly');
+                const objectStore = transaction.objectStore('quiz');
+                const getQuizRequest = objectStore.get(Number(QuizID));
+
+                getQuizRequest.onsuccess = function (event) {
+                    const quizData = event.target.result;
+
+                    if (quizData) {
+                        displayData(quizData);
+                    } else {
+                        console.log('No quiz found with the specified ID.');
+                    }
+                };
+
+                getQuizRequest.onerror = function (event) {
+                    console.error('Error fetching quiz:', event.target.error);
+                };
+            }
+        }
+
+        function displayData(quizData) {
+            document.getElementById('QuizID').value = quizData.QuizID;
+            document.getElementById('QuizName').value = quizData.QuizName;
+            document.getElementById('CategoryID').value = quizData.CategoryID;
+            document.getElementById('CategoryName').value = quizData.CategoryName;
+
+            if (quizData.QuizImage) {
+                document.getElementById('previewImage').src = quizData.QuizImage;
+                document.getElementById('previewImage').style.display = 'block';
+            }
+        }
+
+        function populateCategories() {
+            const selectElement = document.getElementById('CategoryID');
+            const transaction = db.transaction(['quizcategory'], 'readonly');
+            const categoryStore = transaction.objectStore('quizcategory');
+
+            const getCategoryData = categoryStore.getAll();
+
+            getCategoryData.onsuccess = function (event) {
+                const categories = event.target.result;
+
+                if (categories.length > 0) {
+                    selectElement.innerHTML = '';
+                    const defaultOption = document.createElement('option');
+                    defaultOption.value = '0';
+                    defaultOption.textContent = 'Please Select Category';
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    selectElement.appendChild(defaultOption);
+
+                    categories.forEach(function (category) {
+                        const option = document.createElement('option');
+                        option.value = category.CategoryID;
+                        option.textContent = category.CategoryName;
+                        selectElement.appendChild(option);
+                    });
+                } else {
+                    selectElement.innerHTML = "<option value='0' class='form-control'>No Category Found</option>";
+                }
+            };
+
+            getCategoryData.onerror = function (event) {
+                console.error('Error retrieving categories: ', event.target.error);
+            };
+        }
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

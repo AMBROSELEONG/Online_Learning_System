@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: animatezoom 0.5s;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            width: 50rem;
+            height: 20rem;
+            margin: 15rem auto;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+        }
+
+        .modal-content>div {
+            width: 80%;
+            margin: 5%;
+            padding: 5%;
+            border: 1px solid black;
+            font-size: 2rem;
+        }
+
+        #startQuizButton,
+        #cancelQuizButton {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #startQuizButton:hover,
+        #cancelQuizButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body style="background-image: url(../img/quiz.jpg); background-repeat: no-repeat; background-size: cover;">
+    <form method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" style="text-align: center; margin-top: 10%;">
+                    <h1>QUIZ</h1>
+                </div>
+                <div class="col-md-12">
+                    <div class="card"
+                        style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
+                        <div class="card-body">
+                            <h5 class="card-title">Question 1</h5>
+                            <h5 id='Question1'>
+                            </h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1-option1"
+                                    onchange="checkAnswer(1, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q1-option1" id='OptOne1'>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1-option2"
+                                    onchange="checkAnswer(1, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q1-option2" id='OptOne2'>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1-option3"
+                                    onchange="checkAnswer(1, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q1-option3" id='OptOne3'>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1-option4"
+                                    onchange="checkAnswer(1, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q1-option4" id="OptOne4">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card"
+                        style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
+                        <div class="card-body">
+                            <h5 class="card-title">Question 2</h5>
+                            <h5 id='Question2'>
+                            </h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q2" id="q2-option1"
+                                    onchange="checkAnswer(2, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q2-option1" id='OptTwo1'>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q2" id="q2-option2"
+                                    onchange="checkAnswer(2, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q2-option2" id='OptTwo2'>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q2" id="q2-option3"
+                                    onchange="checkAnswer(2, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q2-option3" id='OptTwo3'>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q2" id="q2-option4"
+                                    onchange="checkAnswer(2, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q2-option4" id="OptTwo4">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card"
+                        style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
+                        <div class="card-body">
+                            <h5 class="card-title">Question 3</h5>
+                            <h5 id='Question3'>
+                            </h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q3" id="q3-option1"
+                                    onchange="checkAnswer(3, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q3-option1" id='OptThree1'>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q3" id="q3-option2"
+                                    onchange="checkAnswer(3, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q3-option2" id='OptThree2'>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q3" id="q3-option3"
+                                    onchange="checkAnswer(3, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q3-option3" id='OptThree3'>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q3" id="q3-option4"
+                                    onchange="checkAnswer(3, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q3-option4" id="OptThree4">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card"
+                        style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255,0.5);">
+                        <div class="card-body">
+                            <h5 class="card-title">Question 4</h5>
+                            <h5 id='Question4'>
+                            </h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q4" id="q4-option1"
+                                    onchange="checkAnswer(4, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q4-option1" id='OptFour1'></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q4" id="q4-option2"
+                                    onchange="checkAnswer(4, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q4-option2" id='OptFour2'></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q4" id="q4-option3"
+                                    onchange="checkAnswer(4, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q4-option3" id='OptFour3'></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q4" id="q4-option4"
+                                    onchange="checkAnswer(4, this.nextSibling.textContent); checkSelection()">
+                                <label class="form-check-label" for="q4-option4" id="OptFour4"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="text-align: center; color: red;">
+                    <p>Please Be Aware!! There are a few precautions and rules during the examination start as
+                        below:
+                    </p>
+                    <p>1. DO NOT USED ChatGPT</p>
+                    <p>2. Your actions of cheating WILL BE on the COURT OF LAWS.</p>
+                    <p>3. During the examination, your actions are being monitored until you had done your online
+                        exams
+                        sheet.
+                    </p>
+                </div>
+                <button class="btn btn-primary col-md-12" id="submitBtn" style="margin-bottom: 5%;"
+                    onclick="return validateForm();" disabled>Submit</button>
+                <script>
+                    function checkSelection() {
+                        let isQ1Checked = document.querySelector('input[name="q1"]:checked');
+                        let isQ2Checked = document.querySelector('input[name="q2"]:checked');
+                        let isQ3Checked = document.querySelector('input[name="q3"]:checked');
+                        let isQ4Checked = document.querySelector('input[name="q4"]:checked');
+
+                        let submitBtn = document.getElementById('submitBtn');
+
+                        if (isQ1Checked && isQ2Checked && isQ3Checked && isQ4Checked) {
+                            submitBtn.removeAttribute('disabled');
+                        } else {
+                            submitBtn.setAttribute('disabled', 'true');
+                        }
+                    }
+                </script>
+
+            </div>
+        </div>
+        <div id="quizModal" class="modal">
+            <div class="modal-content">
+                <div>
+                    <div id="scoreDisplay"></div>
+                </div>
+                <a id="startQuizButton" onclick="window.location.href='../Quiz/QuizList.html'">Yes</a>
+            </div>
+        </div>
+        <script>
+            var modal = document.getElementById('quizModal');
+
+            function openModal() {
+                modal.style.display = 'block';
+            }
+        </script>
+    </form>
+</body>
+<script>
+    let score = 0;
+    let questions = [];
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    var QuizID = getParameterByName('QuizID');
+    console.log(QuizID);
+
+    function getQuizByID(QuizID) {
+        const request = window.indexedDB.open("online_learning_system", 1);
+
+        request.onerror = function (event) {
+            console.error("Database failed to open:", event.target.errorCode);
+        };
+
+        request.onsuccess = function (event) {
+            const db = event.target.result;
+            const transaction = db.transaction(["quizquestion"], "readonly");
+            const objectStore = transaction.objectStore('quizquestion');
+
+            const request = objectStore.get(parseInt(QuizID));
+            request.onerror = function (event) {
+                console.error("Error getting data from database:", event.target.error);
+            };
+
+            request.onsuccess = function (event) {
+                const data = event.target.result;
+                if (data) {
+                    diplayData(data);
+                } else {
+                    console.log('No contact found with the specified ID.');
+                }
+            };
+        }
+    }
+
+    getQuizByID(QuizID);
+
+    function diplayData(data) {
+        questions = [
+            {
+                question: data.QuestionOne,
+                options: [
+                    data.OptOne1,
+                    data.OptOne2,
+                    data.OptOne3,
+                    data.AnsOne // Include the answer in the options array for shuffling
+                ]
+            },
+            {
+                question: data.QuestionTwo,
+                options: [
+                    data.OptTwo1,
+                    data.OptTwo2,
+                    data.OptTwo3,
+                    data.AnsTwo
+                ]
+            },
+            {
+                question: data.QuestionThree,
+                options: [
+                    data.OptThree1,
+                    data.OptThree2,
+                    data.OptThree3,
+                    data.AnsThree
+                ]
+            },
+            {
+                question: data.QuestionFour,
+                options: [
+                    data.OptFour1,
+                    data.OptFour2,
+                    data.OptFour3,
+                    data.AnsFour
+                ]
+            }
+        ];
+
+        // Shuffle options for each question
+        questions.forEach((q, index) => {
+            const shuffledOptions = shuffleArray(q.options);
+            displayQuestionWithOptions(index + 1, q.question, shuffledOptions);
+        });
+    }
+
+    function displayQuestionWithOptions(questionNumber, questionText, options) {
+        const questionId = 'Question' + questionNumber;
+        const optionLabels = ['OptOne', 'OptTwo', 'OptThree', 'OptFour'];
+
+        // Display question text
+        document.getElementById(questionId).textContent = questionText;
+
+        // Display shuffled options for the question
+        for (let i = 0; i < options.length; i++) { // Modify loop condition
+            const optionId = `${optionLabels[questionNumber - 1]}${i + 1}`;
+            document.getElementById(optionId).textContent = options[i];
+        }
+    }
+
+    // Function to shuffle an array
+    function shuffleArray(array) {
+        const shuffled = array.slice(); // Create a copy of the array
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+
+    function checkAnswer(questionNumber, selectedOption) {
+        // Now, you can access the 'questions' variable here
+        const question = questions[questionNumber - 1]; // Retrieve the question object
+        console.log(question)
+        if (question && question.options) {
+            const correctAnswer = question.options[3]; // Assuming the correct answer is the last option
+
+            if (selectedOption === correctAnswer) {
+                score += 25; // Increment score by 25 for each correct answer    
+            }
+
+            if (score === 100) {
+                alert('Congratulations! You scored 100 points!');
+            }
+        } else {
+            console.error('Question or options are undefined or not properly populated.');
+        }
+    }
+
+    function validateForm() {
+        // Add your validation logic here if needed
+        calculateScore(); // Calculate the score
+        return false; // Prevent form submission for now
+    }
+
+    function calculateScore() {
+        score = 0; // Reset the score
+
+        // Check each question for the selected answer and update the score
+        for (let i = 1; i <= 4; i++) {
+            const selectedOption = document.querySelector(`input[name="q${i}"]:checked + label`).textContent;
+            checkAnswer(i, selectedOption);
+        }
+
+        displayScore(); // Display the score
+    }
+
+    function displayScore() {
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        scoreDisplay.textContent = `Your final score is ${score}`;
+        openModal();
+    }
+
+</script>
+
+</html>

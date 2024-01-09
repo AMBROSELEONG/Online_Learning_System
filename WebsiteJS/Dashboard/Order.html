@@ -1,0 +1,100 @@
+<!Doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <form action="" method="post" name="indexf">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>OrderID</td>
+                        <td>UserID</td>
+                        <td>UserName</td>
+                        <td>CourseName</td>
+                        <td>Price</td>
+                        <td>OrderDate</td>
+                    </tr>
+                </thead>
+                <tbody id="data-table-body"></tbody>
+            </table>
+        </form>
+    </div>
+    <script>
+        let db;
+
+        function openDatabase() {
+            const request = window.indexedDB.open('online_learning_system', 1);
+            request.onerror = function (event) {
+                console.error('Database error:', event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                db = event.target.result;
+                console.log('Database opened successfully.');
+                displayData();
+            };
+        }
+
+        function displayData() {
+            if (!db) {
+                console.error('Database is not available.');
+                return;
+            }
+
+            const transaction = db.transaction(['orders', 'users'], 'readonly');
+            const orderStore = transaction.objectStore('orders');
+            const userStore = transaction.objectStore('users');
+            const request = orderStore.getAll();
+
+            request.onerror = function (event) {
+                console.error('Error retrieving data:', event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const allOrders = event.target.result;
+                if (allOrders && allOrders.length > 0) {
+                    const tableBody = document.getElementById('data-table-body');
+                    tableBody.innerHTML = '';
+
+                    allOrders.forEach(order => {
+                        const row = document.createElement('tr');
+
+                        // Fetch UserName based on UserID from the users object store
+                        const userRequest = userStore.get(order.UserID);
+                        userRequest.onsuccess = function (userEvent) {
+                            const user = userEvent.target.result;
+                            const userName = user ? user.UserName : 'Unknown'; // Fallback if user not found
+
+                            row.innerHTML = `
+                        <td>${order.OrderID}</td>
+                        <td>${order.UserID}</td>
+                        <td>${userName}</td>
+                        <td>${order.CourseName}</td>
+                        <td>${order.CoursePrice}</td>
+                        <td>${order.OrderDate}</td>`;
+                            tableBody.appendChild(row);
+                        };
+                    });
+                } else {
+                    console.log('No data found in the database.');
+                }
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', openDatabase);
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Detail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h2>Edit Course Detail</h2>
+        <form id="edit-form">
+            <input type="hidden" name="CourseID" id="CourseID">
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Course Name</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="CourseName" id="CourseName" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Course Description</label>
+                <div class="col-sm-6">
+                    <textarea type="text" class="form-control" name="CourseDescription"
+                        id="CourseDescription"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Lecturer Name</label>
+                <div class="col-sm-6">
+                    <select type="text" class="form-control" name="LecturerID" id="LecturerID"></select>
+                    <input type="hidden" name="LecturerName" id="LecturerName">
+                    <input type="hidden" name="LecturerQualification" id="LecturerQualification">
+                </div>
+            </div>
+
+            <script>
+                document.getElementById('LecturerID').addEventListener('change', function () {
+                    var selectedIndex = this.selectedIndex;
+                    var selectedOption = this.options[selectedIndex];
+                    var lecturerName = selectedOption.text;
+                    var lecturerQualification = selectedOption.getAttribute('data-qualification');
+
+                    document.getElementById('LecturerName').value = lecturerName;
+                    document.getElementById('LecturerQualification').value = lecturerQualification;
+                }); 
+            </script>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Study Duration (Year)</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="StudyDuration" id="StudyDuration">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Learning Platform</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="LearningPlatform" id="LearningPlatform">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Learning Result</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="LearningResult" id="LearningResult">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Course Outline</label>
+                <div class="col-sm-6">
+                    <textarea type="text" class="form-control" name="CourseOutline" id="CourseOutline"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <a class="btn btn-outline-primary" href="CourseDetail.html" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        let db;
+        const request = indexedDB.open('online_learning_system', 1);
+
+        request.onsuccess = function (event) {
+            db = event.target.result;
+            populateCategories();
+            getCourseData();
+        }
+
+        document.getElementById('edit-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const editData = {
+                CourseID: document.getElementById('CourseID').value,
+                CourseName: document.getElementById('CourseName').value,
+                CourseDescription: document.getElementById('CourseDescription').value,
+                LecturerID: document.getElementById('LecturerID').value,
+                LecturerName: document.getElementById('LecturerName').value,
+                LecturerQualification: document.getElementById('LecturerQualification').value,
+                StudyDuration: document.getElementById('StudyDuration').value,
+                LearningPlatform: document.getElementById('LearningPlatform').value,
+                LearningResult: document.getElementById('LearningResult').value,
+                CourseOutline: document.getElementById('CourseOutline').value
+            };
+            EditData(editData);
+        })
+
+        function EditData(editData) {
+            const transaction = db.transaction(['coursedetail'], 'readwrite');
+            const ObjectStore = transaction.objectStore('coursedetail');
+
+            const courseRequest = ObjectStore.get(parseInt(editData.CourseID));
+
+            courseRequest.onerror = function (event) {
+                console.error('Error getting data from database:', event.target.errorCode);
+            };
+
+            courseRequest.onsuccess = function (event) {
+                const courseDetail = event.target.result;
+                if (courseDetail) {
+                    courseDetail.CourseDescription = editData.CourseDescription;
+                    courseDetail.LecturerID = editData.LecturerID;
+                    courseDetail.LecturerName = editData.LecturerName;
+                    courseDetail.LecturerQualification = editData.LecturerQualification;
+                    courseDetail.StudyDuration = editData.StudyDuration;
+                    courseDetail.LearningPlatform = editData.LearningPlatform;
+                    courseDetail.LearningResult = editData.LearningResult;
+                    courseDetail.CourseOutline = editData.CourseOutline;
+
+                    const courseUpdateRequest = ObjectStore.put(courseDetail);
+                    courseUpdateRequest.onsuccess = function (event) {
+                       console.log('Data updated successfully in course table');
+
+                        // Update related tables (lecturer and lecturerdetail)
+                        updateRelatedTables(editData);
+                    };
+                    courseUpdateRequest.onerror = function (event) {
+                        console.error('Error updating data in course table:', event.target.errorCode);
+                    };
+                } else {
+                    console.log('No course found with the specified ID');
+                }
+            }
+        }
+
+        function updateRelatedTables(editData) {
+            const lecturerTransaction = db.transaction(['lecturer'], 'readwrite');
+            const lecturerObjectStore = lecturerTransaction.objectStore('lecturer');
+            const lecturerRequest = lecturerObjectStore.get(parseInt(editData.LecturerID));
+
+            lecturerRequest.onsuccess = function (event) {
+                const lecturerData = event.target.result;
+                if (lecturerData) {
+                    lecturerData.CourseName = editData.CourseName;
+
+                    const lecturerUpdateRequest = lecturerObjectStore.put(lecturerData);
+                    lecturerUpdateRequest.onsuccess = function (event) {
+                        console.log('Data updated successfully in lecturer table');
+                    };
+                    lecturerUpdateRequest.onerror = function (event) {
+                        console.error('Error updating data in lecturer table:', event.target.errorCode);
+                    };
+
+                    const lecturerDetailTransaction = db.transaction(['lecturerdetail'], 'readwrite');
+                    const lecturerDetailObjectStore = lecturerDetailTransaction.objectStore('lecturerdetail');
+                    const lecturerDetailRequest = lecturerDetailObjectStore.get(parseInt(editData.LecturerID));
+
+                    lecturerDetailRequest.onsuccess = function (event) {
+                        const lecturerDetailData = event.target.result;
+                        if (lecturerDetailData) {
+                            lecturerDetailData.CourseName = editData.CourseName;
+
+                            const lecturerDetailUpdateRequest = lecturerDetailObjectStore.put(lecturerDetailData);
+                            lecturerDetailUpdateRequest.onsuccess = function (event) {
+                               alert('Data updated successfully');
+                               window.location.replace('CourseDetail.html')
+                            };
+                            lecturerDetailUpdateRequest.onerror = function (event) {
+                                console.error('Error updating data in lecturerdetail table:', event.target.errorCode);
+                            };
+                        } else {
+                            console.log('No lecturer detail found for the specified ID');
+                        }
+                    };
+                } else {
+                    console.log('No lecturer found with the specified ID');
+                }
+            };
+        }
+
+        function getCourseData() {
+            const CourseID = getParameterByName('CourseID');
+            if (CourseID) {
+                getCourseByID(CourseID);
+            } else {
+                console.log('No CourseID provided.');
+            }
+        }
+
+        function getCourseByID(CourseID) {
+            const request = indexedDB.open('online_learning_system', 1);
+
+            request.onerror = function (event) {
+                console.error("Database failed to open:", event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+
+                const transaction = db.transaction(['coursedetail'], 'readonly');
+                const objectStore = transaction.objectStore('coursedetail');
+                const getCourseRequest = objectStore.get(Number(CourseID));
+
+                getCourseRequest.onsuccess = function (event) {
+                    const courseData = event.target.result;
+
+                    if (courseData) {
+                        displayData(courseData);
+                    } else {
+                        console.log('No course found with the specified ID.');
+                    }
+                };
+
+                getCourseRequest.onerror = function (event) {
+                    console.error('Error fetching course:', event.target.error);
+                };
+            }
+        }
+
+        function displayData(courseData) {
+            document.getElementById('CourseID').value = courseData.CourseID;
+            document.getElementById('CourseName').value = courseData.CourseName;
+            document.getElementById('CourseDescription').value = courseData.CourseDescription;
+            document.getElementById('LecturerID').value = courseData.LecturerID;
+            document.getElementById('LecturerName').value = courseData.LecturerName;
+            document.getElementById('LecturerQualification').value = courseData.LecturerQualification;
+            document.getElementById('StudyDuration').value = courseData.StudyDuration;
+            document.getElementById('LearningPlatform').value = courseData.LearningPlatform;
+            document.getElementById('LearningResult').value = courseData.LearningResult;
+            document.getElementById('CourseOutline').value = courseData.CourseOutline;
+        }
+
+        function populateCategories() {
+            const selectElement = document.getElementById('LecturerID');
+
+            const transaction = db.transaction(['lecturer'], 'readonly');
+            const lecturerStore = transaction.objectStore('lecturer');
+
+            const getLecturerData = lecturerStore.getAll();
+
+            getLecturerData.onsuccess = function (event) {
+                const lecturer = event.target.result;
+
+                if (lecturer.length > 0) {
+                    // Clear existing options
+                    selectElement.innerHTML = '';
+                    // Add default option
+                    const defaultOption = document.createElement('option');
+                    defaultOption.value = '0';
+                    defaultOption.textContent = 'Please Select Lecturer';
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    selectElement.appendChild(defaultOption);
+
+                    // Loop through categories and create options
+                    lecturer.forEach(function (lecturer) {
+                        const option = document.createElement('option');
+                        option.value = lecturer.LecturerID;
+                        option.textContent = lecturer.LecturerName;
+                        option.setAttribute('data-qualification', lecturer.LecturerQualification);
+                        selectElement.appendChild(option);
+                    });
+                } else {
+                    // Display a message if no categories are found
+                    selectElement.innerHTML = "<option value='0' class='form-control'>No Category Found</option>";
+                }
+            };
+
+            getLecturerData.onerror = function (event) {
+                console.error('Error retrieving categories: ', event.target.error);
+            };
+        }
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

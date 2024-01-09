@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <header class="headerpage"></header>
+    <section>
+        <div class="container mt-5">
+            <h3 class="heading mb-4">Contact us</h3>
+            <div class="row">
+                <div class="col-md-6 p-3 " style="border: 1px solid black; border-radius: 5%">
+                    <form id="ContactForm" method="post">
+                        <input type="hidden" class="form-control" id="UserID" name="UserID">
+                        <div class="mb-3">
+                            <label for="UserName" class="form-label">Your name</label>
+                            <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Name..."
+                                disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ContactNumber" class="form-label">Your phone number</label>
+                            <input type="text" class="form-control" id="ContactNumber" name="ContactNumber" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Email" class="form-label">Your email address</label>
+                            <input type="email" class="form-control" id="Email" name="Email" placeholder="E-mail..."
+                                disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Message" class="form-label">Your message</label>
+                            <textarea class="form-control" id="Message" name="Message"
+                                placeholder="How can we help you?" required></textarea>
+                        </div>
+                        <input type="hidden" name="replyStatus" value="Waiting Reply">
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary px-4">Send</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 p-3 bg-light">
+                    <div class="contactus-question">
+                        <h1>Have a question for us?</h1>
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="card p-3">
+                                    <h5 class="card-title"><ins>Account & notifications</ins></h5>
+                                    <p class="card-text">If you have trouble logging in or need to change your account
+                                        settings (such as your name, email address, or password)</p>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card p-3">
+                                    <h5 class="card-title"><ins>Privacy query</ins></h5>
+                                    <p class="card-text">If you have questions about our privacy statement or have
+                                        questions about how we protect your personal information, you can contact us at
+                                        <a href="">email</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card p-3">
+                                    <h5 class="card-title"><ins>Industry Partnership Inquiries</ins></h5>
+                                    <p class="card-text">If you’re a university interested in creating Professional
+                                        Certificates on our platform, please contact us <a href="">here</a>.</p>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card p-3">
+                                    <h5 class="card-title"><ins>Refund policies</ins></h5>
+                                    <p class="card-text">If you decide not to complete a course or specialization you
+                                        paid for, we may be able to refund your payment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footerpage"></footer>
+    <script>
+        $(function () {
+            $(".headerpage").load("../Header.html");
+            $(".footerpage").load("../Footer.html");
+        });
+    </script>
+    <script>
+        function checkSessionAndRedirect() {
+            const userID = sessionStorage.getItem('UserID');
+            if (!userID) {
+                window.location.href = '../Login/Login.html';
+            } else {
+                connectToDBAndRetrieveUsername();
+            }
+        }
+
+        function connectToDBAndRetrieveUsername() {
+            const userID = sessionStorage.getItem('UserID');
+            if (!userID) {
+                window.location.href = '../Login/Login.html';
+                return;
+            }
+
+            const request = indexedDB.open('online_learning_system', 1);
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+                const transaction = db.transaction(['users'], 'readonly');
+                const objectStore = transaction.objectStore('users');
+                const getUser = objectStore.get(Number(userID));
+
+                getUser.onsuccess = function (event) {
+                    const user = event.target.result;
+                    if (user) {
+                        document.getElementById('UserID').value = user.UserID;
+                        document.getElementById('UserName').value = user.UserName;
+                        document.getElementById('ContactNumber').value = user.ContactNumber;
+                        document.getElementById('Email').value = user.Email;
+                    }
+                };
+
+                transaction.onerror = function (event) {
+                    console.error("Transaction error:", event.target.error);
+                };
+            }
+
+            request.onerror = function (event) {
+                console.error("Database error:", event.target.errorCode);
+            };
+        }
+
+        checkSessionAndRedirect();
+
+        const form = document.getElementById('ContactForm');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const userData = {
+                UserID: form.elements['UserID'].value,
+                UserName: form.elements['UserName'].value,
+                ContactNumber: form.elements['ContactNumber'].value,
+                Email: form.elements['Email'].value,
+                Message: form.elements['Message'].value,
+            }
+
+            AddData(userData);
+        });
+
+        function AddData(userData) {
+            const request = indexedDB.open('online_learning_system', 1);
+
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+
+                const transaction = db.transaction(['contact'], 'readwrite');
+                const objectStore = transaction.objectStore('contact');
+
+                const data = {
+                    UserID: userData.UserID,
+                    UserName: userData.UserName,
+                    ContactNumber: userData.ContactNumber,
+                    Email: userData.Email,
+                    Message: userData.Message,
+                    ReplyStatus: "No reply"
+                };
+
+                const addRequest = objectStore.add(data);
+
+                addRequest.onsuccess = function (event) {
+                    alert('Data added successfully!');
+                    location.reload();
+                };
+
+                addRequest.onerror = function (event) {
+                    console.error('Error adding data:', event.target.error);
+                };
+            }
+
+            request.onerror = function (event) {
+                console.error('Database error:', event.target.errorCode);
+            };
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Course</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body style="background-color: #f0f0f0;">
+    <header class="headerpage"></header>
+    <div class="container-fluid mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="p-2 mt-5">
+                    <div class="heading d-flex justify-content-between align-items-center">
+                        <h6 class="text-uppercase">Categories</h6>
+                        <span>--</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row g-2" id="productDisplay">
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footerpage"></footer>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let db;
+
+        const request = window.indexedDB.open('online_learning_system', 1);
+        request.onerror = function (event) {
+            console.error('Database error:', event.target.errorCode);
+        };
+
+        request.onsuccess = function (event) {
+            db = event.target.result;
+            displayCategory();
+            fetchProductsFromIndexedDB();
+        };
+
+        function displayCategory() {
+            if (!db) {
+                console.error('Database is not available.');
+                return;
+            }
+
+            const transaction = db.transaction(['coursecategory'], 'readonly');
+            const objectStore = transaction.objectStore('coursecategory');
+            const request = objectStore.getAll();
+
+            request.onerror = function (event) {
+                console.error('Error retrieving data:', event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const allData = event.target.result;
+                if (allData && allData.length > 0) {
+                    const parentDiv = document.querySelector('.p-2'); // 找到父级 div
+
+                    allData.forEach(data => {
+                        const row = document.createElement('div');
+                        row.classList.add('form-check');
+                        row.innerHTML = `
+                                        <input class='form-check-input' type='checkbox' value='${data.CategoryID}' id='flexCheckCategory${data.CategoryID}'>
+                                        <label class='form-check-label' for='flexCheckCategory${data.CategoryID}'>${data.CategoryName}</label>
+                                    `;
+                        parentDiv.appendChild(row);
+                    });
+                } else {
+                    console.log('No data found in the database.');
+                }
+            };
+        }
+
+        function fetchProductsFromIndexedDB() {
+            if (!db) {
+                console.error('Database is not available.');
+                return;
+            }
+
+            const coursetransaction = db.transaction(['course'], 'readonly');
+            const CourseobjectStore = coursetransaction.objectStore('course');
+            const Courserequest = CourseobjectStore.openCursor();
+            const productDisplay = document.getElementById('productDisplay');
+
+            Courserequest.onsuccess = function (event) {
+                const Coursecursor = event.target.result;
+                if (Coursecursor) {
+                    const data = Coursecursor.value;
+                    const productDiv = document.createElement('div');
+
+                    productDiv.classList.add('filterDiv', `category${data.CategoryID}`, 'col-md-4', 'product-card');
+                    productDiv.setAttribute('onclick', `window.location.href='../CourseDetail/CourseDetail.html?CourseID=${data.CourseID}'`);
+
+                    const productContainer = document.createElement('div');
+                    productContainer.classList.add('product', 'py-4');
+
+                    const textCenterDiv = document.createElement('div');
+                    textCenterDiv.classList.add('text-center');
+
+                    const image = document.createElement('img');
+                    image.src = data.CourseImage;
+                    image.width = '200';
+                    image.alt = 'Course Image';
+
+                    textCenterDiv.appendChild(image);
+
+                    const aboutDiv = document.createElement('div');
+                    aboutDiv.classList.add('about', 'text-center');
+
+                    const h5 = document.createElement('h5');
+                    h5.textContent = data.CourseName;
+
+                    const h6 = document.createElement('h6');
+                    h6.textContent = data.CategoryName;
+
+                    const span = document.createElement('span');
+                    span.textContent = `RM ${data.CoursePrice}`;
+
+                    aboutDiv.appendChild(h5);
+                    aboutDiv.appendChild(h6);
+                    aboutDiv.appendChild(span);
+
+                    const cartButtonDiv = document.createElement('div');
+                    cartButtonDiv.classList.add('cart-button', 'mt-3', 'px-2', 'd-flex', 'justify-content-between', 'align-items-center');
+
+                    const button = document.createElement('button');
+                    button.classList.add('btn', 'btn-primary', 'text-uppercase');
+                    button.textContent = 'Check Detail';
+
+                    cartButtonDiv.appendChild(button);
+
+                    productContainer.appendChild(textCenterDiv);
+                    productContainer.appendChild(aboutDiv);
+                    productContainer.appendChild(cartButtonDiv);
+
+                    productDiv.appendChild(productContainer);
+                    productDisplay.appendChild(productDiv);
+
+                    Coursecursor.continue();
+                }
+            };
+
+            Courserequest.onerror = function (event) {
+                console.error('An error occurred while reading the database:', event.target.error);
+            };
+        }
+
+        function filterSelection() {
+            // Get all checkboxes
+            var checkboxes = document.querySelectorAll('.form-check-input');
+            // Create array to store checked categories
+            var checkedCategories = [];
+
+            // Loop through checkboxes and add checked categories to array
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    checkedCategories.push(checkbox.value);
+                }
+            });
+            console.log('Checked categories:', checkedCategories);
+            // Get all products
+            var products = document.querySelectorAll('.filterDiv');
+
+            // Loop through products and filter based on checked categories
+            products.forEach(function (product) {
+                // Get product categories
+                var productCategories = product.classList;
+                // Create boolean to track if product should be shown
+                var showProduct = false;
+
+                // If no categories are checked, show all products
+                if (checkedCategories.length === 0) {
+                    showProduct = true;
+                } else {
+                    // Loop through checked categories and check if product is in category
+                    checkedCategories.forEach(function (category) {
+                        if (productCategories.contains("category" + parseInt(category))) {
+                            showProduct = true;
+                        }
+                    });
+                }
+
+                // Show or hide product based on boolean
+                if (showProduct) {
+                    product.classList.remove("hide");
+                    product.classList.add("show");
+                } else {
+                    product.classList.remove("show");
+                    product.classList.add("hide");
+                }
+            });
+        }
+
+        // Add event listeners to checkboxes for filtering
+        var checkboxes = document.querySelectorAll('.form-check-input');
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', function (event) {
+                if (event.target.checked) {
+                    console.log('Checkbox with value ' + event.target.value + ' is checked.');
+                } else {
+                    console.log('Checkbox with value ' + event.target.value + ' is unchecked.');
+                }
+            });
+        });
+
+
+        // Initial display of all products
+        filterSelection();
+    });
+</script>
+<script>
+    $(function () {
+        $(".headerpage").load("../Header.html");
+        $(".footerpage").load("../Footer.html");
+    });
+</script>
+
+</html>

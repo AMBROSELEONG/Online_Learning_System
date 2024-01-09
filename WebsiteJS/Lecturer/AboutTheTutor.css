@@ -1,0 +1,541 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 10px;
+    height: 100%;
+}
+
+header {
+    width: 80%;
+    height: 5rem;
+    background-color: rgb(60, 60, 60);
+    display: flex;
+    padding: 0% 10%;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0px 2rem 5rem rgba(0, 0, 0, 0.2);
+}
+
+header .left-bar {
+    width: auto;
+    display: flex;
+    height: 5rem;
+}
+
+#logo {
+    width: 10rem;
+    height: 5rem;
+    font-size: 2rem;
+    text-align: center;
+    line-height: 5rem;
+    background-color: rgb(255, 140, 0);
+    color: white;
+}
+
+.menu {
+    width: 30rem;
+    display: flex;
+}
+
+ul {
+    list-style: none;
+}
+
+.menu>li {
+    width: 15rem;
+    text-align: center;
+    font-size: 2rem;
+    color: rgb(255, 140, 0);
+    line-height: 5rem;
+    position: relative;
+}
+
+.menu>li:hover {
+    background-color: rgb(255, 140, 0);
+    color: rgb(60, 60, 60);
+    height: 5rem;
+}
+
+.menu>li>ul {
+    display: none;
+    background-color: rgb(60, 60, 60);
+    color: white;
+    position: absolute;
+    left: 0px;
+    top: 5rem;
+    width: 14.8rem;
+    border-radius: 0px 0px 5px 5px;
+    border: .1rem solid rgb(60, 60, 60);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    z-index: 2;
+}
+
+.item:hover ul {
+    display: block;
+
+}
+
+.item li:hover {
+    background-color: rgb(255, 140, 0);
+    color: white;
+}
+
+.item span {
+    width: 0;
+    height: 0;
+    margin-left: 2rem;
+    display: inline-block;
+    border: .5rem solid transparent;
+    border-top: .5rem solid rgb(255, 140, 0);
+    position: relative;
+    top: .25rem;
+}
+
+.item:hover span {
+    border: .5rem solid transparent;
+    border-bottom: .5rem solid rgb(60, 60, 60);
+    position: relative;
+    top: -2.5px;
+}
+
+.menu::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.right-bar {
+    display: block;
+    display: flex;
+    height: 5rem;
+}
+
+#search-bar-form {
+    width: calc(30rem - 0.1rem);
+    height: 3rem;
+    border: 0.1rem solid rgb(255, 140, 0);
+    align-items: center;
+    border-radius: 1rem;
+    margin: 1rem 0rem;
+    outline: none;
+    display: flex;
+}
+
+#search-bar {
+    outline: none;
+    width: 24rem;
+    height: 3rem;
+    border: none;
+    border-radius: 1rem 0rem 0rem 1rem;
+    padding: 0rem 1rem;
+}
+
+#search-bar-submit {
+    width: calc(5rem - 0.1rem);
+    font-size: 2.5rem;
+    height: 3rem;
+    border-radius: 0rem 1rem 1rem 0rem;
+    border: none;
+    background-color: white;
+    color: rgb(255, 140, 0);
+    margin: 0;
+    cursor: pointer;
+}
+
+#search-bar-submit>i:hover {
+    color: rgb(60, 60, 60);
+}
+
+.right-bar>i {
+    font-size: 3rem;
+    margin-left: 5rem;
+    color: rgb(255, 140, 0);
+    line-height: 5rem;
+}
+
+.right-bar>i:hover {
+    animation: bounce 0.5s;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.openbtn {
+    display: none;
+}
+
+.sidepanel {
+    display: none;
+}
+
+.progress-container {
+    width: 100%;
+    height: 0.8rem;
+    background: #ccc;
+    position: fixed;
+    z-index: 10;
+    top: 5rem;
+}
+
+.progress-bar {
+    height: 0.8rem;
+    background: rgb(255, 140, 0);
+    width: 0%;
+}
+
+
+body section {
+    width: 100%;
+    margin-top: 5rem;
+}
+
+
+.Ourmentors {
+    width: 80%;
+    padding: 10%;
+    text-align: center;
+
+}
+
+.heading {
+    color: #6a6f73;
+    font-size: 3rem;
+}
+
+.declaration {
+    color: #6a6f73;
+    margin-top: 0.5rem;
+    font-size: 2rem;
+}
+
+.tutorflex {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tutorDiv {
+    background-color: #ffffff;
+    width: calc(20% - 2rem);
+    margin: 2.5%;
+    color: black;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.tutorDiv img {
+    width: 100%;
+    height: 15rem;
+    background-color: rgb(255, 140, 0);
+}
+
+.tutorDiv h1 {
+    color: black;
+    font-size: 2rem;
+    margin: 5%;
+}
+
+.tutorDiv>li {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: none;
+    outline: 0;
+    padding: 1rem;
+    color: white;
+    background-color: rgb(255, 140, 0);
+    text-align: center;
+    cursor: pointer;
+    width: calc(100% - 2rem);
+    font-size: 1.6rem;
+    list-style: none;
+}
+
+.tutorDiv>li:hover {
+    background-color: #f5f5f5;
+    color: rgb(60, 60, 60);
+    height: 30rem;
+}
+
+.tutorDiv>li>div {
+    display: none;
+    background-color: rgb(60, 60, 60);
+    position: absolute;
+    left: 0px;
+    bottom: 10rem;
+    width: calc(100% - 2rem);
+    border-radius: 0px 0px 5px 5px;
+    border: .1rem solid rgb(60, 60, 60);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    z-index: 2;
+}
+
+.Intro:hover div {
+    display: block;
+
+}
+
+
+.Intro span {
+    width: 0;
+    height: 0;
+    margin-left: 2rem;
+    display: inline-block;
+    border: .5rem solid transparent;
+    border-bottom: .5rem solid rgb(255, 255, 255);
+    position: relative;
+    top: -2.5px;
+}
+
+.Intro:hover span {
+    border: .5rem solid transparent;
+    border-top: .5rem solid rgb(60, 60, 60);
+    position: relative;
+    top: .25rem;
+}
+
+.tutorDiv::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.joinour {
+    width: 96%;
+    height: 8rem;
+    background-color: #f5f5f5;
+    padding: 2%;
+    text-align: center;
+}
+
+.joinour p {
+    color: #6a6f73;
+    font-size: 3rem;
+}
+
+.joinour button {
+    width: 16rem;
+    height: 4rem;
+    border: none;
+    background-color: white;
+    color: rgb(255, 140, 0);
+    font-size: 1.5rem;
+    border: 1px solid rgb(255, 140, 0);
+    border-radius: 1rem;
+    margin-top: 2rem;
+}
+
+@media all and (max-width: 768px) {
+    html {
+        font-size: 9px;
+    }
+
+    body {
+        width: 100%;
+    }
+
+    .right-bar {
+        display: none;
+    }
+
+    .sidepanel {
+        display: block;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        transition: 0.5s;
+        overflow-x: hidden;
+        padding-top: 5rem;
+        background-color: rgba(255, 140, 0, 0.6);
+        margin-top: 5rem;
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    .sidepanel .closebtn {
+        position: absolute;
+        top: 0;
+        right: 2.5rem;
+        font-size: 3.6rem;
+        color: white;
+        text-decoration: none;
+    }
+
+    header {
+        width: 100%;
+        height: 5rem;
+        background-color: rgb(60, 60, 60);
+        display: flex;
+        justify-content: flex-start
+    }
+
+    .openbtn {
+        font-size: 3rem;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        padding: 1rem;
+        display: block;
+        margin-top: -1rem;
+        margin-right: 0;
+        margin-left: -7%;
+        color: white;
+    }
+
+    .openbtn:hover {
+        height: 6rem;
+        background-color: rgb(255, 140, 0);
+    }
+
+    #search-bar-form {
+        width: 27rem;
+        margin: 1rem 1.5rem;
+    }
+
+    #search-bar {
+        width: 21rem;
+    }
+
+    .sidepanel a>i {
+        color: white;
+        margin: 2rem;
+        display: block;
+        margin-right: 2rem;
+        display: flex;
+        text-decoration: none;
+    }
+
+    .sidepanel a,
+    .sidepanel p {
+        font-size: 2rem;
+        color: white;
+        display: block;
+        margin-left: 3rem;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .sidepanel a:hover {
+        background-color: rgb(60, 60, 60);
+    }
+
+    .sidepanel a {
+        font-size: 3rem;
+        margin: 1rem;
+        cursor: pointer;
+    }
+
+    .swiper-container {
+        width: 100%;
+        margin: 0;
+    }
+
+    .aboutus-container {
+        width: 94%;
+        padding: 3%;
+    }
+
+    .tutorial-container {
+        width: 94%;
+        padding: 3%;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0%;
+    }
+     
+    .tutorDiv {
+        width: calc(45% - 2rem);
+    }
+}
+
+@media all and (max-width: 576px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    html {
+        font-size: 7px;
+        overflow-x: hidden;
+    }
+
+    .left-bar {
+        margin: 0;
+    }
+
+    #course-container {
+        width: 80%;
+        margin-bottom: 30rem;
+        margin: 0% 10%;
+        padding: 0;
+    }
+
+    .course-detail {
+        width: 50%;
+        box-sizing: border-box;
+        margin-bottom: 2%;
+    }
+
+    .course-detail-back button {
+        margin: 0;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+
+    .aboutus-container .aboutus-container-outside {
+        flex-direction: column;
+        width: 100%;
+        flex: 0;
+    }
+
+    .aboutus-container .aboutus-container-inner {
+        width: 70%;
+        margin: 2% 15%;
+    }
+
+    .aboutus-container p {
+        font-size: 4rem;
+    }
+
+    .aboutus-container-inner .content p {
+        font-size: 3rem;
+    }
+
+    .tutorial-container {
+        margin-bottom: 5%;
+    }
+    
+    .tutorDiv {
+        width: calc(100% - 2rem);
+    }
+}

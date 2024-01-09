@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Purchase History</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <header class="headerpage"></header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron">
+                    <h1 class="display-4">Purchase History</h1>
+                    <p class="lead">Manage your recent orders & invoices</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Course Name</th>
+                                <th scope="col">Course Price</th>
+                                <th scope="col">Order Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footerpage"></footer>
+    <script>
+        $(function () {
+            $(".headerpage").load("../Header.html");
+            $(".footerpage").load("../Footer.html");
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const userID = sessionStorage.getItem('UserID');
+
+            if (!userID) {
+                window.location.href = '../Login/Login.html';
+            } else {
+                getHistory(userID);
+            }
+        });
+
+        function getHistory(userID) {
+            const request = window.indexedDB.open('online_learning_system', 1);
+
+            request.onerror = function (event) {
+                console.error('Database error:', event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+                const transaction = db.transaction(['orders'], 'readonly');
+                const objectStore = transaction.objectStore('orders');
+
+                const userIndex = objectStore.index('UserID');
+                const getRequest = userIndex.getAll(userID);
+                getRequest.onerror = function (event) {
+                    console.error('Error retrieving history:', event.target.errorCode);
+                };
+
+                getRequest.onsuccess = function (event) {
+                    const history = event.target.result;
+                    console.log('Retrieved history:', history); // Add this line to check the retrieved emails
+                    renderHistory(history);
+                };
+            };
+        }
+
+        function renderHistory(history) {
+            const tableBody = document.getElementById('data-table-body');
+            tableBody.innerHTML = '';
+
+            history.forEach(data => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                                <td>${data.OrderID}</td>
+                                <td>${data.CourseName}</td>
+                                <td>${data.CoursePrice}</td>
+                                <td>${data.OrderDate}</td>   
+                `;
+                row.classList.add('cursor-pointer');
+
+                tableBody.appendChild(row);
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

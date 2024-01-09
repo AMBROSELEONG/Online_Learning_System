@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1702449869990') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 30px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-youxiang:before {
+  content: "\e71f";
+}
+

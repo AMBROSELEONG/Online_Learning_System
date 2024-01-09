@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .buttonload {
+            background-color: transparent;
+            border: none;
+            color: black;
+            padding: 12px 16px;
+            font-size: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="buttonload">
+        <i class="fa fa-spinner fa-spin"></i>
+    </button>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const UserID = sessionStorage.getItem('UserID');
+
+        if (!UserID) {
+            window.location.href = '../Login/Login.html';
+        } else {
+            deleteCartAndInsertOrder(UserID);
+        }
+    });
+
+    function deleteCartAndInsertOrder(UserID) {
+        const request = window.indexedDB.open('online_learning_system', 1);
+
+        request.onerror = function (event) {
+            console.error('Database error:', event.target.errorCode);
+        };
+
+        request.onsuccess = function (event) {
+            const db = event.target.result;
+            const transaction = db.transaction(['shoppingcart', 'orders'], 'readwrite');
+            const shoppingCartStore = transaction.objectStore('shoppingcart');
+            const ordersStore = transaction.objectStore('orders');
+            const userIndex = shoppingCartStore.index('UserID');
+
+            const getRequest = userIndex.getAll(UserID);
+
+            getRequest.onerror = function (event) {
+                console.error('Error retrieving cart data:', event.target.errorCode);
+            };
+
+            getRequest.onsuccess = function (event) {
+                const cartData = event.target.result;
+
+                const createOrderQuery = cartData.map(item => ({
+                    UserID: item.UserID,
+                    CartID: item.InvoiceID,
+                    CourseID: item.CourseID,
+                    CourseName: item.CourseName,
+                    CoursePrice: item.CoursePrice,
+                    OrderDate: new Date().toLocaleDateString()
+                }));
+
+                const deleteCartRequest = userIndex.openCursor();
+                deleteCartRequest.onsuccess = function (event) {
+                    const cursor = event.target.result;
+                    if (cursor) {
+                        cursor.delete();
+                        cursor.continue();
+                    }
+                };
+
+                createOrderQuery.forEach(order => {
+                    ordersStore.add(order);
+                });
+
+                transaction.oncomplete = function () {
+                    console.log('Shopping cart deleted and data inserted into orders.');
+                    const cartIDs = cartData.map(item => item.InvoiceID).join(',');
+                    setTimeout(function () {
+                        window.location.href = `Receipt.html?CartID=${cartIDs}`;
+                    }, 3000);
+                };
+            };
+        };
+    }
+</script>
+
+</html>

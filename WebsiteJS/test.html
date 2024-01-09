@@ -1,0 +1,38 @@
+<button id="insertExampleDataBtn" type="button" class="btn btn-primary">Insert Example Data</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const insertExampleDataBtn = document.getElementById('insertExampleDataBtn');
+
+    insertExampleDataBtn.addEventListener('click', function () {
+      const request = window.indexedDB.open('online_learning_system', 1);
+
+      request.onerror = function (event) {
+        console.error('Database error:', event.target.errorCode);
+      };
+
+      request.onsuccess = function (event) {
+        const db = event.target.result;
+        const transaction = db.transaction(['orders'], 'readwrite');
+        const objectStore = transaction.objectStore('orders');
+
+        const exampleData = {
+          UserID: 2,
+          CourseName: 'This is a sample course',
+          CoursePrice: '100',
+          OrderDate: '2024-1-8',
+        };
+
+        const addRequest = objectStore.add(exampleData);
+
+        addRequest.onsuccess = function (event) {
+          console.log('Example data added to the database');
+        };
+
+        addRequest.onerror = function (event) {
+          console.error('Error adding example data:', event.target.errorCode);
+        };
+      };
+    });
+  });
+</script>

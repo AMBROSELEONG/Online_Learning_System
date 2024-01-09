@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="../ConnectDB.js"></script>
+</head>
+
+<body style="background-image: url(../img/background.jpg);">
+    <div class="container">
+        <div class="row ">
+            <div class="col"></div>
+            <div class="col-sm-6 p-3 my-3"
+                style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); background-color: rgba(255,255, 255, 0.2);">
+                <h1 style="text-align: center; color: gray;">Registration Form</h1>
+                <form id="registrationForm" action="" method="post">
+                    <div class="form-group">
+                        <label for="username" style="color: gray;">Username</label>
+                        <input type="text" class="form-control" id="UserName" name="UserName"
+                            placeholder="Username can only contain letters and numbers." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" style="color: gray;">Password</label>
+                        <input type="password" class="form-control" id="PasswordHash" name="Password"
+                            placeholder="At least 8 characters, one uppercase, one lowercase, one number, one special character"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="repeatpassword" style="color: gray;">Repeat Password</label>
+                        <input type="password" class="form-control" id="repeatpassword" name="repeatpassword" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact" style="color: gray;">Contact Number</label>
+                        <input type="tel" class="form-control" id="ContactNumber" name="ContactNumber"
+                            placeholder="Please enter a valid 10-digit phone number." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" style="color: gray;">Email</label>
+                        <input type="email" class="form-control" id="Email" name="Email"
+                            placeholder="Please enter a valid email address." required>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                        <label class="form-check-label" for="terms" style="color: gray;">Agree with terms and
+                            privacy</label>
+                    </div>
+                    <p>Already registered? Go <span style="color: blue; cursor: pointer;"><a
+                                href="../Login/Login.html">Login
+                                Now</a></span></p>
+                    <div id="errorMessages" style="color: red;"></div>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="submit" class="btn btn-primary" id="submit" name="submit"
+                        style="background-color: rgb(255, 140, 0);">Submit</button>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('UserName').value;
+            const password = document.getElementById('PasswordHash').value;
+            const email = document.getElementById('Email').value;
+            const contactNumber = document.getElementById('ContactNumber').value;
+            const repeatpassword = document.getElementById('repeatpassword').value;
+
+            function validatePassword(password) {
+                let errors = [];
+                if (password.length < 8) {
+                    errors.push("Password length must be at least 8 characters.");
+                }
+
+                if (!/[a-z]/.test(password)) {
+                    errors.push("Password should contain at least one lowercase letter.");
+                }
+
+                if (!/[A-Z]/.test(password)) {
+                    errors.push("Password should contain at least one uppercase letter.");
+                }
+
+                if (!/\d/.test(password)) {
+                    errors.push("Password should contain at least one number.");
+                }
+
+                if (!/[^a-zA-Z\d]/.test(password)) {
+                    errors.push("Password should contain at least one special character.");
+                }
+                return errors;
+            }
+
+            function verify(username, password, email, contactnumber, repeatpassword) {
+                let errors = [];
+
+                // Check if all fields are filled
+                if (!username || !password || !email || !contactnumber) {
+                    errors.push("Please fill in all fields.");
+                }
+
+                // Check if username is valid
+                if (!/^[a-zA-Z0-9]*$/.test(username)) {
+                    errors.push("Username can only contain letters and numbers.");
+                }
+
+                // Check if password and repeat password match
+                if (password !== repeatpassword) {
+                    errors.push("Password and Repeat Password do not match.");
+                }
+
+                // Check if email is valid
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    errors.push("Please enter a valid email address.");
+                }
+
+                // Check if contact number is valid
+                if (!/^(01[0-9])?\d{7,8}$/.test(contactnumber)) {
+                    errors.push("Please enter a valid 10-digit phone number.");
+                }
+
+                return errors;
+            }
+            const passwordErrors = validatePassword(password);
+            const verifyErrors = verify(username, password, email, contactNumber, repeatpassword);
+
+            if (passwordErrors.length === 0 && verifyErrors.length === 0) {
+                const request = indexedDB.open('online_learning_system', 1);
+
+                request.onsuccess = function (event) {
+                    const db = event.target.result;
+                    const transaction = db.transaction(['users'], 'readwrite');
+                    const objectStore = transaction.objectStore('users');
+
+                    const getUser = objectStore.index('UserName').get(username);
+
+                    getUser.onsuccess = function (event) {
+                        const existingUser = event.target.result;
+                        if (existingUser) {
+                            const errorDiv = document.getElementById('errorMessages');
+                            errorDiv.innerHTML = "Username already exists. Please choose a different username.";
+                        } else {
+                            // Username doesn't exist, proceed to add the user
+                            const user = {
+                                UserName: username,
+                                PasswordHash: password,
+                                Email: email,
+                                ContactNumber: contactNumber,
+                            };
+
+                            const addUserRequest = objectStore.add(user);
+
+                            addUserRequest.onsuccess = function () {
+                                window.location.replace('../Login/Login.html');
+                                alert("Add User Successful");
+                            };
+
+                            addUserRequest.onerror = function () {
+                                const errorDiv = document.getElementById('errorMessages');
+                                errorDiv.innerHTML = 'Error adding user.';
+                            };
+                        }
+                    };
+                };
+
+                request.onerror = function (event) {
+                    console.error('Database error: ' + event.target.errorCode);
+                    // Handle error
+                };
+            } else {
+                const errorDiv = document.getElementById('errorMessages');
+                errorDiv.innerHTML = passwordErrors.concat(verifyErrors).join('<br>');
+            }
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

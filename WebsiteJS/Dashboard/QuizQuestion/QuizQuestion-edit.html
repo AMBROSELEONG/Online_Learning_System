@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h2>Add Question</h2>
+
+        <form id="edit-form">
+            <input type="hidden" class="form-control" name="QuizID" id="QuizID">
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Question One</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="QuestionOne"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option One</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptOne1"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Two</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptOne2"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Three</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptOne3"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Answer</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="AnsOne"></textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Question Two</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="QuestionTwo"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option One</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptTwo1"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Two</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptTwo2"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Three</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptTwo3"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Answer</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="AnsTwo"></textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Question Three</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="QuestionThree"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option One</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptThree1"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Two</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptThree2"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Three</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptThree3"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Answer</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="AnsThree"></textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Question Four</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="QuestionFour"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option One</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptFour1"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Two</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptFour2"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Option Three</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="OptFour3"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Answer</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="AnsFour"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class="btn btn-primary" name="AddQuiz">Submit</button>
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <a class="btn btn-outline-primary" href="QuizQuestion.html" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var QuizID = getParameterByName('QuizID');
+        console.log(QuizID);
+
+        function getLecturerByID(QuizID) {
+            const request = window.indexedDB.open("online_learning_system", 1);
+
+            request.onerror = function (event) {
+                console.error("Database failed to open:", event.target.errorCode);
+            };
+
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+                const transaction = db.transaction(["quizquestion"], "readonly");
+                const objectStore = transaction.objectStore('quizquestion');
+
+                const request = objectStore.get(parseInt(QuizID));
+                request.onerror = function (event) {
+                    console.error("Error getting data from database:", event.target.error);
+                };
+
+                request.onsuccess = function (event) {
+                    const data = event.target.result;
+
+                    if (data) {
+                        diplayData(data);
+                    } else {
+                        console.log('No contact found with the specified ID.');
+                    }
+                };
+            }
+        }
+
+        getLecturerByID(QuizID);
+
+        function diplayData(data) {
+            document.getElementById('QuizID').value = data.QuizID;
+        }
+
+        const form = document.getElementById('edit-form');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const editData = {
+                QuestionOne: document.getElementById('QuestionOne').value,
+                OptOne1: document.getElementById('OptOne1').value,
+                OptOne2: document.getElementById('OptOne2').value,
+                OptOne3: document.getElementById('OptOne3').value,
+                AnsOne: document.getElementById('AnsOne').value,
+                QuestionTwo: document.getElementById('QuestionTwo').value,
+                OptTwo1: document.getElementById('OptTwo1').value,
+                OptTwo2: document.getElementById('OptTwo2').value,
+                OptTwo3: document.getElementById('OptTwo3').value,
+                AnsTwo: document.getElementById('AnsTwo').value,
+                QuestionThree: document.getElementById('QuestionThree').value,
+                OptThree1: document.getElementById('OptThree1').value,
+                OptThree2: document.getElementById('OptThree2').value,
+                OptThree3: document.getElementById('OptThree3').value,
+                AnsThree: document.getElementById('AnsThree').value,
+                QuestionFour: document.getElementById('QuestionFour').value,
+                OptFour1: document.getElementById('OptFour1').value,
+                OptFour2: document.getElementById('OptFour2').value,
+                OptFour3: document.getElementById('OptFour3').value,
+                AnsFour: document.getElementById('AnsFour').value,
+            }
+
+            EditData(QuizID, editData);
+        });
+
+        function EditData(QuizID, editData) {
+            const request = indexedDB.open('online_learning_system', 1);
+            request.onerror = function (event) {
+                console.error('Database failed to open', event.target.errorCode);
+            }
+
+            request.onsuccess = function (event) {
+                const db = event.target.result;
+                const transaction = db.transaction(['quizquestion'], 'readwrite');
+                const objectStore = transaction.objectStore('quizquestion');
+
+                const request = objectStore.get(parseInt(QuizID));
+
+                request.onerror = function (event) {
+                    console.error('Error getting data from database:', event.target.errorCode);
+                };
+
+                request.onsuccess = function (event) {
+                    const data = event.target.result;
+                    if (data) {
+                        data.QuestionOne = editData.QuestionOne;
+                        data.OptOne1 = editData.OptOne1;
+                        data.OptOne2 = editData.OptOne2;
+                        data.OptOne3 = editData.OptOne3;
+                        data.AnsOne = editData.AnsOne;
+                        data.QuestionTwo = editData.QuestionTwo;
+                        data.OptTwo1 = editData.OptTwo1;
+                        data.OptTwo2 = editData.OptTwo2;
+                        data.OptTwo3 = editData.OptTwo3;
+                        data.AnsTwo = editData.AnsTwo;
+                        data.QuestionThree = editData.QuestionThree;
+                        data.OptThree1 = editData.OptThree1;
+                        data.OptThree2 = editData.OptThree2;
+                        data.OptThree3 = editData.OptThree3;
+                        data.AnsThree = editData.AnsThree;
+                        data.QuestionFour = editData.QuestionFour;
+                        data.OptFour1 = editData.OptFour1;
+                        data.OptFour2 = editData.OptFour2;
+                        data.OptFour3 = editData.OptFour3;
+                        data.AnsFour = editData.AnsFour;
+
+                        const requestUpdate = objectStore.put(data);
+
+                        requestUpdate.onsuccess = function (event) {
+                            alert('Data updated successfully');
+                            window.location.replace('QuizQuestion.html');
+                        };
+                        requestUpdate.onerror = function (event) {
+                            console.error('Error updating data in database:', event.target.errorCode);
+                        };
+                    } else {
+                        console.log('No contact found with the specified ID');
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

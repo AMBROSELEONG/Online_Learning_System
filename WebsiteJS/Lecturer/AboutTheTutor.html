@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About The Tutor</title>
+    <link rel="icon" type="image/x-icon" href="../img/Logo_Icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body style="background-color: #f0f0f0;">
+    <header class="headerpage"></header>
+    <div class="container-fluid mt-5 mb-5">
+        <div class="col">
+            <div class="row g-2" id="lecturersContainer">
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="joinour d-flex flex-column align-items-center bg-light p-4 mt-4">
+        <p class="mb-2" style="font-size: 3rem; color: #6a6f73;">Join Our team now</p>
+        <button class="btn btn-outline-warning" onclick="window.location.href = '../ContactUs/ContactUs.html'">Explore
+            Jobs</button>
+    </div>
+    <footer class="footerpage"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $(".headerpage").load("../Header.html");
+            $(".footerpage").load("../Footer.html");
+        });
+    </script>
+    <script>
+        // Open IndexedDB
+        let db;
+        const request = indexedDB.open('online_learning_system', 1);
+
+        request.onsuccess = function (event) {
+            db = event.target.result;
+            fetchLecturersFromIndexedDB();
+        };
+
+        function fetchLecturersFromIndexedDB() {
+            const transaction = db.transaction(['lecturer'], 'readonly');
+            const objectStore = transaction.objectStore('lecturer');
+            const cursor = objectStore.openCursor();
+            const lecturersContainer = document.getElementById('lecturersContainer');
+
+            cursor.onsuccess = function (event) {
+                const cursor = event.target.result;
+                console.log(cursor)
+                if (cursor) {
+                    const lecturer = cursor.value;
+
+                    // Create elements for each lecturer
+                    const lecturerDiv = document.createElement('div');
+                    lecturerDiv.classList.add('col-md-3', 'product-card');
+                    lecturerDiv.setAttribute('onclick', `window.location.href='../LecturerDetail/LecturerDetail.html?LecturerID=${lecturer.LecturerID}'`);
+
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('product', 'py-4', 'm-2', 'bg-light');
+
+                    const textCenterDiv = document.createElement('div');
+                    textCenterDiv.classList.add('text-center');
+
+                    const lecturerImage = document.createElement('img');
+                    lecturerImage.src = '../Dashboard/Lecturer/lecturer-image/Lecturer.jpg';
+                    lecturerImage.width = '100';
+                    lecturerImage.alt = 'Lecturer';
+
+                    textCenterDiv.appendChild(lecturerImage);
+
+                    const aboutDiv = document.createElement('div');
+                    aboutDiv.classList.add('about', 'text-center');
+
+                    const lecturerNameHeading = document.createElement('h5');
+                    lecturerNameHeading.textContent = `Lecturer Name: ${lecturer.LecturerName}`;
+
+                    const teachingSubjectHeading = document.createElement('h6');
+                    teachingSubjectHeading.textContent = `Teaching Subject: ${lecturer.CourseName}`;
+
+                    const qualificationSpan = document.createElement('span');
+                    qualificationSpan.textContent = `Qualification: ${lecturer.LecturerQualification} Years`;
+
+                    aboutDiv.appendChild(lecturerNameHeading);
+                    aboutDiv.appendChild(teachingSubjectHeading);
+                    aboutDiv.appendChild(qualificationSpan);
+
+                    productDiv.appendChild(textCenterDiv);
+                    productDiv.appendChild(aboutDiv);
+
+                    lecturerDiv.appendChild(productDiv);
+                    lecturersContainer.appendChild(lecturerDiv);
+
+                    cursor.continue();
+                }
+            };
+
+            cursor.onerror = function (event) {
+                console.error('Error retrieving data:', event.target.error);
+            };
+        }
+
+    </script>
+
+</body>
+
+</html>

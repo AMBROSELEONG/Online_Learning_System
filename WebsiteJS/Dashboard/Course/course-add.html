@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h2>New Course</h2>
+
+        <form id="CourseForm">
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Course Image</label>
+                <div class="col-sm-6">
+                    <input type="file" class="form-control" name="CourseImage" id="CourseImage">
+                    <img id="previewImage" src="" style="display: none; max-width: 200px; margin-top: 10px;">
+
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Course Name</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="CourseName" id="CourseName">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Course Price</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="CoursePrice" id="CoursePrice">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Category Name</label>
+                <div class="col-sm-6">
+                    <select type="text" class="form-control" name="CategoryID" id="CategoryID"></select>
+                    <input type="hidden" name="CategoryName" id="CategoryName">
+                </div>
+            </div>
+
+            <script>
+                //This code adds an event listener to the 'CategoryID' element, which will be triggered when the user selects an option from the dropdown menu. 
+                document.getElementById('CategoryID').addEventListener('change', function () {
+                    //This variable stores the index of the selected option.
+                    var selectedIndex = this.selectedIndex;
+                    //This variable stores the selected option.
+                    var selectedOption = this.options[selectedIndex];
+                    //This variable stores the text of the selected option.
+                    var categoryName = selectedOption.text;
+
+                    //This line sets the value of the 'CategoryName' element to the value of the 'categoryName' variable.
+                    document.getElementById('CategoryName').value = categoryName;
+                });
+            </script>
+            <div class="row mb-3">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class="btn btn-primary" name="AddCourse">Submit</button>
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <a class="btn btn-outline-primary" href="Course.php" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        let db;
+        const request = indexedDB.open('online_learning_system', 1);
+
+        request.onsuccess = function (event) {
+            db = event.target.result;
+            populateCategories();
+
+            document.getElementById('CourseImage').addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const imageData = event.target.result;
+
+                    // Display the preview of the selected image
+                    document.getElementById('previewImage').src = imageData;
+                    document.getElementById('previewImage').style.display = 'block';
+
+                    // Save imageData in IndexedDB
+                    saveImageData(imageData);
+                };
+                reader.readAsDataURL(file);
+            });
+
+            document.getElementById('CourseForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const CourseImage = document.getElementById('CourseImage').files[0];;
+                const CourseName = document.getElementById('CourseName').value;
+                const CoursePrice = document.getElementById('CoursePrice').value;
+                const CategoryID = document.getElementById('CategoryID').value;
+                const CategoryName = document.getElementById('CategoryName').value;
+
+                if (CourseImage) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        const imageData = event.target.result;
+
+                        const transaction = db.transaction(['course'], 'readwrite');
+                        const courseStore = transaction.objectStore('course');
+
+                        const courseData = {
+                            CourseImage: imageData,
+                            CourseName: CourseName,
+                            CoursePrice: CoursePrice,
+                            CategoryID: CategoryID,
+                            CategoryName: CategoryName
+                        };
+
+                        const addCourseRequest = courseStore.add(courseData);
+
+                        addCourseRequest.onsuccess = function (event) {
+                            const courseID = event.target.result;
+
+                            const courseDetailTransaction = db.transaction(['coursedetail'], 'readwrite');
+                            const courseDetailStore = courseDetailTransaction.objectStore('coursedetail');
+
+                            const courseDetailData = {
+                                CourseID: courseID,
+                                CourseImage: imageData,
+                                CourseName: CourseName,
+                                CoursePrice: CoursePrice,
+                                CategoryID: CategoryID,
+                                CategoryName: CategoryName
+                            };
+
+                            const AddCourseDetailRequest = courseDetailStore.add(courseDetailData);
+                            AddCourseDetailRequest.onsuccess = function (event) {
+                                alert('Course added successfully');
+                                window.location.replace('Course.html');
+                            };
+
+                            AddCourseDetailRequest.onerror = function (event) {
+                                console.error('Error adding course detail: ', event.target.error);
+                            };
+                        };
+
+                        addCourseRequest.onerror = function (event) {
+                            console.error('Error adding course: ', event.target.error);
+                        };
+                    };
+                    reader.readAsDataURL(CourseImage); // Read the file as data URL
+                } else {
+                    console.error('No image selected');
+                }
+            });
+        }
+
+        function populateCategories() {
+            const selectElement = document.getElementById('CategoryID');
+
+            const transaction = db.transaction(['coursecategory'], 'readonly');
+            const categoryStore = transaction.objectStore('coursecategory');
+
+            const getCategoryData = categoryStore.getAll();
+
+            getCategoryData.onsuccess = function (event) {
+                const categories = event.target.result;
+
+                if (categories.length > 0) {
+                    // Clear existing options
+                    selectElement.innerHTML = '';
+                    // Add default option
+                    const defaultOption = document.createElement('option');
+                    defaultOption.value = '0';
+                    defaultOption.textContent = 'Please Select Category';
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    selectElement.appendChild(defaultOption);
+
+                    // Loop through categories and create options
+                    categories.forEach(function (category) {
+                        const option = document.createElement('option');
+                        option.value = category.CategoryID;
+                        option.textContent = category.CategoryName;
+                        selectElement.appendChild(option);
+                    });
+                } else {
+                    // Display a message if no categories are found
+                    selectElement.innerHTML = "<option value='0' class='form-control'>No Category Found</option>";
+                }
+            };
+
+            getCategoryData.onerror = function (event) {
+                console.error('Error retrieving categories: ', event.target.error);
+            };
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
