@@ -13,29 +13,21 @@
 
 <body>
     <div class="container">
-        <form method="post">
-            <div style="width: 100%; justify-content: space-between; margin: 1% 0; display: flex;">
-                <div>
-                    <input type="text" name="search" id="search" placeholder="Search CourseCategory">
-                    <input type="submit" name="searchsub" id="searchsub" value="Search">
-                </div>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <td>ContactID</td>
-                        <td>UserID</td>
-                        <td>UserName</td>
-                        <td>UserPhone</td>
-                        <td>UserEmail</td>
-                        <td>Message</td>
-                        <td>Status</td>
-                        <td>Operating</td>
-                    </tr>
-                </thead>
-                <tbody id="table-body"></tbody>
-            </table>
-        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>ContactID</td>
+                    <td>UserID</td>
+                    <td>UserName</td>
+                    <td>UserPhone</td>
+                    <td>UserEmail</td>
+                    <td>Message</td>
+                    <td>Status</td>
+                    <td>Operating</td>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
